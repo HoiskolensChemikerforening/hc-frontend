@@ -27,7 +27,7 @@ function getWidthString(span) {
   return `width: ${width}%;`;
 };
 
-const Column = styled.div`
+const Col = styled.div`
   float: left;
   ${({ xs }) => xs ? getWidthString(xs) : "width; 100%"};
 
@@ -53,5 +53,5 @@ const Column = styled.div`
 export {
   Container,
   Row,
-  Column
+  Col
 };
