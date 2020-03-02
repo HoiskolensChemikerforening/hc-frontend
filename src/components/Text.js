@@ -1,102 +1,130 @@
 import styled, { css } from 'styled-components';
 import '../index.css';
 
-const LogoText = styled.h1`
-  font-weight: bold;
-  font-size: 18px;
+const H1 = styled.h1`
+  font-size: 1.875rem;
+  font-weight: 400;
+  margin-bottom: 16px;
 
-  :hover {
-    color: #ffd900;
-    transition: 0.07s;
-  }
-`
-
-const SectionHeader = styled.h2`
-  font-weight: bold;
-  font-size: 30px;
-  text-transform: uppercase;
-
-  margin-top: 0px;
-  margin-bottom: 30px;
-  padding-top: 50px;
-  padding-bottom: 0px;
-
-  ${props => props.yellow && css`
-    color: #ffd900;
-  `}
-`;
-
-const Header = styled.h3`
-  font-weight: bold;
-  font-size: 24px;
-
-  margin-top: 0;
-  margin-bottom: 12px;
-
-
-  ${props => props.dramatic && css`
-    font-size: 34px;
-
-    margin-bottom: 15px;
-    padding-top: 30px;
-  `}
-`;
-
-const Lead = styled.p`
-  font-size: 20px;
-
-  margin-top: 0px;
-  margin-bottom: 10px;
-
-  ${props => props.bold && css`
-    font-weight: bold;
+  ${props => props.gray && css`
+    color: var(--gray-80);
   `}
 
-  ${props => props.dramatic && css`
-    margin-bottom: 30px;
+  ${props => props.smallest && css`
+    font-size: 1.125rem;
   `}
-`;
-
-const Long = styled.p`
-  font-size: 18px;
-
-  margin-top: 0px;
-  margin-bottom: 30px;
-
-  ${props => props.bold && css`
-    font-weight: bold;
+  ${props => props.smaller && css`
+    font-size: 1.25rem;
   `}
-`
+  ${props => props.small && css`
+    font-size: 1.5rem;
+  `}
+  ${props => props.big && css`
+    font-size: 2.25rem;
+  `}
+  ${props => props.bigger && css`
+    font-size: 3rem;
+  `}
+  ${props => props.biggest && css`
+    font-size: 3.75rem;
+  `}
 
-const Detail = styled.p`
-  font-size: 14px;
-  margin-top: 0px;
-
-  ${props => props.dramatic && css`
-    margin-bottom: 30px;
+  ${props => props.display1 && css`
+    font-size: 4.5rem;
   `}
 
   ${props => props.bold && css`
-  font-weight: bold;
+    font-weight: 600;
   `}
-`
+  ${props => props.italic && css`
+    font-style: italic;
+  `}
+`;
 
-const Code = styled.p`
-  font-family: "IBM Plex Mono";
-  background-color: #eeeeee;
-  
-  padding: 10px;
-  margin-bottom: 30px;
-`
+const H2 = styled.h2`
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin-bottom: 16px;
+
+  ${props => props.gray && css`
+    color: var(--gray-80);
+  `}
+
+  ${props => props.smaller && css`
+    font-size: 1.125rem;
+  `}
+  ${props => props.small && css`
+    font-size: 1.25rem;
+  `}
+  ${props => props.big && css`
+    font-size: 1.875rem;
+  `}
+  ${props => props.bigger && css`
+    font-size: 2.25rem;
+  `}
+  ${props => props.biggest && css`
+    font-size: 3rem;
+  `}
+
+  ${props => props.bold && css`
+    font-weight: 600;
+  `}
+  ${props => props.italic && css`
+    font-weight: 400;
+    font-style: italic;
+  `}
+`;
+
+const H3 = styled.h3`
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 16px;
+
+  ${props => props.gray && css`
+    color: var(--gray-80);
+  `}
+
+  ${props => props.small && css`
+    font-size: 1.125rem;
+  `}
+  ${props => props.big && css`
+    font-size: 1.5rem;
+  `}
+  ${props => props.bigger && css`
+    font-size: 1.875rem;
+  `}
+  ${props => props.biggest && css`
+    font-size: 2.25rem;
+  `}
+
+  ${props => props.bold && css`
+    font-weight: 600;
+  `}
+  ${props => props.italic && css`
+    font-weight: 400;
+    font-style: italic;
+  `}
+`;
+
+const Text = styled.p`
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 16px;
+
+  ${props => props.big && css`
+    font-size: 18px;
+  `}
+  ${props => props.bold && css`
+    font-weight: 600;
+  `}
+  ${props => props.italic && css`
+    font-weight: 400;
+    font-style: italic;
+  `}
+`;
 
 export {
-  LogoText,
-  SectionHeader,
-  Header,
-
-  Lead,
-  Long,
-
-  Detail,
-  Code
+  H1,
+  H2,
+  Text
 };

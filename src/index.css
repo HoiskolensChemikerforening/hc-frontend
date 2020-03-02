@@ -1,18 +1,38 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:regular&subset=latin,latin-ext');
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:regular,bold,italic&subset=latin,latin-ext');
-
-@font-face {
-  font-family: Metropolis;
-  src: url("fonts/Metropolis/Metropolis-Bold.otf") format("opentype");
-}
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,600&display=swap');
 
 :root {
-  --yellow-main: #ffd900;
+  /* Yellow */
+  --yellow-00: #FFF8DF;
+  --yellow-10: #FFEBAF;
+  --yellow-20: #FFDF7B;
+  --yellow-30: #FFD342;
+  --yellow-40: #FFC800;
+  --yellow-50: #FFBE00;
+  --yellow-60: #FFB000;
+  --yellow-70: #FF9C00;
+  --yellow-80: #FF8A00;
+  --yellow-90: #FF6800;
+
+  /* Gray */
+  --gray-00: #FAFAFA;
+  --gray-10: #F5F5F5;
+  --gray-20: #EEEEEE;
+  --gray-30: #E0E0E0;
+  --gray-40: #BDBDBD;
+  --gray-50: #9E9E9E;
+  --gray-60: #757575;
+  --gray-70: #616161;
+  --gray-80: #424242;
+  --gray-90: #212121;
 }
 
 body {
-  background: #ffffff;
   margin: 0;
+  background: var(--gray-20);
+  color: var(--gray-90);
+  font-weight: 400;
+  font-size: 1rem;
   font-family: "IBM Plex Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -24,10 +44,6 @@ code {
   display: block;
   width: 100%;
   padding: 20px;
-  margin-bottom: 20px;
-  background-color: #282828;
-  border-radius: 5px;
-  color: white;
 }
 
 p {
