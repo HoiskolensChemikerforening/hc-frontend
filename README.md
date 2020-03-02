@@ -13,6 +13,5 @@ This project consists of a set of React components created for use on Høiskolen
 
 ### Layout
 
-
 ### Text
 
