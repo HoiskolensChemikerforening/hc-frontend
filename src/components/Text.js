@@ -29,7 +29,7 @@ const H1 = styled.h1`
     font-size: 3.75rem;
   `}
 
-  ${props => props.display1 && css`
+  ${props => props.display && css`
     font-size: 4.5rem;
   `}
 
@@ -126,5 +126,6 @@ const Text = styled.p`
 export {
   H1,
   H2,
+  H3,
   Text
 };
