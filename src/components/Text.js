@@ -106,7 +106,7 @@ const H3 = styled.h3`
   `}
 `;
 
-const Text = styled.p`
+const P = styled.p`
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 16px;
@@ -127,5 +127,5 @@ export {
   H1,
   H2,
   H3,
-  Text
+  P
 };
