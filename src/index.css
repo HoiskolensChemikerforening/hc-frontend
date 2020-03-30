@@ -32,6 +32,10 @@
   /* Black and white */
   --black: #000;
   --white: #fff;
+
+  /* Accept and warning */
+  --accept: #28a745;
+  --error: #de665f;
 }
 
 body {
