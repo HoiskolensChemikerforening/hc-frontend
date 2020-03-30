@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:regular&subset=latin,latin-ext');
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,600&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Overpass+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Overpass:400,400i,700&display=swap');
 
 :root {
   /* Primary colors */
@@ -40,13 +40,14 @@ body {
   color: var(--gray-90);
   font-weight: 400;
   font-size: 1rem;
-  font-family: 'IBM Plex Sans', 'Helvetica Neue', sans-serif;
+  font-family: "Overpass", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-family: "Overpass Mono", "Courier New",
+    monospace;
   display: block;
   width: 100%;
   padding: 20px;
