@@ -3,18 +3,18 @@
 
 :root {
   /* Primary colors */
-  --primary: var(--yellow-40);
+  --primary: var(--yellow-30);
 
   /* Yellow */
-  --yellow-00: #fff8df;
-  --yellow-10: #ffebaf;
+  --yellow-00: #fff7c0;
+  --yellow-10: #fff3a8;
   --yellow-20: #ffdf7b;
-  --yellow-30: #ffd342;
-  --yellow-40: #ffc800;
+  --yellow-30: #f7e469; 
+  --yellow-40: #ffd342;
   --yellow-50: #ffbe00;
-  --yellow-60: #ffb000;
-  --yellow-70: #ff9c00;
-  --yellow-80: #ff8a00;
+  --yellow-60: #f9c54f;
+  --yellow-70: #fba635;
+  --yellow-80: #fd871a;
   --yellow-90: #ff6800;
 
   /* Gray */
