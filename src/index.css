@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Overpass+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Overpass:400,400i,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Overpass:200,300,400,400i,700,800&display=swap');
 
 :root {
   /* Primary colors */
@@ -36,7 +36,7 @@
 
 body {
   margin: 0;
-  background: var(--gray-20);
+  background: var(--white);
   color: var(--gray-90);
   font-weight: 400;
   font-size: 1rem;

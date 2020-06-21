@@ -39,6 +39,9 @@ const H1 = styled.h1`
   ${props => props.italic && css`
     font-style: italic;
   `}
+  ${props => props.light && css `
+    font-weight: 300;
+  `}
 `;
 
 const H2 = styled.h2`
@@ -72,6 +75,9 @@ const H2 = styled.h2`
   ${props => props.italic && css`
     font-weight: 400;
     font-style: italic;
+  `}
+  ${props => props.light && css `
+    font-weight: 300;
   `}
 `;
 
