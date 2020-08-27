@@ -91,7 +91,7 @@ const ListItem = styled.a`
 const ListTitle = styled.div`
   display: inline-flex;
   font-size: 1.125rem;
-  text-transform: uppercase;
+  font-weight: bold;
 `;
 
 const ListDate = styled(P)`

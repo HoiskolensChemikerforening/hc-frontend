@@ -20,10 +20,10 @@ const NavBar = () => {
         <BorderWrap>
           <LogoText>
             <LogoP smallest light>
-              HØISKOLENS
+              hØiskolens
             </LogoP>
             <LogoP smallest bold>
-              CHEMIKERFORENING
+              chemikerforening
             </LogoP>
           </LogoText>
           <Items>
