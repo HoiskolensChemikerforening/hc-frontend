@@ -4,22 +4,25 @@ import "../index.css";
 
 /* Fundamentals */
 const Container = styled.div`
-  margin: 5% 10%;
+  margin: 0 10%;
   display: flex;
+  justify-content: center;
 `;
 
 const Row = styled.div`
   display: flex;
   flex-direction: row;
-  @media only screen and (max-width: 992px) {
-    flex-direction: column;
-  }
+  flex-wrap: wrap;
+  justify-content: ${props => props.justify || "space-between"};
+  margin: ${props => props.margin || "2% 0"};
 `;
 
 const Col = styled.div`
-  display: flex;
-  margin: 0 10%;
-  flex-direction: column;
+  flex-basis: 100%;
+  margin: ${props => props.margin || "0 2%"};
+  @media only screen and (min-width: 992px) {
+    flex:  ${props => props.flex || 1};;
+  }
 `;
 
 export { Container, Row, Col };

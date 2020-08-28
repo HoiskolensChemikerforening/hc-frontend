@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { FiX } from "react-icons/fi";
 import { IconContext } from "react-icons";
 import LogoSrc from "../../images/logo.png";
-import { H1 } from "../../components/Text";
+import { H1, Link } from "../../components/Text";
 import { Col } from "../../components/FlexLayout";
 
 const NavArea = ({ isOpen, setOpen }) => {
@@ -84,11 +84,13 @@ const TopWrapper = styled.div`
   }
 `;
 
-const IconWrapper = styled.a`
+const IconWrapper = styled(Link)`
   align-self: end;
   margin: 0 10%;
   height: 25px;
   padding:12.5px 15px;
+  position: relative;
+  right: -15px;
   text-decoration: none;
   &:visited {
     color: var(--gray-90);
@@ -99,7 +101,7 @@ const IconWrapper = styled.a`
   }
 `;
 
-const LogoWrapper = styled.a`
+const LogoWrapper = styled(Link)`
   margin: 0 10%;
 `;
 
@@ -144,19 +146,13 @@ const ItemWrapper = styled.div`
   flex-direction: column;
 `;
 
-const Item = styled.a`
+const Item = styled(Link)`
   display: flex;
   text-decoration: none;
   text-transform: uppercase;
   font-size: 14px;
   flex-direction: row;
   margin: 10px;
-  &:visited {
-    color: var(--gray-90);
-  }
-  &:hover {
-    background-color: var(--primary);
-  }
 `;
 
 const MenuText = styled(H1)`

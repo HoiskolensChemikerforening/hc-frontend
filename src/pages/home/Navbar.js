@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import "../../index.css";
 
-import { H1 } from "../../components/Text";
+import { H1, Link } from "../../components/Text";
 import { NavArea } from "./NavArea";
 import LogoSrc from "../../images/logo.png";
 import { FiMenu } from "react-icons/fi";
@@ -64,7 +64,7 @@ const Items = styled.div`
   }
 `;
 
-const Item = styled.a`
+const Item = styled(Link)`
   display: flex;
   text-decoration: none;
   text-transform: uppercase;
@@ -88,10 +88,12 @@ const BorderWrap = styled.div`
     height: 60px;
 `;
 
-const IconWrapper = styled.a`
+const IconWrapper = styled(Link)`
   align-self: end;
   height: 25px;
   padding: 12.5px 15px;
+  position: relative;
+  right: -15px;
   margin-right: 10%;
   text-decoration: none;
   &:hover {
@@ -104,7 +106,7 @@ const IconWrapper = styled.a`
   }
 `;
 
-const LogoWrapper = styled.a`
+const LogoWrapper = styled(Link)`
   margin-left: 10%;
 `;
 

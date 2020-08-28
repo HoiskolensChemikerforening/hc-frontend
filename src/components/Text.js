@@ -116,12 +116,15 @@ const P = styled.p`
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 16px;
+  ${props => props.small && css`
+    font-size: 14px;
+  `}
 
   ${props => props.big && css`
     font-size: 18px;
   `}
   ${props => props.bold && css`
-    font-weight: 600;
+    font-weight: 800;
   `}
   ${props => props.italic && css`
     font-weight: 400;
@@ -129,9 +132,19 @@ const P = styled.p`
   `}
 `;
 
+const Link = styled.a`
+  color: var(--gray-90);
+  text-decoration: none;
+  &:visited {
+    color: var(--gray-90);
+    text-decoration: none;
+  }
+`;
+
 export {
   H1,
   H2,
   H3,
-  P
+  P,
+  Link
 };
