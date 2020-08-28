@@ -6,7 +6,12 @@ import { Wrapper } from "../../components/FlexLayout";
 
 const NewsListing = ({src}) => (
     <Card href="#">
-        <Image src={src} />
+        <ImageContainer>
+            <Image src={src} />
+            <Overlay>
+                <ReadMore>Les mer</ReadMore>
+            </Overlay>
+        </ImageContainer>
         <Title>
             17. mai med HC!
         </Title>
@@ -22,9 +27,14 @@ const Card = styled(Link)`
   }
 `;
 
+const ImageContainer = styled.div`
+    display: inline-block;
+    position: relative;
+`;
+
 const Image = styled.img`
-  width: 100%;
-  height: auto;
+    width: 100%;
+    height: auto;
 `;
 
 const Title = styled.div`
@@ -39,5 +49,32 @@ const TitleLine = styled.div`
     width: 30px;
     margin-bottom: 5px;
 `;
+
+const Overlay = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: var(--primary);
+    &:hover {
+        opacity: 0.5;
+    }
+`;
+
+const ReadMore = styled(P)`
+    margin: 0;
+    font-weight: bold;
+    opacity: 1 !important;
+`;
+
+
 
 export { NewsListing };
