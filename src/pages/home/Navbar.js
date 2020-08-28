@@ -20,7 +20,7 @@ const NavBar = () => {
         <BorderWrap>
           <LogoText>
             <LogoP smallest light>
-              hØiskolens
+              hoiskolens
             </LogoP>
             <LogoP smallest bold>
               chemikerforening
@@ -70,9 +70,7 @@ const Item = styled.a`
   text-transform: uppercase;
   padding: 15px 20px;
   font-size: 14px;
-  &:visited {
-    color: var(--gray-90);
-  }
+  letter-spacing: 1px;
   &:hover {
     background-color: var(--primary);
   }
@@ -93,14 +91,15 @@ const BorderWrap = styled.div`
 const IconWrapper = styled.a`
   align-self: end;
   height: 25px;
-  padding: 0 0px 15px 30px;
+  padding: 12.5px 15px;
   margin-right: 10%;
   text-decoration: none;
-  &:visited {
-    color: var(--gray-90);
+  &:hover {
+    background-color: var(--primary);
   }
+
   @media only screen and (max-width: 992px) {
-    padding: 0;
+    padding: 15px;
     align-self: center;
   }
 `;

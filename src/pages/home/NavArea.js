@@ -88,13 +88,13 @@ const IconWrapper = styled.a`
   align-self: end;
   margin: 0 10%;
   height: 25px;
-  padding: 0 0px 15px 50px;
+  padding:12.5px 15px;
   text-decoration: none;
   &:visited {
     color: var(--gray-90);
   }
   @media only screen and (max-width: 992px) {
-    padding: 0;
+    padding: 15px;
     align-self: center;
   }
 `;

@@ -2,7 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import ImageSrc from "../../images/hc.jpg";
 import { NavBar } from "./Navbar";
-import { EventBox } from "./EventBox";
+import { EventBox2 } from "./EventBox2";
+import { NewsBox } from "./NewsBox";
 import { Container, Row as R, Col } from "../../components/FlexLayout";
 
 const HomePage = () => (
@@ -10,8 +11,8 @@ const HomePage = () => (
     <NavBar />
     <Container>
       <Row>
-        <Image src={ImageSrc} />
-        <EventBox />
+        <NewsBox />
+        <EventBox2 />
       </Row>
     </Container>
   </>
