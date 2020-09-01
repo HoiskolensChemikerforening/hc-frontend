@@ -8,11 +8,6 @@ import { Col, Row } from "../../components/FlexLayout";
 
 const NewsBox = () => (
     <Col flex={7}>
-        <H1 bold>Nyheter</H1>
-        <Row>
-            <NewsListing src={News1} />
-            <NewsListing src={News1} />
-        </Row>
         <Row>
             <NewsListing src={News1} />
             <NewsListing src={News1} />

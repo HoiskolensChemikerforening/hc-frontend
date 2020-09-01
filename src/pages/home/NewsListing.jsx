@@ -28,8 +28,9 @@ const Card = styled(Link)`
 `;
 
 const ImageContainer = styled.div`
-    display: inline-block;
+    overflow: auto;
     position: relative;
+    height: ${props => props.children[0].height || "auto"};
 `;
 
 const Image = styled.img`
