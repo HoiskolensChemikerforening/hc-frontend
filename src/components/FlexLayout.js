@@ -6,6 +6,7 @@ import "../index.css";
 const Container = styled.div`
   margin: 0 10%;
   display: flex;
+  flex-direction: ${props => props.row ? 'row' : 'column'};
   justify-content: center;
 `;
 
