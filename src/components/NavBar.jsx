@@ -4,6 +4,7 @@ import "../index.css";
 import {Container, Row, Col} from "./FlexLayout";
 
 import {H1, Link} from "./Text";
+import {UserBox} from "./UserBox";
 
 import {IconContext} from "react-icons";
 import {BiHomeAlt, BiBriefcaseAlt, BiCalendarEvent, BiCoffee} from "react-icons/bi";
@@ -19,6 +20,7 @@ const NavBar = () => (
             <MenuItem><BiCalendarEvent/></MenuItem>
             <MenuItem><BiCoffee/></MenuItem>
         </Row>
+        <UserBox/>
     </Nav>
 );
 
