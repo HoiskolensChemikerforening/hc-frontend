@@ -10,23 +10,27 @@ function QuizTermBox() {
 
     // Runs once HomePage component is loaded
     useEffect(() => {
-        fetchAllQuizData();
+        const data = fetchAllQuizData();
+        setQuizTerm(data);
     }, []);
 
     // Gets all quiz terms and scores from the quiz api url and sets the quizTerm variable
     async function fetchAllQuizData() {
         const response = await fetch("http://127.0.0.1:8000/quiz/api/");
         const jsonData = await response.json();
-        setQuizTerm(jsonData[0]);
+        return jsonData;
+
     }
 
+    console.log(quizTerm);
     return(
         <Col>
-            {quizTerm.map(quizTerm => (
+
+{/*            {quizTerm.map(quizTerm => (
                 <div key={quizTerm.id}>{quizTerm}</div>
-            ))}
+            ))}*/}
         </Col>
     );
 }
 
-export default QuizTermBox;
+export { QuizTermBox };
