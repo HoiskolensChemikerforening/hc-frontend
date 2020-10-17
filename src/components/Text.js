@@ -34,7 +34,7 @@ const H1 = styled.h1`
   `}
 
   ${props => props.bold && css`
-    font-weight: 600;
+    font-weight: 800;
   `}
   ${props => props.italic && css`
     font-style: italic;
@@ -116,6 +116,8 @@ const P = styled.p`
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 16px;
+  line-height: 1.6;
+  
   ${props => props.small && css`
     font-size: 14px;
   `}
