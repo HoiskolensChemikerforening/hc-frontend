@@ -4,7 +4,7 @@ import {NavBar} from "../../components/NavBar";
 
 const News = () => (
     <>
-    <NavBar/>
+
     </>
 );
 
