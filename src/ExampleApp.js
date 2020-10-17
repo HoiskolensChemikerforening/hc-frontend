@@ -1,13 +1,14 @@
 import React from "react";
 import "./index.css";
-import { ExampleForm } from "./components/Form";
-import { HomePage } from "./pages/home/HomePage";
+import { NewsList } from "./pages/news/NewsList";
 
 class ExampleApp extends React.Component {
   render() {
     return (
       <>
-        <HomePage />
+          <div style={{width: "600px"}}>
+              <NewsList />
+          </div>
       </>
     );
   }

@@ -104,7 +104,7 @@ const H3 = styled.h3`
   `}
 
   ${props => props.bold && css`
-    font-weight: 600;
+    font-weight: 800;
   `}
   ${props => props.italic && css`
     font-weight: 400;
