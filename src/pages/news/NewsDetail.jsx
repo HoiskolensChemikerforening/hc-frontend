@@ -1,17 +1,27 @@
 import React from "react";
 import styled from "styled-components";
-import {H1, P} from "../../components/Text";
-import image from "../../images/trondheim.jpg";
+import {H1, P, Link} from "../../components/Text";
+import articleImage from "../../images/trondheim.jpg";
+import authorImage from "../../images/yoonsik.PNG";
 
 export const NewsDetail = () => (
     <Flex>
       <ImageContainer>
-        <Image/>
+        <ArticleImage/>
       </ImageContainer>
       <ArticleContainer>
         <H1 bigger bold>
           Åpent på Kjelleren
         </H1>
+        <AuthorContainer>
+          <AuthorImage />
+          <P style={{marginBottom: "0px"}}>
+            av <Link bold>Yoonsik Oh</Link>
+          </P>
+        </AuthorContainer>
+        <P>
+          26. oktober 2020 14:51
+        </P>
         <P>
           Innovation is hot right now action item, nor product launch. Put your feelers out crank this out nor
           going
@@ -47,7 +57,6 @@ export const NewsDetail = () => (
           an all-hands this afternoon. I am dead inside. Who's the goto on this job with the way forward tribal
           knowledge pig in a python disband the squad but rehydrate as needed nor can we align on lunch orders, nor
           strategic staircase, yet vec.
-
         </P>
       </ArticleContainer>
     </Flex>
@@ -70,10 +79,25 @@ const ImageContainer = styled.div`
   max-width: 60%;
 `;
 
-const Image = styled.div`
-    width: 100%;
-    padding-bottom: 67%;
-    background: url(${image});
-    background-size: cover;
+const ArticleImage = styled.div`
+  width: 100%;
+  padding-bottom: 67%;
+  background: url(${articleImage});
+  background-size: cover;
 `;
 
+const AuthorImage = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: url(${authorImage});
+  background-size: cover;
+  margin-right: 6px;
+  border: 3px var(--primary) solid;
+`;
+
+const AuthorContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;

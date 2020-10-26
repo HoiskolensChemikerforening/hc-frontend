@@ -136,11 +136,15 @@ const P = styled.p`
 
 const Link = styled.a`
   color: var(--gray-90);
-  text-decoration: none;
+  text-decoration: underline;
   &:visited {
     color: var(--gray-90);
     text-decoration: none;
   }
+  
+  ${props => props.bold && css`
+    font-weight: 600;
+  `}
 `;
 
 export {
