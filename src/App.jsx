@@ -1,0 +1,22 @@
+import React from "react";
+import "./index.css";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import { HomePage } from "./pages/home/HomePage";
+import { NewsRouter } from "./pages/news/NewsRouter";
+
+
+class App extends React.Component {
+  render() {
+    return (
+        <Router>
+          <Switch>
+            <Route exact path="/" component={HomePage}/>
+            <NewsRouter/>
+            <Redirect to="/"/>
+          </Switch>
+        </Router>
+    );
+  }
+}
+
+export default App;
