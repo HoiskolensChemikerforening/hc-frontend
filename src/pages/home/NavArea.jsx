@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React  from "react";
 import "../../index.css";
 import styled, { css } from "styled-components";
 import { FiX } from "react-icons/fi";
 import { IconContext } from "react-icons";
 import LogoSrc from "../../images/logo.png";
 import { H1, Link } from "../../components/Text";
-import { Col } from "../../components/FlexLayout";
 
 const NavArea = ({ isOpen, setOpen }) => {
   return (

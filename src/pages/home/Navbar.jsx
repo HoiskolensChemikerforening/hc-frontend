@@ -27,6 +27,7 @@ const NavBar = () => {
             </LogoP>
           </LogoText>
           <Items>
+            <Item href="/nyheter">Nyheter</Item>
             <Item href="#">For bedrifter</Item>
             <Item href="#">Arrangementer</Item>
             <Item href="#">Linjeforeningen</Item>
