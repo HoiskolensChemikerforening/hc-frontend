@@ -26,7 +26,9 @@ export const NewsList = () => {
         </ButtonContainer>
         {articles.map((article) => (
             <NewsItem key={article.id}>
-              <ImageContainer img={article.image}/>
+              <a href={"/nyheter/info/" + article.id}>
+                <ImageContainer img={article.image}/>
+              </a>
               <H3 bold>
                 {article.title}
               </H3>

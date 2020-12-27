@@ -10,15 +10,14 @@ export const NewsDetail = () => {
     fetchArticle();
   }, []);
 
-  let id = 4;
+  const {id} = useParams();
 
   const [article, setArticle] = useState([]);
   const [author, setAuthor] = useState([]);
 
   const fetchArticle = async () => {
-    const data = await fetch("http://localhost:8000/nyheter/api/5/");
+    const data = await fetch("http://localhost:8000/nyheter/api/" + id.toString() + "/");
     const item = await data.json();
-    console.log(item);
     setArticle(item);
     setAuthor(item.author);
   };
@@ -38,12 +37,12 @@ export const NewsDetail = () => {
           <AuthorContainer>
             <AuthorImage img={article.image}/>
             <P style={{marginBottom: "0px"}}>
-              av <Link bold>{author.full_name}</Link>
+              av <Link bold>{author.full_name}</Link>,
+              {new Date(article.published_date).toLocaleDateString()}
             </P>
           </AuthorContainer>
 
           <P>{parse(article.content)}</P>
-          <P>{Date(article.published_date)}</P>
 
         </ArticleContainer>
       </Flex>
