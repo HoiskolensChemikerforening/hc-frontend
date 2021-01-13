@@ -8,25 +8,26 @@ import {NavBar} from "./components/NavBar";
 class ExampleApp extends React.Component {
   render() {
     return (
-<<<<<<< HEAD
-      <>
-        <NavBar />
-        <News />
-      </>
-=======
         <Router>
           <Switch>
             <Route path="/test/">
               <p>Hei</p>
             </Route>
             <Route path="/">
-              <HomePage/>
+              <NavBar/>
+              <News/>
             </Route>
           </Switch>
         </Router>
->>>>>>> origin/master
     );
   }
 }
 
 export default ExampleApp;
+
+/* 
+  <>
+    <NavBar />
+    <News />
+  </> 
+      */

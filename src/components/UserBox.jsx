@@ -5,7 +5,7 @@ import {H3, P, Link} from "./Text";
 import {BiLogOut, BiMenu} from "react-icons/bi";
 import {DropdownBox} from "./DropdownMenu";
 
-const UserBox = () => (
+const UserBox = (props) => (
     <UserArea>
         <UserImage alt="HC-logo" src="logo.png"/>
         <Log>
@@ -15,7 +15,7 @@ const UserBox = () => (
                 <LogText>Logg ut</LogText>
             </LogInOut>
         </Log>
-        <MenuBox><BiMenu/></MenuBox>
+        <MenuBox onClick={() => props.toggleMenu()} ><BiMenu/></MenuBox>
     </UserArea>
 );
 
@@ -24,8 +24,6 @@ export {UserBox};
 const UserArea = styled.div`
     display: flex;
     flex-direction: row;
-    width = 400px;
-    margin-right:20px;
     align-items: center;
 `;
 
@@ -34,13 +32,23 @@ const UserImage = styled.img `
     width: 50px;
     height: 50px;
     margin: 10px;
+    display: none;
+    &:hover{
+        cursor: pointer;
+    }
+    @media (min-width: 1024px){
+        display: flex;
+    }
 `;
 
 const Log = styled.div`
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     width: 150px;
+    @media (min-width: 1024px){
+        display: flex;
+    }
     
 `;
 const LogInOut = styled.div`
@@ -51,6 +59,9 @@ const LogInOut = styled.div`
     align-items: center;
     width: 100%;
     margin-top: 5px;
+    &:hover{
+        cursor: pointer;
+    }
 `;
 
 const LogOut = styled(Link)`
@@ -72,7 +83,7 @@ const LogText = styled(P)`
 
 const MenuBox = styled.div`
     font-size: 40px;
-    &:onClick {
-      visibility : hidden;
+    &:hover {
+        cursor: pointer;
     }
 `;
