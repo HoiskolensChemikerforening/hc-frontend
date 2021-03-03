@@ -15,7 +15,7 @@ const UserBox = (props) => (
                 <LogText>Logg ut</LogText>
             </LogInOut>
         </Log>
-        <MenuBox onClick={() => props.toggleMenu()} ><BiMenu/></MenuBox>
+        <MenuBox onClick={() => props.toggleMenu(true)} ><BiMenu/></MenuBox>
     </UserArea>
 );
 

@@ -6,7 +6,7 @@ import {H3, Link} from "./Text";
 import {UserBox} from "./UserBox";
 import {DropdownMenu} from "./DropdownMenu";
 import {IconContext} from "react-icons";
-import {BiHomeAlt, BiBriefcaseAlt, BiCalendarEvent, BiCoffee} from "react-icons/bi";
+import {BiHomeAlt, BiBriefcaseAlt, BiCalendarEvent, BiGame, BiInfoCircle} from "react-icons/bi";
 
 
 const NavBar = () =>  {
@@ -31,11 +31,12 @@ const NavBar = () =>  {
                     <MenuItem><BiHomeAlt/></MenuItem>
                     <MenuItem><BiBriefcaseAlt/></MenuItem>
                     <MenuItem><BiCalendarEvent/></MenuItem>
-                    <MenuItem><BiCoffee/></MenuItem>
+                    <MenuItem><BiGame/></MenuItem>
+                    <MenuItem><BiInfoCircle/></MenuItem>
                 </MenuItems>
-                <UserBox toggleMenu={updateMenuState}/>
+                <UserBox toggleMenu={setMenuOpen}/>
             </Nav>
-            <DropdownMenu isOpen={menuOpen}/>
+            <DropdownMenu isOpen={menuOpen} setOpen={setMenuOpen}/>
         </>
     )
 };
