@@ -1,6 +1,7 @@
 import React, {useState} from "react";
+import { Link } from "react-router-dom";
 import styled, {css} from "styled-components";
-import {H2, H3} from "./Text";
+import {H2, H3 } from "./Text"; //, Link
 import { BiX } from "react-icons/bi";
 
 
@@ -17,17 +18,25 @@ const DropdownMenu = (props) => (
             <Close onClick={() => props.setOpen(false)}><BiX/></Close>
         </Nav>
         <WrapperPages>
-            <DropItem>ARRANGEMENT</DropItem>
-            <DropItem>NYHETER</DropItem>
-            <DropItem>BOKSKAP</DropItem>
-            <DropItem>KONTORET</DropItem>
-            <DropItem>KONTAKT</DropItem>
-            <DropItem>INTERNT</DropItem>
+            <Linker to="/"><DropItem>FORSIDEN</DropItem></Linker>
+            <Linker to="/arrangement"><DropItem>ARRANGEMENT</DropItem></Linker>
+            <Linker to="/bedrift"><DropItem>BEDRIFT</DropItem></Linker>
+            <Linker to="/internt"><DropItem>INTERNT</DropItem></Linker>
+            <Linker to="/info"><DropItem>INFORMASJON</DropItem></Linker>
         </WrapperPages>
     </DropdownBox>
 );
 
 export {DropdownMenu};
+
+const Linker = styled(Link)`
+color: var(--gray-90);
+  text-decoration: none;
+  &:visited {
+    color: var(--gray-90);
+    text-decoration: none;
+  }
+`;
 
 const DropdownBox = styled.div`
     position: absolute;

@@ -1,11 +1,10 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import "../index.css";
-
-import {H3, Link} from "./Text";
+import { Link } from "react-router-dom";
+import {H3} from "./Text";
 import {UserBox} from "./UserBox";
 import {DropdownMenu} from "./DropdownMenu";
-import {IconContext} from "react-icons";
 import {BiHomeAlt, BiBriefcaseAlt, BiCalendarEvent, BiGame, BiInfoCircle} from "react-icons/bi";
 
 
@@ -28,11 +27,11 @@ const NavBar = () =>  {
                     </NavText>
                 </LogoArea>
                 <MenuItems>
-                    <MenuItem><BiHomeAlt/></MenuItem>
-                    <MenuItem><BiBriefcaseAlt/></MenuItem>
-                    <MenuItem><BiCalendarEvent/></MenuItem>
-                    <MenuItem><BiGame/></MenuItem>
-                    <MenuItem><BiInfoCircle/></MenuItem>
+                    <MenuItem to="/"><BiHomeAlt/></MenuItem>
+                    <MenuItem to="/bedrift"><BiBriefcaseAlt/></MenuItem>
+                    <MenuItem to="/arrangement"><BiCalendarEvent/></MenuItem>
+                    <MenuItem to="/internt"><BiGame/></MenuItem>
+                    <MenuItem to="/info"><BiInfoCircle/></MenuItem>
                 </MenuItems>
                 <UserBox toggleMenu={setMenuOpen}/>
             </Nav>
@@ -43,6 +42,14 @@ const NavBar = () =>  {
 
 export {NavBar};
 
+const Linker = styled(Link)`
+color: var(--gray-90);
+  text-decoration: none;
+  &:visited {
+    color: var(--gray-90);
+    text-decoration: none;
+  }
+`;
 
 const LogoImg = styled.img`
     width: 60px;
@@ -102,9 +109,14 @@ const MenuItem = styled(Link)`
     margin: 0 25px;
     border-bottom:  3px solid rgba(0,0,0,0);
     transition: 0.4s;
+    color: black;
+    text-decoration: none;
     &:hover {
         border-bottom: 3px solid var(--yellow-30);
         cursor: pointer;
     }
-    
+    &:visited {
+        color: var(--gray-90);
+        text-decoration: none;
+    }  
 `;
