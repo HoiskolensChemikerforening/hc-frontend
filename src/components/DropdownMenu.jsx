@@ -6,14 +6,16 @@ import { BiX } from "react-icons/bi";
 
 const DropdownMenu = (props) => (
     <DropdownBox open={props.isOpen}>
-        <LogoArea>
+        <Nav>
+            <LogoArea>
             <LogoImg alt="HC-logo" src="logo.png"/>
             <NavText>
                 <H>Høiskolens</H>
                 <H>Chemikerforening</H>
             </NavText>
+            </LogoArea>
             <Close onClick={() => props.setOpen(false)}><BiX/></Close>
-        </LogoArea>
+        </Nav>
         <WrapperPages>
             <DropItem>ARRANGEMENT</DropItem>
             <DropItem>NYHETER</DropItem>
@@ -36,22 +38,37 @@ const DropdownBox = styled.div`
 
     display: ${props => (props.open ? `flex` : `none`)};
     flex-direction: column;
-    flex-wrap: wrap;
-    align-content: space-around;
-    height: 100px;
+    justify-content: flex-start;
+    height: 100%;
     width: 100%; 
     
     @media (min-width: 786px) {
         align-self: center;
         //padding: 30px 30px 30px 30px;
-        width: 100%;
-        height: 100%;
-        transition: 2s;
+        
     }
 `;
 
+const LogoArea = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+`;
+
 const Close = styled.div `
+    font-size: 40px;
     cursor: pointer;
+`;
+
+const Nav = styled.nav`
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    margin-bottom: 0;
 `;
 
 const LogoImg = styled.img`
@@ -62,32 +79,9 @@ const LogoImg = styled.img`
 `;
 
 
-const Nav = styled.nav`
-    height: 90px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 10px;
-    margin-bottom: 0;
-    border-bottom: 1px solid #B0BEC5;
-    align-items: center;
-`;
-
-const LogoArea = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0 50px 0 50px;
-    width: 100%;
-`;
-
-
 const NavText = styled.div`
     display: none;
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    /*color: #B0BEC5;*/
     margin: 0px;
     @media (min-width: 1024px){
         display: flex;
@@ -100,16 +94,25 @@ const H = styled(H3)`
 `;
 
 const WrapperPages = styled.div`
-
-`
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    margin-top: 2%;
+`;
 
 const DropItem = styled(H2)`
-    font-weight: 0.9;
-    font-size: .95rem;
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin-top: 18px;
+    &:hover {
+        border-bottom: 1px solid var(--black);
+        cursor: pointer;
+        margin-top: 17px;
+    }
     @media (min-width: 786px){
-        font-weight: 1.;
-        font-size: 1.25rem;
-        transition: 2s;
+        font-weight: 1.5;
+        font-size: 2rem;
     }
     
 `;

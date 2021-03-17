@@ -82,10 +82,11 @@ const BorderWrap = styled.div`
   height: 80px;
   flex-direction: row;
   justify-content: space-between;
-  #border-bottom: 2px solid var(--primary);
+  border-bottom: 2px solid var(--primary);
   @media only screen and (max-width: 992px) {
     width: 90vw;
     height: 60px;
+  }
 `;
 
 const IconWrapper = styled(Link)`
