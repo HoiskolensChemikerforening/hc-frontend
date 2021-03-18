@@ -18,11 +18,16 @@ const DropdownMenu = (props) => (
             <Close onClick={() => props.setOpen(false)}><BiX/></Close>
         </Nav>
         <WrapperPages>
-            <Linker to="/"><DropItem>FORSIDEN</DropItem></Linker>
-            <Linker to="/arrangement"><DropItem>ARRANGEMENT</DropItem></Linker>
-            <Linker to="/bedrift"><DropItem>BEDRIFT</DropItem></Linker>
-            <Linker to="/internt"><DropItem>INTERNT</DropItem></Linker>
-            <Linker to="/info"><DropItem>INFORMASJON</DropItem></Linker>
+            <Linker to="/"  onClick={() => props.setOpen(false)}>
+                <DropItem>FORSIDEN</DropItem></Linker>
+            <Linker to="/arrangement"   onClick={() => props.setOpen(false)}>
+                <DropItem>ARRANGEMENT</DropItem></Linker>
+            <Linker to="/bedrift"   onClick={() => props.setOpen(false)}>
+                <DropItem>BEDRIFT</DropItem></Linker>
+            <Linker to="/internt"   onClick={() => props.setOpen(false)}>
+                <DropItem>INTERNT</DropItem></Linker>
+            <Linker to="/info"      onClick={() => props.setOpen(false)}>
+                <DropItem>INFORMASJON</DropItem></Linker>
         </WrapperPages>
     </DropdownBox>
 );

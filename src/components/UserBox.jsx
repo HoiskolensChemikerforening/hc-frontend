@@ -1,15 +1,14 @@
-import React, {useState} from "react";
-import styled, {css} from "styled-components";
-import {Container} from "./FlexLayout";
-import {H3, P, Link} from "./Text";
-import {BiLogOut, BiMenu} from "react-icons/bi";
-import {DropdownBox} from "./DropdownMenu";
+import React from "react";
+import styled from "styled-components";
+import { P } from "./Text";
+import { Link } from "react-router-dom";
+import { BiLogOut, BiMenu } from "react-icons/bi";
 
 const UserBox = (props) => (
     <UserArea>
-        <UserImage alt="HC-logo" src="logo.png"/>
+        <Linker to="/profil"><UserImage alt="HC-logo" src="logo.png"/></Linker>
         <Log>
-            <UserText>Bendik Søta</UserText>
+            <Linker to="/profil"><UserText>Bendik Søta</UserText></Linker>
             <LogInOut>
                 <LogOut><BiLogOut/></LogOut>
                 <LogText>Logg ut</LogText>
@@ -20,6 +19,11 @@ const UserBox = (props) => (
 );
 
 export {UserBox};
+
+const Linker = styled(Link)`
+color: var(--gray-90);
+  text-decoration: none;
+`;
 
 const UserArea = styled.div`
     display: flex;
@@ -59,6 +63,7 @@ const LogInOut = styled.div`
     align-items: center;
     width: 100%;
     margin-top: 5px;
+    
     &:hover{
         cursor: pointer;
     }
@@ -67,6 +72,8 @@ const LogInOut = styled.div`
 const LogOut = styled(Link)`
     font-size: 25px;
     margin: 0;
+    text-decoration: none;
+    color:black;
 `;
 
 const UserText = styled(P)`
@@ -79,6 +86,9 @@ const LogText = styled(P)`
     font-weight: 0;
     width: 100%;
     margin: 0;
+    &:hover{
+        cursor: pointer;
+    }
 `;
 
 const MenuBox = styled.div`
