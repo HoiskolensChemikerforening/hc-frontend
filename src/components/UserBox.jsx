@@ -8,7 +8,7 @@ const UserBox = (props) => (
     <UserArea>
         <Linker to="/profil"><UserImage alt="HC-logo" src="logo.png"/></Linker>
         <Log>
-            <Linker to="/profil"><UserText>Bendik Søta</UserText></Linker>
+            <Linker to="/profil"><UserText>Bendik Søta Sannes</UserText></Linker>
             <LogInOut>
                 <LogOut><BiLogOut/></LogOut>
                 <LogText>Logg ut</LogText>
@@ -49,7 +49,7 @@ const Log = styled.div`
     display: none;
     flex-direction: column;
     justify-content: center;
-    width: 150px;
+    width: 200px;
     @media (min-width: 1024px){
         display: flex;
     }
@@ -62,8 +62,8 @@ const LogInOut = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    margin-top: 5px;
-    
+    margin: 5px 0 -12px -6px;
+
     &:hover{
         cursor: pointer;
     }
@@ -78,14 +78,14 @@ const LogOut = styled(Link)`
 
 const UserText = styled(P)`
     width: 100%;
-    margin: 0;
+    margin: -7px 0 0 0;
 `;
 
 const LogText = styled(P)`
     font-size: 12px;
     font-weight: 0;
     width: 100%;
-    margin: 0;
+    margin: 0 0 5px 0;
     &:hover{
         cursor: pointer;
     }

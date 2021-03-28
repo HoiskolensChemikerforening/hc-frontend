@@ -66,6 +66,7 @@ const Nav = styled.nav`
     justify-content: space-between;
     margin: 10px;
     margin-bottom: 0;
+    padding: 0 40px 0 40px;
     border-bottom: 1px solid #B0BEC5;
     align-items: center;
 `;
@@ -79,20 +80,19 @@ const LogoArea = styled.div`
 
 
 const NavText = styled.div`
-    display: none;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
-    /*color: #B0BEC5;*/
     margin: 0px;
-    @media (min-width: 1024px){
-        display: flex;
-    }
+    margin-top: -7px;
 `;
 
 const H = styled(H3)`
     margin: 0px;
     font-weight: 500;
+    font-size: 1rem;
+    @media (min-width: 500px){
+        font-weight: 500;
+        font-size: 1.25rem;
+    }
+    
 `;
 const MenuItems = styled.div`
     padding-top: 18px;

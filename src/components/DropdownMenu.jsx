@@ -52,7 +52,6 @@ const DropdownBox = styled.div`
 
     display: ${props => (props.open ? `flex` : `none`)};
     flex-direction: column;
-    justify-content: flex-start;
     height: 100%;
     width: 100%; 
     
@@ -83,6 +82,7 @@ const Nav = styled.nav`
     align-items: center;
     margin: 10px;
     margin-bottom: 0;
+    padding: 0 40px 0 40px;
 `;
 
 const LogoImg = styled.img`
@@ -95,10 +95,11 @@ const LogoImg = styled.img`
 
 const NavText = styled.div`
     display: none;
-    flex-direction: column;
     margin: 0px;
-    @media (min-width: 1024px){
+    margin-top: -7px;
+    @media (min-width: 768px){
         display: flex;
+        flex-direction: column;
     }
 `;
 
@@ -124,7 +125,7 @@ const DropItem = styled(H2)`
         cursor: pointer;
         margin-top: 17px;
     }
-    @media (min-width: 786px){
+    @media (min-width: 500px){
         font-weight: 1.5;
         font-size: 2rem;
     }
