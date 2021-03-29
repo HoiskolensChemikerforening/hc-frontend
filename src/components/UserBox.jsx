@@ -49,7 +49,10 @@ const Log = styled.div`
     display: none;
     flex-direction: column;
     justify-content: center;
-    width: 200px;
+    max-width: 250px;
+    min-width: 150px;
+    margin-right: 30px;
+
     @media (min-width: 1024px){
         display: flex;
     }

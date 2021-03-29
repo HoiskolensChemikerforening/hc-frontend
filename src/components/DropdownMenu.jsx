@@ -28,6 +28,8 @@ const DropdownMenu = (props) => (
                 <DropItem>INTERNT</DropItem></Linker>
             <Linker to="/info"      onClick={() => props.setOpen(false)}>
                 <DropItem>INFORMASJON</DropItem></Linker>
+            <Linker to="/profil"      onClick={() => props.setOpen(false)}>
+                <MobileDropItem id="profileSmall">PROFIL</MobileDropItem></Linker>
         </WrapperPages>
     </DropdownBox>
 );
@@ -130,6 +132,13 @@ const DropItem = styled(H2)`
         font-size: 2rem;
     }
     
+`;
+
+const MobileDropItem = styled(DropItem) `
+    
+  @media (min-width: 1024px){
+      display: none;
+    }
 `;
 
 export{DropdownBox};
