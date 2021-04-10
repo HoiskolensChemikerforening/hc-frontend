@@ -10,7 +10,7 @@ class App extends React.Component {
     return (
         <Router>
           <Switch>
-            <Route exact path="/" component={HomePage}/>
+            <Route exact path="/"/>
             <NewsRouter/>
             <Redirect to="/"/>
           </Switch>
