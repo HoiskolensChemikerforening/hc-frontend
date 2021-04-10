@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { H3, P } from "../../components/Text";
 import { Button } from "../../components/Button.js";
+import moment from 'moment';
 
 export const NewsList = () => {
   useEffect(() => {
@@ -15,11 +16,15 @@ export const NewsList = () => {
     const data = await fetch("http://localhost:8000/nyheter/api/");
     const items = await data.json();
     setArticles(items);
+    console.log(items[0].published_date);
   };
 
   return (
       <NewsListContainer>
         <ButtonContainer>
+          {//This should be edited to in a absolute position on homepage
+          // or only visible when hovered
+          }
           <Link to="/nyheter/ny">
             <Button primary>Opprett nyhet</Button>
           </Link>
@@ -34,7 +39,7 @@ export const NewsList = () => {
               </H3>
               <P>
                 <span style={{fontWeight: "800"}}>{article.author.full_name}</span>
-                / {article.published_date} timer siden
+                {article.published_date}
               </P>
             </NewsItem>
         ))}
