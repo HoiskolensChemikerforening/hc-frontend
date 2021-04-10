@@ -20,6 +20,7 @@ const Row = styled.div`
 
 const Col = styled.div`
   flex-basis: 100%;
+  flex-direction: column;
   margin: ${props => props.margin || "0 2%"};
   @media only screen and (min-width: 992px) {
     flex:  ${props => props.flex || 1};;

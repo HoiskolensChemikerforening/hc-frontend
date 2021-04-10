@@ -6,6 +6,7 @@ import { EventBox2 } from "./EventBox2";
 import { NewsBox } from "./NewsBox";
 import { Container, Row, Col } from "../../components/FlexLayout";
 
+
 const HomePage = () => (
   <>
     <NavBar />
