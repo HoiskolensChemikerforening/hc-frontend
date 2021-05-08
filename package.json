@@ -4,7 +4,7 @@
     "private": true,
     "dependencies": {
         "@material-ui/core": "^4.10.0",
-        "handlebars": "^4.5.3",
+        "handlebars": "^4.7.7",
         "react": "^16.12.0",
         "react-dom": "^16.12.0",
         "react-icons": "^3.10.0",
