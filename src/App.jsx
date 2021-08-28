@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { HomePage } from "./pages/home/HomePage";
 import { NavBar } from "./components/NavBar";
 import { H1 } from "./components/Text";
+import { NavBarPhone } from "./components/NavBarPhone";
 
 class ExampleApp extends React.Component {
   render() {
@@ -18,6 +19,7 @@ class ExampleApp extends React.Component {
             <Route path="/info">          <H1>Info</H1>               </Route>
             <Route path="/profil">        <H1>Profil</H1>             </Route>
           </Switch>
+          <NavBarPhone/>
         </Router>
     );
   }

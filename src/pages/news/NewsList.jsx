@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { H3, P } from "../../components/Text";
 import { Button } from "../../components/Button.js";
 import moment from 'moment';
+import { NavBarPhone } from "../../components/NavBarPhone";
 
 export const NewsList = () => {
   useEffect(() => {
