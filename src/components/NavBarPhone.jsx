@@ -31,23 +31,23 @@ export {NavBarPhone};
 
 const Nav = styled.nav`
     height: 90px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 10px;
     margin-bottom: 0;
-    padding: 0 40px 0 40px;
     border-top: 1px solid #B0BEC5;
     position: absolute;
-    align-items: center;
     bottom: 0;
     width: 100%;
+    @media (min-width: 768px){
+        display: none;
+    }
 `;
 
 const MenuItems = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
     padding-top: 18px;
-    margin-left: -10px;
-    width: 100%;
+    margin: 0px 10px 0px 10px;
 `;
 
 
@@ -66,7 +66,5 @@ const MenuItem = styled(Link)`
         color: var(--gray-90);
         text-decoration: none;
     } 
-    @media (min-width: 768px){
-        display: none;
-    }
+    
 `;

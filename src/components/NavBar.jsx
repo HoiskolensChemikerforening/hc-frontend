@@ -65,7 +65,7 @@ const Nav = styled.nav`
     flex-direction: row;
     justify-content: space-between;
     margin: 10px;
-    margin-bottom: 0;
+    margin-bottom: 40px;
     padding: 0 40px 0 40px;
     border-bottom: 1px solid #B0BEC5;
     align-items: center;
@@ -105,7 +105,7 @@ const MenuItems = styled.div`
 
 
 const MenuItem = styled(Link)`
-    font-size: 40px;
+    font-size: 35px;
     margin: 0 25px;
     border-bottom:  3px solid rgba(0,0,0,0);
     transition: 0.4s;
