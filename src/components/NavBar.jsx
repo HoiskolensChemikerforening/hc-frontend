@@ -60,10 +60,7 @@ const Nav = styled.nav`
     margin-bottom: 5px;
     padding: 0 40px 0 40px;
     border-bottom: 1px solid #B0BEC5;
-    background-color: var(--white);
     align-items: center;
-    position: sticky;
-    z-index: 2;
 `;
 
 const LogoArea = styled.div`
