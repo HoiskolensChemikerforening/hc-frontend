@@ -33,7 +33,7 @@ const NavBar = () =>  {
                     <MenuItem to="/internt"><BiGame/></MenuItem>
                     <MenuItem to="/info"><BiInfoCircle/></MenuItem>
                 </MenuItems>
-                <UserBox toggleMenu={setMenuOpen}/>
+               <UserBox toggleMenu={setMenuOpen}/>
             </Nav>
             <DropdownMenu isOpen={menuOpen} setOpen={setMenuOpen}/>
         </>
@@ -42,14 +42,6 @@ const NavBar = () =>  {
 
 export {NavBar};
 
-const Linker = styled(Link)`
-color: var(--gray-90);
-  text-decoration: none;
-  &:visited {
-    color: var(--gray-90);
-    text-decoration: none;
-  }
-`;
 
 const LogoImg = styled.img`
     width: 60px;

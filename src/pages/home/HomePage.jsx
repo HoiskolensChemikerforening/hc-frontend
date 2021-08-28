@@ -51,6 +51,7 @@ const NewsContainer = styled.div`
     min-width: 100px;
     max-width: 100%;
     justify-content: center;
+    margin-top: 10px;
 `;
 
 const WidgetContainer = styled.div`

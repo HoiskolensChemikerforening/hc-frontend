@@ -6,7 +6,7 @@ import { NavBar } from "./components/NavBar";
 import { H1 } from "./components/Text";
 import { NavBarPhone } from "./components/NavBarPhone";
 
-class ExampleApp extends React.Component {
+class App extends React.Component {
   render() {
     return (
         <Router>
@@ -25,4 +25,4 @@ class ExampleApp extends React.Component {
   }
 }
 
-export default ExampleApp;
+export default App;
