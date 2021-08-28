@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from "react";
+import { useRouteMatch } from "react-router-dom";
+
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
 import parse from "react-html-parser";
 import { H1, P, Link } from "../../components/Text";
 
 
 export const NewsDetail = () => {
-  const { id } = useParams();
+  const { params } = useRouteMatch("/nyheter/:id");
+  console.log(params);
+  //const id = match ? id as string;
   useEffect(() => {
-    console.log("Hello")
-    console.log(id);
     fetchArticle();
   }, []);
 
-  console.log(id)
 
   const [article, setArticle] = useState([]);
   const [author, setAuthor] = useState([]);
 
   const fetchArticle = async () => {
-    const data = await fetch("http://localhost:8000/nyheter/api/" + id.toString() + "/");
+    const data = await fetch("http://localhost:8000/nyheter/api/" + params.id.toString() + "/");
     const item = await data.json();
     setArticle(item);
     setAuthor(item.author);

@@ -23,11 +23,7 @@ class App extends React.Component {
             <Route path="/internt">       <H1>Internt</H1>            </Route>
             <Route path="/info">          <H1>Info</H1>               </Route>
             <Route path="/profil">        <H1>Profil</H1>             </Route>
-            { //<Route path="/nyheter"> <NewsRouter /> </Route>
-            }
-            <Route exact path="nyheter/"> <NewsList/></Route>
-            <Route exact path="nyheter/ny"> <NewsForm/></Route>
-            <Route exact path="nyheter/:id"> <NewsDetail/></Route>
+            <Route path="/nyheter"> <NewsRouter /> </Route>
           </Switch>
           <NavBarPhone/>
         </Router>
