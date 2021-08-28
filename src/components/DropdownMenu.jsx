@@ -47,6 +47,7 @@ color: var(--gray-90);
 
 const DropdownBox = styled.div`
     position: absolute;
+    z-index: 1;
     top: 0;
     right: 0;
     margin: 0; 
