@@ -6,11 +6,14 @@ import { H1, P, Link } from "../../components/Text";
 
 
 export const NewsDetail = () => {
+  const { id } = useParams();
   useEffect(() => {
+    console.log("Hello")
+    console.log(id);
     fetchArticle();
   }, []);
 
-  const {id} = useParams();
+  console.log(id)
 
   const [article, setArticle] = useState([]);
   const [author, setAuthor] = useState([]);
@@ -48,6 +51,7 @@ export const NewsDetail = () => {
       </Flex>
   )
 };
+
 
 const Flex = styled.div`
   display: flex;

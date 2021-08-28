@@ -34,6 +34,7 @@ const HomeContainer = styled.div`
     @media (min-width: 768px){
         flex-direction: row;
         justify-content: space-around;
+        flex-wrap: nowrap;
         align-items: flex-start;        // or stretch
     }
 `;

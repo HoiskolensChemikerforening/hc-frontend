@@ -57,7 +57,7 @@ const Nav = styled.nav`
     flex-direction: row;
     justify-content: space-between;
     margin: 10px;
-    margin-bottom: 40px;
+    margin-bottom: 5px;
     padding: 0 40px 0 40px;
     border-bottom: 1px solid #B0BEC5;
     align-items: center;

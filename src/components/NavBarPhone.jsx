@@ -30,11 +30,13 @@ export {NavBarPhone};
 
 
 const Nav = styled.nav`
-    height: 90px;
+    height: 50px;
     margin-bottom: 0;
-    border-top: 1px solid #B0BEC5;
-    position: absolute;
     bottom: 0;
+    border-top: 1px solid #B0BEC5;
+    background-color: var(--white);
+    position: sticky;
+    position: -webkit-sticky;
     width: 100%;
     @media (min-width: 768px){
         display: none;
@@ -46,7 +48,7 @@ const MenuItems = styled.div`
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    padding-top: 18px;
+    padding-top: 10px;
     margin: 0px 10px 0px 10px;
 `;
 

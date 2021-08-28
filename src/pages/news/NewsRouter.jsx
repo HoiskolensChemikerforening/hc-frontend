@@ -8,9 +8,9 @@ import { NewsForm } from "./NewsForm"
 const NewsRouter = () => {
   return (
       <Route>
-        <Route exact path="/nyheter" component={NewsList}/>
-        <Route exact path="/nyheter/ny" component={NewsForm}/>
-        <Route exact path="/nyheter/info/:id" component={NewsDetail}/>
+        <Route exact path="/" component={NewsList}/>
+        <Route exact path="/ny" component={NewsForm}/>
+        <Route exact path="/:id" component={NewsDetail}/>
       </Route>
   )
 };

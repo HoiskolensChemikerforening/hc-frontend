@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { H3, P } from "../../components/Text";
 import { Button } from "../../components/Button.js";
 import moment from 'moment';
-import { NavBarPhone } from "../../components/NavBarPhone";
 
 export const NewsList = () => {
   useEffect(() => {
@@ -12,12 +11,12 @@ export const NewsList = () => {
   }, []);
 
   const [articles, setArticles] = useState([]);
+  const history = useHistory();
 
   const fetchArticles = async () => {
     const data = await fetch("http://localhost:8000/nyheter/api/");
     const items = await data.json();
     setArticles(items);
-    console.log(items[0].published_date);
   };
 
   return (
@@ -32,9 +31,7 @@ export const NewsList = () => {
         </ButtonContainer>
         {articles.map((article) => (
             <NewsItem key={article.id}>
-              <a href={"/nyheter/info/" + article.id}>
-                <ImageContainer img={article.image}/>
-              </a>
+                <ImageContainer img={article.image} onClick={() => {history.push(`/nyheter/${article.id}`)}}/>
               <H3 bold>
                 {article.title}
               </H3>
