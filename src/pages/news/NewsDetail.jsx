@@ -39,12 +39,13 @@ export const NewsDetail = () => {
         <AuthorContainer>
           <AuthorImage img={article.image} />
           <P style={{ marginBottom: "0px" }}>
-            av <Link bold>{author.full_name}</Link>
+            av <span style={{color: "black", fontWeight: 600}}>{author.full_name}</span>
+            &nbsp;/&nbsp;
             {new Date(article.published_date).toLocaleDateString()}
           </P>
         </AuthorContainer>
 
-        <P>{parse(article.content)}</P>
+        <P style={{marginTop: "20px"}}>{parse(article.content)}</P>
       </ArticleContainer>
     </NewsContainer>
   );
