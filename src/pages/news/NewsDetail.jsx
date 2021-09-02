@@ -5,7 +5,6 @@ import styled from "styled-components";
 import parse from "react-html-parser";
 import { H1, P, Link } from "../../components/Text";
 
-
 export const NewsDetail = () => {
   const { params } = useRouteMatch("/nyheter/:id");
   console.log(params);
@@ -14,60 +13,94 @@ export const NewsDetail = () => {
     fetchArticle();
   }, []);
 
-
   const [article, setArticle] = useState([]);
   const [author, setAuthor] = useState([]);
 
   const fetchArticle = async () => {
-    const data = await fetch("http://localhost:8000/nyheter/api/" + params.id.toString() + "/");
+    const data = await fetch(
+      "http://localhost:8000/nyheter/api/" + params.id.toString() + "/"
+    );
     const item = await data.json();
     setArticle(item);
     setAuthor(item.author);
   };
 
   return (
-      <Flex>
+    <NewsContainer>
         <ImageContainer>
-          <h1>{article.title}</h1>
-          <ArticleImage img={article.image}/>
+          <ArticleImage img={article.image} />
         </ImageContainer>
 
-        <ArticleContainer>
-          <H1 bigger bold>
-            {article.title}
-          </H1>
+      <ArticleContainer>
+        <H1 bigger bold>
+          {article.title}
+        </H1>
 
-          <AuthorContainer>
-            <AuthorImage img={article.image}/>
-            <P style={{marginBottom: "0px"}}>
-              av <Link bold>{author.full_name}</Link>,
-              {new Date(article.published_date).toLocaleDateString()}
-            </P>
-          </AuthorContainer>
+        <AuthorContainer>
+          <AuthorImage img={article.image} />
+          <P style={{ marginBottom: "0px" }}>
+            av <Link bold>{author.full_name}</Link>
+            {new Date(article.published_date).toLocaleDateString()}
+          </P>
+        </AuthorContainer>
 
-          <P>{parse(article.content)}</P>
-
-        </ArticleContainer>
-      </Flex>
-  )
+        <P>{parse(article.content)}</P>
+      </ArticleContainer>
+    </NewsContainer>
+  );
 };
 
-
-const Flex = styled.div`
+const NewsContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
+  margin-top: -5px;
+  width: 100%;
+  height: 100%;
 `;
 
 const ArticleContainer = styled.div`
-    max-width: 550px;
+  max-width: 550px;
+  @media (min-width: 500px){
+    height:100%;
+    width: 70%;
+    }
+  @media (min-width: 700px) {
+    height:100%;
+    width: 60%;
+  }
+  @media (min-width: 850px) {
+    height:100%;
+    width: 55%;
+  }
+  @media (min-width: 900px) {
+    height:100%;
+    width: 50%;
+  }
 `;
 
 const ImageContainer = styled.div`
-  padding: 0 200px;
-  height: 100%;
+  padding: 0 0px;
+  margin-top: -5px;
   width: 100%;
-  max-width: 60%;
+  @media (min-width: 500px){
+    height:100%;
+    width: 70%;
+    }
+  @media (min-width: 700px) {
+    height:100%;
+    width: 60%;
+  }
+  @media (min-width: 850px) {
+    height:100%;
+    width: 55%;
+    margin-bottom: -20px;
+  }
+  @media (min-width: 900px) {
+    height:100%;
+    width: 50%;
+    margin-bottom: -20px;
+  }
 `;
 
 const ArticleImage = styled.div`
