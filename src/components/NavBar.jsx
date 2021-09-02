@@ -18,9 +18,11 @@ const NavBar = () =>  {
     }
     return (
         <>
+            <NavContainer>
+
             <Nav>
                 <LogoArea>
-                    <LogoImg alt="HC-logo" src="logo.png"/>
+                    <LogoImg alt="HC-logo" src="logo.png"/> 
                     <NavText>
                         <H>Høiskolens</H>
                         <H>Chemikerforening</H>
@@ -35,6 +37,7 @@ const NavBar = () =>  {
                 </MenuItems>
                <UserBox toggleMenu={setMenuOpen}/>
             </Nav>
+            </NavContainer>
             <DropdownMenu isOpen={menuOpen} setOpen={setMenuOpen}/>
         </>
     )
@@ -50,14 +53,19 @@ const LogoImg = styled.img`
     padding-right: 15px;
 `;
 
+const NavContainer = styled.div`
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0px;
+    background-color: var(--white);
+`;
 
 const Nav = styled.nav`
     height: 90px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 10px;
-    margin-bottom: 5px;
+    margin: 0px 10px 5px 10px;
     padding: 0 40px 0 40px;
     border-bottom: 1px solid #B0BEC5;
     align-items: center;

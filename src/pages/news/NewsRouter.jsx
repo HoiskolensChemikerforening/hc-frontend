@@ -1,18 +1,23 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Route } from "react-router-dom";
 import { NewsList } from "./NewsList";
 import { NewsDetail } from "./NewsDetail";
-import { NewsForm } from "./NewsForm"
-
+import { NewsForm } from "./NewsForm";
 
 const NewsRouter = () => {
   return (
-      <Route>
-        <Route exact path="/" component={NewsList}/>
-        <Route exact path="/ny" component={NewsForm}/>
-        <Route exact path="/:id" component={NewsDetail}/>
+    <Fragment>
+      <Route exact path="/">
+        <NewsList />
       </Route>
-  )
+      <Route path="/ny">
+        <NewsForm />
+      </Route>
+      <Route path="/:id">
+        <NewsDetail />
+      </Route>
+    </Fragment>
+  );
 };
 
 export { NewsRouter };

@@ -30,9 +30,10 @@ export {NavBarPhone};
 
 
 const Nav = styled.nav`
-    height: 50px;
+    height: 60px;
     margin-bottom: 0;
     bottom: 0;
+    padding: 0px 5px 0px 5px;
     border-top: 1px solid #B0BEC5;
     background-color: var(--white);
     position: sticky;
@@ -49,7 +50,7 @@ const MenuItems = styled.div`
     justify-content: space-evenly;
     align-items: center;
     padding-top: 10px;
-    margin: 0px 10px 0px 10px;
+    margin: 5px 10px 0px 10px;
 `;
 
 
