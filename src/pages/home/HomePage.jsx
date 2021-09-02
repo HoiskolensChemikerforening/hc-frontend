@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ImageSrc from "../../images/hc.jpg";
 import { NewsList } from "../news/NewsList";
+import {Row, Col, Container} from "../../components/Layout";
 //import { EventBox2 } from "./EventBox2";
 //import { NewsBox } from "./NewsBox";
 //import { Container, Row, Col } from "../../components/FlexLayout";
@@ -9,17 +10,23 @@ import { NewsList } from "../news/NewsList";
 
 const HomePage = () => (
   <>
-    <HomeContainer>
-      <EventContainer>
+    <Row>
+        <Col md="3">
+        <Container>
           <h1>Events</h1>
-      </EventContainer>
-      <NewsContainer>
+          </Container>
+        </Col>
+        <Col sm="12" md="6">
+        <Container>
           <NewsList/>
-      </NewsContainer>
-      <WidgetContainer>
+        </Container>
+        </Col>
+        <Col md="3">
+        <Container>
           <h1>Widgets</h1>
-      </WidgetContainer>
-    </HomeContainer>
+          </Container>
+        </Col>
+    </Row>
   </>
 );
 
