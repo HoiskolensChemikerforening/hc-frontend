@@ -27,13 +27,11 @@ const NavBarPhone = () => {
 
 export {NavBarPhone};
 
-
-
 const Nav = styled.nav`
     height: 60px;
     margin-bottom: 0;
     bottom: 0;
-    padding: 0px 5px 0px 5px;
+    padding: 0px 0px 0px 0px;
     border-top: 1px solid #B0BEC5;
     background-color: var(--white);
     position: sticky;

@@ -12,9 +12,9 @@ const HomePage = () => (
   <>
     <Row>
         <Col md="3">
-        <Container>
+        <EventContainer>
           <h1>Events</h1>
-          </Container>
+        </EventContainer>
         </Col>
         <Col sm="12" md="6">
         <Container>
@@ -51,6 +51,7 @@ const EventContainer = styled.div`
     display:flex;
     min-width: 200px;
     max-width: 100%;
+    margin-left: 5px;
     justify-content: center;
 `;
 

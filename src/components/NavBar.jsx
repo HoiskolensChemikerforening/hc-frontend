@@ -19,7 +19,6 @@ const NavBar = () =>  {
     return (
         <>
             <NavContainer>
-
             <Nav>
                 <LogoArea>
                     <LogoImg alt="HC-logo" src="logo.png"/> 
@@ -56,6 +55,7 @@ const LogoImg = styled.img`
 const NavContainer = styled.div`
     position: sticky;
     position: -webkit-sticky;
+    z-index: 1;
     top: 0px;
     background-color: var(--white);
 `;

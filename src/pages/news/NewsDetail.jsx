@@ -40,7 +40,7 @@ export const NewsDetail = () => {
           <AuthorImage img={article.image} />
           <P style={{ marginBottom: "0px" }}>
             av <span style={{color: "black", fontWeight: 600}}>{author.full_name}</span>
-            &nbsp;/&nbsp;
+            &nbsp;
             {new Date(article.published_date).toLocaleDateString()}
           </P>
         </AuthorContainer>
