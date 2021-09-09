@@ -42,7 +42,7 @@ export const NewsList = () => {
                 </H3>
                 <P small style={{margin: "10px"}}>
                   <span style={{fontWeight: 600}}>{article.author.full_name}</span>
-                  &nbsp;/&nbsp;
+                  &nbsp;
                   <span style={{color: "#616161"}}>{new Date(article.published_date).toLocaleDateString()}</span>
                 </P>
                 <P style={{margin: "10px"}}>
@@ -91,11 +91,6 @@ const ImageContainer = styled.div`
     background-size: cover;
 `;
 
-const NewsText = styled.div`
-    position: absolute;
-    top: 0;
-    left: 7%;
-`;
 
 const HRule = styled.hr`
     margin: 0;
