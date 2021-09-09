@@ -17,8 +17,8 @@ const Button = styled.button`
 
   ${props => props.primary && css`
     color: #000;
-    background: #ffd900;
-    border: 2px #ffd900 solid;
+    background: var(--primary);
+    border: 2px var(--primary) solid;
   `}
   ${props => props.secondary && css`
     border: 2px #212121 solid;
