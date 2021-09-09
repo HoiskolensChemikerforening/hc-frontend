@@ -27,8 +27,6 @@ const NavBarPhone = () => {
 
 export {NavBarPhone};
 
-
-
 const Nav = styled.nav`
     height: 60px;
     margin-bottom: 0;

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { H3, P } from "../../components/Text";
 import { Button } from "../../components/Button.js";
+import parse from "react-html-parser";
 import moment from 'moment';
 import { BiMessageRoundedMinus } from "react-icons/bi";
 
@@ -31,9 +32,9 @@ export const NewsList = () => {
           </Link>
         </ButtonContainer>
         {articles.map((article) => (
-            <NewsItem key={article.id}>
+            <NewsItem key={article.id} onClick={() => {history.push(`/nyheter/${article.id}`)}}>
               <div>
-                <ImageContainer img={article.image} onClick={() => {history.push(`/nyheter/${article.id}`)}}/>
+                <ImageContainer img={article.image} />
               </div>
 
               <div>
@@ -45,9 +46,9 @@ export const NewsList = () => {
                   &nbsp;
                   <span style={{color: "#616161"}}>{new Date(article.published_date).toLocaleDateString()}</span>
                 </P>
-                <P style={{margin: "10px"}}>
-                  Dette er en ingress
-                </P>
+                <Ingress>
+                {parse(article.content)}
+                </Ingress>
               </div>
                 <HRule></HRule>
             </NewsItem>
@@ -97,4 +98,10 @@ const HRule = styled.hr`
     padding: 0;
     border: var(--gray-30) 0.1px solid;
 
+`
+
+const Ingress = styled.p`
+  margin: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
