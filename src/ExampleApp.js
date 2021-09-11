@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { HomePage } from "./pages/home/HomePage";
 import { News } from "./pages/news/News";
 import { NavBar } from "./components/NavBar";
+import { Internt } from "./pages/internt/Internt";
 import { H1 } from "./components/Text";
 
 class ExampleApp extends React.Component {
@@ -15,7 +16,7 @@ class ExampleApp extends React.Component {
             <Route path="/" exact>        <News/>                     </Route>
             <Route path="/arrangement">   <H1>BLOT OG SÅNN!!!</H1>    </Route>
             <Route path="/bedrift">       <H1>Bedrift</H1>            </Route>
-            <Route path="/internt">       <H1>Internt</H1>            </Route>
+            <Route path="/internt">       <Internt/>                  </Route>
             <Route path="/info">          <H1>Info</H1>               </Route>
             <Route path="/profil">        <H1>Profil</H1>             </Route>
           </Switch>
@@ -25,10 +26,3 @@ class ExampleApp extends React.Component {
 }
 
 export default ExampleApp;
-
-/* 
-  <>
-    <NavBar />
-    <News />
-  </> 
-      */
