@@ -92,10 +92,10 @@ const HRule = styled.hr`
     padding: 0;
     border: var(--gray-30) 0.1px solid;
 
-`
+`;
 
 const Ingress = styled.p`
   margin: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
-`
+`;
