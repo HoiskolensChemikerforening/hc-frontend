@@ -15,6 +15,19 @@ export const EventHomepage = () => {
   
     return (
         <>
+            <EventBox>
+                Event
+            </EventBox>
         </>
     )
   };
+
+const EventBox = styled.div`
+    width: 200px;
+    background-color: var(--yellow-30);
+    border-color: var(--grey-10);
+`;
+
+const Picture = styled.img`
+    
+`;

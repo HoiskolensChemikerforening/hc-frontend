@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ImageSrc from "../../images/hc.jpg";
 import { NewsList } from "../news/NewsList";
 import {Row, Col, Container} from "../../components/Layout";
+import { EventHomepage } from "../events/EventHomepage";
 //import { EventBox2 } from "./EventBox2";
 //import { NewsBox } from "./NewsBox";
 //import { Container, Row, Col } from "../../components/FlexLayout";
@@ -12,9 +13,9 @@ const HomePage = () => (
   <>
     <Row>
         <Col md="3">
-        <EventContainer>
-          <h1>Events</h1>
-        </EventContainer>
+        <Container>
+          <EventHomepage/>
+        </Container>
         </Col>
         <Col sm="12" md="6">
         <Container>
@@ -23,8 +24,8 @@ const HomePage = () => (
         </Col>
         <Col md="3">
         <Container>
-          <h1>Widgets</h1>
-          </Container>
+          Widgets
+        </Container>
         </Col>
     </Row>
   </>
