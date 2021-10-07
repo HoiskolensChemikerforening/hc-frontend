@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ImageSrc from "../../images/hc.jpg";
 import { NewsList } from "../news/NewsList";
 import {Row, Col, Container} from "../../components/Layout";
-import { Widgets } from "../widgets/Widgets";
+import { Widgets } from "./Widgets";
 //import { EventBox2 } from "./EventBox2";
 //import { NewsBox } from "./NewsBox";
 //import { Container, Row, Col } from "../../components/FlexLayout";
