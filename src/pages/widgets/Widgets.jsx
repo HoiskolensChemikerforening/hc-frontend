@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import styled, { css } from 'styled-components';
-import { Link, useHistory } from "react-router-dom";
-import { H3, P } from "../../components/Text";
+import styled from 'styled-components';
+import { Link } from "react-router-dom";
+import { P } from "../../components/Text";
 import { FiCoffee } from "react-icons/fi";
 import { RiArchiveDrawerLine, RiHandCoinLine, RiDoorOpenFill } from "react-icons/ri";
 
