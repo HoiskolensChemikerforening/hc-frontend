@@ -4,6 +4,7 @@ import ImageSrc from "../../images/hc.jpg";
 import { NewsList } from "../news/NewsList";
 import {Row, Col, Container} from "../../components/Layout";
 import { EventHomepage } from "../events/EventHomepage";
+import { Widgets } from "./Widgets";
 //import { EventBox2 } from "./EventBox2";
 //import { NewsBox } from "./NewsBox";
 //import { Container, Row, Col } from "../../components/FlexLayout";
@@ -11,23 +12,20 @@ import { EventHomepage } from "../events/EventHomepage";
 
 const HomePage = () => (
   <>
-    <Row>
-        <Col md="3">
-        <Container>
-          <EventHomepage/>
-        </Container>
-        </Col>
-        <Col sm="12" md="6">
-        <Container>
-          <NewsList/>
-        </Container>
-        </Col>
-        <Col md="3">
-        <Container>
-          Widgets
-        </Container>
-        </Col>
-    </Row>
+    <Container>
+      <Row>
+          <Col md="3">
+            <h1>Events</h1>
+            <EventHomepage/>
+          </Col>
+          <Col sm="12" md="6">
+              <NewsList/>
+          </Col>
+          <Col md="3">
+            <Widgets/>
+          </Col>
+      </Row>
+    </Container>
   </>
 );
 
