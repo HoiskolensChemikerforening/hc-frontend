@@ -9,32 +9,67 @@ import { FiCoffee } from "react-icons/fi";
 import { RiArchiveDrawerLine, RiHandCoinLine, RiDoorOpenFill } from "react-icons/ri";
 import { BiReceipt } from "react-icons/bi";
 import { Container, Col, Row } from "../../components/Layout";
+import DateDiff from "date-diff";
 
 export const Widgets = () => {
-  
+
+    useEffect(() => {
+        fetchCoffeebutton();
+      }, []);
+    
+      const [coffeeButton, setCoffeeButton] = useState("");
+    
+      const fetchCoffeebutton = async () => {
+        const data = await fetch("http://localhost:8000/web_push/api/");
+        const items = await data.json();
+        console.log(items[0].date);
+        setCoffeeButton(new Date(items[0].date));
+      };
+
+      const currentTime = new Date();
+      const dateSincePushed = currentTime - coffeeButton;
+      const sec = Math.floor(dateSincePushed/1000);
+      const min = Math.floor(sec/60);
+      const h = Math.floor(min/60);
+      const day = Math.floor(h/24);
+      let time;
+      if (sec < 60) {
+        time = sec.tostring() + ' s siden';
+      } else if (min < 60) {
+        time = min.toString() + ' min siden';
+      } else if (h <24) {
+        time = h.toString() + ' timer siden';
+      } else {
+        time = day.toString() + ' dager siden';
+      }
+
+
   
     return (
         <>
             <StaticContainer>
                 <WidgetContainer>
                     <CompContainer><FiCoffee/></CompContainer>
+                    <TextContainer>
+                        <P small style={{padding: "12px 0px 0px 0px "}}>Kaffeknappen ble trykket for {time}</P>
+                    </TextContainer>
                 </WidgetContainer> 
                 <WidgetContainer to="/bokskap">
                     <CompContainer><RiArchiveDrawerLine/></CompContainer>
                     <TextContainer>
-                        <P>Bokskap</P>
+                        <P small>Bokskap</P>
                     </TextContainer>
                 </WidgetContainer>
                 <WidgetContainer to="/midler">
                     <CompContainer><RiHandCoinLine/></CompContainer>
                     <TextContainer>
-                        <P>Midler</P>
+                        <P small>Midler</P>
                     </TextContainer>
                 </WidgetContainer>
                 <WidgetContainer to="/kontortilgang/søk">
                     <CompContainer><RiDoorOpenFill/></CompContainer>
                     <TextContainer>
-                        <P>Kontortilgang</P>
+                        <P small>Kontortilgang</P>
                     </TextContainer>
                 </WidgetContainer>
             </StaticContainer>
