@@ -9,6 +9,7 @@ import { FiCoffee } from "react-icons/fi";
 import { RiArchiveDrawerLine, RiHandCoinLine, RiDoorOpenFill } from "react-icons/ri";
 import { BiReceipt } from "react-icons/bi";
 import { Container, Col, Row } from "../../components/Layout";
+import Img from "../../images/trondheim.jpg";
 
 export const EventHomepage = () => {
   
@@ -16,7 +17,8 @@ export const EventHomepage = () => {
     return (
         <>
             <EventBox>
-                Event
+                <DateBox></DateBox>
+                <P bold>Arrangement</P>
             </EventBox>
         </>
     )
@@ -24,10 +26,17 @@ export const EventHomepage = () => {
 
 const EventBox = styled.div`
     width: 200px;
-    background-color: var(--yellow-30);
-    border-color: var(--grey-10);
+    height: 70px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--gray-50);
+    display: flex;
+    flex-direction: row;
 `;
 
-const Picture = styled.img`
-    
+const DateBox = styled.div`
+    height: 40px;
+    width: 60px;
+    margin: 4px;
+    background-color: var(--yellow-30)
 `;

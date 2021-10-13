@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ImageSrc from "../../images/hc.jpg";
 import { NewsList } from "../news/NewsList";
 import {Row, Col, Container} from "../../components/Layout";
-import { EventHomepage } from "../events/EventHomepage";
+import { EventHomepage } from "./EventHomepage";
 import { Widgets } from "./Widgets";
 //import { EventBox2 } from "./EventBox2";
 //import { NewsBox } from "./NewsBox";
@@ -15,7 +15,6 @@ const HomePage = () => (
     <Container>
       <Row>
           <Col md="3">
-            <h1>Events</h1>
             <EventHomepage/>
           </Col>
           <Col sm="12" md="6">
