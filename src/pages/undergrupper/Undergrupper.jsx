@@ -1,25 +1,33 @@
 import React from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Container, Row, Col } from "../../components/Layout";
+import { H1 } from "../../components/Text";
 
 const Undergrupper = () => (
-  <Center_Wrapper>
-    <H1>Komiteer og Undergrupper</H1>
-    <Wrapper>
-      <StyledLink to="/undergrupper/webkom"> 
-        <img src="https://www.pixelstalk.net/wp-content/uploads/2016/06/Free-Jungle-Image-Download.jpg" width="100%" height="auto"></img> 
-        Webkom
-      </StyledLink>
-      <StyledLink to="/undergrupper/webkom">Webkom</StyledLink>
-      <StyledLink to="/undergrupper/webkom">Webkom</StyledLink>
-      <StyledLink to="/undergrupper/webkom">Webkom</StyledLink>
-      <StyledLink to="/undergrupper/webkom">Webkom</StyledLink>
-      <StyledLink to="/undergrupper/webkom">Webkom</StyledLink>
-      <StyledLink to="/undergrupper/webkom">Webkom</StyledLink>
-      <StyledLink to="/undergrupper/webkom">Webkom</StyledLink>
-      <StyledLink to="/undergrupper/webkom">Webkom</StyledLink>
-    </Wrapper>
-  </Center_Wrapper>
+  <Container>
+    <Row>
+      <H1>Komiteer og Undergrupper</H1>
+    </Row>
+    <Row>
+      <Col xs="12" sm="6" md="6" lg="4">
+        <a href="/undergupper/webkom">
+          <StyledWrapper>
+            <div style={{
+              position: "absolute",width: "100%",
+              height: "100%",
+              backgroundImage: `url("https://www.pixelstalk.net/wp-content/uploads/2016/06/Free-Jungle-Image-Download.jpg")`,
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat"
+            }}>
+            Webkom
+            </div>
+          </StyledWrapper>
+        </a>
+      </Col>
+    </Row>
+
+  </Container>
 )
 
 const Center_Wrapper = styled.div`
@@ -41,28 +49,17 @@ const Wrapper = styled.div`
     flex-wrap: wrap;
 `;
 
-const H1 = styled.h1`
-    color: black;
-`;
-
-const StyledLink = styled(Link)`
+const StyledWrapper = styled.div`
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.35%;
     text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     color: black;
+    //background-color: black;
     font-weight: bold;
     font-size: 125%;
-    margin: 1% 1% 1% 1%;
-    padding: 1% 1% 1% 1%;
-    width: 29%;
-    height: 20%;
-    min-width: 180px;
-    @media only screen and (max-width: 435px) {
-      width: 70%;
-      min-width: 150px;
-    }
+    //margin: 1% 1% 1% 1%;
+    //padding: 1% 1% 1% 1%;
 `;
 
 export { Undergrupper };
