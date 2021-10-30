@@ -25,8 +25,53 @@ const Undergrupper = () => (
           </StyledWrapper>
         </a>
       </Col>
+      <Col xs="12" sm="6" md="6" lg="4">
+        <a href="/undergrupper/webkom">
+          <StyledWrapper>
+            <div style={{
+              position: "absolute",width: "100%",
+              height: "100%",
+              backgroundImage: `url("https://www.pixelstalk.net/wp-content/uploads/2016/06/Free-Jungle-Image-Download.jpg")`,
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat"
+            }}>
+            Promokom
+            </div>
+          </StyledWrapper>
+        </a>
+      </Col>
+      <Col xs="12" sm="6" md="6" lg="4">
+        <a href="/undergupper/utenriks">
+          <StyledWrapper>
+            <div style={{
+              position: "absolute",width: "100%",
+              height: "100%",
+              backgroundImage: `url("https://www.pixelstalk.net/wp-content/uploads/2016/06/Free-Jungle-Image-Download.jpg")`,
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat"
+            }}>
+            Utenriks
+            </div>
+          </StyledWrapper>
+        </a>
+      </Col>
+      <Col xs="12" sm="6" md="6" lg="4" >
+        <a href="/undergrupper/phaestkom">
+          <StyledWrapper>
+            <div style={{
+              position: "absolute",
+              width: "100%",
+              height: "100%",
+              backgroundImage: `url("https://www.pixelstalk.net/wp-content/uploads/2016/06/Free-Jungle-Image-Download.jpg")`,
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat"
+            }}>
+            pHaestkom
+            </div>
+          </StyledWrapper>
+        </a>
+      </Col>
     </Row>
-
   </Container>
 )
 
@@ -51,14 +96,13 @@ const Wrapper = styled.div`
 
 const StyledWrapper = styled.div`
     position: relative;
-    width: 100%;
     padding-bottom: 56.35%;
     text-decoration: none;
     color: black;
     //background-color: black;
     font-weight: bold;
     font-size: 125%;
-    //margin: 1% 1% 1% 1%;
+    margin: 10px;
     //padding: 1% 1% 1% 1%;
 `;
 
