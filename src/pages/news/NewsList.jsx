@@ -28,7 +28,7 @@ export const NewsList = () => {
           // or only visible when hovered
           }
           <Link to="/nyheter/ny">
-            <Button primary>Opprett nyhet</Button>
+            <Button primary style={{borderRadius: "5px"}}>Opprett nyhet</Button>
           </Link>
         </ButtonContainer>
         {articles.map((article) => (
@@ -37,7 +37,7 @@ export const NewsList = () => {
                 <ImageContainer img={article.image} />
               </div>
 
-              <div>
+              <div style={{borderRadius: "5px"}}>
                 <H3 biggest bold style={{margin: "10px"}}>
                   {article.title}
                 </H3>
@@ -84,6 +84,7 @@ const ImageContainer = styled.div`
     padding-bottom: 67%;
     background: url(${props => props.img});
     background-size: cover;
+    border-radius: 5px;
 `;
 
 
@@ -98,4 +99,5 @@ const Ingress = styled.p`
   margin: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
+  height: 40px;
 `;
