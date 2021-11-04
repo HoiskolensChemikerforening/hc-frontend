@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import { P } from "../../components/Text";
+import { useHistory } from "react-router-dom";
 
 
 export const EventHomepage = () => {
@@ -10,24 +11,25 @@ export const EventHomepage = () => {
       }, []);
     
       const [events, setEvents] = useState();
+      const history = useHistory();
     
       const fetchEvents = async () => {
         const data = await fetch("http://localhost:8000/arrangementer/api/social");
         const items = await data.json();
-        console.log(items)
-        setEvents(items);
+        const itemsDisplayed = items.slice(0,5);
+        setEvents(itemsDisplayed);
       };
   
     return (
         <div>
         {events && events.map((event) => (
-             <EventBox>
+             <EventBox key={event.id} onClick={() => {history.push(`/arrangementer/${event.id}`)}}>
                 <DateBox>
-                    <P>
+                    <P bold small style={{marginBottom: "0", color: "var(--gray-70)"}}>
                         <span>{new Date(event.date).toLocaleDateString()}</span>
                     </P>
                 </DateBox>
-                <P bold>{event.title}</P>
+                <P bold style={{marginBottom: "7px",}}>{event.title}</P>
                 <ProgressBar value={event.attendees.length} max={event.sluts} color="var(--yellow-30)"></ProgressBar>
             </EventBox>
         )) }
@@ -37,6 +39,7 @@ export const EventHomepage = () => {
        
 
 const EventBox = styled.div`
+    cursor: pointer;
     border-style: solid;
     border-width: 1px;
     border-color: var(--gray-50);
@@ -44,13 +47,19 @@ const EventBox = styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     margin: 5px 0px 0px 0px;
+    padding: 5px 0px 7px 5px;
+    border-radius: 5px;
 `;
 
 const DateBox = styled.div`
-    height: 40px;
-    width: 60px;
-    margin: 4px;
-    background-color: var(--yellow-30)
+    height: 35px;
+    width: 85px;
+    margin-bottom: 10px;
+    background-color: var(--yellow-30);
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 `;
 
 const ProgressCont = styled.div`
@@ -62,12 +71,13 @@ const ProgressCont = styled.div`
         height: 10px;
         border-radius: 20px;
         background-color: #eee;
+        margin-bottom: 4px;
     }
 
     ::-webkit-progress-value {
         height: 10px;
         border-radius: 20px;
-        background-color: ${props => props.color}
+        background-color: ${props => props.color};
     }
   }
 `;
@@ -77,7 +87,19 @@ const ProgressBar = props => {
     return (
         <ProgressCont color={color} width={width}>
             <progress value={value} max={max} />
-            <span>{value}/{max}</span>
+            <NumberCount black>{value}</NumberCount>
+            <NumberCount gray>/{max}</NumberCount>
         </ProgressCont>
     );
 };
+
+const NumberCount = styled.span`
+    font-weight: 600;
+    ${props => props.black && css`
+    color: black;
+    padding-left: 5px;
+  `}
+    ${props => props.gray && css`
+    color: var(--gray-60);
+  `}
+`;
