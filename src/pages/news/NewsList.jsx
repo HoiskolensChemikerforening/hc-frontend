@@ -18,7 +18,7 @@ export const NewsList = () => {
     const items = await data.json();
     setArticles(items);
   };
-
+  
   return (
       <NewsListContainer>
         <ButtonContainer>
