@@ -83,6 +83,7 @@ const WidgetContainer = styled(Link)`
     color: black;
     text-decoration: none;
     align-items: center;
+    border-radius: 10px;
 `;
 
 const CompContainer = styled.div`
