@@ -84,6 +84,7 @@ const LogoArea = styled.div`
 const NavText = styled.div`
     margin: 0px;
     margin-top: -7px;
+    border-radius: 5px;
 `;
 
 const H = styled(H3)`
