@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled, {css} from 'styled-components';
 import { P } from "../../components/Text";
 import { useHistory } from "react-router-dom";
+import { Button } from "../../components/Button";
 
 
 export const EventHomepage = () => {
@@ -9,19 +10,42 @@ export const EventHomepage = () => {
     useEffect(() => {
         fetchEvents();
       }, []);
-    
+      
       const [events, setEvents] = useState();
+      const [commingEvents, setCommingEvents] = useState();
+      const [coorporateEvents, setCoorporateEvents] = useState();
       const history = useHistory();
     
       const fetchEvents = async () => {
         const data = await fetch("http://localhost:8000/arrangementer/api/social");
         const items = await data.json();
         const itemsDisplayed = items.slice(0,5);
-        setEvents(itemsDisplayed);
+        const oldEventDisplayed = items.slice(5,10);
+        setEvents(commingEvents);
+        setCommingEvents(itemsDisplayed);
+        setCoorporateEvents(oldEventDisplayed);
       };
+
+  const switchEvent = value => {
+    switch(value){
+    case "Social":
+      setEvents(commingEvents);
+      break;
+    case "Coorporate":
+      setEvents(coorporateEvents);
+      break;
+    }
+      // if (events == commingEvents){
+      //   setEvents(coorporateEvents);
+      // }
+      // else {
+      //   setEvents(commingEvents);
+      // }
+  };
   
     return (
         <div>
+          <navBar value="Social" onClick={switchEvent}>Hei</navBar><navBar value="Coorporate" onClick={switchEvent}>Hei2</navBar>
         {events && events.map((event) => (
              <EventBox key={event.id} onClick={() => {history.push(`/arrangementer/${event.id}`)}}>
                 <DateBox>
@@ -102,4 +126,10 @@ const NumberCount = styled.span`
     ${props => props.gray && css`
     color: var(--gray-60);
   `}
+`;
+
+const navBar = styled.div`
+  width: 50%;
+  height: 30px;
+  background-color: green;
 `;

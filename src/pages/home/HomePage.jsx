@@ -10,7 +10,7 @@ import { Widgets } from "./Widgets";
 //import { Container, Row, Col } from "../../components/FlexLayout";
 
 
-const HomePage = () => (
+export const HomePage = () => (
   <>
     <Container>
       <Row>
@@ -28,7 +28,7 @@ const HomePage = () => (
   </>
 );
 
-export { HomePage };
+
 
 const HomeContainer = styled.div`
     display: flex;
