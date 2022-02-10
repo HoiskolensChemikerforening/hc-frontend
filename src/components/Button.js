@@ -11,7 +11,7 @@ const Button = styled.button`
 
   background: transparent;
   border: 2px transparent;
-  border-radius: 1px;
+  border-radius: 10px;
 
   cursor: pointer;
 

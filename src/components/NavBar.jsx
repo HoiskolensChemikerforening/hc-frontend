@@ -48,8 +48,10 @@ export {NavBar};
 const LogoImg = styled.img`
     width: 60px;
     height: 60px;
+    border-radius: 50%;
     margin-bottom: 10px;
-    padding-right: 15px;
+    margin-right: 15px;
+    //padding-right: 15px;
 `;
 
 const NavContainer = styled.div`
