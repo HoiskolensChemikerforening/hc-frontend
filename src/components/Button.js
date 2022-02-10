@@ -12,6 +12,8 @@ const Button = styled.button`
   background: transparent;
   border: 2px transparent;
   border-radius: 10px;
+  // Shadow #36 by tailwind
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 
   cursor: pointer;
 
