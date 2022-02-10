@@ -35,7 +35,7 @@ export const NewsForm = () => {
         author: {username: "Helebo", email: "helebo@stud.ntnu.no",
         first_name: "",
         last_name: "",
-        full_name: ""},
+        full_name: "Helene"},
         image: imageFile.djFile,
         published_date: new Date(), 
         slug: title.split(" ").join("-"),
@@ -60,7 +60,7 @@ export const NewsForm = () => {
       const data = {
         title: title,
         content: dataEdit,
-        author: {username: "Helebo", email: "helebo@stud.ntnu.no",
+        author: {full_name: "Helene", username: "Helebo", email: "helebo@stud.ntnu.no",
         first_name: "",
         last_name: "",
         full_name: ""},
