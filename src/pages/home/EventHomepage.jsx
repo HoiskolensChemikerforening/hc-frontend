@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled, {css} from 'styled-components';
-import { P } from "../../components/Text";
+import { P, H3 } from "../../components/Text";
 import { useHistory } from "react-router-dom";
 import { Button } from "../../components/Button";
 
@@ -11,42 +11,49 @@ export const EventHomepage = () => {
         fetchEvents();
       }, []);
       
-      const [events, setEvents] = useState();
-      const [commingEvents, setCommingEvents] = useState();
-      const [coorporateEvents, setCoorporateEvents] = useState();
+      const [dispEvents, setDispEvents] = useState();
+      const [socialEvents, setSocialEvents] = useState();
+      const [corporateEvents, setCorporateEvents] = useState();
+      const [socialBold, setSocialBold] = useState(true);
       const history = useHistory();
     
       const fetchEvents = async () => {
-        const data = await fetch("http://localhost:8000/arrangementer/api/social");
-        const items = await data.json();
-        const itemsDisplayed = items.slice(0,5);
-        const oldEventDisplayed = items.slice(5,10);
-        setEvents(commingEvents);
-        setCommingEvents(itemsDisplayed);
-        setCoorporateEvents(oldEventDisplayed);
+        const data1 = await fetch("http://localhost:8000/arrangementer/api/social");
+        const items1 = await data1.json();
+        const data2 = await fetch("http://localhost:8000/arrangementer/api/bedpres");
+        const items2 = await data2.json();
+        const socialData = items1.slice(0,5);
+        const corporateData = items2.slice(0,5);
+        setDispEvents(socialData);
+        setSocialEvents(socialData);
+        setCorporateEvents(corporateData);
       };
 
   const switchEvent = value => {
-    switch(value){
-    case "Social":
-      setEvents(commingEvents);
-      break;
-    case "Coorporate":
-      setEvents(coorporateEvents);
-      break;
+    console.log(typeof(value));
+    if (value == "Social" && dispEvents==corporateEvents){
+      setDispEvents(socialEvents);
+      setSocialBold(true);
     }
-      // if (events == commingEvents){
-      //   setEvents(coorporateEvents);
-      // }
-      // else {
-      //   setEvents(commingEvents);
-      // }
+    if (value == "Corporate" && dispEvents==socialEvents){
+      setDispEvents(corporateEvents);
+      setSocialBold(false);
+    }
   };
   
     return (
-        <div>
-          <navBar value="Social" onClick={switchEvent}>Hei</navBar><navBar value="Coorporate" onClick={switchEvent}>Hei2</navBar>
-        {events && events.map((event) => (
+        <EventContainer>
+          <div style={{postition: "fixed"}}>
+          <EventType>
+            <Title  value="Corporate" onClick={() => switchEvent("Social")}
+              style={  socialBold ? { fontWeight: 'bold' } : { fontWeight: 'normal' } }
+            >Sosialt</Title>
+            <Title> /</Title>
+            <Title value="Corporate" onClick={() => switchEvent("Corporate")}
+            style={  !socialBold ? { fontWeight: 'bold' } : { fontWeight: 'normal' } }
+            >Bedrift</Title>
+          </EventType>
+          {dispEvents && dispEvents.map((event) => (
              <EventBox key={event.id} onClick={() => {history.push(`/arrangementer/${event.id}`)}}>
                 <DateBox>
                     <P bold small style={{marginBottom: "0", color: "var(--gray-70)"}}>
@@ -58,10 +65,30 @@ export const EventHomepage = () => {
             </EventBox>
         )) }
         </div>
+        </EventContainer>
     )
   };
        
-
+const EventContainer = styled.div`
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 200px;
+  height: 80%;
+  padding-right: 10px;
+  margin-top: 10px;
+`;
+const EventType = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin:0;
+`;
+const Title = styled.p`
+  margin: 0;
+  size: medium;
+`;
 const EventBox = styled.div`
     cursor: pointer;
     border-style: solid;
@@ -70,7 +97,7 @@ const EventBox = styled.div`
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    margin: 5px 0px 0px 0px;
+    margin: 5px 0px 15px 0px;
     padding: 5px 0px 7px 5px;
     border-radius: 5px;
 `;
@@ -109,7 +136,7 @@ const ProgressCont = styled.div`
 const ProgressBar = props => {
     const { value, max, color, width } = props;
     return (
-        <ProgressCont color={color} width={width}>
+        <ProgressCont color={color} width={width} >
             <progress value={value} max={max} />
             <NumberCount black>{value}</NumberCount>
             <NumberCount gray>/{max}</NumberCount>
@@ -126,10 +153,4 @@ const NumberCount = styled.span`
     ${props => props.gray && css`
     color: var(--gray-60);
   `}
-`;
-
-const navBar = styled.div`
-  width: 50%;
-  height: 30px;
-  background-color: green;
 `;
