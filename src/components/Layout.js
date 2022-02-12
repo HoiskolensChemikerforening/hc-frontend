@@ -17,6 +17,7 @@ const Row = styled.div`
     clear: both;
     display: table;
   }
+  width: 100%;
 `;
 
 // Help function for Column
