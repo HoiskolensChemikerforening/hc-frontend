@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled, {css} from 'styled-components';
 import { P, H3 } from "../../components/Text";
 import { useHistory } from "react-router-dom";
-import { Button } from "../../components/Button";
 
 
 export const EventHomepage = () => {
@@ -22,8 +21,8 @@ export const EventHomepage = () => {
         const items1 = await data1.json();
         const data2 = await fetch("http://localhost:8000/arrangementer/api/bedpres");
         const items2 = await data2.json();
-        const socialData = items1.slice(0,5);
-        const corporateData = items2.slice(0,5);
+        const socialData = items1.slice(0,4);
+        const corporateData = items2.slice(0,4);
         setDispEvents(socialData);
         setSocialEvents(socialData);
         setCorporateEvents(corporateData);
@@ -69,12 +68,13 @@ export const EventHomepage = () => {
     )
   };
        
+const widthProgress = 180;
 const EventContainer = styled.div`
   position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 200px;
+  width: ${widthProgress}px;
   height: 80%;
   padding-right: 10px;
   margin-top: 10px;
@@ -114,9 +114,15 @@ const DateBox = styled.div`
 `;
 
 const ProgressCont = styled.div`
+  display:flex;
+  align-items: baseline;
+  max-width: ${widthProgress}px;
+
+
   progress[value] {
-      width: ${props => props.width};
+      width: ${widthProgress-65}px;
       appearance: none;
+      padding-top:5px;
 
     ::-webkit-progress-bar {
         height: 10px;
@@ -135,12 +141,18 @@ const ProgressCont = styled.div`
 
 const ProgressBar = props => {
     const { value, max, color, width } = props;
-    return (
+    
+    // Atendees or open event.
+    const progress = (
         <ProgressCont color={color} width={width} >
-            <progress value={value} max={max} />
+            <progress value={value} max={max} width={width}/>
             <NumberCount black>{value}</NumberCount>
             <NumberCount gray>/{max}</NumberCount>
-        </ProgressCont>
+        </ProgressCont>);
+    const open = (<P italic style={{"margin-bottom":"0px"}} > Åpent for alle!</P>)
+    return ( 
+      (max != 0) ? progress : open
+          
     );
 };
 
