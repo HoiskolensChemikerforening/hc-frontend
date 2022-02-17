@@ -44,10 +44,10 @@ export const EventHomepage = () => {
         <EventContainer>
           <div style={{postition: "fixed"}}>
           <EventType>
-            <Title  value="Corporate" onClick={() => switchEvent("Social")}
+            <Title value="Corporate" onClick={() => switchEvent("Social")}
               style={  socialBold ? { fontWeight: 'bold' } : { fontWeight: 'normal' } }
             >Sosialt</Title>
-            <Title> /</Title>
+            <Title style={{cursor: "default"}}> /</Title>
             <Title value="Corporate" onClick={() => switchEvent("Corporate")}
             style={  !socialBold ? { fontWeight: 'bold' } : { fontWeight: 'normal' } }
             >Bedrift</Title>
@@ -85,7 +85,9 @@ const EventType = styled.div`
   justify-content: space-around;
   margin:0;
 `;
+
 const Title = styled.p`
+  cursor: pointer;
   margin: 0;
   size: medium;
 `;
