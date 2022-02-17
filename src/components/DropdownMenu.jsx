@@ -83,7 +83,7 @@ const Nav = styled.nav`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
+    margin: 0px 10px 5px 10px;
     margin-bottom: 0;
     padding: 0 40px 0 40px;
 `;
