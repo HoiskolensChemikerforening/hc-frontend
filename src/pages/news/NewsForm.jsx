@@ -25,7 +25,28 @@ export const NewsForm = () => {
     else {
     return null; }*/
    // }, [sendNews]);
+   
 
+    const sendArticle = async() => {
+
+      const author = 1;
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", dataEdit);
+    formData.append("image", imageFile.file);
+    formData.append("author", author);
+
+
+      const response = await fetch("http://localhost:8000/nyheter/api/", {
+      method: 'POST',
+      body: formData,
+      //JSON.stringify(news),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    /*
     const sendArticle = async() => {
       const response = await fetch("http://localhost:8000/nyheter/api/", {
       method: 'POST',
@@ -45,6 +66,7 @@ export const NewsForm = () => {
         'Content-Type': 'application/json',
       },
     });
+    */
     const data = await response.json();
     console.log(data)
   
