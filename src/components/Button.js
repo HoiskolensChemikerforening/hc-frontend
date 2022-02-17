@@ -26,6 +26,12 @@ const Button = styled.button`
     border: 2px #212121 solid;
     color: rgb(0, 0, 0, 0.7);
   `}
+  ${props => props.navigation && css`
+    border: 2px #212121 solid;
+    color: rgb(0, 0, 0, 0.7);
+    width: 100px;
+    height: 50px;
+  `}
 `;
 
 export {
