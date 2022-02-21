@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./news.css";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { TextField, ImageField } from "../../components/Form"
 import { Button } from "../../components/Button.js";
+
 
 export const NewsForm = () => {
    // For validation
@@ -14,6 +15,7 @@ export const NewsForm = () => {
    const [error, setError] = useState(false);
    const [sendNews, setSendNews] = useState(false);
    const [news, setNews] = useState(null);
+
    // const title = useRef(null); // ref={}
   // Post Form
   //useEffect(() => {
@@ -35,16 +37,20 @@ export const NewsForm = () => {
     formData.append("content", dataEdit);
     formData.append("image", imageFile.file);
     formData.append("author", author);
-
-
+    for (let value of formData.values()) {
+      console.log(value);
+    }
       const response = await fetch("http://localhost:8000/nyheter/api/", {
       method: 'POST',
-      body: formData,
-      //JSON.stringify(news),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      body: formData,      
     });
+    /*
+    //JSON.stringify(news),
+    headers: {
+        'Accept': 'application/json'  
+      },
+    */ 
+    // 'Accept': 'application/json', 'Content-Type': 'application/json', 'HTTP_X_REQUEST_WITH': 'XMLHttpRequest','X-Requested-with':'XMLHttpRequest'
 
     /*
     const sendArticle = async() => {
@@ -67,7 +73,7 @@ export const NewsForm = () => {
       },
     });
     */
-    const data = await response.json();
+    const data = await response.text();
     console.log(data)
   
     }  // use Callback?
@@ -100,7 +106,7 @@ export const NewsForm = () => {
   return (
     <NewArticleContainer>
       <h1>New Article</h1>
-    <form onSubmit={postArticle} onFocus={() => setError(false)}>
+    <form  onSubmit={postArticle} onFocus={() => setError(false)}>
       <FormContainer >
         <TextField placeholder="Tittel på nyheten" onChange={(event) => {setTitle(event.target.value)}} />
         <CKEditor 
