@@ -91,7 +91,7 @@ const HRule = styled.hr`
 
 `;
 
-const Ingress = styled.p`
+const Ingress = styled.div`
   margin: 10px;
   overflow: hidden;
   text-overflow: ellipsis;

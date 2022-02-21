@@ -1,40 +1,45 @@
 import React, { useEffect, useState } from "react";
 import styled, {css} from 'styled-components';
-import { P, H3 } from "../../components/Text";
+import { P } from "../../components/Text";
 import { useHistory } from "react-router-dom";
 
 
 export const EventHomepage = () => {
-    
-    useEffect(() => {
-        fetchEvents();
-      }, []);
       
       const [dispEvents, setDispEvents] = useState();
       const [socialEvents, setSocialEvents] = useState();
       const [corporateEvents, setCorporateEvents] = useState();
       const [socialBold, setSocialBold] = useState(true);
       const history = useHistory();
+
+      useEffect(() => {
+        let isMounted = true;
+          fetchEvents().then(data => {
+            if (isMounted) {
+            setDispEvents(data.social);
+            setSocialEvents(data.social);
+            setCorporateEvents(data.corporate);
+            }});
+          return () => {isMounted = false};
+        }, []);
     
       const fetchEvents = async () => {
         const data1 = await fetch("http://localhost:8000/arrangementer/api/social");
-        const items1 = await data1.json();
+        const itemsSocial = await data1.json();
         const data2 = await fetch("http://localhost:8000/arrangementer/api/bedpres");
-        const items2 = await data2.json();
-        const socialData = items1.slice(0,4);
-        const corporateData = items2.slice(0,4);
-        setDispEvents(socialData);
-        setSocialEvents(socialData);
-        setCorporateEvents(corporateData);
+        const itemsCorp = await data2.json();
+        const socialData = itemsSocial.slice(0,4);
+        const corporateData = itemsCorp.slice(0,4);
+        return {social: socialData, corporate: corporateData }
       };
 
   const switchEvent = value => {
     console.log(typeof(value));
-    if (value == "Social" && dispEvents==corporateEvents){
+    if (value === "Social" && dispEvents===corporateEvents){
       setDispEvents(socialEvents);
       setSocialBold(true);
     }
-    if (value == "Corporate" && dispEvents==socialEvents){
+    if (value === "Corporate" && dispEvents===socialEvents){
       setDispEvents(corporateEvents);
       setSocialBold(false);
     }
@@ -151,9 +156,9 @@ const ProgressBar = props => {
             <NumberCount black>{value}</NumberCount>
             <NumberCount gray>/{max}</NumberCount>
         </ProgressCont>);
-    const open = (<P italic style={{"margin-bottom":"0px"}} > Åpent for alle!</P>)
+    const open = (<P italic style={{marginBottom:"0px"}} > Åpent for alle!</P>)
     return ( 
-      (max != 0) ? progress : open
+      (max !== 0) ? progress : open
           
     );
 };
