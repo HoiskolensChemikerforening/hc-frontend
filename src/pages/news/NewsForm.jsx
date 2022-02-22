@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./news.css";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
@@ -13,7 +13,7 @@ export const NewsForm = () => {
    const [title, setTitle] = useState(null);
    const [error, setError] = useState(false);
    const [sendNews, setSendNews] = useState(false);
-   const [news, setNews] = useState(null);
+   //const [news, setNews] = useState(null);
    // const title = useRef(null); // ref={}
   // Post Form
   //useEffect(() => {
@@ -55,19 +55,6 @@ export const NewsForm = () => {
     event.preventDefault();
     if(title != null && dataEdit != null && imageFile != null){
       setError(false);
-      // console.log("image: "+ image + "article text: " + articleText);
-      // Either delete this or pass to post request
-      const data = {
-        title: title,
-        content: dataEdit,
-        author: {full_name: "Helene", username: "Helebo", email: "helebo@stud.ntnu.no",
-        first_name: "",
-        last_name: "",
-        full_name: ""},
-        image: imageFile.file.toString(),
-        published_date: new Date(), 
-      };
-      setNews(data);
       setSendNews(true);
       sendNews && sendArticle();
     }
@@ -114,10 +101,6 @@ const FormContainer = styled.div`
   max-height: 1000px;
 `;  
 
-const Title = styled.h2 `
-  margin-bottom: 20px;
-`
-
 const ButtonContainer = styled.div`
     display: flex;
     flex-flow: row nowrap;
@@ -143,3 +126,19 @@ const Error = styled.p `
   font-style: bold;
   background-color: var(--yellow-30);
 `
+
+// console.log("image: "+ image + "article text: " + articleText);
+      // Either delete this or pass to post request
+      /*const data = {
+        title: title,
+        content: dataEdit,
+        author: {full_name: "Helene", username: "Helebo", email: "helebo@stud.ntnu.no",
+        first_name: "",
+        last_name: "",
+        full_name: ""},
+        image: imageFile.file.toString(),
+        published_date: new Date(), 
+      };
+      console.log(data)
+      */
+      //setNews(data);
