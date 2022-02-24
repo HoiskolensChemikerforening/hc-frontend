@@ -59,7 +59,7 @@ export const EventHomepage = () => {
                         <span>{new Date(event.date).toLocaleDateString()}</span>
                     </P>
                 </DateBox>
-                <P bold style={{marginBottom: "7px",}}>{event.title}</P>
+                <P bold style={{marginBottom: "7px",maxWidth: "100%", overflow: "hidden", textOverflow: "ellipsis"}}>{event.title}</P>
                 <ProgressBar value={event.attendees.length} max={event.sluts} color="var(--yellow-30)"></ProgressBar>
             </EventBox>
         )) }
