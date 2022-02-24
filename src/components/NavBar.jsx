@@ -48,8 +48,10 @@ export {NavBar};
 const LogoImg = styled.img`
     width: 60px;
     height: 60px;
+    border-radius: 50%;
     margin-bottom: 10px;
-    padding-right: 15px;
+    margin-right: 15px;
+    //padding-right: 15px;
 `;
 
 const NavContainer = styled.div`
@@ -82,6 +84,7 @@ const LogoArea = styled.div`
 const NavText = styled.div`
     margin: 0px;
     margin-top: -7px;
+    border-radius: 5px;
 `;
 
 const H = styled(H3)`

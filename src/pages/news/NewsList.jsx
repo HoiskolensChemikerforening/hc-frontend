@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { H3, P } from "../../components/Text";
 import { Button } from "../../components/Button.js";
 import parse from "react-html-parser";
-import moment from 'moment';
-import { BiMessageRoundedMinus } from "react-icons/bi";
 
 export const NewsList = () => {
   useEffect(() => {
@@ -20,16 +18,15 @@ export const NewsList = () => {
     const items = await data.json();
     setArticles(items);
   };
-
+  
   return (
       <NewsListContainer>
         <ButtonContainer>
           {//This should be edited to in a absolute position on homepage
           // or only visible when hovered
+          //Previously link component wrapped around button
           }
-          <Link to="/nyheter/ny">
-            <Button primary style={{borderRadius: "5px"}}>Opprett nyhet</Button>
-          </Link>
+            <Button primary onClick={() => {history.push(`/nyheter/ny`)}}>Opprett nyhet</Button>
         </ButtonContainer>
         {articles.map((article) => (
             <NewsItem key={article.id} onClick={() => {history.push(`/nyheter/${article.id}`)}}>
