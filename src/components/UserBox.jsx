@@ -6,11 +6,11 @@ import { BiLogOut, BiMenu } from "react-icons/bi";
 
 const UserBox = (props) => (
     <UserArea>
-        <Linker to="/profil"><UserImage alt="HC-logo" src="logo.png"/></Linker>
+        <Link to="/profil" style={linkStyle}><UserImage alt="HC-logo" src="logo.png"/></Link>
         <Log>
-            <Linker to="/profil"><UserText>Bendik Søta Sannes</UserText></Linker>
+            <Link to="/profil" style={linkStyle}><UserText>Bendik Søta Sannes</UserText></Link>
             <LogInOut>
-                <LogOut><BiLogOut/></LogOut>
+                <Link to="/" style={styleLogOut}><BiLogOut/></Link>
                 <LogText>Logg ut</LogText>
             </LogInOut>
         </Log>
@@ -20,10 +20,10 @@ const UserBox = (props) => (
 
 export {UserBox};
 
-const Linker = styled(Link)`
-color: var(--gray-90);
-  text-decoration: none;
-`;
+const linkStyle= {
+    color: "var(--gray-90)",
+    textDecoration: "none"
+};
 
 const UserArea = styled.div`
     display: flex;
@@ -72,12 +72,12 @@ const LogInOut = styled.div`
     }
 `;
 
-const LogOut = styled(Link)`
-    font-size: 25px;
-    margin: 0;
-    text-decoration: none;
-    color:black;
-`;
+const styleLogOut = {
+    fontSize: "25px",
+    margin: "0",
+    textDecoration: "none",
+    color: "black"
+};
 
 const UserText = styled(P)`
     width: 100%;

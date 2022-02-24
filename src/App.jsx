@@ -7,9 +7,6 @@ import { H1 } from "./components/Text";
 import { NavBarPhone } from "./components/NavBarPhone";
 import { NewsRouter } from "./pages/news/NewsRouter";
 import { Shitbox } from "./pages/shitbox/Shitbox";
-import { NewsList } from "./pages/news/NewsList";
-import { NewsDetail } from "./pages/news/NewsDetail";
-import { NewsForm} from "./pages/news/NewsForm";
 
 
 class App extends React.Component {
