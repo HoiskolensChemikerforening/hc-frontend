@@ -14,14 +14,12 @@ export const HomePage = () => {
   <>
     <Container>
       <Row>
-        {// TODO Fix to tablet - must fix layout,
-        }
-      {isDesktopResolution && 
-          <Col md="3">
+      {isTabletResolution && 
+          <Col sm="4" md="3">
             <EventHomepage/> 
           </Col>
       }
-          <Col sm="12" md="6">
+          <Col sm="8" md="6" >
               <NewsList/>
           </Col>
           {isDesktopResolution && 
@@ -33,3 +31,4 @@ export const HomePage = () => {
     </Container>
   </>
 )};
+//style={{marginLeft: "10px", marginRight:"10px"}}

@@ -3,10 +3,10 @@ import '../index.css';
 
 /* Fundamentals */
 const Container = styled.div`
-  margin: 0 5%;
+  margin: 0 10%;
 
   @media only screen and (min-width: 768px) {
-    margin: 0 10%;
+    margin: 0 2%;
   }
 `;
 
