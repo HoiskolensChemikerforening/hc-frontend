@@ -59,7 +59,7 @@ export const EventHomepage = () => {
                         <span>{new Date(event.date).toLocaleDateString()}</span>
                     </P>
                 </DateBox>
-                <P bold style={{marginBottom: "7px",maxWidth: "100%", overflow: "hidden", textOverflow: "ellipsis"}}>{event.title}</P>
+                <PTitle>{event.title}</PTitle>
                 <ProgressBar value={event.attendees.length} max={event.sluts} color="var(--yellow-30)"></ProgressBar>
             </EventBox>
         )) }
@@ -167,4 +167,17 @@ const NumberCount = styled.span`
     ${props => props.gray && css`
     color: var(--gray-60);
   `}
+`;
+
+const PTitle = styled.div`
+  margin-bottom: 7px;
+  max-width: 100%;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 16px;
+  line-height: 1.6;
+  font-weight: 800;
 `;

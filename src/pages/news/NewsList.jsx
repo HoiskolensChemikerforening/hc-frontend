@@ -96,5 +96,5 @@ const Ingress = styled.p`
   margin: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 40px;
+  max-height: 2.5em;
 `;
