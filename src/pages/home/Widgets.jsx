@@ -79,11 +79,11 @@ const StaticContainer = styled.div`
     position:fixed;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
 
-    width: 180px;
+    width: 175px;
     height: 80%;
-    margin-left: 50px;
+    margin-left: 40px;
 `;
 
 const WidgetContainer = styled(Link)`
@@ -94,7 +94,7 @@ const WidgetContainer = styled(Link)`
 
     width: 100%;
     height: 70px;
-    //margin-bottom: 50px;
+    margin-top: 50px;
     padding: 5px;
     border-radius: 10px;
 
@@ -114,6 +114,7 @@ const CoffeeContainer = styled.div`
     height: 70px;
     //margin-bottom: 50px;
     padding: 5px;
+    margin-top: 15px;
     border-radius: 10px;
 
     background-color: var(--yellow-30);

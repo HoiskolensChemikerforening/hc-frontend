@@ -83,6 +83,16 @@ const EventContainer = styled.div`
   height: 80%;
   padding-right: 10px;
   margin-top: 10px;
+  
+  @media (min-width: 1100px){
+        display: flex;
+        padding-left: 30px;
+    }
+
+    /*@media (min-width: 1100px; max-width:){
+        display: flex;
+        padding-left: 50px;
+    }*/
 `;
 const EventType = styled.div`
   display: flex;
