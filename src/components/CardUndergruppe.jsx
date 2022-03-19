@@ -5,9 +5,12 @@ import { Container, Row, Col } from "./Layout";
 import { CommitteePage } from "../pages/undergrupper/Undergrupper";
 import { useHistory } from "react-router-dom";
 
-const Subgroup = (props) => (
+export const Subgroup = (props) => (
     <Col xs="12" sm="6" md="6" lg="4">
-        <StyledWrapper onClick={()=> {props.history.push(`/undergrupper/${props.committee.title}`);}} style={{cursor:'pointer'}}>
+        <StyledWrapper onClick={()=> {props.history.push({
+          pathname:`/undergrupper/${props.committee.title}`,
+          state: {committee: props.committee}
+        });}} style={{cursor:'pointer'}}>
 
           <BackgroundWrapper committee = {props.committee} >
           <Center_Wrapper>
@@ -62,5 +65,3 @@ const BackgroundWrapper = styled.div`
   align-items: end;
 `;
 
-
-export {Subgroup}
