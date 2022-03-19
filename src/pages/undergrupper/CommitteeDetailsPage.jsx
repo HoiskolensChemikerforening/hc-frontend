@@ -30,6 +30,5 @@ const Column = styled.div`
 `;
 const Rw = styled.div`
     display: flex;
-    flex-direction: row;
-    
+    flex-direction: row; 
 `;

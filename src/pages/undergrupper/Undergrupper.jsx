@@ -23,7 +23,9 @@ export const CommitteePage = () => {
   return (
     <Container>
       <Row>
-        <H1>Komiteer og Undergrupper</H1>
+        <TitleContainer>
+            <Title>Komiteer og Undergrupper</Title>
+          </TitleContainer>
       </Row>
       <Row>
         {committees.map((committee) => (
@@ -33,3 +35,14 @@ export const CommitteePage = () => {
     </Container>
   )
 };
+
+const TitleContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+const Title = styled.h1`
+  background-color: #f8e469ff;
+  text-align: center;
+  padding: 5px 15px 5px 15px;
+`

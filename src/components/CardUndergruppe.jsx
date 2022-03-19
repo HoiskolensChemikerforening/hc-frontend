@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 
 const Subgroup = (props) => (
     <Col xs="12" sm="6" md="6" lg="4">
-        <StyledWrapper onClick={()=> {console.log("Bip bop"); props.history.push(`/undergrupper/${props.committee.title}`)}} style={{cursor:'pointer'}}>
+        <StyledWrapper onClick={()=> {props.history.push(`/undergrupper/${props.committee.title}`);}} style={{cursor:'pointer'}}>
 
           <BackgroundWrapper committee = {props.committee} >
           <Center_Wrapper>
@@ -25,7 +25,7 @@ const Center_Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-color:#737373a6;
+  background-color:#ADADADBF; //#737373a6;
   height: 20%;
   font-size: 25px;
 `;
@@ -53,10 +53,10 @@ const StyledWrapper = styled.div`
 
 const BackgroundWrapper = styled.div`
   position: absolute;
-  width: 100%;
   height: 100%;
+  width: 100%;
   background-image: url(${props => props.committee.image});
-  background-size: contain;
+  background-size: cover; \\This streches the background image instead of setting the proportions of the box to match the proportions of the image. Will hopefully get back to this
   background-repeat: no-repeat;
   display: flex;
   align-items: end;
