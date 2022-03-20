@@ -132,6 +132,12 @@ const P = styled.p`
     font-weight: 400;
     font-style: italic;
   `}
+  ${props => props.cursor&& css`
+    cursor: pointer;
+    &:hover {
+      font-weight: 600;
+    } 
+  `}
 `;
 
 const Link = styled.a`
