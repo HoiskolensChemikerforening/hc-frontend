@@ -17,10 +17,15 @@ const Button = styled.button`
 
   cursor: pointer;
 
+
   ${props => props.primary && css`
     color: #000;
     background: var(--primary);
     border: 2px var(--primary) solid;
+    &:hover {
+      border-color: var(--yellow-30);
+      filter:  brightness(105%);
+    }
   `}
   ${props => props.secondary && css`
     border: 2px #212121 solid;
@@ -32,6 +37,7 @@ const Button = styled.button`
     width: 100px;
     height: 50px;
   `}
+
 `;
 
 export {
