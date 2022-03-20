@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { P } from "./Text";
+import { P } from "../Text";
 import { Link } from "react-router-dom";
 import { BiLogOut, BiMenu } from "react-icons/bi";
 
