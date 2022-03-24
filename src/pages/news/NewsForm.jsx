@@ -13,94 +13,31 @@ export const NewsForm = () => {
    const [imageFile, setImage] = useState(null);
    const [title, setTitle] = useState(null);
    const [error, setError] = useState(false);
-   const [sendNews, setSendNews] = useState(false);
-   const [news, setNews] = useState(null);
-
-   // const title = useRef(null); // ref={}
-  // Post Form
-  //useEffect(() => {
-   //   sendArticle();
-  
-    /*if (!response.ok) {
-      throw new Error(data.message || 'Could not create quote.');
-    }
-    else {
-    return null; }*/
-   // }, [sendNews]);
    
+  // const sendArticle = async() => {
 
-    const sendArticle = async() => {
-
-      const author = 1;
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("content", dataEdit);
-    formData.append("image", imageFile.file);
-    formData.append("author", author);
-    for (let value of formData.values()) {
-      console.log(value);
-    }
-      const response = await fetch("http://localhost:8000/nyheter/api/", {
-      method: 'POST',
-      body: formData,      
-    });
-    /*
-    //JSON.stringify(news),
-    headers: {
-        'Accept': 'application/json'  
-      },
-    */ 
-    // 'Accept': 'application/json', 'Content-Type': 'application/json', 'HTTP_X_REQUEST_WITH': 'XMLHttpRequest','X-Requested-with':'XMLHttpRequest'
-
-    /*
-    const sendArticle = async() => {
-      const response = await fetch("http://localhost:8000/nyheter/api/", {
-      method: 'POST',
-      body: JSON.stringify({
-        title: title,
-        content: "dataEdit",
-        author: {username: "Helebo", email: "helebo@stud.ntnu.no",
-        first_name: "",
-        last_name: "",
-        full_name: "Helene"},
-        image: imageFile.djFile,
-        published_date: new Date(), 
-        slug: title.split(" ").join("-"),
-      }),
-      //JSON.stringify(news),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    */
-    const data = await response.text();
-    console.log(data)
-  
-    }  // use Callback?
-
-  //const isNotEmpty = (value) => value.trim() !== "";
-  const postArticle =(event) => {
+  const postArticle = async(event) => {
     event.preventDefault();
     if(title != null && dataEdit != null && imageFile != null){
       setError(false);
-      // console.log("image: "+ image + "article text: " + articleText);
-      // Either delete this or pass to post request
-      const data = {
-        title: title,
-        content: dataEdit,
-        author: {full_name: "Helene", username: "Helebo", email: "helebo@stud.ntnu.no",
-        first_name: "",
-        last_name: "",
-        full_name: ""},
-        image: imageFile.file.toString(),
-        published_date: new Date(), 
-      };
-      setNews(data);
-      setSendNews(true);
-      sendNews && sendArticle();
-    }
-    else {setError(true)}
+    
+      const author = 1;
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("content", dataEdit);
+      formData.append("image", imageFile.djFile);
+      formData.append("author", author);
 
+
+      const response = await fetch("http://localhost:8000/nyheter/api/", {
+      method: 'POST',
+      body: formData,      
+      });
+    
+      const data = await response.text();
+      console.log(data)
+    
+      } else {setError(true)}
   };
 
   return (
@@ -141,10 +78,6 @@ const FormContainer = styled.div`
   min-height: 500px;
   max-height: 1000px;
 `;  
-
-const Title = styled.h2 `
-  margin-bottom: 20px;
-`
 
 const ButtonContainer = styled.div`
     display: flex;
