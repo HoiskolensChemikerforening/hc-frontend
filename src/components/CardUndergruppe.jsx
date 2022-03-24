@@ -5,6 +5,7 @@ import { Container, Row, Col } from "./Layout";
 import { CommitteePage } from "../pages/undergrupper/Undergrupper";
 import { useHistory } from "react-router-dom";
 
+
 export const Subgroup = (props) => (
     <Col xs="12" sm="6" md="6" lg="4">
         <StyledWrapper onClick={()=> {props.history.push({
@@ -17,7 +18,6 @@ export const Subgroup = (props) => (
             {props.committee.title}
           </Center_Wrapper>
           </BackgroundWrapper>
-
         </StyledWrapper>
       </Col>
 )
