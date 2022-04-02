@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import axios from 'axios';
 
 import { Container } from "../../components/Layout";
@@ -10,25 +10,25 @@ const ShitboxForm = () => {
   const [imageFile, setImageFile] = useState(null);
 
     const onFinish = (event) => {
-        event.preventDefault();
         let author = 1;
 
         let formData = new FormData();
         formData.append("content", content);
-        formData.append("image", imageFile);
+        if (imageFile) {
+          formData.append("image", imageFile);
+        }
         formData.append("author", author);
 
-        let url = "http://localhost:8000/sladreboks/api/"
+        let url = "http://localhost:8000/sladreboks/api/";
 
         axios.post(
             url, formData
             ).then(res => {
+                // Er vil vi vel legge til en melding om at det gikk bra
                 console.log(res.data);
-                alert("Success!");
               })
               .catch(err => {
                 console.log(err);
-                alert("Failure!")
               })
     }
 
