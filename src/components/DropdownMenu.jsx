@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import styled, {css} from "styled-components";
-import {H2, H3 } from "./Text"; //, Link
+import styled from "styled-components";
+import {H2, H3 } from "./Text"; 
 import { BiX } from "react-icons/bi";
 
 
@@ -60,8 +60,6 @@ const DropdownBox = styled.div`
     
     @media (min-width: 786px) {
         align-self: center;
-        //padding: 30px 30px 30px 30px;
-        
     }
 `;
 
@@ -83,7 +81,7 @@ const Nav = styled.nav`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
+    margin: 0px 10px 5px 10px;
     margin-bottom: 0;
     padding: 0 40px 0 40px;
 `;

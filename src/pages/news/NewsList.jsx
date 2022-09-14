@@ -34,7 +34,7 @@ export const NewsList = () => {
                 <ImageContainer img={article.image} />
               </div>
 
-              <div>
+              <div style={{borderRadius: "5px"}}>
                 <H3 biggest bold style={{margin: "10px"}}>
                   {article.title}
                 </H3>
@@ -81,6 +81,7 @@ const ImageContainer = styled.div`
     padding-bottom: 67%;
     background: url(${props => props.img});
     background-size: cover;
+    border-radius: 5px;
 `;
 
 
@@ -89,10 +90,11 @@ const HRule = styled.hr`
     padding: 0;
     border: var(--gray-30) 0.1px solid;
 
-`
+`;
 
-const Ingress = styled.p`
+const Ingress = styled.div`
   margin: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
-`
+  max-height: 2.5em;
+`;

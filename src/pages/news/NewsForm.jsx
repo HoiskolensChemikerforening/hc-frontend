@@ -1,63 +1,60 @@
 import styled from "styled-components";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import axios from 'axios';
 import "./news.css";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { TextField, ImageField } from "../../components/Form"
 import { Button } from "../../components/Button.js";
 
-
 export const NewsForm = () => {
    // For validation
-   const [dataEdit, setData] = useState("<p>Din spennende nyhet</p>");
-   const [imageFile, setImage] = useState(null);
+   const [content, setContent] = useState(null);
+   const [imageFile, setImageFile] = useState(null);
    const [title, setTitle] = useState(null);
-   const [error, setError] = useState(false);
-   
-  // const sendArticle = async() => {
 
-  const postArticle = async(event) => {
+  const postArticle = (event) => {
+
     event.preventDefault();
-    if(title != null && dataEdit != null && imageFile != null){
-      setError(false);
+    let author = 1;
     
-      const author = 1;
-      const formData = new FormData();
-      formData.append("title", title);
-      formData.append("content", dataEdit);
-      formData.append("image", imageFile.djFile);
-      formData.append("author", author);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("image", imageFile);
+    formData.append("author", author);
 
+    const url = "http://localhost:8000/nyheter/api/";
 
-      const response = await fetch("http://localhost:8000/nyheter/api/", {
-      method: 'POST',
-      body: formData,      
-      });
-    
-      const data = await response.text();
-      console.log(data)
-    
-      } else {setError(true)}
-  };
+    axios.post(
+      url, formData
+      ).then(res => {
+          // Er vil vi vel legge til en melding om at det gikk bra
+          console.log(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+  }
 
   return (
     <NewArticleContainer>
       <h1>New Article</h1>
-    <form  onSubmit={postArticle} onFocus={() => setError(false)}>
+    <form  onSubmit={postArticle}>
       <FormContainer >
         <TextField placeholder="Tittel på nyheten" onChange={(event) => {setTitle(event.target.value)}} />
-        <CKEditor 
-          data={dataEdit} 
+        <CKEditor
+          data={content} 
           editor={ClassicEditor} 
-          onChange={(event, editor) => {setData(editor.getData())}} onFocus={() => setError(false)}/>
+          onChange={(event, editor) => {setContent(editor.getData())}} />
 
         {imageFile && 
           <ImageContainer> <ImagePreview src={imageFile.file}/> </ImageContainer>
         }
 
-        <ImageField onChange={(event) => {setImage({file: URL.createObjectURL(event.target.files[0]), djFile: event.target.files[0]});console.log(URL.createObjectURL(event.target.files[0]))}} onFocus={() => setError(false)}/>
+        <ImageField onChange={(event) => {setImageFile(event.target.files[0])}}/>
+
       </FormContainer>
-      { error && <Error>Husk både tittel, tekst OG bilde!</Error>}
       <ButtonContainer>
         <Button primary type="submit" >Send inn</Button>
       </ButtonContainer>

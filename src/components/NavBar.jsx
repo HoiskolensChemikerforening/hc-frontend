@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import "../index.css";
 import { Link } from "react-router-dom";
 import {H3} from "./Text";
 import {UserBox} from "./UserBox";
@@ -10,12 +9,7 @@ import {BiHomeAlt, BiBriefcaseAlt, BiCalendarEvent, BiGame, BiInfoCircle} from "
 
 const NavBar = () =>  {
     const [menuOpen, setMenuOpen] = useState(false);
-
-    function updateMenuState(){
-        if (menuOpen){
-            setMenuOpen(false)
-        } else {setMenuOpen(true)}
-    }
+    
     return (
         <>
             <NavContainer>
@@ -48,8 +42,9 @@ export {NavBar};
 const LogoImg = styled.img`
     width: 60px;
     height: 60px;
+    border-radius: 50%;
     margin-bottom: 10px;
-    padding-right: 15px;
+    margin-right: 15px;
 `;
 
 const NavContainer = styled.div`
@@ -82,6 +77,7 @@ const LogoArea = styled.div`
 const NavText = styled.div`
     margin: 0px;
     margin-top: -7px;
+    border-radius: 5px;
 `;
 
 const H = styled(H3)`
