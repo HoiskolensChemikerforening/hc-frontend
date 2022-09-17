@@ -10,7 +10,7 @@ import { NewsRouter } from "./pages/news/NewsRouter";
 import { NewsList } from "./pages/news/NewsList";
 import { NewsDetail } from "./pages/news/NewsDetail";
 import { NewsForm} from "./pages/news/NewsForm";
-import CommitteeDetailsPage from "./pages/undergrupper/CommitteeDetailsPage";
+import { CommitteeDetailsPage } from "./pages/undergrupper/CommitteeDetailsPage";
 
 
 class App extends React.Component {
