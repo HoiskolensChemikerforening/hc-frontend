@@ -53,9 +53,10 @@ const ButtonContainer = styled.div`
 `;
 
 const Button = styled.button`
-  margin: 15px 0;
+  margin: 15px 30px 30px;
   padding: 2em 2em;
-  width: 200px;
+  width: 250px;
+  
 
   font-weight: bold;
   font-size: 16px;
@@ -70,4 +71,5 @@ const Button = styled.button`
 color: #000;
 background: var(--primary);
 border: 3px var(--primary) solid;
+hover: #FFF;
 `;
