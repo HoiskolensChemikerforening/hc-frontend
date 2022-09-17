@@ -1,18 +1,48 @@
 import React from "react";
-import { useState, useRef } from "react";
+import axios from 'axios';
+import { useState, useRef} from "react";
 import styled from "styled-components";
 import { PageContainer } from "../../components/Layout";
 import { Button } from "../../components/Button";
 import { H1, H3, P } from "../../components/Text";
+import { setAuthToken } from "./setAuthToken";
 
 export const Login = () =>  {
-    
     const emailInputRef = useRef();
     const passwordInputRef = useRef();
 
     const [isLoading, setIsLoading] = useState(false);
     const [isLogin, setIsLogin] = useState(true);
+
+
+    // localStorage.setItem("token", "test");
+
+
     
+    const handleLogin = (email, pass) => {
+        //reqres registered sample user
+        const loginPayload = {
+          username: '',  // Update to your user
+          password: ''
+        }
+      
+        axios.post("http://localhost:8000/api/token/", loginPayload)
+          .then(response => {
+            //get token from response
+            const token  =  response.data.token;
+            console.log("TEST")
+            console.log(token)
+            //set JWT token to local
+            localStorage.setItem("token", token);
+      
+            //set token to axios common header
+            setAuthToken(token);
+      
+     //redirect user to home page
+            window.location.href = '/'
+          })
+          .catch(err => console.log(err));
+      };
 
     async function loginRequest(url, enteredEmail, enteredPassword) {
         console.log("Log in :)")
@@ -82,7 +112,7 @@ export const Login = () =>  {
         <PageContainer>
             <Auth>
                 { isLogin ? <H1> Log Inn</H1> : <H3>Har du glemt Passordet ditt?</H3> }
-                <form onSubmit={submitHandler}>
+                <form onSubmit={handleLogin}>
                     <Control>
                     <Label htmlFor="email">Din e-post</Label>
                     <Input type="email" id="email" required ref={emailInputRef} placeholder="hc@ntnu.no" />
