@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { H3, P } from "../../components/Text";
 import { Button } from "../../components/Button.js";
 import parse from "react-html-parser";
-import moment from 'moment';
-import { BiMessageRoundedMinus } from "react-icons/bi";
 
 export const NewsList = () => {
   useEffect(() => {
@@ -20,16 +18,15 @@ export const NewsList = () => {
     const items = await data.json();
     setArticles(items);
   };
-
+  
   return (
       <NewsListContainer>
         <ButtonContainer>
           {//This should be edited to in a absolute position on homepage
           // or only visible when hovered
+          //Previously link component wrapped around button
           }
-          <Link to="/nyheter/ny">
-            <Button primary>Opprett nyhet</Button>
-          </Link>
+            <Button primary onClick={() => {history.push(`/nyheter/ny`)}}>Opprett nyhet</Button>
         </ButtonContainer>
         {articles.map((article) => (
             <NewsItem key={article.id} onClick={() => {history.push(`/nyheter/${article.id}`)}}>
@@ -37,7 +34,7 @@ export const NewsList = () => {
                 <ImageContainer img={article.image} />
               </div>
 
-              <div>
+              <div style={{borderRadius: "5px"}}>
                 <H3 biggest bold style={{margin: "10px"}}>
                   {article.title}
                 </H3>
@@ -84,6 +81,7 @@ const ImageContainer = styled.div`
     padding-bottom: 67%;
     background: url(${props => props.img});
     background-size: cover;
+    border-radius: 5px;
 `;
 
 
@@ -92,10 +90,11 @@ const HRule = styled.hr`
     padding: 0;
     border: var(--gray-30) 0.1px solid;
 
-`
+`;
 
-const Ingress = styled.p`
+const Ingress = styled.div`
   margin: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
-`
+  max-height: 2.5em;
+`;

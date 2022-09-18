@@ -3,27 +3,28 @@ import { useRouteMatch } from "react-router-dom";
 
 import styled from "styled-components";
 import parse from "react-html-parser";
-import { H1, P, Link } from "../../components/Text";
+import { H1, P } from "../../components/Text";
 
 export const NewsDetail = () => {
   const { params } = useRouteMatch("/nyheter/:id");
-  console.log(params);
-  //const id = match ? id as string;
-  useEffect(() => {
-    fetchArticle();
-  }, []);
-
   const [article, setArticle] = useState([]);
   const [author, setAuthor] = useState([]);
 
-  const fetchArticle = async () => {
-    const data = await fetch(
-      "http://localhost:8000/nyheter/api/" + params.id.toString() + "/"
-    );
-    const item = await data.json();
-    setArticle(item);
-    setAuthor(item.author);
-  };
+  useEffect(() => {
+    const fetchArticle = async () => {
+      const data = await fetch(
+        "http://localhost:8000/nyheter/api/" + params.id.toString() + "/"
+      );
+      const item = await data.json();
+      return item;
+    };
+
+    let isMounted = true;
+    fetchArticle().then(data => {if (isMounted) {setArticle(data); setAuthor(data.author);}});
+    return () => { isMounted = false };
+  }, [params.id]);
+
+
 
   return (
     <NewsContainer>
