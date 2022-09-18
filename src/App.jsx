@@ -3,14 +3,14 @@ import "./index.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { HomePage } from "./pages/home/HomePage";
 import { NavBar } from "./components/NavBar";
-import { CommitteePage} from "./pages/undergrupper/Undergrupper";
+import { CommitteePage} from "./pages/subgroups/SubGroups";
 import { H1 } from "./components/Text";
 import { NavBarPhone } from "./components/NavBarPhone";
 import { NewsRouter } from "./pages/news/NewsRouter";
 import { NewsList } from "./pages/news/NewsList";
 import { NewsDetail } from "./pages/news/NewsDetail";
 import { NewsForm} from "./pages/news/NewsForm";
-import { CommitteeDetailsPage } from "./pages/undergrupper/CommitteeDetailsPage";
+import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
 
 
 class App extends React.Component {

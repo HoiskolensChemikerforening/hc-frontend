@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { Container, Row, Col } from "./Layout";
-import { CommitteePage } from "../pages/undergrupper/Undergrupper";
+import { CommitteePage } from "../pages/subgroups/SubGroups";
 import { useHistory } from "react-router-dom";
 
 

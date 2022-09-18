@@ -1,36 +1,67 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Link } from "react-router-dom";
 import { Container, Row, Col } from "./Layout";
 import { useHistory } from "react-router-dom";
 import { H2 } from "../components/Text";
-import { Column } from "../pages/undergrupper/CommitteeDetailsPage"
+import { Column } from "../pages/subgroups/CommitteeDetailsPage"
 
 
 
-export const CommitteeMemberList = (props) => ( 
-    /* The positioncards should be initiated with a mapping over all the positions of the committee,
+export const CommitteeMemberList = (props) => { 
+
+
+    useEffect(() => {
+        fetchPositions();
+      }, []);
+    
+    const [positions, setPositions] = useState([]);
+    const history = useHistory();
+
+    /* This fetches all positions, no matter the committee, which could be impractical. 
+    Can be remitted by making a new view in the back-end project, which takes an committee as argument, 
+    and returns all positions of the given committee. */
+    const fetchPositions = async () => {
+        /*Fetching all positions*/
+        const apidata = await fetch("http://localhost:8000/verv/api/position");
+        /*Parsing the data recieved*/
+        const allitems = await apidata.json();
+
+        /*Filtering out only the positions of the current committee*/
+        const filtereddata = await allitems.filter(item => {
+            return item.committee === props.committee.id;
+        })
+
+        console.log(filtereddata);
+        /*Setting the positions to be the relevant positions*/
+        setPositions(filtereddata);
+        };
+
+    return (
+    /* The position cards should be initiated with a mapping over all the positions of the committee,
     with the committee and position passed as props to the card*/
     <PositionColumn>
-        <PositionCard></PositionCard>
-        <PositionCard></PositionCard>
+        {positions.map((position) => (
+          <PositionCard key={position.id} position={position} history={history}></PositionCard>
+        ))}
     </PositionColumn>
-)
+    )
+};
 
 const PositionCard = (props) => (
     /* The position title should be replaced by the passed position title prop,
     and the member list should be initiated with a mapping of all the position members*/
     <Column>
-        <H2> Position Title </H2>
-        <PositionMemberList></PositionMemberList>
+        <H2> {props.position.title} </H2>
+        <PositionMemberList users={props.position.users}></PositionMemberList>
     </Column>
 )
 
 const PositionMemberList = (props) => (
     <MemberColumn>
-        <div>Name</div>
-        <div>Name</div>
-        <div>Name</div>
+        {props.users.map((user) => (
+            <div> {user.full_name}</div>
+        ))}
     </MemberColumn>
 )
 

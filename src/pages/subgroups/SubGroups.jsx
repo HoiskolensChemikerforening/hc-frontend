@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { Container, Row, Col } from "../../components/Layout";
 import { H1 } from "../../components/Text";
-import { Subgroup } from "../../components/CardUndergruppe"
+import { Subgroup } from "../../components/CardSubGroups"
 
 export const CommitteePage = () => {
   useEffect(() => {
