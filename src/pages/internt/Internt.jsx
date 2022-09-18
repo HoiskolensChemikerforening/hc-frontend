@@ -5,7 +5,8 @@ import { H1 } from "../../components/Text";
 import { Link, useHistory } from "react-router-dom";
 
 
-export const Internside = () => (
+export const Internside = () => {
+  return(
     <>
           <ButtonContainer>
             {//This should be edited to in a absolute position on homepage
@@ -44,7 +45,8 @@ export const Internside = () => (
             </Link>
         </ButtonContainer>
     </>
-);
+  )
+};
 
 const ButtonContainer = styled.div`
     display: flex;
