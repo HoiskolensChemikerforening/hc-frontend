@@ -12,6 +12,7 @@ import { NewsDetail } from "./pages/news/NewsDetail";
 import { NewsForm} from "./pages/news/NewsForm";
 import { CommitteeDetailsPage } from "./pages/undergrupper/CommitteeDetailsPage";
 import { Internside } from "./pages/internt/Internt";
+import { Profil } from "./pages/profile/profile";
 
 
 class App extends React.Component {
@@ -25,7 +26,7 @@ class App extends React.Component {
             <Route path="/bedrift">       <H1>Bedrift</H1>            </Route>
             <Route path="/internt">       <Internside/>            </Route>
             <Route path="/info">          <H1>Info</H1>               </Route>
-            <Route path="/profil">        <H1>Profil</H1>             </Route>
+            <Route path="/profil">        <Profil/>             </Route>
             <Route path="/nyheter">       <NewsRouter/>               </Route>
             <Route path="/undergrupper/test">  <CommitteeDetailsPage/>            </Route>            
             <Route path="/undergrupper">  <CommitteePage/>            </Route>
