@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import { FiCoffee } from "react-icons/fi";
 import { RiArchiveDrawerLine, RiHandCoinLine, RiDoorOpenFill } from "react-icons/ri";
+import axios from 'axios';
 
 export const Widgets = () => {
   const [coffeeButton, setCoffeeButton] = useState("");   
@@ -15,10 +16,12 @@ export const Widgets = () => {
     
     
       const fetchCoffeebutton = async () => {
-        const data = await fetch("http://localhost:8000/web_push/api/");
-        const items = await data.json();
-        return items;
-        
+
+        await axios.get("http://localhost:8000/web_push/api/")
+        .then(response => {
+          let coffeeData = response.data;
+          return coffeeData;
+        })
       };
 
       const currentTime = new Date();

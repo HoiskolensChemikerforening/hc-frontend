@@ -7,8 +7,18 @@ import { H1 } from "./components/Text";
 import { NavBarPhone } from "./components/navigation/NavBarPhone";
 import { NewsRouter } from "./pages/news/NewsRouter";
 import { Login } from "./pages/login/Login";
+import { setAuthToken } from "./pages/login/setAuthToken";
 
 class App extends React.Component {
+  
+  componentDidMount() {
+    // Check for JWT
+    const token = localStorage.getItem("token");
+    if (token) {
+        setAuthToken(token);
+    }
+  }
+
   render() {
     return (
         <Router>

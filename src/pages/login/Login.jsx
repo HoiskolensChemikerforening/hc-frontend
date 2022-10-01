@@ -1,6 +1,6 @@
 import React from "react";
 import axios from 'axios';
-import { useState, useRef} from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { PageContainer } from "../../components/Layout";
 import { Button } from "../../components/Button";
@@ -8,114 +8,61 @@ import { H1, H3, P } from "../../components/Text";
 import { setAuthToken } from "./setAuthToken";
 
 export const Login = () =>  {
-    const emailInputRef = useRef();
-    const passwordInputRef = useRef();
-
     const [isLoading, setIsLoading] = useState(false);
     const [isLogin, setIsLogin] = useState(true);
 
 
-    // localStorage.setItem("token", "test");
+    const handleSubmit = (event) => {
+        setIsLoading(true);
+        
+        event.preventDefault();
+        // Get username and password from form
+        const username = event.target.username.value; // Get correct values
+        const password = event.target.password.value; // Get correct values
 
-
-    
-    const handleLogin = (email, pass) => {
-        //reqres registered sample user
         const loginPayload = {
-          username: '',  // Update to your user
-          password: ''
+            "username": username,
+            "password": password
         }
-      
+
+        // Post to api to get JWT
         axios.post("http://localhost:8000/api/token/", loginPayload)
           .then(response => {
-            //get token from response
-            const token  =  response.data.token;
-            console.log("TEST")
-            console.log(token)
-            //set JWT token to local
-            localStorage.setItem("token", token);
+
+            // TODO: HANDLE WRONG CREDENTIALS
+
+            // Get token from response
+            const token  =  response.data.access;
+            const refresh = response.data.refresh;
       
-            //set token to axios common header
+            // Set JWT token to local storage
+            localStorage.setItem("token", token);
+            localStorage.setItem("refresh", refresh);
+      
+            // Set token to axios common header
             setAuthToken(token);
       
-     //redirect user to home page
-            window.location.href = '/'
+            // Redirect user to home page
+            setIsLoading(false);
+            window.location.href = '/';
           })
           .catch(err => console.log(err));
-      };
-
-    async function loginRequest(url, enteredEmail, enteredPassword) {
-        console.log("Log in :)")
-        /*
-        try {
-            const response = await fetch(url, 
-            {
-            method: "POST",
-            body: JSON.stringify({
-              email: enteredEmail,
-              password: enteredPassword,
-              returnSecureToken: true,
-            }),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
           setIsLoading(false);
-          
-          const data = await response.json();
-          console.log(data);
-    
-          if (!response.ok) {
-            let errorMessage = "Authentication failed!";
-            if (data && data.error && data.error.message) {
-                errorMessage = data.error.message;
-            }
-            throw new Error(errorMessage);
-        }
-        const expirationTime = new Date(new Date().getTime() +  (data.expiresIn * 1000));
-        authCtx.login(data.idToken, expirationTime.toISOString());
-        history.replace('/');
-        
-    } catch (error){
-        alert(error.message);
     }
-    */
-};
 
-
-
-    const submitHandler = (event) => {
-        event.preventDefault();
-
-        const enteredEmail = emailInputRef.current.value;
-        const enteredPassword = passwordInputRef.current.value;
-        // Add validation
-
-        
-        setIsLoading(true);
-        const KEY = 1;
-        
-        let url;
-        if (isLogin) {
-        url = `https://hc.ntnu.no/accounts:signInWithPassword?key=${KEY}`;
-        } else {
-        url = `https://hc.ntnu.no/accounts:forgot?key=${KEY}`;
-        }
-        loginRequest( url, enteredEmail, enteredPassword);
-    }
 
     const switchLoginHandler = () => {
-        setIsLogin((prevState) => !prevState)
+        setIsLogin((prevState) => !prevState);
     }
     
     return (
         <PageContainer>
             <Auth>
-                { isLogin ? <H1> Log Inn</H1> : <H3>Har du glemt Passordet ditt?</H3> }
-                <form onSubmit={handleLogin}>
+                { isLogin ? <H1> Logg inn</H1> : <H3>Har du glemt Passordet ditt?</H3> }
+                <form onSubmit={handleSubmit}>
                     <Control>
-                    <Label htmlFor="email">Din e-post</Label>
-                    <Input type="email" id="email" required ref={emailInputRef} placeholder="hc@ntnu.no" />
+                    <Label htmlFor="username">Brukernavn</Label>
+                    <Input type="username" id="username" required placeholder="Skriv inn brukernavn..." />
                     </Control>
                     { isLogin &&
                     <Control>
@@ -124,7 +71,6 @@ export const Login = () =>  {
                         type="password"
                         id="password"
                         required
-                        ref={passwordInputRef}
                     />
                     </Control> }
                     <Action>
@@ -135,11 +81,10 @@ export const Login = () =>  {
                     </Action>
                 </form>
                 <br/>
-                <P italic small cursor onClick={switchLoginHandler}> 
+                <P italic small cursor="true" onClick={switchLoginHandler}> 
                     { isLogin ? "Glemt passord?" : "Tilbake til innlogging" }
                 </P>
                 </Auth>
-
         </PageContainer>
     );
 }

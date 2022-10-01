@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { H3, P } from "../../components/Text";
 import { Button } from "../../components/Button.js";
 import parse from "react-html-parser";
+import axios from 'axios';
 
 export const NewsList = () => {
   useEffect(() => {
@@ -14,9 +15,12 @@ export const NewsList = () => {
   const history = useHistory();
 
   const fetchArticles = async () => {
-    const data = await fetch("http://localhost:8000/nyheter/api/");
-    const items = await data.json();
-    setArticles(items);
+
+    await axios.get("http://localhost:8000/nyheter/api/")
+    .then(response => {
+      const items = response.data;
+      setArticles(items);
+    })
   };
   
   return (
