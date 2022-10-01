@@ -72,6 +72,10 @@ const Button = styled.button`
 
 color: #000;
 background: var(--primary);
-border: 3px var(--primary) solid;
 hover: #FFF;
+
+&:hover {
+  cursor: pointer;
+  background-color: #ebce3d;
+}
 `;
