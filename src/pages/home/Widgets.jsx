@@ -9,19 +9,23 @@ export const Widgets = () => {
   const [coffeeButton, setCoffeeButton] = useState("");   
 
     useEffect(() => {
-      let isMounted = true;   
-      fetchCoffeebutton().then(data => {if (isMounted) setCoffeeButton(new Date(data[0].date))} );
+      let isMounted = true;
+      fetchCoffeebutton().then(data => {
+        if (isMounted) setCoffeeButton(new Date(data[0].date))
+      });
         return () => { isMounted = false };
       }, []);
     
     
       const fetchCoffeebutton = async () => {
+        let coffeeData;
 
         await axios.get("http://localhost:8000/web_push/api/")
         .then(response => {
-          let coffeeData = response.data;
-          return coffeeData;
+          coffeeData = response.data;
         })
+        
+        return coffeeData;
       };
 
       const currentTime = new Date();
@@ -32,7 +36,7 @@ export const Widgets = () => {
       const day = Math.floor(h/24);
       let time;
       if (sec < 60) {
-        time = sec.tostring() + ' s siden';
+        time = sec.toString() + ' s siden';
       } else if (min < 60) {
         time = min.toString() + ' min siden';
       }
