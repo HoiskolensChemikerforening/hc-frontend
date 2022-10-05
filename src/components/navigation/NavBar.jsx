@@ -8,6 +8,7 @@ import { NavLogo } from "./NavLogo";
 
 const NavBar = () =>  {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [isLoggedIn, setLoginStatus] = useState(false);
     
     return (
         <>
@@ -21,7 +22,7 @@ const NavBar = () =>  {
                     <MenuItem to="/internt"><BiGame/></MenuItem>
                     <MenuItem to="/info"><BiInfoCircle/></MenuItem>
                 </MenuItems>
-               <UserBox toggleMenu={setMenuOpen}/>
+               <UserBox toggleMenu={setMenuOpen} isLoggedIn={isLoggedIn}/>
             </Nav>
             </NavContainer>
             <DropdownMenu isOpen={menuOpen} setOpen={setMenuOpen}/>
