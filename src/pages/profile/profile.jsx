@@ -8,17 +8,22 @@ import { Link, useHistory } from "react-router-dom";
 
     return (
     <>
-    <Title>
+    <Titlecontainer><Title>
         Profil
-    </Title>
+    </Title></Titlecontainer>
    <RowContainer>
         <ProfilePictureContainer>
         <ChangeProfilePicture onClick={() => console.log('Endre profilbilde')}> Endre profilbilde </ChangeProfilePicture>
         </ProfilePictureContainer>
         <Column>
+        <Column>
         <ProfileInfo>
-            <Title2>Fornavn</Title2>
+            <Column>
+            <Title2>Fornavn </Title2>
+            </Column>
+            <Column>
             <Title2>Etternavn</Title2>
+            </Column>
         </ProfileInfo>
         <ProfileInfo>
             <Title2>Epost</Title2>
@@ -56,11 +61,13 @@ import { Link, useHistory } from "react-router-dom";
             </Column>
         </ProfileInfo>
         </Column>
+        </Column>
    </RowContainer>
     </>      
 
     )
 };
+
 
 const Title = styled.div`
 font-size: 1.875rem;
@@ -72,6 +79,12 @@ justify-content: center;
 color: #000;
 background: var(--primary);
 border: 3px var(--primary) solid;
+width: 10%;
+`
+const Titlecontainer = styled.div`
+display: flex;
+justify-content: center;
+width = 100%
 `
 
 const Title2 = styled.div`
@@ -96,7 +109,8 @@ const ProfilePictureContainer = styled.div`
 `;
 
 const ProfileInfo = styled.div`
-    width: 100%
+    width: 100%;
+    height: 50%;
     display: flex;
     justify-content: space-around;
     margin: 50px 100px 50px 4px;
@@ -105,6 +119,7 @@ const ProfileInfo = styled.div`
 const Column = styled.div`
     display: flex;
     flex-direction: column;
+    height: 50px;
 `
 const DropDown = styled.select`
   border: solid 1px ;

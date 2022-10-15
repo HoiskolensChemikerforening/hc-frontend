@@ -33,13 +33,13 @@ export const Internside = () => (
             </Link>
         </ButtonContainer>
         <ButtonContainer>
-            <Link to="/nyheter/ny">
+            <Link to="/undergrupper">
                 <Button>Undergrupper</Button>
             </Link>
-            <Link to="/nyheter/ny">
+            <Link to="/undergrupper">
                 <Button>Valg</Button>
             </Link>
-            <Link to="/nyheter/ny">
+            <Link to="/undergrupper">
                 <Button>Wiki</Button>
             </Link>
         </ButtonContainer>
