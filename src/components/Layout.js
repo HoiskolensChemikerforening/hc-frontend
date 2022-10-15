@@ -1,13 +1,12 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import '../index.css';
 
 /* Fundamentals */
 const Container = styled.div`
-  margin: 0 5%;
+  margin: 0 10%;
 
   @media only screen and (min-width: 768px) {
-    margin: 0 10%;
+    margin: 0 2%;
   }
 `;
 
@@ -17,6 +16,7 @@ const Row = styled.div`
     clear: both;
     display: table;
   }
+  width: 100%;
 `;
 
 // Help function for Column

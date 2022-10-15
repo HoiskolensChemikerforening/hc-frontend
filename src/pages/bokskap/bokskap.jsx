@@ -327,4 +327,5 @@ const Button = styled.button`
 const LockContainer = styled.div`
     justify-content: right;
     position: right;
+    margin: 5px 5px;
 `;

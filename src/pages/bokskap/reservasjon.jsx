@@ -29,6 +29,7 @@ export const Reservasjon = () => {
                 <li> Gratulerer med nytt bokskap! </li>
             </ol>
         </P>
+        <font size="2"> Merk! Det er kun mulig å eie to bokskap samtidig. Dersom du ønsker å bytte bokskap; ta kontakt med webkom@hc.ntnu.no. I begynnelsen av hvert høstsemester vil Høiskolens Chemikerforening tømme alle bokskap som er oppført som tomme. Derfor er det viktig at du bekrefter at du vil beholde skapet. Dette gjør man ved å trykke på lenken i en epost som blir sendt ut til alle som eier et bokskap. </font>
     </Container>
 
 
