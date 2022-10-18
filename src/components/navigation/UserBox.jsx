@@ -1,16 +1,27 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { P } from "../Text";
 import { Link } from "react-router-dom";
 import { BiLogOut, BiMenu } from "react-icons/bi";
+import { getRequest } from "../../utils/requests";
 
-const UserBox = (props) => (
+const UserBox = (props) => {
+    const [profile, setProfile] = useState(false);
+
+    useEffect(() => {
+        getRequest("bruker/api/", setProfile);
+      }, []);
+    
+    return (
     <>
-    {props.isLoggedIn ?
+    {profile ?
     <UserArea>
-        <Link to="/profil" style={linkStyle}><UserImage alt="HC-logo" src="logo.png"/></Link>
+        <Link to="/profil" style={linkStyle}><UserImage alt="user-image" 
+                src={profile.image_primary}/>
+        </Link>
         <Log>
-            <Link to="/profil" style={linkStyle}><UserText>Navn</UserText></Link>
+            <Link to="/profil" style={linkStyle}><UserText>{profile.user.full_name}</UserText></Link>
             <LogInOut>
                 <Link to="/" style={styleLogOut}><BiLogOut/></Link>
                 <LogText>Logg ut</LogText>
@@ -33,6 +44,7 @@ const UserBox = (props) => (
     }
     </>
 );
+}
 
 export {UserBox};
 
