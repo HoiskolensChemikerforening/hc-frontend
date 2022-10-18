@@ -5,21 +5,22 @@ import { H3, P } from "../../components/Text";
 import { Button } from "../../components/Button.js";
 import parse from "react-html-parser";
 import axios from 'axios';
+import { checkPermission } from "../../utils/permissions";
 
 export const NewsList = () => {
-  useEffect(() => {
-    fetchArticles();
-  }, []);
-
   const [articles, setArticles] = useState([]);
+  const [canAddArticle, setCanAddArticle] = useState(false);
   const history = useHistory();
 
-  const fetchArticles = async () => {
+  useEffect(() => {
+    fetchArticles();
+    checkPermission("news.add_article", setCanAddArticle);
+  }, []);
 
+  const fetchArticles = async () => {
     await axios.get("http://localhost:8000/nyheter/api/")
     .then(response => {
-      const items = response.data;
-      setArticles(items);
+      setArticles(response.data);
     })
   };
   
@@ -30,7 +31,11 @@ export const NewsList = () => {
           // or only visible when hovered
           //Previously link component wrapped around button
           }
-            <Button primary onClick={() => {history.push(`/nyheter/ny`)}}>Opprett nyhet</Button>
+          {canAddArticle ?
+          <Button primary onClick={() => {history.push(`/nyheter/ny`)}}>Opprett nyhet</Button>
+          :
+          <p>Du får ikke lov haha</p>
+          }
         </ButtonContainer>
         {articles.map((article) => (
             <NewsItem key={article.id} onClick={() => {history.push(`/nyheter/${article.id}`)}}>
