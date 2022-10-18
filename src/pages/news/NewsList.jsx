@@ -4,8 +4,8 @@ import { useHistory } from "react-router-dom";
 import { H3, P } from "../../components/Text";
 import { Button } from "../../components/Button.js";
 import parse from "react-html-parser";
-import axios from 'axios';
 import { checkPermission } from "../../utils/permissions";
+import { getRequest } from "../../utils/requests";
 
 export const NewsList = () => {
   const [articles, setArticles] = useState([]);
@@ -13,16 +13,9 @@ export const NewsList = () => {
   const history = useHistory();
 
   useEffect(() => {
-    fetchArticles();
+    getRequest("nyheter/api/", setArticles);
     checkPermission("news.add_article", setCanAddArticle);
   }, []);
-
-  const fetchArticles = async () => {
-    await axios.get("http://localhost:8000/nyheter/api/")
-    .then(response => {
-      setArticles(response.data);
-    })
-  };
   
   return (
       <NewsListContainer>
@@ -33,8 +26,7 @@ export const NewsList = () => {
           }
           {canAddArticle ?
           <Button primary onClick={() => {history.push(`/nyheter/ny`)}}>Opprett nyhet</Button>
-          :
-          <p>Du får ikke lov haha</p>
+          :<></>
           }
         </ButtonContainer>
         {articles.map((article) => (
