@@ -1,17 +1,22 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { P } from "../Text";
 import { Link } from "react-router-dom";
 import { BiLogOut, BiMenu } from "react-icons/bi";
-import { getRequest } from "../../utils/requests";
+
+import AuthContext from "../../context/AuthContext";
+import { fetchDetail } from "../../utils/requests";
 
 const UserBox = (props) => {
-    const [profile, setProfile] = useState(false);
+    let {user, logoutUser} = useContext(AuthContext);
+    const [profile, setProfile] = useState(null);
 
     useEffect(() => {
-        getRequest("bruker/api/", setProfile);
-      }, []);
+        if (user) {
+            fetchDetail("api/profil/", user.user_id, setProfile);
+        }
+    }, []);
     
     return (
     <>
@@ -21,22 +26,26 @@ const UserBox = (props) => {
                 src={profile.image_primary}/>
         </Link>
         <Log>
-            <Link to="/profil" style={linkStyle}><UserText>{profile.user.full_name}</UserText></Link>
-            <LogInOut>
-                <Link to="/" style={styleLogOut}><BiLogOut/></Link>
-                <LogText>Logg ut</LogText>
-            </LogInOut>
+            <Link to="/profil" style={linkStyle}><UserText>{profile.user.full_name}</UserText>
+                <LogInOut>
+                    <Link to="/" style={styleLogOut}>
+                        <BiLogOut/>
+                        <LogText onClick={logoutUser}>Logg ut</LogText>
+                    </Link>
+                </LogInOut>
+            </Link>
         </Log>
         <MenuBox onClick={() => props.toggleMenu(true)} ><BiMenu/></MenuBox>
     </UserArea>
     :
     <UserArea>
-    <Link to="/profil" style={linkStyle}><UserImage alt="HC-logo" src="logo.png"/></Link>
+    <UserImage alt="HC-logo" src="logo.png"/>
     <Log>
-        <Link to="/profil" style={linkStyle}><UserText>IKKE LOGGET INN</UserText></Link>
+        <UserText>IKKE LOGGET INN</UserText>
         <LogInOut>
-            <Link to="/login" style={styleLogOut}><BiLogOut/></Link>
-            <LogText>Logg inn</LogText>
+            <Link to="/login" style={styleLogOut}><BiLogOut/>
+                <LogText>Logg inn</LogText>
+            </Link>
         </LogInOut>
     </Log>
     <MenuBox onClick={() => props.toggleMenu(true)} ><BiMenu/></MenuBox>

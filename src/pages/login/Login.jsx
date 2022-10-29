@@ -1,65 +1,29 @@
 import React from "react";
-import axios from 'axios';
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styled from "styled-components";
 import { PageContainer } from "../../components/Layout";
 import { Button } from "../../components/Button";
 import { H1, H3, P } from "../../components/Text";
-import { setAuthToken } from "./setAuthToken";
+
+import AuthContext from "../../context/AuthContext";
 
 export const Login = () =>  {
+    let {loginUser} = useContext(AuthContext);
+
     const [isLoading, setIsLoading] = useState(false);
     const [isLogin, setIsLogin] = useState(true);
 
-
-    const handleSubmit = (event) => {
-        setIsLoading(true);
-        
-        event.preventDefault();
-        // Get username and password from form
-        const username = event.target.username.value; // Get correct values
-        const password = event.target.password.value; // Get correct values
-
-        const loginPayload = {
-            "username": username,
-            "password": password
-        }
-
-        // Post to api to get JWT
-        axios.post("http://localhost:8000/api/token/", loginPayload)
-          .then(response => {
-
-            // TODO: HANDLE WRONG CREDENTIALS
-
-            // Get token from response
-            const token  =  response.data.access;
-            const refresh = response.data.refresh;
-      
-            // Set JWT token to local storage
-            localStorage.setItem("token", token);
-            localStorage.setItem("refresh", refresh);
-      
-            // Set token to axios common header
-            setAuthToken(token);
-      
-            // Redirect user to home page
-            setIsLoading(false);
-            window.location.href = '/';
-          })
-          .catch(err => console.log(err));
-          setIsLoading(false);
-    }
-
-
     const switchLoginHandler = () => {
+        setIsLoading(true);
         setIsLogin((prevState) => !prevState);
+        setIsLoading(false);
     }
     
     return (
         <PageContainer>
             <Auth>
                 { isLogin ? <H1> Logg inn</H1> : <H3>Har du glemt Passordet ditt?</H3> }
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={loginUser}>
                     <Control>
                     <Label htmlFor="username">Brukernavn</Label>
                     <Input type="username" id="username" required placeholder="Skriv inn brukernavn..." />

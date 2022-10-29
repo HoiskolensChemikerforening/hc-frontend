@@ -5,7 +5,7 @@ import { H3, P } from "../../components/Text";
 import { Button } from "../../components/Button.js";
 import parse from "react-html-parser";
 import { checkPermission } from "../../utils/permissions";
-import { getRequest } from "../../utils/requests";
+import { fetchList } from "../../utils/requests";
 
 export const NewsList = () => {
   const [articles, setArticles] = useState([]);
@@ -13,7 +13,7 @@ export const NewsList = () => {
   const history = useHistory();
 
   useEffect(() => {
-    getRequest("nyheter/api/", setArticles);
+    fetchList("nyheter/api/", setArticles);
     checkPermission("news.add_article", setCanAddArticle);
   }, []);
   
