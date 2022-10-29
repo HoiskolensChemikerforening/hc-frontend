@@ -1,126 +1,147 @@
 import React from "react";
 import styled from "styled-components";
 import { Container, Row, Col } from "../../components/Layout";
-import { H1 } from "../../components/Text";
+import { H1, H3, P } from "../../components/Text";
 import { Link, useHistory } from "react-router-dom";
+import { useState } from "react";
+import { PageContainer } from "../../components/Layout";
+import { Button } from "../../components/Button";
+import { YearPicker } from '@mui/x-date-pickers';
+import { LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { Dayjs } from 'dayjs';
+import { ImageUpload } from "../../components/Form";
+
 
   export const Profil = () => {
+    const [isLoading, setIsLoading] = useState(false);
+    const [isLogin, setIsLogin] = useState(true);
+
+
+    const handleSubmit = (event) => {
+        setIsLoading(true);
+        
+        event.preventDefault();
+        // Get profile info
+        const fornavn = event.target.fornavn.value; // Get correct values
+        const etternavn = event.target.etternavn.value; // Get correct values
+        const epost = event.target.epost.value; // Get correct values
+        const adresse = event.target.adresse.value; // Get correct values
+        const mobilnr = event.target.mobilnr.value; // Get correct values
+        const emnr = event.target.emnr.value; // Get correct values
+        const startyear = event.target.startyear.value; // Get correct values
+        const endyear = event.target.endyear.value; // Get correct values
+        const allergi = event.target.allergi.value; // Get correct values
+        const samlivsstatus = event.target.samlivsstatus.value; // Get correct values
+
+
+        const loginPayload = {
+            "fornavn": fornavn,
+            "etternavn": etternavn,
+            "epost": epost,
+            "adresse": adresse,
+            "mobilnr": mobilnr,
+            "emnr": emnr,
+            "startyear": startyear,
+            "endyear": endyear,
+            "allergi": allergi,
+            "samlivsstatus": samlivsstatus
+        }}
+
 
     return (
-    <>
-    <Titlecontainer><Title>
-        Profil
-    </Title></Titlecontainer>
-   <RowContainer>
-        <ProfilePictureContainer>
-        <ChangeProfilePicture onClick={() => console.log('Endre profilbilde')}> Endre profilbilde </ChangeProfilePicture>
-        </ProfilePictureContainer>
-        <Column>
-        <Column>
-        <ProfileInfo>
-            <Column>
-            <Title2>Fornavn </Title2>
-            </Column>
-            <Column>
-            <Title2>Etternavn</Title2>
-            </Column>
-        </ProfileInfo>
-        <ProfileInfo>
-            <Title2>Epost</Title2>
-            <Title2>Adresse</Title2>
-        </ProfileInfo>
-        <ProfileInfo>
-            <Title2>Mobilnummer</Title2>
-            <Title2>EM-nummer</Title2>
-        </ProfileInfo>
-        <ProfileInfo>
-            <Column>
-            <Title2>Startår</Title2>
-            <DropDown>
-                <Option>År 1</Option>
-                <Option>År 2</Option>
-            </DropDown>
-            </Column>
-            <Column>
-            <Title2>Estimert ferdig</Title2>
-            <DropDown>
-                <Option>År 1</Option>
-                <Option>År 2</Option>
-            </DropDown>
-            </Column>
-        </ProfileInfo>
-        <ProfileInfo>
-            <Title2>Matallergi</Title2>
-            <Column>
-            <Title2>Samlivssatus</Title2>
-            <DropDown>
-                <Option>Singel</Option>
-                <Option>Opptatt</Option>
-                <Option>;)</Option>
-            </DropDown>
-            </Column>
-        </ProfileInfo>
-        </Column>
-        </Column>
-   </RowContainer>
-    </>      
-
+    <PageContainer>
+        <Auth>
+        <H1>Profil</H1>
+        <ImageUpload/>
+        <Button primary> {isLogin ? "Endre profilbilde" : "Send" }</Button>
+        <form onSubmit={handleSubmit}>
+                    <Control>
+                    <Label htmlFor="fornavn">Fornavn</Label>
+                    <Input type="fornavn" id="fornavn" required placeholder="Skriv inn fornavn..." />
+                    </Control>
+                    <Control>
+                    <Label htmlFor="etternavn">Etternavn</Label>
+                     <Input type="etternavn" id="etternavn" required placeholder="Skriv inn etternavn..."/>
+                    </Control> 
+                    <Control>
+                    <Label htmlFor="epost">E-post</Label>
+                     <Input type="epost" id="epost" required placeholder="Skriv inn din e-post..."/>
+                    </Control>
+                    <Control>
+                    <Label htmlFor="adresse">Adresse</Label>
+                     <Input type="adresse" id="adresse" required placeholder="Skriv inn adresse..."/>
+                    </Control>
+                    <Control>
+                    <Label htmlFor="mobilnr">Mobilnummer</Label>
+                     <Input type="mobilnr" id="mobilnr" required placeholder="Skriv inn mobilnummeret ditt.."/>
+                    </Control>
+                    <Control>
+                    <Label htmlFor="emnr">EM-nummer</Label>
+                     <Input type="emnr" id="emnr" required placeholder="Skriv inn EM-nummer..."/>
+                    </Control>
+                    <Control>
+                    <Label htmlFor="startyear">Startår</Label>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <YearPicker/>
+                    </LocalizationProvider>
+                    </Control>
+                    <Control>
+                    <Label htmlFor="endyear">Estimert ferdig</Label>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <YearPicker/>
+                    </LocalizationProvider>
+                    </Control>
+                    <Control>
+                    <Label htmlFor="emnr">Alergener/Diett</Label>
+                     <Input type="allergi" id="allergi" required placeholder="Skriv inn ..."/>
+                    </Control>
+                    <Control>
+                    <Label htmlFor="samlivsstatus">Samlivsstatus</Label>
+                    <DropDown></DropDown>
+                    </Control>
+                </form>
+   </Auth>
+   </PageContainer>     
     )
 };
 
-
-const Title = styled.div`
-font-size: 1.875rem;
-font-weight: 400;
-margin-bottom: 16px;
-display: flex;
-justify-content: center;
-
-color: #000;
-background: var(--primary);
-border: 3px var(--primary) solid;
-width: 10%;
-`
-const Titlecontainer = styled.div`
-display: flex;
-justify-content: center;
-width = 100%
-`
-
-const Title2 = styled.div`
-    font-size: 1rem;
-    font-weight: 200;
-    margin-bottom: 16px;
-    display: flex;
-`
-
-const RowContainer = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    height: 250px;
-    margin: 50px 10px 700px 40px;
+const Auth = styled.section`
+    margin: 3rem auto;
+    width: 95%;
+    max-width: 25rem;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    text-align: center;
 `;
 
-const ProfilePictureContainer = styled.div` 
-    width: 40%;
-    display: flex; 
-    justify-content: start;
-    margin: 50px 100px 100px 40px;
+const Control = styled.div`
+    margin-bottom: 0.5rem;
 `;
 
-const ProfileInfo = styled.div`
-    width: 100%;
-    height: 50%;
-    display: flex;
-    justify-content: space-around;
-    margin: 50px 100px 50px 4px;
+const Label = styled.label`
+    display: block;
+    margin-bottom: 0.5rem;
 `;
 
-const Column = styled.div`
-    display: flex;
-    flex-direction: column;
-    height: 50px;
-`
+const Input = styled.input`
+    font-style: inherit;
+    background-color: var(--yellow-00);
+    border-radius: 4px;
+    border: 1px solid white;
+    width: 70%;
+    text-align: left;
+    padding: 0.25rem;
+  `;
+
+  const Action = styled.div`
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 const DropDown = styled.select`
   border: solid 1px ;
   border-radius: 4px;
@@ -158,5 +179,8 @@ const ChangeProfilePicture = styled.button`
     border-radius 2px;
     cursor: pointer;
     padding: 0,25em 1em;
-    position:relative; left:230px; top:22px;
+    left:230px; 
+    top:22px;
+    display: flex; 
+    justify-content: center;
 `;

@@ -1,14 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { P } from "./Text";
+import { P } from "../Text";
 import { Link } from "react-router-dom";
 import { BiLogOut, BiMenu } from "react-icons/bi";
 
 const UserBox = (props) => (
+    <>
+    {props.isLoggedIn ?
     <UserArea>
         <Link to="/profil" style={linkStyle}><UserImage alt="HC-logo" src="logo.png"/></Link>
         <Log>
-            <Link to="/profil" style={linkStyle}><UserText>Bendik Søta Sannes</UserText></Link>
+            <Link to="/profil" style={linkStyle}><UserText>Navn</UserText></Link>
             <LogInOut>
                 <Link to="/" style={styleLogOut}><BiLogOut/></Link>
                 <LogText>Logg ut</LogText>
@@ -16,6 +18,20 @@ const UserBox = (props) => (
         </Log>
         <MenuBox onClick={() => props.toggleMenu(true)} ><BiMenu/></MenuBox>
     </UserArea>
+    :
+    <UserArea>
+    <Link to="/profil" style={linkStyle}><UserImage alt="HC-logo" src="logo.png"/></Link>
+    <Log>
+        <Link to="/profil" style={linkStyle}><UserText>IKKE LOGGET INN</UserText></Link>
+        <LogInOut>
+            <Link to="/login" style={styleLogOut}><BiLogOut/></Link>
+            <LogText>Logg inn</LogText>
+        </LogInOut>
+    </Log>
+    <MenuBox onClick={() => props.toggleMenu(true)} ><BiMenu/></MenuBox>
+    </UserArea>
+    }
+    </>
 );
 
 export {UserBox};

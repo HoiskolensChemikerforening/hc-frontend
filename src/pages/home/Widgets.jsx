@@ -3,22 +3,29 @@ import styled from 'styled-components';
 import { Link } from "react-router-dom";
 import { FiCoffee } from "react-icons/fi";
 import { RiArchiveDrawerLine, RiHandCoinLine, RiDoorOpenFill } from "react-icons/ri";
+import axios from 'axios';
 
 export const Widgets = () => {
   const [coffeeButton, setCoffeeButton] = useState("");   
 
     useEffect(() => {
-      let isMounted = true;   
-      fetchCoffeebutton().then(data => {if (isMounted) setCoffeeButton(new Date(data[0].date))} );
+      let isMounted = true;
+      fetchCoffeebutton().then(data => {
+        if (isMounted) setCoffeeButton(new Date(data[0].date))
+      });
         return () => { isMounted = false };
       }, []);
     
     
       const fetchCoffeebutton = async () => {
-        const data = await fetch("http://localhost:8000/web_push/api/");
-        const items = await data.json();
-        return items;
+        let coffeeData;
+
+        await axios.get("http://localhost:8000/web_push/api/")
+        .then(response => {
+          coffeeData = response.data;
+        })
         
+        return coffeeData;
       };
 
       const currentTime = new Date();
@@ -29,7 +36,7 @@ export const Widgets = () => {
       const day = Math.floor(h/24);
       let time;
       if (sec < 60) {
-        time = sec.tostring() + ' s siden';
+        time = sec.toString() + ' s siden';
       } else if (min < 60) {
         time = min.toString() + ' min siden';
       }
