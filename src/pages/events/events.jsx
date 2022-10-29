@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled, {css} from "styled-components";
 import { Button } from "../../components/Button"; 
-import { Container, Row, Col } from "../../components/Layout";
+import { Col } from "../../components/Layout";
 import { H1, P} from "../../components/Text";
 import { Link, useHistory } from "react-router-dom";
 
@@ -44,22 +44,39 @@ export const EventPage = () => {
       setSocialBold(false);
     }
   };
+
+  const addEvent= () =>{
+    console.log("La til event");
+
+  };
   
     return (
         <>
         <EventContainer>
         <EventType>
           <Title value="Corporate" onClick={() => switchEvent("Social")}
-            style={  socialBold ? { fontWeight: 'bold' } : { fontWeight: 'normal' } }
+            style={  socialBold ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30' } : { fontWeight: 'normal' } }
           >Sosialt</Title>
-          <Title style={{cursor: "default"}}> /</Title>
           <Title value="Corporate" onClick={() => switchEvent("Corporate")}
-          style={  !socialBold ? { fontWeight: 'bold' } : { fontWeight: 'normal' } }
+          style={  !socialBold ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
           >Bedrift</Title>
+          <Title value="Event" onClick={()=> addEvent()} style={{fontWeight: 'bold'}}>+</Title>
+          <Title value="Corporate" onClick={() => switchEvent("Corporate")}
+          style={  !socialBold ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+          >Kommende</Title>
+          <Title value="Corporate" onClick={() => switchEvent("Corporate")}
+          style={  !socialBold ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+          >Mine</Title>
+          <Title value="Corporate" onClick={() => switchEvent("Corporate")}
+          style={  !socialBold ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+          >Tidligere</Title>
         </EventType>
         <EventList>
         {dispEvents && dispEvents.map((event) => (
            <EventBox key={event.id} onClick={() => {history.push(`/arrangementer/${event.id}`)}}>
+              <ImageCont>
+                <Image src={event.image}/>
+              </ImageCont>
               <DateBox>
                   <P bold small style={{marginBottom: "0", color: "var(--gray-70)"}}>
                       <span>{new Date(event.date).toLocaleDateString()}</span>
@@ -76,11 +93,26 @@ export const EventPage = () => {
 };
 
 const widthProgress = 180;
+
+const Image = styled.img`
+  width: 100%;
+`;
+
+const ImageCont = styled.div`
+  min-height: 200px;
+  max-height: 200px;
+  float: left;
+  margin: 3px;
+  padding: 3px;
+  overflow: hidden;
+  border-radius: 5px;
+`;
+
 const EventContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  width: 1000px;
+  width: 100%;
   height: 60%;
   padding-right: 10px;
   margin-top: 10px;
@@ -100,12 +132,14 @@ const EventType = styled.div`
   flex-direction: row;
   justify-content: space-around;
   margin:0;
+  width: 300px;
 `;
 
 const Title = styled.p`
   cursor: pointer;
   margin: 0;
-  size: medium;
+  size: large;
+  font-size: 20px;
 `;
 const EventBox = styled.div`
     cursor: pointer;
