@@ -26,7 +26,7 @@ export const NewsList = () => {
           // or only visible when hovered
           //Previously link component wrapped around button
           }
-            <Button primary onClick={() => {history.push(`/nyheter/ny`)}}>Opprett nyhet</Button>
+            <Button primary style={{ background: "red", border: "2px red solid"}} onClick={() => {history.push(`/nyheter/ny`)}}>Opprett nyhet</Button>
         </ButtonContainer>
         {articles.map((article) => (
             <NewsItem key={article.id} onClick={() => {history.push(`/nyheter/${article.id}`)}}>

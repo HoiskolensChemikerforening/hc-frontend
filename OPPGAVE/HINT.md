@@ -1,0 +1,1 @@
+Er det nødvendig å ha styling i filen. Hvor kommer knappen fra.
