@@ -14,7 +14,6 @@ import { CommitteeDetailsPage } from "./pages/undergrupper/CommitteeDetailsPage"
 import { Internside } from "./pages/internt/Internt";
 import { Bokskap } from "./pages/bokskap/bokskap";
 import { Reservasjon } from "./pages/bokskap/reservasjon";
-import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
 
 
 class App extends React.Component {

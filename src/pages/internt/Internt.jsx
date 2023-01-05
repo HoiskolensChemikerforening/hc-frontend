@@ -49,10 +49,9 @@ export const Internside = () => {
 };
 
 const ButtonContainer = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
-`;
+  display: flex;
+  justify-content: space-evenly;
+  `;
 
 const Button = styled.button`
   margin: 15px 30px 30px;
@@ -70,12 +69,12 @@ const Button = styled.button`
 
   cursor: pointer;
 
-color: #000;
-background: var(--primary);
-hover: #FFF;
+  color: #000;
+  background: var(--primary);
+  hover: #FFF;
 
-&:hover {
-  cursor: pointer;
-  background-color: #ebce3d;
+  &:hover {
+    cursor: pointer;
+    background-color: #ebce3d;
 }
 `;

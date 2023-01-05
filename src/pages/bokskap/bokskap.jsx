@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import ImageSrc from "../../images/hc.jpg";
 import { NewsList } from "../news/NewsList";
 import {Row, Col, Container} from "../../components/Layout";
 import { H1, H3, P } from "../../components/Text";
@@ -270,9 +269,9 @@ export const Bokskap = () => {
         <div>ㅤ</div>
         <div>ㅤ</div>
         <div>ㅤ</div>
-        <Container>
-            1 2 3 4     Neste
-        </Container>
+        <RowContainer>
+            <YellowBox>1 </YellowBox> 2 3 4      Neste
+        </RowContainer>
         <div>ㅤ</div>
         <div>ㅤ</div>
         <div>ㅤ</div>
@@ -329,3 +328,20 @@ const LockContainer = styled.div`
     position: right;
     margin: 5px 5px;
 `;
+
+const YellowBox = styled.div`
+    background-color: #f7e469;
+    margin: 0 auto;
+    padding: 5px 5px 20px 5px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    width: -20px;
+`
+
+const RowContainer = styled.div`
+    display: flex;
+    flex-flow: row-reverse nowrap;
+    height: 85px;
+    width: -1px;
+    margin: 5px 5px 5px 5px;
+`

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import ImageSrc from "../../images/hc.jpg";
 import { NewsList } from "../news/NewsList";
 import {Row, Col, Container} from "../../components/Layout";
 import { H1, H3, P } from "../../components/Text";
