@@ -1,0 +1,1 @@
+Bytt om <Homepage> og <NewsRouter> i App.jsx

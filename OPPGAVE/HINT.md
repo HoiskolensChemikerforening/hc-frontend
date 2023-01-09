@@ -1,0 +1,1 @@
+Sjekk hvilken url som gir hvilken side
