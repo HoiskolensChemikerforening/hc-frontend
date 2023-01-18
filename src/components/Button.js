@@ -4,6 +4,10 @@ import '../index.css';
 const Button = styled.button`
   margin: 10px 0;
   padding: 0.5em 1.5em;
+  
+  const [isOpen, setIsOpen] = useState(false);
+  const toggling = () => setIsOpen(!isOpen);
+  
 
   font-weight: bold;
   font-size: 16px;
@@ -34,6 +38,8 @@ const Button = styled.button`
   `}
 `;
 
+
 export {
   Button
 };
+
