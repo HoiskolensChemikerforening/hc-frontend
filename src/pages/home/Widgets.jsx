@@ -143,5 +143,6 @@ const TextContainer = styled.p`
     font-weight: 510;
     color: var(--gray-90);
     cursor: default;
+
 `;
 

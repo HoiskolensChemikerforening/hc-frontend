@@ -49,8 +49,7 @@ export const Internside = () => {
 };
 
 const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-evenly;
+
   `;
 
 const Button = styled.button`

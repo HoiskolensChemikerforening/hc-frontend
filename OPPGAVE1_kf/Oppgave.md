@@ -1,0 +1,1 @@
+Boksene på internsiden er sidestilt til venstre, som ikke ser så pent ut. Endre koden slik at boksene er midtstilt på siden, med jevnt mellomrom.
