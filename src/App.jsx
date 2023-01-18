@@ -15,7 +15,7 @@ import { Internside } from "./pages/internt/Internt";
 import { Bokskap } from "./pages/bokskap/bokskap";
 import { Reservasjon } from "./pages/bokskap/reservasjon";
 
-
+{/*Endre kode i denne filen*/ }
 class App extends React.Component {
   render() {
     return (
