@@ -32,44 +32,71 @@ export const Subgroup = (props) => (
 )
 
 const Center_Wrapper = styled.div`
+  // Position
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  // Shape
   width: 100%;
-  background-color:#ADADADBF; //#737373a6;
   height: 20%;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  // Color & text
   font-size: 25px;
+  background-color:#ADADADBF; //#737373a6;
 `;
 
 const Wrapper = styled.div`
+  // Position
   display: flex;
-  width: 90%;
-  height: 100%;
   justify-content:space-evenly;
   flex-direction: row;
   flex-wrap: wrap;
+  
+  // Shape
+  width: 90%;
+  height: 100%;
+  
+
+
 `;
 
 const StyledWrapper = styled.div`
+  // Position
   position: relative;
   padding-bottom: 60%;
+  
+  // Shape
+  border-radius: 10px;
+  margin: 10px;
+  display: flex;
+
+  // Color and text
   text-decoration: none;
   color: black;
   font-weight: bold;
   font-size: 125%;
-  margin: 10px;
-  display: flex;
+  
 `;
 
 const BackgroundWrapper = styled.div`
+  // Position
   position: absolute;
+  display: flex;
+  align-items: end;
+
+  // Shape
   height: 100%;
   width: 100%;
+  border-radius: 10px;
+
+  // Color and Text
   background-image: url(${props => props.committee.image});
   background-size: cover; \\This streches the background image instead of setting the proportions of the box to match the proportions of the image. Will hopefully get back to this
   background-repeat: no-repeat;
-  display: flex;
-  align-items: end;
+  box-shadow: rgba(0, 0, 0, 0.36) 1px 1px 5px -1px //, rgba(0, 0, 0, 0.06) 0px 1px 2px px;
 `;
 

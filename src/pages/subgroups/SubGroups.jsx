@@ -42,7 +42,12 @@ const TitleContainer = styled.div`
 `
 
 const Title = styled.h1`
+  // Shape
+  border-radius: 10px;
+
+  // Color and text
   background-color: #f8e469ff;
   text-align: center;
   padding: 5px 15px 5px 15px;
+  box-shadow: rgba(0, 0, 0, 0.36) 1px 1px 3px -1px
 `
