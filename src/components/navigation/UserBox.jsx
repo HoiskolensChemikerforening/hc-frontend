@@ -4,36 +4,51 @@ import styled from "styled-components";
 import { P } from "../Text";
 import { Link } from "react-router-dom";
 import { BiLogOut, BiMenu } from "react-icons/bi";
+import axios from "axios";
 
 import AuthContext from "../../context/AuthContext";
-import { fetchDetail } from "../../utils/requests";
+//import { fetchDetail } from "../../utils/requests";
 
 const UserBox = (props) => {
     let {user, logoutUser} = useContext(AuthContext);
-    const [profile, setProfile] = useState(null);
+    const [profile, setProfile] = useState({});
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        if (user) {
-            fetchDetail("api/profil/", user.user_id, setProfile);
+        async function fetchProfile() {
+            setIsLoggedIn(false);
+            const data = await axios.get("http://localhost:8000/api/profil/" + String(user.user_id) + "/")
+                            .then(response => response.data);
+            console.log("SETTING PROFILE");
+            setProfile(data);
+            setIsLoggedIn(true);
         }
-    }, []);
-    
+
+        if (user) {
+            fetchProfile();
+        } else {
+            setIsLoggedIn(false);
+            console.log("We don't have a user", user);
+        }
+    }, [user]);
+
     return (
     <>
-    {profile ?
+    {isLoggedIn ?
     <UserArea>
         <Link to="/profil" style={linkStyle}><UserImage alt="user-image" 
                 src={profile.image_primary}/>
         </Link>
         <Log>
-            <Link to="/profil" style={linkStyle}><UserText>{profile.user.full_name}</UserText>
+            <Link to="/profil" style={linkStyle}>
+                <UserText>{profile.user.full_name}</UserText>
+            </Link>
                 <LogInOut>
                     <Link to="/" style={styleLogOut}>
                         <BiLogOut/>
                         <LogText onClick={logoutUser}>Logg ut</LogText>
                     </Link>
                 </LogInOut>
-            </Link>
         </Log>
         <MenuBox onClick={() => props.toggleMenu(true)} ><BiMenu/></MenuBox>
     </UserArea>
@@ -52,7 +67,7 @@ const UserBox = (props) => {
     </UserArea>
     }
     </>
-);
+    )
 }
 
 export {UserBox};

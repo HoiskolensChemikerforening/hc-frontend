@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { baseUrl } from './requests';
-import { setAuthToken } from '../pages/login/setAuthToken';
  
 export const checkPermission = async (permission, setFunction) => {
 
