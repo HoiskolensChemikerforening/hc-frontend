@@ -10,11 +10,17 @@ export const fetchList = async (url, setFunction) => {
     })
 }
 
-export const fetchDetail = async (url, id, setFunction) => {
+export const fetchDetail = async (url, id, setFunction, setLoading=null) => {
+    if (setLoading) {
+        setLoading(true);
+    }
     await axios.get(baseUrl + url + String(id) + "/")
     .then(response => {
         setFunction(response.data);
     })
+    if (setLoading) {
+        setLoading(false);
+    }
 }
 
 export const postRequest = async (url, data) => {

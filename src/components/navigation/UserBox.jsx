@@ -4,37 +4,39 @@ import styled from "styled-components";
 import { P } from "../Text";
 import { Link } from "react-router-dom";
 import { BiLogOut, BiMenu } from "react-icons/bi";
-import axios from "axios";
 
 import AuthContext from "../../context/AuthContext";
-//import { fetchDetail } from "../../utils/requests";
+import { fetchDetail } from "../../utils/requests";
 
 const UserBox = (props) => {
     let {user, logoutUser} = useContext(AuthContext);
     const [profile, setProfile] = useState({});
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isAnonymous, setIsAnonymous] = useState(true);
 
     useEffect(() => {
-        async function fetchProfile() {
-            setIsLoggedIn(false);
-            const data = await axios.get("http://localhost:8000/api/profil/" + String(user.user_id) + "/")
-                            .then(response => response.data);
-            console.log("SETTING PROFILE");
-            setProfile(data);
-            setIsLoggedIn(true);
-        }
-
         if (user) {
-            fetchProfile();
+            fetchDetail("api/profil/", String(user.user_id), setProfile, setIsAnonymous);
         } else {
-            setIsLoggedIn(false);
-            console.log("We don't have a user", user);
+            setIsAnonymous(true);
         }
     }, [user]);
 
     return (
     <>
-    {isLoggedIn ?
+    {isAnonymous ?
+    <UserArea>
+        <UserImage alt="HC-logo" src="logo.png"/>
+        <Log>
+            <UserText>IKKE LOGGET INN</UserText>
+            <LogInOut>
+                <Link to="/login" style={styleLogOut}><BiLogOut/>
+                    <LogText>Logg inn</LogText>
+                </Link>
+            </LogInOut>
+        </Log>
+        <MenuBox onClick={() => props.toggleMenu(true)} ><BiMenu/></MenuBox>
+    </UserArea>
+    :
     <UserArea>
         <Link to="/profil" style={linkStyle}><UserImage alt="user-image" 
                 src={profile.image_primary}/>
@@ -51,19 +53,6 @@ const UserBox = (props) => {
                 </LogInOut>
         </Log>
         <MenuBox onClick={() => props.toggleMenu(true)} ><BiMenu/></MenuBox>
-    </UserArea>
-    :
-    <UserArea>
-    <UserImage alt="HC-logo" src="logo.png"/>
-    <Log>
-        <UserText>IKKE LOGGET INN</UserText>
-        <LogInOut>
-            <Link to="/login" style={styleLogOut}><BiLogOut/>
-                <LogText>Logg inn</LogText>
-            </Link>
-        </LogInOut>
-    </Log>
-    <MenuBox onClick={() => props.toggleMenu(true)} ><BiMenu/></MenuBox>
     </UserArea>
     }
     </>
