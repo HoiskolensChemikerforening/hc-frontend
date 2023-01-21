@@ -66,19 +66,28 @@ const PositionMemberList = (props) => (
 )
 
 const MemberColumn = styled.div`
+    // Position
     display: flex;
     flex-direction: column;
+
+    // Shape
     padding-left: 10px;
 `;
 
 const PositionColumn = styled.div`
+    // Position
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-around;
+
+    // Shape
     margin-left: 50px;
     margin-right: 50px;
     padding: 10px 10px 10px 10px;
-    background-color: var(--primary);
     border-radius: 10px;
-    justify-content: space-around;
+
+    // Color and Text
+    background-color: var(--primary);
+    
 `;
