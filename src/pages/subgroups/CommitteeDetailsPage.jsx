@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "../../components/Layout";
 import { H1 } from "../../components/Text";
 import { useLocation } from "react-router-dom";
-import { CommitteeMemberList } from "../../components/CommitteeMembersList";
+import { CommitteeMemberList } from "../../components/Subgroups/CommitteeMembersList";
 
 function CommitteeDetailsPage (props) {
     const { committee } = useParams();

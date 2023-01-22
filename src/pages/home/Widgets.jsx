@@ -29,7 +29,7 @@ export const Widgets = () => {
       const day = Math.floor(h/24);
       let time;
       if (sec < 60) {
-        time = sec.tostring() + ' s siden';
+        time = sec.toString() + ' s siden';
       } else if (min < 60) {
         time = min.toString() + ' min siden';
       }

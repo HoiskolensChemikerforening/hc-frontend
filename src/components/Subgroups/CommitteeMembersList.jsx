@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import { Container, Row, Col } from "./Layout";
+import { Container, Row, Col } from "../Layout";
 import { useHistory } from "react-router-dom";
-import { H2 } from "../components/Text";
-import { Column } from "../pages/subgroups/CommitteeDetailsPage"
+import { H2 } from "../Text";
+import { Column } from "../../pages/subgroups/CommitteeDetailsPage"
 
 
 

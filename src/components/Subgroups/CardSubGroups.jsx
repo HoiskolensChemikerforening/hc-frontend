@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import { Container, Row, Col } from "./Layout";
-import { CommitteePage } from "../pages/subgroups/SubGroups";
+import { Container, Row, Col } from "../Layout";
+import { CommitteePage } from "../../pages/subgroups/SubGroups";
 import { useHistory } from "react-router-dom";
 
 
-export const Subgroup = (props) => (
+const Subgroup = (props) => (
     <Col xs="12" sm="6" md="6" lg="4">
         <StyledWrapper onClick={
           ()=> 
@@ -73,3 +73,5 @@ const BackgroundWrapper = styled.div`
   align-items: end;
 `;
 
+
+export {Subgroup, StyledWrapper}

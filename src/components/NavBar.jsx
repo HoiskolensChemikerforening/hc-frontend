@@ -24,7 +24,7 @@ const NavBar = () =>  {
                 <MenuItems>
                     <MenuItem to="/"><BiHomeAlt/></MenuItem>
                     <MenuItem to="/bedrift"><BiBriefcaseAlt/></MenuItem>
-                    <MenuItem to="/arrangement"><BiCalendarEvent/></MenuItem>
+                    <MenuItem to="/events"><BiCalendarEvent/></MenuItem>
                     <MenuItem to="/internt"><BiGame/></MenuItem>
                     <MenuItem to="/info"><BiInfoCircle/></MenuItem>
                 </MenuItems>

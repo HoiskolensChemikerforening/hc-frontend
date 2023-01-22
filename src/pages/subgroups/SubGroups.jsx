@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { Container, Row, Col } from "../../components/Layout";
 import { H1 } from "../../components/Text";
-import { Subgroup } from "../../components/CardSubGroups"
+import { Subgroup } from "../../components/Subgroups/CardSubGroups"
 
-export const CommitteePage = () => {
+const CommitteePage = () => {
   useEffect(() => {
     fetchCommittees();
   }, []);
@@ -46,3 +46,5 @@ const Title = styled.h1`
   text-align: center;
   padding: 5px 15px 5px 15px;
 `
+
+export { CommitteePage, TitleContainer, Title}
