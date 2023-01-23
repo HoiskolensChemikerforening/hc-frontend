@@ -21,7 +21,7 @@ const Subgroup = (props) => (
           } 
           style={ {cursor:'pointer'} }>
 
-          <BackgroundWrapper committee = {props.committee} >
+          <BackgroundWrapper backImg = {props.committee.image} >
             <Center_Wrapper>
               {props.committee.title}
             </Center_Wrapper>
@@ -66,7 +66,7 @@ const BackgroundWrapper = styled.div`
   position: absolute;
   height: 100%;
   width: 100%;
-  background-image: url(${props => props.committee.image});
+  background-image: url(${props => props.backImg});
   background-size: cover; \\This streches the background image instead of setting the proportions of the box to match the proportions of the image. Will hopefully get back to this
   background-repeat: no-repeat;
   display: flex;
@@ -74,4 +74,4 @@ const BackgroundWrapper = styled.div`
 `;
 
 
-export {Subgroup, StyledWrapper}
+export {Subgroup, StyledWrapper, BackgroundWrapper, Wrapper, Center_Wrapper}

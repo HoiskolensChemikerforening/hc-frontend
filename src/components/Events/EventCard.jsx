@@ -1,6 +1,7 @@
 import React from "react";
 import { Col } from "../Layout";
-import { StyledWrapper } from "../Subgroups/CardSubGroups";
+import { StyledWrapper, BackgroundWrapper, Center_Wrapper } from "../Subgroups/CardSubGroups";
+import { H1, P } from "../Text";
 
 
 export const EventCard = (props) => {
@@ -13,8 +14,13 @@ export const EventCard = (props) => {
                   state: {event: props.event}
                 } ); } } 
           style={ {cursor:'pointer'} }>
-
-            hei
+            <Col>
+              <img src={props.event.image} alt='Congratz, u failed to load a fucking image.' 
+                width="100%" height="auto" >
+              </img>
+              <H1> {props.event.title} </H1>
+              <P> {props.event.description} </P>
+            </Col>
         </StyledWrapper>
       </Col>
     </>

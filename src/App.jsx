@@ -12,6 +12,7 @@ import { NewsDetail } from "./pages/news/NewsDetail";
 import { NewsForm} from "./pages/news/NewsForm";
 import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
 import { EventsPage } from "./pages/eventpage/lotsaevents";
+import { EventDetailPage } from "./pages/eventpage/whataboutanevent";
 
 
 class App extends React.Component {
@@ -21,13 +22,14 @@ class App extends React.Component {
           <NavBar/>
           <Switch>
             <Route path="/" exact>                  <HomePage/>                 </Route>
-            <Route path="/events">                  <EventsPage/>               </Route>
+            <Route path="/events/:commitee">        <EventDetailPage/>          </Route>  
+            <Route path="/events">                  <EventsPage/>               </Route>  
             <Route path="/bedrift">                 <H1>Bedrift</H1>            </Route>
             <Route path="/internt">                 <H1>Internt</H1>            </Route>
             <Route path="/info">                    <H1>Info</H1>               </Route>
             <Route path="/profil">                  <H1>Profil</H1>             </Route>
             <Route path="/nyheter">                 <NewsRouter/>               </Route>
-            <Route path="/undergrupper/:committee"> <CommitteeDetailsPage/>     </Route>            
+            <Route path="/undergrupper/:committee"> <CommitteeDetailsPage/>     </Route>        
             <Route path="/undergrupper">            <CommitteePage/>            </Route>
           </Switch>
           <NavBarPhone/>

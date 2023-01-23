@@ -32,11 +32,11 @@ export const EventsPage = () => {
             Social Events
         </Title>
     </TitleContainer>
-    <Col>
+    <Row>
         {socialEvents.map((event) => (
             <EventCard key={event.id} event={event} history={history} ></EventCard>
         ))}
-    </Col>
+    </Row>
     </>
     )
 }
