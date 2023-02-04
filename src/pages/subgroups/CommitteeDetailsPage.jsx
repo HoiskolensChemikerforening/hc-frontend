@@ -23,7 +23,7 @@ function CommitteeDetailsPage (props) {
                         <img width="100%" height="auto" src={location.state.committee.image} ></img>
                     </ImageContainer>
                 </Col>
-                <Col xs="12" sm="12" md="3" lg="3">
+                <Col xs="12" sm="12" md="3" lg="4">
                 <CommitteeMemberList key={committee.id} committee={location.state.committee}> </CommitteeMemberList>
                 </Col>
             </Rw>
