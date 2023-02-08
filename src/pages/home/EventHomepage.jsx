@@ -58,7 +58,10 @@ export const EventHomepage = () => {
             >Bedrift</Title>
           </EventType>
           {dispEvents && dispEvents.map((event) => (
-             <EventBox key={event.id} onClick={() => {history.push(`/arrangementer/${event.id}`)}}>
+             <EventBox key={event.id} onClick={() => {history.push({
+                pathname:`/events/${event.id}`,
+                state: {event: event}
+             })}}>
                 <DateBox>
                     <P bold small style={{marginBottom: "0", color: "var(--gray-70)"}}>
                         <span>{new Date(event.date).toLocaleDateString()}</span>

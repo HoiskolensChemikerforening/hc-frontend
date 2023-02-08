@@ -22,7 +22,7 @@ class App extends React.Component {
           <NavBar/>
           <Switch>
             <Route path="/" exact>                  <HomePage/>                 </Route>
-            <Route path="/events/:commitee">        <EventDetailPage/>          </Route>  
+            <Route path="/events/:event">           <EventDetailPage/>          </Route>  
             <Route path="/events">                  <EventsPage/>               </Route>  
             <Route path="/bedrift">                 <H1>Bedrift</H1>            </Route>
             <Route path="/internt">                 <H1>Internt</H1>            </Route>
