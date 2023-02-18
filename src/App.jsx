@@ -2,7 +2,7 @@ import React from "react";
 import "./index.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { HomePage } from "./pages/home/HomePage";
-import { NavBar } from "./components/NavBar";
+import { NavBar } from "./components/navigation/NavBar";
 import { CommitteePage} from "./pages/subgroups/SubGroups";
 import { H1 } from "./components/Text";
 import { NavBarPhone } from "./components/navigation/NavBarPhone";
@@ -30,6 +30,7 @@ class App extends React.Component {
   render() {
     return (
         <Router>
+          <AuthProvider>
           <NavBar/>
           <Switch>
             <Route path="/" exact>                  <HomePage/>                 </Route>
@@ -44,6 +45,7 @@ class App extends React.Component {
             <Route path="/undergrupper">            <CommitteePage/>            </Route>
           </Switch>
           <NavBarPhone/>
+          </AuthProvider>
         </Router>
     );
   }
