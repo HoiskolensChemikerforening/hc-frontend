@@ -26,3 +26,20 @@ export const fetchDetail = async (url, id, setFunction, setLoading=null) => {
 export const postRequest = async (url, data) => {
     await axios.post(baseUrl + url, data);
 }
+
+export const checkPermission = async (permission, user, setFunction) => {
+
+    const data = {
+        "permission": permission,
+        "user_id": user? user.user_id : null
+    }
+  
+    await axios.post(
+        baseUrl + "api/permissions/", data
+        ).then(response => {
+            setFunction(response.data.hasPermission);
+        }).catch(error => {
+            setFunction(false);
+        }
+    );
+}

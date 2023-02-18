@@ -1,22 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { H3, P } from "../../components/Text";
 import { Button } from "../../components/Button.js";
 import parse from "react-html-parser";
-import { checkPermission } from "../../utils/permissions";
-import { fetchList } from "../../utils/requests";
+import { fetchList, checkPermission } from "../../utils/requests";
+
+import AuthContext from "../../context/AuthContext";
 
 export const NewsList = () => {
+  let {user} = useContext(AuthContext);
   const [articles, setArticles] = useState([]);
   const [canAddArticle, setCanAddArticle] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
     fetchList("nyheter/api/", setArticles);
-    checkPermission("news.add_article", setCanAddArticle);
   }, []);
-  
+
+  useEffect(() => {
+    checkPermission("news.add_article", user, setCanAddArticle);
+  }, [user])
+
   return (
       <NewsListContainer>
         <ButtonContainer>
