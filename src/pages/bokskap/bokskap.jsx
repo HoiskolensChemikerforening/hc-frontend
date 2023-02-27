@@ -270,8 +270,9 @@ export const Bokskap = () => {
         <div>ㅤ</div>
         <div>ㅤ</div>
         <RowContainer>
-            <YellowBox>1 </YellowBox> 2 3 4      Neste
+            <YellowBox>1 </YellowBox> <GreyBox> 2 </GreyBox> <GreyBox> 3 </GreyBox> <GreyBox> 4 </GreyBox> <GreyBox> Neste </GreyBox>
         </RowContainer>
+
         <div>ㅤ</div>
         <div>ㅤ</div>
         <div>ㅤ</div>
@@ -316,32 +317,51 @@ const Button = styled.button`
     color: #000;
     background-color: #F7F7F7;
     border: 1px #B1B1B1 solid;
-    hover: #FFFF
     &:hover {
-        cursor: pointer;
-        background-color: #F1F1F1;
+      background-color: #F1F1F1;
     }
+    cursor: pointer;
 `;
 
 const LockContainer = styled.div`
-    justify-content: right;
+    justify-content: center;
     position: right;
     margin: 5px 5px;
 `;
 
-const YellowBox = styled.div`
+const YellowBox = styled.button`
+    display: flex;
+    justify-content: space-evenly;
     background-color: #f7e469;
-    margin: 0 auto;
-    padding: 5px 5px 20px 5px;
-    margin-bottom: 0px;
-    margin-top: 0px;
-    width: -20px;
+    font-size: 16px;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    border: 2px #f7e469;
+    &:hover {
+      background-color: #e3d262;
+    }
+`
+
+const GreyBox = styled.button`
+    display: flex;
+    justify-content: space-evenly;
+    cursor: pointer;
+    background-color: #F7F7F7;
+    border: 10px #F7F7F7;
+    font-size: 16px;
+    &:hover {
+      background-color: #F1F1F1;
+    }
 `
 
 const RowContainer = styled.div`
     display: flex;
-    flex-flow: row-reverse nowrap;
-    height: 85px;
-    width: -1px;
-    margin: 5px 5px 5px 5px;
+    height: 20px;
+    width: 342px;
+    left: 154px;
+    top: 918px;
+    background: #FFFFFF;
+    margin: 5px 60px -6px;
+    
 `
