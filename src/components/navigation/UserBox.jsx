@@ -15,7 +15,10 @@ const UserBox = (props) => {
 
     useEffect(() => {
         if (user) {
-            fetchDetail("api/profil/", String(user.user_id), setProfile, setIsAnonymous);
+            if (user.profile_id) 
+                fetchDetail("api/profil/", String(user.profile_id), setProfile, setIsAnonymous)
+            else
+                setIsAnonymous(true);
         } else {
             setIsAnonymous(true);
         }
@@ -27,7 +30,7 @@ const UserBox = (props) => {
     <UserArea>
         <UserImage alt="HC-logo" src="logo.png"/>
         <Log>
-            <UserText>IKKE LOGGET INN</UserText>
+            <UserText>Ikke logget inn</UserText>
             <LogInOut>
                 <Link to="/login" style={styleLogOut}><BiLogOut/>
                     <LogText>Logg inn</LogText>
