@@ -102,7 +102,7 @@ const WidgetContainer = styled(Link)`
     padding: 5px;
     border-radius: 10px;
 
-    background-color: var(--yellow-90);
+    background-color: var(--yellow-30);
     color: var(--gray-90);
     text-decoration: none;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
