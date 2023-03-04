@@ -102,6 +102,7 @@ const EventContainer = styled.div`
         padding-left: 50px;
     }*/
 `;
+
 const EventType = styled.div`
   display: flex;
   flex-direction: row;

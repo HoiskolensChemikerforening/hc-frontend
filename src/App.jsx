@@ -11,9 +11,6 @@ import { Login } from "./pages/login/Login";
 import { setAuthToken } from "./pages/login/setAuthToken";
 
 import { AuthProvider } from './context/AuthContext'
-import { NewsList } from "./pages/news/NewsList";
-import { NewsDetail } from "./pages/news/NewsDetail";
-import { NewsForm} from "./pages/news/NewsForm";
 import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
 
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import {H2} from "../Text"; 
+import { H2 } from "../Text"; 
 import { BiX } from "react-icons/bi";
 import { NavLogo } from "./NavLogo";
 

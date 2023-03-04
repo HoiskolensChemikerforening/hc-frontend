@@ -16,7 +16,6 @@ export const Widgets = () => {
         return () => { isMounted = false };
       }, []);
     
-    
       const fetchCoffeebutton = async () => {
         let coffeeData;
 
@@ -48,8 +47,6 @@ export const Widgets = () => {
         time = day.toString() + ' dager siden';
       }
 
-
-  
     return (
         <>
             <StaticContainer>
@@ -109,8 +106,8 @@ const WidgetContainer = styled(Link)`
     color: var(--gray-90);
     text-decoration: none;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    
 `;
+
 const CoffeeContainer = styled.div`
     display: flex;
     flex-direction: row;
@@ -128,7 +125,6 @@ const CoffeeContainer = styled.div`
     color: var(--gray-90);
     text-decoration: none;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    
 `;
 
 const CompContainer = styled.div`
@@ -151,4 +147,3 @@ const TextContainer = styled.p`
     color: var(--gray-90);
     cursor: default;
 `;
-
