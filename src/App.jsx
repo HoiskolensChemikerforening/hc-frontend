@@ -9,8 +9,8 @@ import { NavBarPhone } from "./components/navigation/NavBarPhone";
 import { NewsRouter } from "./pages/news/NewsRouter";
 import { Login } from "./pages/login/Login";
 import { setAuthToken } from "./pages/login/setAuthToken";
-
-import { AuthProvider } from './context/AuthContext'
+import { Kontortilgang } from "./pages/home/Kontortilgang";
+import { AuthProvider } from './context/AuthContext';
 import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
 
 
@@ -40,6 +40,7 @@ class App extends React.Component {
             <Route path="/nyheter">                 <NewsRouter/>               </Route>
             <Route path="/undergrupper/:committee"> <CommitteeDetailsPage/>     </Route>            
             <Route path="/undergrupper">            <CommitteePage/>            </Route>
+            <Route path="/kontortilgang">           <Kontortilgang/>            </Route>
           </Switch>
           <NavBarPhone/>
           </AuthProvider>
