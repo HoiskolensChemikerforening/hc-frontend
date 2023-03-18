@@ -1,8 +1,19 @@
-# HC Components
-
-This project consists of a set of React components created for use on Høiskolen Chemikerforening's web page. All components and props are described below.
-
 ## General
+ Download the project
+
+ Install npm
+
+ run 
+ ```shell
+  npm install
+```
+to install all required packages
+
+ run 
+ ```shell
+ npm start
+ ```
+ to start the program
 
 ### Colors
 We have a set of color variables for the project. The following variables are defined:
