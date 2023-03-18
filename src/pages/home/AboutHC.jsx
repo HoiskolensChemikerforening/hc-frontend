@@ -42,11 +42,7 @@ export const AboutHC = () => {
             <Title>Om Høiskolens Chemikerforening</Title>
         </TitleContainer>
 
-        <Content>
-          <img src={"logo.png"} alt={"HC logo"} style={{width:150, height:150, borderRadius:150/2}}/>
-          <H2>Innholdsfortegnelse</H2>
-          <img src={"logo.png"} alt={"HC logo"} style={{width:150, height:150, borderRadius:150/2}}/>
-        </Content>
+        <H2>Innholdsfortegnelse</H2>
 
         <TableOfContent>
           <Button primary type="button" onClick={ScrollToHvaErHC}>Hva er HC?</Button>
@@ -75,8 +71,11 @@ export const AboutHC = () => {
             god dialog og et godt samarbeid med NTNU.
         </P>
 
-        <H1 >Årlige arrangementer</H1>
-
+        <Content>
+          <img src={"logo.png"} alt={"HC logo"} style={{width:150, height:150, borderRadius:150/2}}/>
+          <H1 style={{marginTop:"50px"}}>Årlige arrangementer</H1>
+          <img src={"logo.png"} alt={"HC logo"} style={{width:150, height:150, borderRadius:150/2}}/>
+        </Content>
         <H2>pHnockepHaest</H2>
         <P>
         pHnockepHaesten er immatrikuleringsballet til Høiskolens Chemikerforening. pHnockepHaesten er en tradisjonsrik fest som 
@@ -151,7 +150,12 @@ export const AboutHC = () => {
         og du er velkommen som du er.
         </P>
 
-        <H1>HC-kontoret</H1>
+        <Content>
+          <img src={"logo.png"} alt={"HC logo"} style={{width:150, height:150, borderRadius:150/2}}/>
+          <H1 style={{marginTop:"50px"}}>HC-kontoret</H1>
+          <img src={"logo.png"} alt={"HC logo"} style={{width:150, height:150, borderRadius:150/2}}/>
+        </Content>
+        
         <P>
         HC har et eget kontor ved inngangen til Realfagsbygget mellom kjemiblokkene. Kontoret har to små sofagrupper, hvor man kan slå 
         av en prat med andre Chemikere, spise lunsj eller bare slappe av. Det er i tillegg mulig å få tilgang til et felles kjøkken for 
@@ -175,7 +179,12 @@ export const AboutHC = () => {
         til å føle samme tilhørigheten til kontoret. Kart til kontoret.
         </P>
 
-        <H1 >HCs oppbygning</H1>
+        <Content>
+          <img src={"logo.png"} alt={"HC logo"} style={{width:150, height:150, borderRadius:150/2}}/>
+          <H1 style={{marginTop:"50px"}}>HCs oppbygning</H1>
+          <img src={"logo.png"} alt={"HC logo"} style={{width:150, height:150, borderRadius:150/2}}/>
+        </Content>
+
         <P>
         Høiskolens Chemikerforening har mange engasjerte studenter som driver foreningen på daglig basis. Foreningens styre består av 
         8 studenter som i helhet har ansvar for daglig drift og administrative oppgaver. Representasjon utad på Gløshaugen er også 
@@ -245,7 +254,7 @@ const TitleContainer = styled.div`
   justify-content: center;
 `
 
-const Title = styled.h1`
+const Title = styled.div`
   background-color: var(--primary);
   width: auto;
   height: auto;
@@ -264,6 +273,8 @@ const TableOfContent = styled.div`
 
 const Content = styled.div`
   width: 100%;
+  height: 170px;
   display: flex;
   justify-content: space-evenly;
+  vertical-align: center;
 `
