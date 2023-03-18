@@ -41,14 +41,13 @@ export const Kontortilgang = () => {
           </P>
           <h2>Studentbrukernavn fra NTNU:</h2>
 
-          <Container>
+        
           <TextField
           placeholder="Brukernavn"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           />
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-          </Container>
 
           <br />
           <br />
@@ -197,7 +196,3 @@ const ErrorMessage = styled.div`
   margin-left: 5px;
 `;
 
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-`;
