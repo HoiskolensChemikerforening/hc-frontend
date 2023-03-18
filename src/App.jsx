@@ -14,6 +14,7 @@ import { CommitteeDetailsPage } from "./pages/undergrupper/CommitteeDetailsPage"
 import { Internside } from "./pages/internt/Internt";
 import { Bokskap } from "./pages/bokskap/bokskap";
 import { Reservasjon } from "./pages/bokskap/reservasjon";
+import { Glemtbokskap } from "./pages/bokskap/glemtbokskap"
 
 
 class App extends React.Component {
@@ -33,6 +34,7 @@ class App extends React.Component {
             <Route path="/undergrupper">            <CommitteePage/>            </Route>
             <Route path="/bokskap"> <Bokskap/> </Route>
             <Route path="/reservasjon"> <Reservasjon/> </Route>
+            <Route path="/glemtbokskap"> <Glemtbokskap/> </Route>
           </Switch>
           <NavBarPhone/>
         </Router>

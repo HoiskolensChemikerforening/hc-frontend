@@ -5,6 +5,8 @@ import {Row, Col, Container} from "../../components/Layout";
 import { H1, H3, P } from "../../components/Text";
 import { FormHelperText } from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
+import { Pagination } from '@mui/material';
+import { MemoryRouter, Route} from 'react-router';
 
 
 export const Bokskap = () => {
@@ -23,7 +25,7 @@ export const Bokskap = () => {
     </Box>
 
     <Container>
-        <P> Klikk på et av det x antall ledige bokskapene for å reservere et bokskap. Skapene er lokalisert her, i U2 under Kjemivrimle i Realfagsbygget. Klikk her for å se hvilke skap som er dine.</P>
+        <P style={{textAlign: "center"}}> Klikk på et av det x antall ledige bokskapene for å reservere et bokskap. Bokskapene er lokalisert <Link to="https://use.mazemap.com/#v=1&zlevel=-2&center=10.405022,63.415656&zoom=19.3&sharepoitype=poi&sharepoi=1000287262&campusid=1" style={{ textDecoration: 'none', color:'#e3d262' }}>her</Link>, i U2 under Kjemivrimle i Realfagsbygget.</P>
     </Container>
 
     <ButtonContainer>
@@ -266,12 +268,17 @@ export const Bokskap = () => {
             </Button>
             </Link>
         </ButtonContainer>
+        <Link style={{ textDecoration: 'none' }} to="/glemtbokskap">
+          <YellowBox>
+            Glemt bokskapnummer
+          </YellowBox >
+        </Link>
+
+        
         <div>ㅤ</div>
         <div>ㅤ</div>
         <div>ㅤ</div>
-        <RowContainer>
-            <YellowBox>1 </YellowBox> <GreyBox> 2 </GreyBox> <GreyBox> 3 </GreyBox> <GreyBox> 4 </GreyBox> <GreyBox> Neste </GreyBox>
-        </RowContainer>
+        <ForgottenContainer><Pagination count={10} shape="rounded" /></ForgottenContainer>
 
         <div>ㅤ</div>
         <div>ㅤ</div>
@@ -320,7 +327,7 @@ const Button = styled.button`
     &:hover {
       background-color: #F1F1F1;
     }
-    cursor: pointer;
+
 `;
 
 const LockContainer = styled.div`
@@ -331,16 +338,20 @@ const LockContainer = styled.div`
 
 const YellowBox = styled.button`
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     background-color: #f7e469;
     font-size: 16px;
-    height: 20px;
-    width: 20px;
+    height: 50px;
+    width: 250px;
     cursor: pointer;
-    border: 2px #f7e469;
     &:hover {
       background-color: #e3d262;
     }
+    margin-left: 240px;
+    margin-top: 45px;
+    line-height: 44px;
+    border: 1px transparent solid;
+
 `
 
 const GreyBox = styled.button`
@@ -353,15 +364,20 @@ const GreyBox = styled.button`
     &:hover {
       background-color: #F1F1F1;
     }
+    margin: 2px;
 `
 
 const RowContainer = styled.div`
     display: flex;
     height: 20px;
     width: 342px;
-    left: 154px;
+    left: 300px;
     top: 918px;
     background: #FFFFFF;
     margin: 5px 60px -6px;
-    
+`
+
+const ForgottenContainer = styled.div`
+    display: flex;
+    margin: -100px 563px -6px;
 `
