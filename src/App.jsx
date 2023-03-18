@@ -15,14 +15,6 @@ import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
 
 
 class App extends React.Component {
-  
-  componentDidMount() {
-    // Check for JWT
-    const token = localStorage.getItem("token");
-    if (token) {
-        setAuthToken(token);
-    }
-  }
 
   render() {
     return (

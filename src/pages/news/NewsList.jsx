@@ -16,11 +16,8 @@ export const NewsList = () => {
 
   useEffect(() => {
     fetchList("nyheter/api/", setArticles);
-  }, []);
-
-  useEffect(() => {
     checkPermission("news.add_article", user, setCanAddArticle);
-  }, [user])
+  }, [user]);
 
   return (
       <NewsListContainer>
