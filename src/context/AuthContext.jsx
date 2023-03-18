@@ -51,30 +51,22 @@ export const AuthProvider = ({children}) => {
         setAuthTokens(null);
         setUser(null);
         localStorage.removeItem('authTokens');
-        history.push('/login');
     };
 
 
     let updateToken = async () => {
-
-        let response = await fetch(baseUrl + 'api/token/refresh/', {
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({'refresh': authTokens?.refresh})
-        });
-
-        let data = await response.json();
-        
-        if (response.status === 200) {
-            setAuthTokens(data);
-            setUser(jwt_decode(data.access));
-            setAuthHeader(data.access);
-            localStorage.setItem('authTokens', JSON.stringify(data));
-        } else {
+        const headers = {'Content-Type':'application/json'};
+        let data = {'refresh': authTokens?.refresh};
+        await axios.post(baseUrl + 'api/token/refresh/', data, {headers: headers})
+        .then((response) => {
+            setAuthTokens(response.data);
+            setUser(jwt_decode(response.data.access));
+            setAuthHeader(response.data.access);
+            localStorage.setItem('authTokens', JSON.stringify(response.data));
+        })
+        .catch((error) => {
             logoutUser();
-        }
+        })
 
         if (loading) {
             setLoading(false);
