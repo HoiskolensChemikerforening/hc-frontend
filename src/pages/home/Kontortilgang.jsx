@@ -1,20 +1,203 @@
-import React, { useEffect, useState } from "react";
-import styled, {css} from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 import { P } from "../../components/Text";
-import { useHistory } from "react-router-dom";
-
+import { PageContainer } from "../../components/Layout";
+import { TextField } from "../../components/Form";
+import { Button } from "../../components/Button";
 
 export const Kontortilgang = () => {
-      
+  const [username, setUsername] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
+
+  const handleSubmit = () => {
+    if (!username) {
+      setErrorMessage("Please enter your username.");
+      return;
+    }
   
-    return (
-      <>
-      <h1>Kontortilgang</h1>
-      <P>
-        Hei og hå
-      </P>  
-      </>
-    )
+    if (!document.getElementById("id_approval").checked) {
+      setErrorMessage("Please accept the terms and conditions.");
+      return;
+    }
+  
+    console.log("Form submitted with username:", username);
+    setUsername("");
+    setErrorMessage("");
   };
-       
+  
+
+  return (
+    <OuterWrapper>
+      <PageContainer>
+        <HeaderKontortilgang>Kontortilgang</HeaderKontortilgang>
+        <ContentBox>
+          <h2>Her kan du søke om tilgang på kontoret med studentkortet ditt.</h2>
+          <P>
+            For at tilgang skal kunne bli invilget er det viktig at
+            studentbrukernavnet du oppgir samsvarer med ditt faktiske
+            studentbrukernavn fra NTNU.
+          </P>
+          <h2>Studentbrukernavn fra NTNU:</h2>
+
+          <Container>
+          <TextField
+          placeholder="Brukernavn"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          />
+          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+          </Container>
+
+          <br />
+          <br />
+
+          <div style={{ float: "left", marginRight: "3px" }}>
+            <div className="row" id="id_approval_container">
+              <label>
+                <input className="filled-in" id="id_approval" name="approval" type="checkbox" />
+                <span htmlFor="id_approval">Jeg godkjenner</span>
+              </label>
+            </div>
+          </div>
+
+          <TermsLinkContainer>
+            <a
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowModal(true);
+              }}
+            >
+              Vilkår og Betingelser
+            </a>
+          </TermsLinkContainer>
+
+          <Button primary type="button" onClick={handleSubmit}>
+            SEND SØKNAD
+          </Button>
+
+        </ContentBox>
+      </PageContainer>
+
+      <ModalWrapper show={showModal}>
+        <div className="modal-content">
+          <h2>Kontrakt for tilgang til HC-kontoret</h2>
+          <br />
+          <P>
+            <u>Vilkår for tilgang til HC-kontoret</u>
+            <br />
+            Tilgang til HC-kontoret skal være et gode som tilfaller aktive
+            medlemmer av Høiskolens Chemikerforening. Det stilles følgende
+            krav til vedkommende:
+          </P>
+          <br />
+            <StyledOl>
+          <li>Alle medlemmer av Høiskolens Chemikerforening har rett til å søke på tilgang til Kontoret.</li>
+          <li>Kjøkkenutstyr (vaffeljern, mikrobølgeovn, toastjern, vannkoker etc.) skal kun benyttes på kjøkkenet, aldri på Kontoret. </li>
+          <li>Alle medlemmer som har tilgang til Kontoret har et kollektivt ansvar for å holde Kontoret rent og ryddig. Dette innebærer å rydde etter seg selv, samt å sørge for at andre gjør det samme. </li>
+          <li>Ved bruk av kopper, bestikk o.l. fra Kontoret skal dette vaskes og legges tilbake samme dag som det ble brukt. </li>
+          <li>Bruk av Kontoret på nattestid skal skje i henhold til NTNUs regler. Ved aktiviteter som krever rydding eller vasking skal dette gjennomføres samme kveld eller påfølgende skoledag. Se forøvrig også punkt 6. </li>
+          <li>Hvis man er sistemann som forlater Kontoret skal døren låses. </li>
+          <li>Ved aktivitet på Kontoret utenom vanlig arbeidstid (kl. 18:00 – 08:00), vil vedkommende som sist låste seg inn på Kontoret stå som økonomisk ansvarlig for eventuelle skader/tap av verdier. </li>
+          <li>Drikking av alkohol på Kontoret skal kun skje til de tider som blir bestemt av Styret og godkjent av NTNUs adgangskontroll. Ved konsumering av alkohol skal døren til Kontoret holdes lukket. </li>
+          <li>Akademisk arbeid skal ikke gjøres på Kontoret. </li>
+          <li>Nøkler til HCs lagerrom skal kun brukes til komitéarbeid. </li>
+      </StyledOl>
+            <P>
+              Ved å godkjenne bekrefter man at man har lest og godtar de vilkår
+              som er beskrevet i kontrakten og vil med dette få tilgang til
+              HC-kontoret. Styret har mulighet til å oppheve kontrakten hvis kravene over ikke er tilfredsstilt.
+      </P>
+    </div>
+    <div>
+      <Button
+        href="#!"
+        onClick={(e) => {
+          e.preventDefault();
+          setShowModal(false);
+        }}
+      >
+        Lukk
+      </Button>
+    </div>
+  </ModalWrapper>
+  <ModalOverlay show={showModal} onClick={() => setShowModal(false)} />
+</OuterWrapper>
+)
+};
+
+const OuterWrapper = styled.div`
+  background-color: var(--gray-10);
+  min-height: 100vh;
+`;
+
+const HeaderKontortilgang = styled.div`
+  background-color: var(--primary);
+  width: 50%;
+  height: 55px;
+  font-size: 42px;
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 20px;
+`;
+
+const ContentBox = styled.div`
+  background-color: white;
+  width: 70%;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+`;
+
+const TermsLinkContainer = styled.div`
+  font-size: 15px;
+  padding-top: 1.2px;
+`;
+
+const ModalWrapper = styled.div`
+  display: ${({ show }) => (show ? "block" : "none")};
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1003;
+  background-color: white;
+  width: 80%;
+  max-height: 80%;
+  overflow-y: auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const ModalOverlay = styled.div`
+  display: ${(props) => (props.show ? 'block' : 'none')};
+  z-index: 1002;
+  opacity: 0.5;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+`;
+
+const StyledOl = styled.ol`
+  li {
+    margin: 4px 0;
+  }
+`;
+
+const ErrorMessage = styled.div`
+  color: red;
+  font-size: 14px;
+  margin-left: 5px;
+`;
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+`;
