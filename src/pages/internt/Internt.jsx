@@ -63,10 +63,14 @@ const Button = styled.button`
   color: rgb(0, 0, 0, 0.5);
 
   background: transparent;
-  border: 2px transparent;
+  border: 2px cursor: pointer;
   border-radius: 1px;
 
   cursor: pointer;
+    &:hover {
+      background-color: #e3d262;
+      border-color: #e3d262;
+    }
 
 color: #000;
 background: var(--primary);
