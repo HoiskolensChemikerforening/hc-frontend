@@ -12,7 +12,7 @@ import { NewsDetail } from "./pages/news/NewsDetail";
 import { NewsForm} from "./pages/news/NewsForm";
 import { CommitteeDetailsPage } from "./pages/undergrupper/CommitteeDetailsPage";
 import { Internside } from "./pages/internt/Internt";
-
+import { Kontaktinfo } from "./pages/info/kontaktinfo";
 
 class App extends React.Component {
   render() {
@@ -24,7 +24,8 @@ class App extends React.Component {
             <Route path="/arrangement">   <H1>BLOT OG SÅNN!!!</H1>    </Route>
             <Route path="/bedrift">       <H1>Bedrift</H1>            </Route>
             <Route path="/internt">       <Internside/>            </Route>
-            <Route path="/info">          <H1>Info</H1>               </Route>
+            <Route path="/info/kontaktinfo">          <H1>Info</H1>               </Route>
+            <Route path="/kontaktinfo"> <Kontaktinfo/> </Route>
             <Route path="/profil">        <H1>Profil</H1>             </Route>
             <Route path="/nyheter">       <NewsRouter/>               </Route>
             <Route path="/undergrupper/test">  <CommitteeDetailsPage/>            </Route>            
