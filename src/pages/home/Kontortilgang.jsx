@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { P } from "../../components/Text";
+import { H1, H2, P, Link } from "../../components/Text";
 import { PageContainer } from "../../components/Layout";
 import { TextField } from "../../components/Form";
 import { Button } from "../../components/Button";
@@ -9,7 +9,6 @@ export const Kontortilgang = () => {
   const [username, setUsername] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-
 
   const handleSubmit = () => {
     if (!username) {
@@ -26,21 +25,19 @@ export const Kontortilgang = () => {
     setUsername("");
     setErrorMessage("");
   };
-  
 
   return (
     <OuterWrapper>
       <PageContainer>
         <HeaderKontortilgang>Kontortilgang</HeaderKontortilgang>
         <ContentBox>
-          <h2>Her kan du søke om tilgang på kontoret med studentkortet ditt.</h2>
+          <H1>Her kan du søke om tilgang på kontoret med studentkortet ditt.</H1>
           <P>
             For at tilgang skal kunne bli invilget er det viktig at
             studentbrukernavnet du oppgir samsvarer med ditt faktiske
             studentbrukernavn fra NTNU.
           </P>
-          <h2>Studentbrukernavn fra NTNU:</h2>
-
+          <H2>Studentbrukernavn fra NTNU:</H2>
         
           <TextField
           placeholder="Brukernavn"
@@ -49,20 +46,19 @@ export const Kontortilgang = () => {
           />
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
 
-          <br />
-          <br />
+          <br/>
+          <br/>
+          <br/>
 
           <div style={{ float: "left", marginRight: "3px" }}>
-            <div className="row" id="id_approval_container">
               <label>
-                <input className="filled-in" id="id_approval" name="approval" type="checkbox" />
+                <input id="id_approval" name="approval" type="checkbox" />
                 <span htmlFor="id_approval">Jeg godkjenner</span>
               </label>
-            </div>
           </div>
 
           <TermsLinkContainer>
-            <a
+            <Link
               href="#"
               onClick={(e) => {
                 e.preventDefault();
@@ -70,7 +66,7 @@ export const Kontortilgang = () => {
               }}
             >
               Vilkår og Betingelser
-            </a>
+            </Link>
           </TermsLinkContainer>
 
           <Button primary type="button" onClick={handleSubmit}>
@@ -81,9 +77,7 @@ export const Kontortilgang = () => {
       </PageContainer>
 
       <ModalWrapper show={showModal}>
-        <div className="modal-content">
-          <h2>Kontrakt for tilgang til HC-kontoret</h2>
-          <br />
+          <H2>Kontrakt for tilgang til HC-kontoret</H2>
           <P>
             <u>Vilkår for tilgang til HC-kontoret</u>
             <br />
@@ -91,8 +85,7 @@ export const Kontortilgang = () => {
             medlemmer av Høiskolens Chemikerforening. Det stilles følgende
             krav til vedkommende:
           </P>
-          <br />
-            <StyledOl>
+            <ol>
           <li>Alle medlemmer av Høiskolens Chemikerforening har rett til å søke på tilgang til Kontoret.</li>
           <li>Kjøkkenutstyr (vaffeljern, mikrobølgeovn, toastjern, vannkoker etc.) skal kun benyttes på kjøkkenet, aldri på Kontoret. </li>
           <li>Alle medlemmer som har tilgang til Kontoret har et kollektivt ansvar for å holde Kontoret rent og ryddig. Dette innebærer å rydde etter seg selv, samt å sørge for at andre gjør det samme. </li>
@@ -103,14 +96,12 @@ export const Kontortilgang = () => {
           <li>Drikking av alkohol på Kontoret skal kun skje til de tider som blir bestemt av Styret og godkjent av NTNUs adgangskontroll. Ved konsumering av alkohol skal døren til Kontoret holdes lukket. </li>
           <li>Akademisk arbeid skal ikke gjøres på Kontoret. </li>
           <li>Nøkler til HCs lagerrom skal kun brukes til komitéarbeid. </li>
-      </StyledOl>
+      </ol>
             <P>
               Ved å godkjenne bekrefter man at man har lest og godtar de vilkår
               som er beskrevet i kontrakten og vil med dette få tilgang til
               HC-kontoret. Styret har mulighet til å oppheve kontrakten hvis kravene over ikke er tilfredsstilt.
       </P>
-    </div>
-    <div>
       <Button
         href="#!"
         onClick={(e) => {
@@ -120,12 +111,10 @@ export const Kontortilgang = () => {
       >
         Lukk
       </Button>
-    </div>
   </ModalWrapper>
   <ModalOverlay show={showModal} onClick={() => setShowModal(false)} />
 </OuterWrapper>
-)
-};
+)};
 
 const OuterWrapper = styled.div`
   background-color: var(--gray-10);
@@ -134,7 +123,7 @@ const OuterWrapper = styled.div`
 
 const HeaderKontortilgang = styled.div`
   background-color: var(--primary);
-  width: 50%;
+  width: 55%;
   height: 55px;
   font-size: 42px;
   text-align: center;
@@ -184,15 +173,8 @@ const ModalOverlay = styled.div`
   bottom: 0;
 `;
 
-const StyledOl = styled.ol`
-  li {
-    margin: 4px 0;
-  }
-`;
-
-const ErrorMessage = styled.div`
+const ErrorMessage = styled.p`
   color: red;
-  font-size: 14px;
-  margin-left: 5px;
+  position: absolute;
 `;
 
