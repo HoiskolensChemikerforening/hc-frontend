@@ -248,7 +248,11 @@ const Title = styled.div`
 const TableOfContent = styled.div`
   width: 80%;
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
+  @media (min-width: 947px){
+    flex-direction: row;
+  }
 `
 
 const Content = styled.div`
