@@ -1,9 +1,9 @@
 
 import React from "react";
 import styled from "styled-components";
-import "../index.css";
+import "../../index.css";
 import { Link } from "react-router-dom";
-import {BiHomeAlt, BiBriefcaseAlt, BiCalendarEvent, BiGame, BiInfoCircle} from "react-icons/bi";
+import { BiHomeAlt, BiBriefcaseAlt, BiCalendarEvent, BiGame, BiInfoCircle } from "react-icons/bi";
 
 
 const NavBarPhone = () => {
