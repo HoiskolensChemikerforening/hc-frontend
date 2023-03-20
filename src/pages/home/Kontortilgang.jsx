@@ -24,6 +24,7 @@ export const Kontortilgang = () => {
     console.log("Form submitted with username:", username);
     setUsername("");
     setErrorMessage("");
+    document.getElementById("id_approval").checked = false; 
   };
 
   return (
@@ -68,11 +69,13 @@ export const Kontortilgang = () => {
               Vilkår og Betingelser
             </Link>
           </TermsLinkContainer>
-
+          
+          <ButtonWrapper>
           <Button primary type="button" onClick={handleSubmit}>
             SEND SØKNAD
           </Button>
-
+          </ButtonWrapper>          
+          
         </ContentBox>
       </PageContainer>
 
@@ -178,3 +181,7 @@ const ErrorMessage = styled.p`
   position: absolute;
 `;
 
+const ButtonWrapper = styled.div`
+  width: 100%;
+  text-align: left;
+`;
