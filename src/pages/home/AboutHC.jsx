@@ -1,37 +1,17 @@
-import React, { useEffect, useState } from "react";
-import styled, {css} from 'styled-components';
+import React from "react";
+import styled from 'styled-components';
 import { P, H1, H2 } from "../../components/Text";
-import { PageContainer } from "../../components/Layout";
-import { useHistory } from "react-router-dom";
-import axios from 'axios';
 import { Button } from "../../components/Button";
 
 
 
 export const AboutHC = () => {
 
-  const ScrollToHvaErHC = () => {
-    const HvaErHc = document.getElementById('HvaErHc');
-    if (HvaErHc) {
-      HvaErHc.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-  const ScrollToArrangementer = () => {
-    const Arrangementer = document.getElementById('Arrangementer');
-    if (Arrangementer) {
-      Arrangementer.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-  const ScrollToHCKontor = () => {
-    const HCKontor = document.getElementById('HCKontor');
-    if (HCKontor) {
-      HCKontor.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-  const ScrollToHCOppbygning = () => {
-    const HCOppbygning = document.getElementById('HCOppbygning');
-    if (HCOppbygning) {
-      HCOppbygning.scrollIntoView({ behavior: 'smooth' });
+
+  const Scroll = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
   
@@ -42,16 +22,16 @@ export const AboutHC = () => {
             <Title>Om Høiskolens Chemikerforening</Title>
         </TitleContainer>
 
-        <H2>Innholdsfortegnelse</H2>
+        <H2 id="HvaErHC">Innholdsfortegnelse</H2>
 
-        <TableOfContent>
-          <Button primary type="button" onClick={ScrollToHvaErHC}>Hva er HC?</Button>
-          <Button primary type="button" onClick={ScrollToArrangementer}>Årlige arrangementer</Button>
-          <Button primary type="button" onClick={ScrollToHCKontor}>HC-kontoret</Button>
-          <Button primary type="button" onClick={ScrollToHCOppbygning}>HC´s oppbygning</Button>
+        <TableOfContent >
+          <Button primary type="button" onClick={() => Scroll("HvaErHC")}>Hva er HC?</Button>
+          <Button primary type="button" onClick={() => Scroll("Arrangementer")}>Årlige arrangementer</Button>
+          <Button primary type="button" onClick={() => Scroll("HCKontor")}>HC-kontoret</Button>
+          <Button primary type="button" onClick={() => Scroll("HCOppbygning")}>HC´s oppbygning</Button>
         </TableOfContent>
 
-        <P id="HvaErHC">
+        <P >
             Høiskolens Chemikerforening (HC) er linjeforeningen for studiet industriell kjemi og bioteknologi. 
             HC er en av de største bidragsyterne til det gode miljøet som er mellom studentene på linja vår. 
             Høiskolens Chemikerforening ble grunnlagt 8. mars 1915, og er derfor en av de eldste linjeforeningene i landet. 
