@@ -69,7 +69,7 @@ export const Kontortilgang = () => {
               Vilkår og Betingelser
             </Link>
           </TermsLinkContainer>
-          
+          <br/>
           <ButtonWrapper>
           <Button primary type="button" onClick={handleSubmit}>
             SEND SØKNAD
@@ -126,12 +126,12 @@ const OuterWrapper = styled.div`
 
 const HeaderKontortilgang = styled.div`
   background-color: var(--primary);
-  width: 55%;
-  height: 55px;
+  width: auto;
+  height: auto;
   font-size: 42px;
   text-align: center;
   border-radius: 10px;
-  padding: 10px;
+  padding: 10px 10%;
   margin: 20px;
 `;
 
