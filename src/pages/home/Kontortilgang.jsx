@@ -4,6 +4,7 @@ import { H1, H2, P, Link } from "../../components/Text";
 import { PageContainer } from "../../components/Layout";
 import { TextField } from "../../components/Form";
 import { Button } from "../../components/Button";
+import { Col } from "../../components/Layout";
 
 export const Kontortilgang = () => {
   const [username, setUsername] = useState("");
@@ -11,25 +12,35 @@ export const Kontortilgang = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = () => {
+    let isUsernameValid = true;
+    let isCheckboxValid = true;
+  
     if (!username) {
-      setErrorMessage("Please enter your username.");
-      return;
+      isUsernameValid = false;
     }
-  
     if (!document.getElementById("id_approval").checked) {
-      setErrorMessage("Please accept the terms and conditions.");
-      return;
+      isCheckboxValid = false;
     }
   
-    console.log("Form submitted with username:", username);
-    setUsername("");
-    setErrorMessage("");
-    document.getElementById("id_approval").checked = false; 
+    if (!isUsernameValid && !isCheckboxValid) {
+      setErrorMessage("Please enter your username and accept the terms and conditions.");
+    } else if (!isUsernameValid) {
+      setErrorMessage("Please enter your username.");
+    } else if (!isCheckboxValid) {
+      setErrorMessage("Please accept the terms and conditions.");
+    } else {
+      console.log("Form submitted with username:", username);
+      setUsername("");
+      setErrorMessage("");
+      document.getElementById("id_approval").checked = false;
+    }
   };
 
   return (
     <OuterWrapper>
       <PageContainer>
+      <Col xs={12} sm={11} md={10} lg={9} xl={8}>
+        <PageContainer>
         <HeaderKontortilgang>Kontortilgang</HeaderKontortilgang>
         <ContentBox>
           <H1>Her kan du søke om tilgang på kontoret med studentkortet ditt.</H1>
@@ -38,7 +49,7 @@ export const Kontortilgang = () => {
             studentbrukernavnet du oppgir samsvarer med ditt faktiske
             studentbrukernavn fra NTNU.
           </P>
-          <H2>Studentbrukernavn fra NTNU:</H2>
+          <H2>Studentbrukernavn:</H2>
         
           <TextField
           placeholder="Brukernavn"
@@ -77,6 +88,8 @@ export const Kontortilgang = () => {
           </ButtonWrapper>          
           
         </ContentBox>
+        </PageContainer>
+      </Col>
       </PageContainer>
 
       <ModalWrapper show={showModal}>
@@ -137,10 +150,9 @@ const HeaderKontortilgang = styled.div`
 
 const ContentBox = styled.div`
   background-color: white;
-  width: 70%;
+  width: 90%;
   border-radius: 10px;
-  padding: 20px;
-  margin: 20px;
+  padding: 0 20px;
 `;
 
 const TermsLinkContainer = styled.div`
