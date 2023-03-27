@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
-import { P, H1, H2 } from "../../components/Text";
+import { P, H1, H2, TitleContainer, Title } from "../../components/Text";
 import { Button } from "../../components/Button";
 
 
@@ -229,22 +229,6 @@ const BodyContainer = styled.div`
   text-align: center;
 `;
 
-const TitleContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
-const Title = styled.div`
-  background-color: var(--primary);
-  width: auto;
-  height: auto;
-  font-size: 42px;
-  text-align: center;
-  border-radius: 10px;
-  padding: 10px;
-  margin:20px;
-`
-
 const TableOfContent = styled.div`
   width: 80%;
   display: flex;
@@ -253,7 +237,7 @@ const TableOfContent = styled.div`
   @media (min-width: 947px){
     flex-direction: row;
   }
-`
+`;
 
 const Content = styled.div`
   width: 100%;
@@ -261,4 +245,4 @@ const Content = styled.div`
   display: flex;
   justify-content: space-evenly;
   vertical-align: center;
-`
+`;
