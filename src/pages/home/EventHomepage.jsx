@@ -60,7 +60,7 @@ export const EventHomepage = () => {
             <Title value="Corporate" onClick={() => switchEvent("Social")}
               style={  socialBold ? { fontWeight: 'bold' } : { fontWeight: 'normal' } }
             >Sosialt</Title>
-            <Title style={{cursor: "default"}}> /</Title>
+            <Title style={{cursor: "default"}}> </Title>
             <Title value="Corporate" onClick={() => switchEvent("Corporate")}
             style={  !socialBold ? { fontWeight: 'bold' } : { fontWeight: 'normal' } }
             >Bedrift</Title>

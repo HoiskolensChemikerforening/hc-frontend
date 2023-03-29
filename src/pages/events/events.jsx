@@ -5,11 +5,18 @@ import { Col } from "../../components/Layout";
 import { H1, P} from "../../components/Text";
 import { Link, useHistory } from "react-router-dom";
 
+const coming = 1
+const mine = 2
+const previous = 3
+const social = 1
+const corporate = 2
+
 export const EventPage = () => {
     const [dispEvents, setDispEvents] = useState();
     const [socialEvents, setSocialEvents] = useState();
     const [corporateEvents, setCorporateEvents] = useState();
-    const [socialBold, setSocialBold] = useState(true);
+    const [eventTypeBold, seteventTypeBold] = useState(social);
+    const [eventFilterBold, seteventFilterBold] = useState(coming);
     const history = useHistory();
 
     useEffect(() => {
@@ -26,6 +33,7 @@ export const EventPage = () => {
         const fetchEvents = async () => {
         const data1 = await fetch("http://localhost:8000/arrangementer/api/social");
         const itemsSocial = await data1.json();
+        console.log(itemsSocial)
         const data2 = await fetch("http://localhost:8000/arrangementer/api/bedpres");
         const itemsCorp = await data2.json();
         const socialData = itemsSocial.slice(0,4);
@@ -33,20 +41,22 @@ export const EventPage = () => {
         return {social: socialData, corporate: corporateData }
       };
 
-  const switchEvent = value => {
-    console.log(typeof(value));
-    if (value === "Social" && dispEvents===corporateEvents){
+  const switchEvent = eventType => {
+    seteventTypeBold(eventType);
+    if (eventType === social ){
       setDispEvents(socialEvents);
-      setSocialBold(true);
     }
-    if (value === "Corporate" && dispEvents===socialEvents){
+    else if (eventType === corporate ){
       setDispEvents(corporateEvents);
-      setSocialBold(false);
     }
   };
 
+  const switchFilter = filter_id => {
+    seteventFilterBold(filter_id)
+  };
+
   const addEvent= () =>{
-    console.log("La til event");
+    alert("La til event");
 
   };
   
@@ -54,21 +64,22 @@ export const EventPage = () => {
         <>
         <EventContainer>
         <EventType>
-          <Title value="Corporate" onClick={() => switchEvent("Social")}
-            style={  socialBold ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30' } : { fontWeight: 'normal' } }
+          <Title  onClick={() => switchEvent(social)}
+            style={ eventTypeBold === social ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30' } : { fontWeight: 'normal' } }
           >Sosialt</Title>
-          <Title value="Corporate" onClick={() => switchEvent("Corporate")}
-          style={  !socialBold ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+          <Title  onClick={() => switchEvent(corporate)}
+          style={ eventTypeBold === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
           >Bedrift</Title>
-          <Title value="Event" onClick={()=> addEvent()} style={{fontWeight: 'bold'}}>+</Title>
-          <Title value="Corporate" onClick={() => switchEvent("Corporate")}
-          style={  !socialBold ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+          <Title value="Event" onClick={()=> addEvent()} style={{fontWeight: 'bold'}}
+          >+</Title>
+          <Title  onClick={() => switchFilter(coming)}
+          style={ eventFilterBold === coming ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
           >Kommende</Title>
-          <Title value="Corporate" onClick={() => switchEvent("Corporate")}
-          style={  !socialBold ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+          <Title  onClick={() => switchFilter(mine)}
+          style={ eventFilterBold === mine ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
           >Mine</Title>
-          <Title value="Corporate" onClick={() => switchEvent("Corporate")}
-          style={  !socialBold ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+          <Title  onClick={() => switchFilter(previous)}
+          style={ eventFilterBold === previous ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
           >Tidligere</Title>
         </EventType>
         <EventList>
@@ -132,7 +143,7 @@ const EventType = styled.div`
   flex-direction: row;
   justify-content: space-around;
   margin:0;
-  width: 300px;
+  width: auto;
 `;
 
 const Title = styled.p`
