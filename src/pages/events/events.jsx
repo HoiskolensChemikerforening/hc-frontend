@@ -53,6 +53,28 @@ export const EventPage = () => {
 
   const switchFilter = filter_id => {
     seteventFilterBold(filter_id)
+    if (eventTypeBold === social){
+      if (filter_id === coming){
+        console.log("Kommende sosiale eventer")
+      }
+      else if (filter_id === mine){
+        console.log("Mine sosiale eventer")
+      }
+      else if (filter_id === previous){
+        console.log("Tidligere sosiale eventer")
+      }
+    }
+    else if (eventTypeBold === corporate){
+      if (filter_id === coming){
+        console.log("Kommende bedrift eventer")
+      }
+      else if (filter_id === mine){
+        console.log("Mine bedrift eventer")
+      }
+      else if (filter_id === previous){
+        console.log("Tidligere bedrift eventer")
+      }
+    }
   };
 
   const addEvent= () =>{
@@ -64,23 +86,33 @@ export const EventPage = () => {
         <>
         <EventContainer>
         <EventType>
+          <EventTypeDevider>
+          <Devider>
           <Title  onClick={() => switchEvent(social)}
             style={ eventTypeBold === social ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30' } : { fontWeight: 'normal' } }
-          >Sosialt</Title>
+          >Sosialt</Title> </Devider>
+          <Devider>
           <Title  onClick={() => switchEvent(corporate)}
           style={ eventTypeBold === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
-          >Bedrift</Title>
+          >Bedrift</Title></Devider>
+          <Devider>
           <Title value="Event" onClick={()=> addEvent()} style={{fontWeight: 'bold'}}
-          >+</Title>
+          >+</Title></Devider>
+          </EventTypeDevider>
+          <EventFilterDevider>
+          <Devider>
           <Title  onClick={() => switchFilter(coming)}
           style={ eventFilterBold === coming ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
-          >Kommende</Title>
+          >Kommende</Title></Devider>
+          <Devider>
           <Title  onClick={() => switchFilter(mine)}
           style={ eventFilterBold === mine ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
-          >Mine</Title>
+          >Mine</Title></Devider>
+          <Devider>
           <Title  onClick={() => switchFilter(previous)}
           style={ eventFilterBold === previous ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
-          >Tidligere</Title>
+          >Tidligere</Title> </Devider>
+          </EventFilterDevider>
         </EventType>
         <EventList>
         {dispEvents && dispEvents.map((event) => (
@@ -141,8 +173,8 @@ const EventContainer = styled.div`
 const EventType = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  margin:0;
+  justify-content: space-between;
+  margin: 0;
   width: auto;
 `;
 
@@ -152,6 +184,23 @@ const Title = styled.p`
   size: large;
   font-size: 20px;
 `;
+
+const EventTypeDevider = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+`;
+
+const EventFilterDevider = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-right: 10%;
+`;
+
+const Devider = styled.div`
+  padding: 5%;
+`;
+
 const EventBox = styled.div`
     cursor: pointer;
     border-style: solid;
