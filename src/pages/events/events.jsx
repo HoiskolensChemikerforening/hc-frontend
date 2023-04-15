@@ -4,6 +4,7 @@ import { Button } from "../../components/Button";
 import { Col } from "../../components/Layout";
 import { H1, P} from "../../components/Text";
 import { Link, useHistory } from "react-router-dom";
+import { fetchList } from "../../utils/requests";
 
 const coming = 1
 const mine = 2
@@ -20,26 +21,39 @@ export const EventPage = () => {
     const history = useHistory();
 
     useEffect(() => {
-        let isMounted = true;
-          fetchEvents().then(data => {
-            if (isMounted) {
-            setDispEvents(data.social);
-            setSocialEvents(data.social);
-            setCorporateEvents(data.corporate);
-            }});
-          return () => {isMounted = false};
+      fetchList("http://localhost:8000/arrangementer/api/social/kommende/", setDispEvents);
+      console.log(dispEvents);
+   //     let isMounted = true;
+    //      fetchEvents().then(data => {
+    //        if (isMounted) {
+    //        setDispEvents(data.social);
+    //        setSocialEvents(data.social);
+    //        setCorporateEvents(data.corporate);
+    //        }});
+    //      return () => {isMounted = false};
         }, []);
     
-        const fetchEvents = async () => {
-        const data1 = await fetch("http://localhost:8000/arrangementer/api/social");
-        const itemsSocial = await data1.json();
-        console.log(itemsSocial)
-        const data2 = await fetch("http://localhost:8000/arrangementer/api/bedpres");
-        const itemsCorp = await data2.json();
-        const socialData = itemsSocial;
-        const corporateData = itemsCorp;
-        return {social: socialData, corporate: corporateData }
-      };
+      //const fetchEvents = async () => {
+      //  const data1 = await fetch("http://localhost:8000/arrangementer/api/social/");
+      //  const itemsSocial = await data1.json();
+      //  const data2 = await fetch("http://localhost:8000/arrangementer/api/bedpres/");
+      //  const itemsCorp = await data2.json();
+      //  const data3 = await fetch("http://localhost:8000/arrangementer/api/social/kommende/");
+      //  const ComingItemsSocial = await data3.json();
+      //  const data4 = await fetch("http://localhost:8000/arrangementer/api/bedpres/kommende/");
+      //  const ComingItemsCorp = await data4.json();
+      //  const data5 = await fetch("http://localhost:8000/arrangementer/api/social/mine/");
+      //  const MyItemsSocial = await data5.json();
+      //  const data6 = await fetch("http://localhost:8000/arrangementer/api/bedpres/mine/");
+      //  const MyItemsCorp = await data6.json();
+      //  const socialData = itemsSocial;
+      //  const corporateData = itemsCorp;
+      //  const ComingSocialData = ComingItemsSocial;
+      //  const ComingCorporateData = ComingItemsCorp;
+      //  const MySocialData = MyItemsSocial;
+      //  const MyCorporateData = MyItemsCorp;
+      //  return {social: socialData, corporate: corporateData }
+      //};
 
   const switchEvent = eventType => {
     seteventTypeBold(eventType);
@@ -55,24 +69,30 @@ export const EventPage = () => {
     seteventFilterBold(filter_id)
     if (eventTypeBold === social){
       if (filter_id === coming){
+        fetchList("http://localhost:8000/arrangementer/api/social/kommende/", setDispEvents)
         console.log("Kommende sosiale eventer")
       }
       else if (filter_id === mine){
+        fetchList("http://localhost:8000/arrangementer/api/social/mine/", setDispEvents)
         console.log("Mine sosiale eventer")
       }
       else if (filter_id === previous){
-        console.log("Tidligere sosiale eventer")
+        fetchList("http://localhost:8000/arrangementer/api/social/", setDispEvents)
+        console.log("Alle sosiale eventer")
       }
     }
     else if (eventTypeBold === corporate){
       if (filter_id === coming){
+        fetchList("http://localhost:8000/arrangementer/api/bedpres/kommende/", setDispEvents)
         console.log("Kommende bedrift eventer")
       }
       else if (filter_id === mine){
+        fetchList("http://localhost:8000/arrangementer/api/bedpres/mine/", setDispEvents)
         console.log("Mine bedrift eventer")
       }
       else if (filter_id === previous){
-        console.log("Tidligere bedrift eventer")
+        fetchList("http://localhost:8000/arrangementer/api/bedpres/", setDispEvents)
+        console.log("Alle bedrift eventer")
       }
     }
   };
