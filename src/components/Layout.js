@@ -23,12 +23,13 @@ const Row = styled.div`
 function getWidthString(span) {
   if (!span) return;
 
-  let width = span / 12 * 100;
+  let width = (span / 12 * 100) -2;
   return `width: ${width}%;`;
 };
 
 const Col = styled.div`
   float: left;
+  padding: 1%;
   ${({ xs }) => xs ? getWidthString(xs) : "width; 100%"};
 
   @media only screen and (min-width: 768px) {
