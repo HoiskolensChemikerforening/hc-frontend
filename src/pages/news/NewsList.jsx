@@ -1,35 +1,35 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { H3, P } from "../../components/Text";
 import { Button } from "../../components/Button.js";
 import parse from "react-html-parser";
-import moment from 'moment';
-import { BiMessageRoundedMinus } from "react-icons/bi";
+import { fetchList, checkPermission } from "../../utils/requests";
+
+import AuthContext from "../../context/AuthContext";
 
 export const NewsList = () => {
-  useEffect(() => {
-    fetchArticles();
-  }, []);
-
+  let {user} = useContext(AuthContext);
   const [articles, setArticles] = useState([]);
+  const [canAddArticle, setCanAddArticle] = useState(false);
   const history = useHistory();
 
-  const fetchArticles = async () => {
-    const data = await fetch("http://localhost:8000/nyheter/api/");
-    const items = await data.json();
-    setArticles(items);
-  };
+  useEffect(() => {
+    fetchList("nyheter/api/", setArticles);
+    checkPermission("news.add_article", user, setCanAddArticle);
+  }, [user]);
 
   return (
       <NewsListContainer>
         <ButtonContainer>
           {//This should be edited to in a absolute position on homepage
           // or only visible when hovered
+          //Previously link component wrapped around button
           }
-          <Link to="/nyheter/ny">
-            <Button primary>Opprett nyhet</Button>
-          </Link>
+          {canAddArticle ?
+          <Button primary onClick={() => {history.push(`/nyheter/ny`)}}>Opprett nyhet</Button>
+          :<></>
+          }
         </ButtonContainer>
         {articles.map((article) => (
             <NewsItem key={article.id} onClick={() => {history.push(`/nyheter/${article.id}`)}}>
@@ -37,7 +37,7 @@ export const NewsList = () => {
                 <ImageContainer img={article.image} />
               </div>
 
-              <div>
+              <div style={{borderRadius: "5px"}}>
                 <H3 biggest bold style={{margin: "10px"}}>
                   {article.title}
                 </H3>
@@ -84,6 +84,7 @@ const ImageContainer = styled.div`
     padding-bottom: 67%;
     background: url(${props => props.img});
     background-size: cover;
+    border-radius: 5px;
 `;
 
 
@@ -94,8 +95,9 @@ const HRule = styled.hr`
 
 `;
 
-const Ingress = styled.p`
+const Ingress = styled.div`
   margin: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-height: 2.5em;
 `;

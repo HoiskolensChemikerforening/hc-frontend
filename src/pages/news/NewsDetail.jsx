@@ -3,27 +3,18 @@ import { useRouteMatch } from "react-router-dom";
 
 import styled from "styled-components";
 import parse from "react-html-parser";
-import { H1, P, Link } from "../../components/Text";
+import { H1, P } from "../../components/Text";
+
+import { fetchDetail } from "../../utils/requests";
 
 export const NewsDetail = () => {
   const { params } = useRouteMatch("/nyheter/:id");
-  console.log(params);
-  //const id = match ? id as string;
+  const [article, setArticle] = useState({});
+
   useEffect(() => {
-    fetchArticle();
-  }, []);
-
-  const [article, setArticle] = useState([]);
-  const [author, setAuthor] = useState([]);
-
-  const fetchArticle = async () => {
-    const data = await fetch(
-      "http://localhost:8000/nyheter/api/" + params.id.toString() + "/"
-    );
-    const item = await data.json();
-    setArticle(item);
-    setAuthor(item.author);
-  };
+    fetchDetail("nyheter/api/", params.id, setArticle);
+    console.log(article);
+  }, [])
 
   return (
     <NewsContainer>
@@ -39,7 +30,7 @@ export const NewsDetail = () => {
         <AuthorContainer>
           <AuthorImage img={article.image} />
           <P style={{ marginBottom: "0px" }}>
-            av <span style={{color: "black", fontWeight: 600}}>{author.full_name}</span>
+            av <span style={{color: "black", fontWeight: 600}}>{article.author?.full_name}</span>
             &nbsp;
             {new Date(article.published_date).toLocaleDateString()}
           </P>

@@ -1,12 +1,9 @@
 
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
-import "../index.css";
+import "../../index.css";
 import { Link } from "react-router-dom";
-import {H3} from "./Text";
-import {UserBox} from "./UserBox";
-import {DropdownMenu} from "./DropdownMenu";
-import {BiHomeAlt, BiBriefcaseAlt, BiCalendarEvent, BiGame, BiInfoCircle} from "react-icons/bi";
+import { BiHomeAlt, BiBriefcaseAlt, BiCalendarEvent, BiGame, BiInfoCircle } from "react-icons/bi";
 
 
 const NavBarPhone = () => {

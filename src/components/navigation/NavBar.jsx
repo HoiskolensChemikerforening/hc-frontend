@@ -1,32 +1,19 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import "../index.css";
 import { Link } from "react-router-dom";
-import {H3} from "./Text";
 import {UserBox} from "./UserBox";
 import {DropdownMenu} from "./DropdownMenu";
 import {BiHomeAlt, BiBriefcaseAlt, BiCalendarEvent, BiGame, BiInfoCircle} from "react-icons/bi";
+import { NavLogo } from "./NavLogo";
 
 
 const NavBar = () =>  {
-    const [menuOpen, setMenuOpen] = useState(false);
-
-    function updateMenuState(){
-        if (menuOpen){
-            setMenuOpen(false)
-        } else {setMenuOpen(true)}
-    }
+    const [menuOpen, setMenuOpen] = useState(false);  
     return (
         <>
             <NavContainer>
             <Nav>
-                <LogoArea>
-                    <LogoImg alt="HC-logo" src="logo.png"/> 
-                    <NavText>
-                        <H>Høiskolens</H>
-                        <H>Chemikerforening</H>
-                    </NavText>
-                </LogoArea>
+                <NavLogo/>
                 <MenuItems>
                     <MenuItem to="/"><BiHomeAlt/></MenuItem>
                     <MenuItem to="/bedrift"><BiBriefcaseAlt/></MenuItem>
@@ -34,7 +21,7 @@ const NavBar = () =>  {
                     <MenuItem to="/internt"><BiGame/></MenuItem>
                     <MenuItem to="/info"><BiInfoCircle/></MenuItem>
                 </MenuItems>
-               <UserBox toggleMenu={setMenuOpen}/>
+               <UserBox toggleMenu={setMenuOpen} />
             </Nav>
             </NavContainer>
             <DropdownMenu isOpen={menuOpen} setOpen={setMenuOpen}/>
@@ -44,13 +31,6 @@ const NavBar = () =>  {
 
 export {NavBar};
 
-
-const LogoImg = styled.img`
-    width: 60px;
-    height: 60px;
-    margin-bottom: 10px;
-    padding-right: 15px;
-`;
 
 const NavContainer = styled.div`
     position: sticky;
@@ -71,29 +51,7 @@ const Nav = styled.nav`
     align-items: center;
 `;
 
-const LogoArea = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0;
-`;
 
-
-const NavText = styled.div`
-    margin: 0px;
-    margin-top: -7px;
-`;
-
-const H = styled(H3)`
-    margin: 0px;
-    font-weight: 500;
-    font-size: 1rem;
-    @media (min-width: 500px){
-        font-weight: 500;
-        font-size: 1.25rem;
-    }
-    
-`;
 const MenuItems = styled.div`
     padding-top: 18px;
     margin-left: -20px;

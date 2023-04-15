@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+/*import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';*/
 import "../index.css";
 import React from "react";
 import { H1 } from "./Text";
@@ -28,6 +28,7 @@ const ImageUpload = () => (
     </ImageFieldLabel>
 );
 
+/*
 function RichTextEditor() {
   return (
       <CKEditor
@@ -36,6 +37,7 @@ function RichTextEditor() {
       />
   );
 }
+*/
 
 const FormContainer = styled.div`
   display: flex;
@@ -112,4 +114,4 @@ const Password = styled.input.attrs({ type: "password" })`
   width: ${ props => props.width || "200px" };
 `;
 
-export {TextArea, TextField, ImageField };
+export {TextArea, TextField, ImageField, ExampleForm, ImageUpload };

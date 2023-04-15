@@ -1,20 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import styled, {css} from "styled-components";
-import {H2, H3 } from "./Text"; //, Link
+import styled from "styled-components";
+import { H2 } from "../Text"; 
 import { BiX } from "react-icons/bi";
-
+import { NavLogo } from "./NavLogo";
 
 const DropdownMenu = (props) => (
     <DropdownBox open={props.isOpen}>
         <Nav>
-            <LogoArea>
-            <LogoImg alt="HC-logo" src="logo.png"/>
-            <NavText>
-                <H>Høiskolens</H>
-                <H>Chemikerforening</H>
-            </NavText>
-            </LogoArea>
+            <NavLogo/>
             <Close onClick={() => props.setOpen(false)}><BiX/></Close>
         </Nav>
         <WrapperPages>
@@ -60,16 +54,7 @@ const DropdownBox = styled.div`
     
     @media (min-width: 786px) {
         align-self: center;
-        //padding: 30px 30px 30px 30px;
-        
     }
-`;
-
-const LogoArea = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0;
 `;
 
 const Close = styled.div `
@@ -83,32 +68,9 @@ const Nav = styled.nav`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    margin: 10px;
+    margin: 0px 10px 5px 10px;
     margin-bottom: 0;
     padding: 0 40px 0 40px;
-`;
-
-const LogoImg = styled.img`
-    width: 60px;
-    height: 60px;
-    margin-bottom: 10px;
-    padding-right: 15px;
-`;
-
-
-const NavText = styled.div`
-    display: none;
-    margin: 0px;
-    margin-top: -7px;
-    @media (min-width: 768px){
-        display: flex;
-        flex-direction: column;
-    }
-`;
-
-const H = styled(H3)`
-    margin: 0px;
-    font-weight: 500;
 `;
 
 const WrapperPages = styled.div`
