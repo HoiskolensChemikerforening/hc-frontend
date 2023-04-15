@@ -9,20 +9,12 @@ import { NavBarPhone } from "./components/navigation/NavBarPhone";
 import { NewsRouter } from "./pages/news/NewsRouter";
 import { Login } from "./pages/login/Login";
 import { setAuthToken } from "./pages/login/setAuthToken";
-
+import { AboutHC } from "./pages/home/AboutHC";
 import { AuthProvider } from './context/AuthContext'
 import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
 
 
 class App extends React.Component {
-  
-  componentDidMount() {
-    // Check for JWT
-    const token = localStorage.getItem("token");
-    if (token) {
-        setAuthToken(token);
-    }
-  }
 
   render() {
     return (
@@ -37,6 +29,7 @@ class App extends React.Component {
             <Route path="/internt">                 <H1>Internt</H1>            </Route>
             <Route path="/info">                    <H1>Info</H1>               </Route>
             <Route path="/profil">                  <H1>Profil</H1>             </Route>
+            <Route path="/om-hc">                   <AboutHC/>                  </Route>
             <Route path="/nyheter">                 <NewsRouter/>               </Route>
             <Route path="/undergrupper/:committee"> <CommitteeDetailsPage/>     </Route>            
             <Route path="/undergrupper">            <CommitteePage/>            </Route>

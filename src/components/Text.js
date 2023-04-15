@@ -153,10 +153,28 @@ const Link = styled.a`
   `}
 `;
 
+const TitleContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Title = styled.div`
+  background-color: var(--primary);
+  width: auto;
+  height: auto;
+  font-size: 42px;
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px;
+  margin:20px;
+`;
+
 export {
   H1,
   H2,
   H3,
   P,
-  Link
+  Link,
+  TitleContainer,
+  Title
 };
