@@ -144,8 +144,7 @@ const ImageCont = styled.div`
   min-height: 200px;
   max-height: 200px;
   float: left;
-  margin: 3px;
-  padding: 3px;
+  margin-right: 5px;
   overflow: hidden;
   border-radius: 5px;
 `;
