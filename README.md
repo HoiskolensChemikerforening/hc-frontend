@@ -113,3 +113,7 @@ Default: `none`
 - `italic`
 - `bold`
 - `gray`: color `var(--gray-70)`
+
+hvis regexp 
+
+rm -rf node_modules/ package-lock.json
