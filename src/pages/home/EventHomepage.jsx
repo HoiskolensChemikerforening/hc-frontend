@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled, {css} from 'styled-components';
 import { P } from "../../components/Text";
 import { useHistory } from "react-router-dom";
+import axios from 'axios';
 
 
 export const EventHomepage = () => {
@@ -14,27 +15,34 @@ export const EventHomepage = () => {
 
       useEffect(() => {
         let isMounted = true;
-          fetchEvents().then(data => {
+          fetchEvents().then((events) => {
             if (isMounted) {
-            setDispEvents(data.social);
-            setSocialEvents(data.social);
-            setCorporateEvents(data.corporate);
+            setDispEvents(events.social);
+            setSocialEvents(events.social);
+            setCorporateEvents(events.corporate);
             }});
           return () => {isMounted = false};
         }, []);
     
       const fetchEvents = async () => {
-        const data1 = await fetch("http://localhost:8000/arrangementer/api/social");
-        const itemsSocial = await data1.json();
-        const data2 = await fetch("http://localhost:8000/arrangementer/api/bedpres");
-        const itemsCorp = await data2.json();
-        const socialData = itemsSocial.slice(0,4);
-        const corporateData = itemsCorp.slice(0,4);
-        return {social: socialData, corporate: corporateData }
+
+        let socialData;
+        let bedpresData;
+
+        await axios.get("http://localhost:8000/arrangementer/api/social")
+        .then(response => {
+          socialData = response.data;
+          //const socialData = itemsSocial.slice(0,4);
+        })
+        .then(axios.get("http://localhost:8000/arrangementer/api/bedpres")
+        .then(response => {
+          bedpresData = response.data;
+          //const bedpresData = itemsSocial.slice(0,4);
+        }))
+        return {social: socialData, corporate: bedpresData}
       };
 
   const switchEvent = value => {
-    console.log(typeof(value));
     if (value === "Social" && dispEvents===corporateEvents){
       setDispEvents(socialEvents);
       setSocialBold(true);
@@ -94,6 +102,7 @@ const EventContainer = styled.div`
         padding-left: 50px;
     }*/
 `;
+
 const EventType = styled.div`
   display: flex;
   flex-direction: row;
