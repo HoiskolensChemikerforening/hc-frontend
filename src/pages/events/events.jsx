@@ -36,8 +36,8 @@ export const EventPage = () => {
         console.log(itemsSocial)
         const data2 = await fetch("http://localhost:8000/arrangementer/api/bedpres");
         const itemsCorp = await data2.json();
-        const socialData = itemsSocial.slice(0,4);
-        const corporateData = itemsCorp.slice(0,4);
+        const socialData = itemsSocial;
+        const corporateData = itemsCorp;
         return {social: socialData, corporate: corporateData }
       };
 
@@ -79,7 +79,6 @@ export const EventPage = () => {
 
   const addEvent= () =>{
     alert("La til event");
-
   };
   
     return (
