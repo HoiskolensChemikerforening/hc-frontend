@@ -116,4 +116,4 @@ Default: `none`
 
 hvis regexp 
 
-rm -rf node_modules/ package-lock.json
+rm -rf node_modules/ package-lock.json (bare på mac)
