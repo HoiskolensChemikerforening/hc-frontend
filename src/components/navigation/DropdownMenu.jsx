@@ -5,7 +5,7 @@ import { H2 } from "../Text";
 import { BiX } from "react-icons/bi";
 import { NavLogo } from "./NavLogo";
 
-const DropdownMenu = (props) => (
+const DropdownMenu = (props, listOfTokens, listOfURL) => (
     <DropdownBox open={props.isOpen}>
         <Nav>
             <NavLogo/>

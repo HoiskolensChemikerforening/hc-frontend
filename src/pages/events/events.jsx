@@ -21,39 +21,9 @@ export const EventPage = () => {
     const history = useHistory();
 
     useEffect(() => {
-      fetchList("http://localhost:8000/arrangementer/api/social/kommende/", setDispEvents);
+      fetchList("arrangementer/api/social/kommende/", setDispEvents);
       console.log(dispEvents);
-   //     let isMounted = true;
-    //      fetchEvents().then(data => {
-    //        if (isMounted) {
-    //        setDispEvents(data.social);
-    //        setSocialEvents(data.social);
-    //        setCorporateEvents(data.corporate);
-    //        }});
-    //      return () => {isMounted = false};
         }, []);
-    
-      //const fetchEvents = async () => {
-      //  const data1 = await fetch("http://localhost:8000/arrangementer/api/social/");
-      //  const itemsSocial = await data1.json();
-      //  const data2 = await fetch("http://localhost:8000/arrangementer/api/bedpres/");
-      //  const itemsCorp = await data2.json();
-      //  const data3 = await fetch("http://localhost:8000/arrangementer/api/social/kommende/");
-      //  const ComingItemsSocial = await data3.json();
-      //  const data4 = await fetch("http://localhost:8000/arrangementer/api/bedpres/kommende/");
-      //  const ComingItemsCorp = await data4.json();
-      //  const data5 = await fetch("http://localhost:8000/arrangementer/api/social/mine/");
-      //  const MyItemsSocial = await data5.json();
-      //  const data6 = await fetch("http://localhost:8000/arrangementer/api/bedpres/mine/");
-      //  const MyItemsCorp = await data6.json();
-      //  const socialData = itemsSocial;
-      //  const corporateData = itemsCorp;
-      //  const ComingSocialData = ComingItemsSocial;
-      //  const ComingCorporateData = ComingItemsCorp;
-      //  const MySocialData = MyItemsSocial;
-      //  const MyCorporateData = MyItemsCorp;
-      //  return {social: socialData, corporate: corporateData }
-      //};
 
   const switchEvent = eventType => {
     seteventTypeBold(eventType);
@@ -69,29 +39,29 @@ export const EventPage = () => {
     seteventFilterBold(filter_id)
     if (eventTypeBold === social){
       if (filter_id === coming){
-        fetchList("http://localhost:8000/arrangementer/api/social/kommende/", setDispEvents)
+        fetchList("arrangementer/api/social/kommende/", setDispEvents)
         console.log("Kommende sosiale eventer")
       }
       else if (filter_id === mine){
-        fetchList("http://localhost:8000/arrangementer/api/social/mine/", setDispEvents)
+        fetchList("arrangementer/api/social/mine/", setDispEvents)
         console.log("Mine sosiale eventer")
       }
       else if (filter_id === previous){
-        fetchList("http://localhost:8000/arrangementer/api/social/", setDispEvents)
+        fetchList("arrangementer/api/social/", setDispEvents)
         console.log("Alle sosiale eventer")
       }
     }
     else if (eventTypeBold === corporate){
       if (filter_id === coming){
-        fetchList("http://localhost:8000/arrangementer/api/bedpres/kommende/", setDispEvents)
+        fetchList("arrangementer/api/bedpres/kommende/", setDispEvents)
         console.log("Kommende bedrift eventer")
       }
       else if (filter_id === mine){
-        fetchList("http://localhost:8000/arrangementer/api/bedpres/mine/", setDispEvents)
+        fetchList("arrangementer/api/bedpres/mine/", setDispEvents)
         console.log("Mine bedrift eventer")
       }
       else if (filter_id === previous){
-        fetchList("http://localhost:8000/arrangementer/api/bedpres/", setDispEvents)
+        fetchList("arrangementer/api/bedpres/", setDispEvents)
         console.log("Alle bedrift eventer")
       }
     }
@@ -104,51 +74,51 @@ export const EventPage = () => {
     return (
         <>
         <EventContainer>
-        <EventType>
-          <EventTypeDevider>
-          <Devider>
-          <Title  onClick={() => switchEvent(social)}
-            style={ eventTypeBold === social ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30' } : { fontWeight: 'normal' } }
-          >Sosialt</Title> </Devider>
-          <Devider>
-          <Title  onClick={() => switchEvent(corporate)}
-          style={ eventTypeBold === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
-          >Bedrift</Title></Devider>
-          <Devider>
-          <Title value="Event" onClick={()=> addEvent()} style={{fontWeight: 'bold'}}
-          >+</Title></Devider>
-          </EventTypeDevider>
-          <EventFilterDevider>
-          <Devider>
-          <Title  onClick={() => switchFilter(coming)}
-          style={ eventFilterBold === coming ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
-          >Kommende</Title></Devider>
-          <Devider>
-          <Title  onClick={() => switchFilter(mine)}
-          style={ eventFilterBold === mine ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
-          >Mine</Title></Devider>
-          <Devider>
-          <Title  onClick={() => switchFilter(previous)}
-          style={ eventFilterBold === previous ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
-          >Tidligere</Title> </Devider>
-          </EventFilterDevider>
-        </EventType>
-        <EventList>
-        {dispEvents && dispEvents.map((event) => (
-           <EventBox key={event.id} onClick={() => {history.push(`/arrangementer/${event.id}`)}}>
-              <ImageCont>
-                <Image src={event.image}/>
-              </ImageCont>
-              <DateBox>
-                  <P bold small style={{marginBottom: "0", color: "var(--gray-70)"}}>
-                      <span>{new Date(event.date).toLocaleDateString()}</span>
-                  </P>
-              </DateBox>
-              <PTitle>{event.title}</PTitle>
-              <ProgressBar value={event.attendees.length} max={event.sluts} color="var(--yellow-30)"></ProgressBar>
-          </EventBox>
-        )) }
-        </EventList>
+          <EventType>
+            <EventTypeDevider>
+              <Devider>
+              <Title  onClick={() => switchEvent(social)}
+                style={ eventTypeBold === social ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30' } : { fontWeight: 'normal' } }
+              >Sosialt</Title> </Devider>
+              <Devider>
+              <Title  onClick={() => switchEvent(corporate)}
+              style={ eventTypeBold === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+              >Bedrift</Title></Devider>
+              <Devider>
+              <Title value="Event" onClick={()=> addEvent()} style={{fontWeight: 'bold'}}
+              >+</Title></Devider>
+            </EventTypeDevider>
+            <EventFilterDevider>
+              <Devider>
+              <Title  onClick={() => switchFilter(coming)}
+              style={ eventFilterBold === coming ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+              >Kommende</Title></Devider>
+              <Devider>
+              <Title  onClick={() => switchFilter(mine)}
+              style={ eventFilterBold === mine ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+              >Mine</Title></Devider>
+              <Devider>
+              <Title  onClick={() => switchFilter(previous)}
+              style={ eventFilterBold === previous ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+              >Tidligere</Title> </Devider>
+            </EventFilterDevider>
+          </EventType>
+          <EventList>
+          {dispEvents && dispEvents.map((event) => (
+             <EventBox key={event.id} onClick={() => {history.push(`/arrangementer/${event.id}`)}}>
+                <ImageCont>
+                  <Image src={event.image}/>
+                </ImageCont>
+                <DateBox>
+                    <P bold small style={{marginBottom: "0", color: "var(--gray-70)"}}>
+                        <span>{new Date(event.date).toLocaleDateString()}</span>
+                    </P>
+                </DateBox>
+                <PTitle>{event.title}</PTitle>
+                <ProgressBar value={event.attendees.length} max={event.sluts} color="var(--yellow-30)"></ProgressBar>
+            </EventBox>
+          )) }
+          </EventList>
         </EventContainer>
       </>
   )
@@ -177,16 +147,6 @@ const EventContainer = styled.div`
   height: 60%;
   padding-right: 10px;
   margin-top: 10px;
-  
-  @media (min-width: 1100px){
-        display: flex;
-        padding-left: 30px;
-    }
-
-    /*@media (min-width: 1100px; max-width:){
-        display: flex;
-        padding-left: 50px;
-    }*/
 `;
 const EventType = styled.div`
   display: flex;
@@ -194,6 +154,12 @@ const EventType = styled.div`
   justify-content: space-between;
   margin: 0;
   width: auto;
+
+  @media (max-width: 500px){
+    flex-direction: column;
+    padding: 30px;
+    align-items: center;
+  }
 `;
 
 const Title = styled.p`
@@ -207,12 +173,27 @@ const EventTypeDevider = styled.div`
   display: flex;
   flex-direction: row;
   align-self: center;
+
+  @media (max-width: 400px){
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
+  }
+
 `;
 
 const EventFilterDevider = styled.div`
   display: flex;
   flex-direction: row;
   margin-right: 10%;
+
+  @media (max-width: 400px){
+    flex-direction: column;
+    padding-left: 10px;
+    justify_content: space-between;
+    height: auto;
+  }
+
 `;
 
 const Devider = styled.div`
