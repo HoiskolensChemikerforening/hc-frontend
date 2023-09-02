@@ -20,11 +20,13 @@ function CommitteeDetailsPage (props) {
             <Rw>
                 <Col xs="12" sm="12" md="8" lg="8">
                     <ImageContainer>
-                        <img width="100%" height="auto" src={location.state.committee.image} ></img>
+                        <img width="100%" height="100%" 
+                        src={location.state.committee.image}
+                        ></img> 
                     </ImageContainer>
                 </Col>
                 <Col xs="12" sm="12" md="3" lg="4">
-                <CommitteeMemberList key={committee.id} committee={location.state.committee}> </CommitteeMemberList>
+                    <CommitteeMemberList key={committee.id} committee={location.state.committee}> </CommitteeMemberList>
                 </Col>
             </Rw>
             <Description>
@@ -59,7 +61,17 @@ const Description = styled.div`
 
 const ImageContainer = styled.div`
     width: 100%;
+    height: 100%
     min-width: 400px;
+
+    //shape:
+    //border-radius: 10px;
+    
+
+
+    // color:
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+
 `;
 
 export {
