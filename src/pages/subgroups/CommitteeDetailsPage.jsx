@@ -22,6 +22,7 @@ function CommitteeDetailsPage (props) {
                     <ImageContainer>
                         <img width="100%" height="100%" 
                         src={location.state.committee.image}
+                        style={{borderRadius: 5 + 'px'}}
                         ></img> 
                     </ImageContainer>
                 </Col>
@@ -65,7 +66,7 @@ const ImageContainer = styled.div`
     min-width: 400px;
 
     //shape:
-    //border-radius: 10px;
+    border-radius: 5px;
     
 
 
