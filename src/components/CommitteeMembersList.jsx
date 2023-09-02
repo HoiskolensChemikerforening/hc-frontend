@@ -23,7 +23,7 @@ export const CommitteeMemberList = (props) => {
     and returns all positions of the given committee. */
     const fetchPositions = async () => {
         /*Fetching all positions*/
-        const apidata = await fetch("http://localhost:8000/verv/api/position");
+        const apidata = await fetch("http://localhost:8000/undergrupper/api/position");
         /*Parsing the data recieved*/
         const allitems = await apidata.json();
 
@@ -52,7 +52,7 @@ const PositionCard = (props) => (
     /* The position title should be replaced by the passed position title prop,
     and the member list should be initiated with a mapping of all the position members*/
     <Column>
-        <H2> {props.position.title} </H2>
+        <H2> {props.position.title}: </H2>
         <PositionMemberList users={props.position.users}></PositionMemberList>
     </Column>
 )

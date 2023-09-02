@@ -14,7 +14,7 @@ export const CommitteePage = () => {
   const history = useHistory();
 
   const fetchCommittees = async () => {
-    const data = await fetch("http://localhost:8000/verv/api/");
+    const data = await fetch("http://localhost:8000/undergrupper/api/");
     const items = await data.json();
     console.log(items);
     setCommittees(items);
