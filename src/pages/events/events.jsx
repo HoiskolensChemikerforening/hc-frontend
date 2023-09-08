@@ -106,17 +106,17 @@ export const EventPage = () => {
           <EventList>
           {dispEvents && dispEvents.map((event) => (
              <EventBox key={event.id} onClick={() => {history.push(`/arrangementer/${event.id}`)}}>
-                <ImageCont>
-                  <Image src={event.image}/>
-                </ImageCont>
-                <DateBox>
-                    <P bold small style={{marginBottom: "0", color: "var(--gray-70)"}}>
-                        <span>{new Date(event.date).toLocaleDateString()}</span>
-                    </P>
-                </DateBox>
-                <PTitle>{event.title}</PTitle>
-                <ProgressBar value={event.attendees.length} max={event.sluts} color="var(--yellow-30)"></ProgressBar>
-            </EventBox>
+              <ImageCont>
+               <Image src={event.image}/>
+              </ImageCont>
+             <DateBox>
+                 <P bold small style={{marginBottom: "0", color: "var(--gray-70)"}}>
+                     <span>{new Date(event.date).toLocaleDateString()}</span>
+                 </P>
+             </DateBox>
+             <PTitle>{event.title}</PTitle>
+             <ProgressBar value={event.attendees.length} max={event.sluts} color="var(--yellow-30)"></ProgressBar>
+         </EventBox>
           )) }
           </EventList>
         </EventContainer>
@@ -155,8 +155,8 @@ const EventType = styled.div`
   margin: 0;
   width: auto;
 
-  @media (max-width: 500px){
-    flex-direction: column;
+  @media (max-width: 530px){
+    flex-direction: row;
     padding: 30px;
     align-items: center;
   }
@@ -174,7 +174,7 @@ const EventTypeDevider = styled.div`
   flex-direction: row;
   align-self: center;
 
-  @media (max-width: 400px){
+  @media (max-width: 530px){
     flex-direction: column;
     justify-content: space-between;
     height: auto;
@@ -187,7 +187,7 @@ const EventFilterDevider = styled.div`
   flex-direction: row;
   margin-right: 10%;
 
-  @media (max-width: 400px){
+  @media (max-width: 530px){
     flex-direction: column;
     padding-left: 10px;
     justify_content: space-between;
