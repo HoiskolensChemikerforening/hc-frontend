@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled, {css} from "styled-components";
 import { Button } from "../../components/Button"; 
 import { Col } from "../../components/Layout";
 import { H1, P} from "../../components/Text";
 import { Link, useHistory } from "react-router-dom";
-import { fetchList } from "../../utils/requests";
+import { fetchList, checkPermission } from "../../utils/requests";
+import AuthContext from "../../context/AuthContext";
 
 const coming = 1
 const mine = 2
@@ -18,12 +19,15 @@ export const EventPage = () => {
     const [corporateEvents, setCorporateEvents] = useState();
     const [eventTypeBold, seteventTypeBold] = useState(social);
     const [eventFilterBold, seteventFilterBold] = useState(coming);
+    const [canAddSocial, setCanAddSocial] = useState(false);
     const history = useHistory();
+    let {user} = useContext(AuthContext);
 
     useEffect(() => {
       fetchList("arrangementer/api/social/kommende/", setDispEvents);
       console.log(dispEvents);
-        }, []);
+      checkPermission("events.add_social", user, setCanAddSocial);
+        }, [user]);
 
   const switchEvent = eventType => {
     seteventTypeBold(eventType);
@@ -85,8 +89,10 @@ export const EventPage = () => {
               style={ eventTypeBold === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
               >Bedrift</Title></Devider>
               <Devider>
+              {canAddSocial ?
               <Title value="Event" onClick={()=> addEvent()} style={{fontWeight: 'bold'}}
-              >+</Title></Devider>
+              >+</Title>:null
+            }</Devider>
             </EventTypeDevider>
             <EventFilterDevider>
               <Devider>
