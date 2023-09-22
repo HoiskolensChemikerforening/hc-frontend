@@ -10,6 +10,15 @@ const Container = styled.div`
   }
 `;
 
+const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -5px;
+  width: 100%;
+  height: 100%;
+`;
+
 const Row = styled.div`
   &::after {
     content: "";
@@ -53,6 +62,7 @@ const Col = styled.div`
 
 export {
   Container,
+  PageContainer,
   Row,
   Col
 };

@@ -5,26 +5,16 @@ import styled from "styled-components";
 import parse from "react-html-parser";
 import { H1, P } from "../../components/Text";
 
+import { fetchDetail } from "../../utils/requests";
+
 export const NewsDetail = () => {
   const { params } = useRouteMatch("/nyheter/:id");
-  const [article, setArticle] = useState([]);
-  const [author, setAuthor] = useState([]);
+  const [article, setArticle] = useState({});
 
   useEffect(() => {
-    const fetchArticle = async () => {
-      const data = await fetch(
-        "http://localhost:8000/nyheter/api/" + params.id.toString() + "/"
-      );
-      const item = await data.json();
-      return item;
-    };
-
-    let isMounted = true;
-    fetchArticle().then(data => {if (isMounted) {setArticle(data); setAuthor(data.author);}});
-    return () => { isMounted = false };
-  }, [params.id]);
-
-
+    fetchDetail("nyheter/api/", params.id, setArticle);
+    console.log(article);
+  }, [])
 
   return (
     <NewsContainer>
@@ -40,7 +30,7 @@ export const NewsDetail = () => {
         <AuthorContainer>
           <AuthorImage img={article.image} />
           <P style={{ marginBottom: "0px" }}>
-            av <span style={{color: "black", fontWeight: 600}}>{author.full_name}</span>
+            av <span style={{color: "black", fontWeight: 600}}>{article.author?.full_name}</span>
             &nbsp;
             {new Date(article.published_date).toLocaleDateString()}
           </P>

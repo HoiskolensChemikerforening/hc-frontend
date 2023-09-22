@@ -1,22 +1,66 @@
 import React from "react";
+import { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
-import { P } from "./Text";
+import { P } from "../Text";
 import { Link } from "react-router-dom";
 import { BiLogOut, BiMenu } from "react-icons/bi";
 
-const UserBox = (props) => (
+import AuthContext from "../../context/AuthContext";
+import { fetchDetail } from "../../utils/requests";
+
+const UserBox = (props) => {
+    let {user, logoutUser} = useContext(AuthContext);
+    const [profile, setProfile] = useState({});
+    const [isAnonymous, setIsAnonymous] = useState(true);
+
+    useEffect(() => {
+        if (user) {
+            if (user.profile_id) 
+                fetchDetail("api/profil/", String(user.profile_id), setProfile, setIsAnonymous)
+            else
+                setIsAnonymous(true);
+        } else {
+            setIsAnonymous(true);
+        }
+    }, [user]);
+
+    return (
+    <>
+    {isAnonymous ?
     <UserArea>
-        <Link to="/profil" style={linkStyle}><UserImage alt="HC-logo" src="logo.png"/></Link>
+        <UserImage alt="HC-logo" src="logo.png"/>
         <Log>
-            <Link to="/profil" style={linkStyle}><UserText>Bendik Søta Sannes</UserText></Link>
+            <UserText>Ikke logget inn</UserText>
             <LogInOut>
-                <Link to="/" style={styleLogOut}><BiLogOut/></Link>
-                <LogText>Logg ut</LogText>
+                <Link to="/login" style={styleLogOut}><BiLogOut/>
+                    <LogText>Logg inn</LogText>
+                </Link>
             </LogInOut>
         </Log>
         <MenuBox onClick={() => props.toggleMenu(true)} ><BiMenu/></MenuBox>
     </UserArea>
-);
+    :
+    <UserArea>
+        <Link to="/profil" style={linkStyle}><UserImage alt="user-image" 
+                src={profile.image_primary}/>
+        </Link>
+        <Log>
+            <Link to="/profil" style={linkStyle}>
+                <UserText>{profile.user.full_name}</UserText>
+            </Link>
+                <LogInOut>
+                    <Link to="/" style={styleLogOut}>
+                        <BiLogOut/>
+                        <LogText onClick={logoutUser}>Logg ut</LogText>
+                    </Link>
+                </LogInOut>
+        </Log>
+        <MenuBox onClick={() => props.toggleMenu(true)} ><BiMenu/></MenuBox>
+    </UserArea>
+    }
+    </>
+    )
+}
 
 export {UserBox};
 
@@ -56,7 +100,6 @@ const Log = styled.div`
     @media (min-width: 1024px){
         display: flex;
     }
-    
 `;
 const LogInOut = styled.div`
     display: flex;

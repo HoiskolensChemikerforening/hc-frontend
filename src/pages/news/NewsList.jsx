@@ -1,24 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { H3, P } from "../../components/Text";
 import { Button } from "../../components/Button.js";
 import parse from "react-html-parser";
+import { fetchList, checkPermission } from "../../utils/requests";
+
+import AuthContext from "../../context/AuthContext";
 
 export const NewsList = () => {
-  useEffect(() => {
-    fetchArticles();
-  }, []);
-
+  let {user} = useContext(AuthContext);
   const [articles, setArticles] = useState([]);
+  const [canAddArticle, setCanAddArticle] = useState(false);
   const history = useHistory();
 
-  const fetchArticles = async () => {
-    const data = await fetch("http://localhost:8000/nyheter/api/");
-    const items = await data.json();
-    setArticles(items);
-  };
-  
+  useEffect(() => {
+    fetchList("nyheter/api/", setArticles);
+    checkPermission("news.add_article", user, setCanAddArticle);
+  }, [user]);
+
   return (
       <NewsListContainer>
         <ButtonContainer>
@@ -26,7 +26,10 @@ export const NewsList = () => {
           // or only visible when hovered
           //Previously link component wrapped around button
           }
-            <Button primary onClick={() => {history.push(`/nyheter/ny`)}}>Opprett nyhet</Button>
+          {canAddArticle ?
+          <Button primary onClick={() => {history.push(`/nyheter/ny`)}}>Opprett nyhet</Button>
+          :<></>
+          }
         </ButtonContainer>
         {articles.map((article) => (
             <NewsItem key={article.id} onClick={() => {history.push(`/nyheter/${article.id}`)}}>
