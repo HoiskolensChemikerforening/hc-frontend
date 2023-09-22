@@ -12,6 +12,7 @@ import { setAuthToken } from "./pages/login/setAuthToken";
 import { AboutHC } from "./pages/home/AboutHC";
 import { AuthProvider } from './context/AuthContext'
 import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
+import { SoknadMidler } from "./pages/home/soknadommidler";
 
 
 class App extends React.Component {
@@ -33,6 +34,7 @@ class App extends React.Component {
             <Route path="/nyheter">                 <NewsRouter/>               </Route>
             <Route path="/undergrupper/:committee"> <CommitteeDetailsPage/>     </Route>            
             <Route path="/undergrupper">            <CommitteePage/>            </Route>
+            <Route path="/midler">                  <SoknadMidler/>             </Route>
           </Switch>
           <NavBarPhone/>
           </AuthProvider>
