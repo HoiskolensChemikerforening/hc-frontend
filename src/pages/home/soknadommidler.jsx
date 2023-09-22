@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 import styled from "styled-components";
-import { TextArea, Option, DropDown } from "../../components/Form";
+import { TextArea, TextField } from "../../components/Form";
 import { H1, H3, P} from "../../components/Text";
-
 
 
 
@@ -27,20 +26,23 @@ export const SoknadMidler = () => {
             </NewApplicationFundsText>
 
             <form>
+                
                 <FormContainer>
+                <FormContainer1>
+                    <img src=""/>
+                    <TextField placeholder="Søker på vegne av"/>
                     <P>Prisklasse</P> 
                     <input type='radio' id='Under 500 kr' name='price_class' value='Under 500 kr'/>
                     <label for='Under 500 kr'>Under 500 kr</label><br/>
                     <input type='radio' id='Over 500 kr' name='price_class' value='Over 500 kr'/>
                     <label for='Over 500 kr'>Over 500 kr</label>
-            
-                <br/>
+                </FormContainer1>
+                
                 <P>Beskrivelse av formål</P>
                 <TextArea width="auto" placeholder="Hva søkes det støtte til? Dato, hvor skal det være, for hvem? Hvor mye støtte ønskes?"/>   
-                <br/>
-            
                 </FormContainer>
                 <Button primary type='submit'>Send inn</Button>
+                
             </form>
         
         </Page>
@@ -50,7 +52,6 @@ export const SoknadMidler = () => {
 const Page = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
     background-color: var(--gray-20);
     margin: 50px;
     padding: 20px;
@@ -67,8 +68,13 @@ const FormContainer = styled.div`
     border-style: solid;
     border-radius: 10px; 
     flex-direction: column;
-    width: 90%;
+    width: 70%;
 `; 
+const FormContainer1 = styled.div`
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-evenly;
+`;
 const NewApplicationFundsText = styled.div`
     display: flex;
     justify-content: center;
