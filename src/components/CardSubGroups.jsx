@@ -7,13 +7,14 @@ import { useHistory } from "react-router-dom";
 
 
 export const Subgroup = (props) => (
-    <Col xs="12" sm="6" md="6" lg="4">
+  <Col xs="12" sm="6" md="6" lg="4">
+      {console.log("props:", props)}
         <StyledWrapper onClick={
           ()=> 
             {
               props.history.push(
                 {
-                  pathname:`/undergrupper/${props.committee.title}`,
+                  pathname: props.committee.absolute_url,
                   state: {committee: props.committee}
                 }
               );

@@ -31,7 +31,7 @@ class App extends React.Component {
             <Route path="/profil">                  <H1>Profil</H1>             </Route>
             <Route path="/om-hc">                   <AboutHC/>                  </Route>
             <Route path="/nyheter">                 <NewsRouter/>               </Route>
-            <Route path="/undergrupper/:committee"> <CommitteeDetailsPage/>     </Route>            
+            <Route path="/undergrupper/:committee_slug"> <CommitteeDetailsPage/>     </Route>            
             <Route path="/undergrupper">            <CommitteePage/>            </Route>
           </Switch>
           <NavBarPhone/>

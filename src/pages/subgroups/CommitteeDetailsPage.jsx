@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "../../components/Layout";
@@ -8,14 +8,24 @@ import { CommitteeMemberList } from "../../components/CommitteeMembersList";
 import parse from "react-html-parser";
 
 function CommitteeDetailsPage (props) {
-    const { committee } = useParams();
-
+    
+    
+    const { committee_slug } = useParams();
+    
+    console.log('comSlug:', committee_slug)
     let location = useLocation();
+    
+    console.log('loc:', location)
+    console.log('props:', props)
+
+    
+    
 
     return (
-    <>
+        <>
     <Container>
         <Column>
+            <h2>Test</h2>
             <H1>{ location.state.committee.title }</H1>
             <Rw>
                 <Col xs="12" sm="12" md="8" lg="8">
