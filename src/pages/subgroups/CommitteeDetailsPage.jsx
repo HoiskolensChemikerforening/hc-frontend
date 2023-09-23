@@ -9,23 +9,46 @@ import parse from "react-html-parser";
 
 function CommitteeDetailsPage (props) {
     
+    /* useEffect(() => {
+        fetchCommittees();
+      }, []);
     
-    const { committee_slug } = useParams();
+    const [committees, setCommittees] = useState([]);
+    const history = useHistory();
+
+    const fetchCommittees = async () => {
+    const data = await fetch("http://localhost:8000/undergrupper/api/");
+    const items = await data.json();
+    console.log(items);
+    setCommittees(items);
+    }; */
     
-    console.log('comSlug:', committee_slug)
+    const { committee } = useParams();
+    
+    console.log('comSlug:', committee)
     let location = useLocation();
     
+    
+
+
     console.log('loc:', location)
     console.log('props:', props)
 
+    const checkLocation = (location) => {
+        if (typeof location.state == "undefined") {
+            console.log("location not exist")
+        }
+        else{
+            console.log("Location exist")
+        }
+    }
     
-    
+    checkLocation(location)
 
     return (
         <>
     <Container>
         <Column>
-            <h2>Test</h2>
             <H1>{ location.state.committee.title }</H1>
             <Rw>
                 <Col xs="12" sm="12" md="8" lg="8">
