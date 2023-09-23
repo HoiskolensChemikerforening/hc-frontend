@@ -89,7 +89,7 @@ export const EventPage = () => {
               style={ eventTypeBold === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
               >Bedrift</Title></Devider>
               <Devider>
-                <AddButtonContainer to="/opprett">
+                <AddButtonContainer to="/sosialt/opprett">
                   {canAddSocial ?
               <Title value="Event" onClick={()=> addEvent()} style={{fontWeight: 'bold'}}
               >+</Title>:null
@@ -310,5 +310,6 @@ const PTitle = styled.div`
 `;
 
 const AddButtonContainer = styled(Link)`
-
+  text-decoration: none; 
+  color: black; 
 `;
