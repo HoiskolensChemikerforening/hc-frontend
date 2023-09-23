@@ -4,17 +4,19 @@ import { H1, H2, P, Link } from "../../components/Text";
 import { PageContainer } from "../../components/Layout";
 import { TextField } from "../../components/Form";
 import { Button } from "../../components/Button";
-import { Col } from "../../components/Layout";
 
 export const Kontortilgang = () => {
   const [username, setUsername] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = () => {
     let isUsernameValid = true;
     let isCheckboxValid = true;
-  
+
+    setSuccessMessage("");
+
     if (!username) {
       isUsernameValid = false;
     }
@@ -30,8 +32,9 @@ export const Kontortilgang = () => {
       setErrorMessage("Please accept the terms and conditions.");
     } else {
       console.log("Form submitted with username:", username);
-      setUsername("");
+      setSuccessMessage(`Form submitted with username: ${username}`);
       setErrorMessage("");
+      setUsername("");
       document.getElementById("id_approval").checked = false;
     }
   };
@@ -39,7 +42,6 @@ export const Kontortilgang = () => {
   return (
     <OuterWrapper>
       <PageContainer>
-      <Col xs={12} sm={11} md={10} lg={9} xl={8}>
         <PageContainer>
         <HeaderKontortilgang>Kontortilgang</HeaderKontortilgang>
         <ContentBox>
@@ -57,6 +59,7 @@ export const Kontortilgang = () => {
           onChange={(e) => setUsername(e.target.value)}
           />
           {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+          {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
 
           <br/>
           <br/>
@@ -89,7 +92,6 @@ export const Kontortilgang = () => {
           
         </ContentBox>
         </PageContainer>
-      </Col>
       </PageContainer>
 
       <ModalWrapper show={showModal}>
@@ -146,6 +148,10 @@ const HeaderKontortilgang = styled.div`
   border-radius: 10px;
   padding: 10px 10%;
   margin: 20px;
+
+  @media (max-width: 530px){
+    width 100%
+  }
 `;
 
 const ContentBox = styled.div`
@@ -190,6 +196,11 @@ const ModalOverlay = styled.div`
 
 const ErrorMessage = styled.p`
   color: red;
+  position: absolute;
+`;
+
+const SuccessMessage = styled.p`
+  color: green;
   position: absolute;
 `;
 
