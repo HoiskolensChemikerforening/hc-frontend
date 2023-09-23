@@ -20,6 +20,7 @@ export const EventPage = () => {
     const [eventTypeBold, seteventTypeBold] = useState(social);
     const [eventFilterBold, seteventFilterBold] = useState(coming);
     const [canAddSocial, setCanAddSocial] = useState(false);
+    const [canAddCorporate, setCanAddCorporate] = useState(false);
     const history = useHistory();
     let {user} = useContext(AuthContext);
 
@@ -27,6 +28,7 @@ export const EventPage = () => {
       fetchList("arrangementer/api/social/kommende/", setDispEvents);
       console.log(dispEvents);
       checkPermission("events.add_social", user, setCanAddSocial);
+      checkPermission("events.add_corporate", user, setCanAddCorporate);
         }, [user]);
 
   const switchEvent = eventType => {
@@ -89,14 +91,20 @@ export const EventPage = () => {
               style={ eventTypeBold === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
               >Bedrift</Title></Devider>
               <Devider>
-                <AddButtonContainer to="/sosialt/opprett">
+                
+                {eventTypeBold === 'social' ? (
                   {canAddSocial ?
-              <Title value="Event" onClick={()=> addEvent()} style={{fontWeight: 'bold'}}
-              >+</Title>:null
-            }</AddButtonContainer>
+                    <Title value="Event" onClick={()=> addEvent()} style={{fontWeight: 'bold'}}
+                    >+</Title>:null}
+                ) : null}
+                {canAddCorporate && eventTypeBold === 'corporate' ? (
+                  <AddButtonContainer to="/bedpres/opprett">
+                    <Title value="Event" onClick={() => addEvent()} style={{ fontWeight: 'bold' }}>+</Title>
+                  </AddButtonContainer>
+                ) : null}
               </Devider>
-            </EventTypeDevider>
-            <EventFilterDevider>
+              </EventTypeDevider>
+              <EventFilterDevider>
               <Devider>
               <Title  onClick={() => switchFilter(coming)}
               style={ eventFilterBold === coming ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
