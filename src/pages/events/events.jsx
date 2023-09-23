@@ -89,10 +89,12 @@ export const EventPage = () => {
               style={ eventTypeBold === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
               >Bedrift</Title></Devider>
               <Devider>
-              {canAddSocial ?
+                <AddButtonContainer to="/opprett">
+                  {canAddSocial ?
               <Title value="Event" onClick={()=> addEvent()} style={{fontWeight: 'bold'}}
               >+</Title>:null
-            }</Devider>
+            }</AddButtonContainer>
+              </Devider>
             </EventTypeDevider>
             <EventFilterDevider>
               <Devider>
@@ -305,4 +307,8 @@ const PTitle = styled.div`
   margin-bottom: 16px;
   line-height: 1.6;
   font-weight: 800;
+`;
+
+const AddButtonContainer = styled(Link)`
+
 `;
