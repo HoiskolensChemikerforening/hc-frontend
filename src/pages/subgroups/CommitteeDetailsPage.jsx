@@ -8,7 +8,7 @@ import { useLocation } from "react-router-dom";
 import { CommitteeMemberList } from "../../components/CommitteeMembersList";
 import parse from "react-html-parser";
 
-function CommitteeDetailsPage (props) {
+export const CommitteeDetailsPage = (props) => {
     
     
     const { committee } = useParams();
@@ -48,9 +48,8 @@ function CommitteeDetailsPage (props) {
     }
     
     
-    
-    
     console.log("com-obj:", committee_object);
+    console.log("com-id:", committee_object.id);
     console.log("comitteeess", committees)
     
     
@@ -69,7 +68,7 @@ function CommitteeDetailsPage (props) {
                     </ImageContainer>
                 </Col>
                 <Col xs="12" sm="12" md="3" lg="4">
-                    <CommitteeMemberList key={committee.id} committee={committee_object}> </CommitteeMemberList>
+                    <CommitteeMemberList key={committee_object.id} committee={committee_object}> </CommitteeMemberList>
                 </Col>
             </Rw>
             <Description>
@@ -118,6 +117,5 @@ const ImageContainer = styled.div`
 `;
 
 export {
-    CommitteeDetailsPage,
     Column
 }
