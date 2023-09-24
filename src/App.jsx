@@ -14,6 +14,7 @@ import { AboutHC } from "./pages/home/AboutHC";
 import { AuthProvider } from './context/AuthContext'
 import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
 import { SoknadMidler } from "./pages/home/soknadommidler";
+import { Klassekatalog } from "./pages/internt/Klassekatalog";
 
 
 class App extends React.Component {
@@ -37,6 +38,7 @@ class App extends React.Component {
             <Route path="/undergrupper">            <CommitteePage/>            </Route>
             <Route path="/kontortilgang">           <Kontortilgang/>            </Route>
             <Route path="/midler">                  <SoknadMidler/>             </Route>
+            <Route path="/katalog">                 <Klassekatalog/>            </Route>
           </Switch>
           <NavBarPhone/>
           </AuthProvider>
