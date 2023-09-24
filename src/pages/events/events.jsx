@@ -91,13 +91,12 @@ export const EventPage = () => {
               style={ eventTypeBold === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
               >Bedrift</Title></Devider>
               <Devider>
-                
-                {eventTypeBold === 'social' ? (
-                  {canAddSocial ?
-                    <Title value="Event" onClick={()=> addEvent()} style={{fontWeight: 'bold'}}
-                    >+</Title>:null}
-                ) : null}
-                {canAddCorporate && eventTypeBold === 'corporate' ? (
+              {eventTypeBold === social && canAddSocial ? (
+                <AddButtonContainer to="/sosialt/opprett">
+                  <Title value="Event" onClick={() => addEvent()} style={{ fontWeight: 'bold' }}>+</Title>
+                </AddButtonContainer>
+              ) : null}
+                {eventTypeBold === corporate && canAddCorporate ? (
                   <AddButtonContainer to="/bedpres/opprett">
                     <Title value="Event" onClick={() => addEvent()} style={{ fontWeight: 'bold' }}>+</Title>
                   </AddButtonContainer>
