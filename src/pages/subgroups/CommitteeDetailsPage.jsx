@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "../../components/Layout";
 import { H1 } from "../../components/Text";
+import { useHistory } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { CommitteeMemberList } from "../../components/CommitteeMembersList";
 import parse from "react-html-parser";
@@ -22,15 +23,15 @@ function CommitteeDetailsPage (props) {
     
     const [committees, setCommittees] = useState();
     const [committee_object, setCommittee_object] = useState([]);
+    const history = useHistory();
     
     
     const fetchCommittees = async () => {
         const data = await fetch("http://localhost:8000/undergrupper/api/");
         const items = await data.json();
         console.log("items:",items);
-        
-        
         setCommittee_object(matchCommittee(items));
+        setCommittees(items);
         
     };
     

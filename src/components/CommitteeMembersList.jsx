@@ -29,6 +29,7 @@ export const CommitteeMemberList = (props) => {
 
         /*Filtering out only the positions of the current committee*/
         const filtereddata = await allitems.filter(item => {
+            console.log(item.committee, props.committee.id);
             return item.committee === props.committee.id;
         })
 
