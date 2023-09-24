@@ -30,41 +30,69 @@ function CommitteeDetailsPage (props) {
     
     
 
+    const [committees, setCommittees] = useState([]);
+    const [committee_object, setCommittee_object] = useState([]);
 
-    console.log('loc:', location)
-    console.log('props:', props)
+    const fetchCommittees = async () => {
+        const data = await fetch("http://localhost:8000/undergrupper/api/");
+        const items = await data.json();
+        console.log("items:",items);
+        setCommittees(items);
+        console.log("committeees", committees)
+        matchCommittee();
+      };
 
-    const checkLocation = (location) => {
-        if (typeof location.state == "undefined") {
-            console.log("location not exist")
-        }
-        else{
-            console.log("Location exist")
+    const matchCommittee = () => {
+        console.log("type:", committees)
+        for (let com in committees) {
+            console.log("com", com)
+            if (com.slug == committee) {
+                console.log("commatch", com)
+                return com
+            }
         }
     }
     
-    checkLocation(location)
+    const setCommittee = (location) => {
+        if (typeof location.state == "undefined") {
+            console.log("undef")
+            
+            fetchCommittees();
+            
+        }
+        else{
+            setCommittee_object(location.state.committee)
+        }
+    }
+    
+    
+    useEffect(() => {
+        setCommittee(location);
+      }, []);
+
+    console.log("com-obj:", committee_object)
+
 
     return (
         <>
     <Container>
         <Column>
-            <H1>{ location.state.committee.title }</H1>
+            <H1>{ committee_object.title }</H1>
             <Rw>
                 <Col xs="12" sm="12" md="8" lg="8">
                     <ImageContainer>
                         <img width="100%" height="100%" 
-                        src={location.state.committee.image}
+                        src={committee_object.image}
                         style={{borderRadius: 5 + 'px'}}
                         ></img> 
                     </ImageContainer>
                 </Col>
                 <Col xs="12" sm="12" md="3" lg="4">
-                    <CommitteeMemberList key={committee.id} committee={location.state.committee}> </CommitteeMemberList>
+                    <CommitteeMemberList key={committee.id} committee={committee_object}> </CommitteeMemberList>
                 </Col>
             </Rw>
             <Description>
-                <p>{parse(location.state.committee.description)} </p>
+                <p>{parse(committee_object.description)} </p>
             </Description>
         </Column>
             
