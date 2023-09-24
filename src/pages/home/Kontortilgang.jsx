@@ -42,7 +42,6 @@ export const Kontortilgang = () => {
   return (
     <OuterWrapper>
       <PageContainer>
-        <PageContainer>
         <WideTitle>Kontortilgang</WideTitle>
         <ContentBox>
           <H1>Her kan du søke om tilgang på kontoret med studentkortet ditt.</H1>
@@ -91,7 +90,6 @@ export const Kontortilgang = () => {
           </ButtonWrapper>          
           
         </ContentBox>
-        </PageContainer>
       </PageContainer>
 
       <ModalWrapper show={showModal}>
