@@ -9,70 +9,50 @@ import parse from "react-html-parser";
 
 function CommitteeDetailsPage (props) {
     
-    /* useEffect(() => {
-        fetchCommittees();
-      }, []);
-    
-    const [committees, setCommittees] = useState([]);
-    const history = useHistory();
-
-    const fetchCommittees = async () => {
-    const data = await fetch("http://localhost:8000/undergrupper/api/");
-    const items = await data.json();
-    console.log(items);
-    setCommittees(items);
-    }; */
     
     const { committee } = useParams();
     
-    console.log('comSlug:', committee)
-    let location = useLocation();
+    useEffect(() => {
+        console.log("useEffect");
+        fetchCommittees();
+        
+    }, []);
     
+    console.log('comSlug:', committee);
     
-
-    const [committees, setCommittees] = useState([]);
+    const [committees, setCommittees] = useState();
     const [committee_object, setCommittee_object] = useState([]);
-
+    
+    
     const fetchCommittees = async () => {
         const data = await fetch("http://localhost:8000/undergrupper/api/");
         const items = await data.json();
         console.log("items:",items);
-        setCommittees(items);
-        console.log("committeees", committees)
-        matchCommittee();
-      };
-
-    const matchCommittee = () => {
-        console.log("type:", committees)
-        for (let com in committees) {
+        
+        
+        setCommittee_object(matchCommittee(items));
+        
+    };
+    
+    const matchCommittee = (items) => {
+        
+        for (let comIndex in items) {
+            let com = items[comIndex]
             console.log("com", com)
             if (com.slug == committee) {
-                console.log("commatch", com)
+                console.log("commatch", com);
                 return com
             }
         }
     }
     
-    const setCommittee = (location) => {
-        if (typeof location.state == "undefined") {
-            console.log("undef")
-            
-            fetchCommittees();
-            
-        }
-        else{
-            setCommittee_object(location.state.committee)
-        }
-    }
     
     
-    useEffect(() => {
-        setCommittee(location);
-      }, []);
-
-    console.log("com-obj:", committee_object)
-
-
+    
+    console.log("com-obj:", committee_object);
+    console.log("comitteeess", committees)
+    
+    
     return (
         <>
     <Container>
