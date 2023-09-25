@@ -9,10 +9,12 @@ import { NavBarPhone } from "./components/navigation/NavBarPhone";
 import { NewsRouter } from "./pages/news/NewsRouter";
 import { Login } from "./pages/login/Login";
 import { setAuthToken } from "./pages/login/setAuthToken";
+import { Kontortilgang } from "./pages/home/Kontortilgang";
 import { AboutHC } from "./pages/home/AboutHC";
 import { AuthProvider } from './context/AuthContext'
 import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
 import { EventPage } from "./pages/events/events";
+import { SoknadMidler } from "./pages/home/soknadommidler";
 
 
 class App extends React.Component {
@@ -34,6 +36,8 @@ class App extends React.Component {
             <Route path="/nyheter">                 <NewsRouter/>               </Route>
             <Route path="/undergrupper/:committee"> <CommitteeDetailsPage/>     </Route>            
             <Route path="/undergrupper">            <CommitteePage/>            </Route>
+            <Route path="/kontortilgang">           <Kontortilgang/>            </Route>
+            <Route path="/midler">                  <SoknadMidler/>             </Route>
           </Switch>
           <NavBarPhone/>
           </AuthProvider>
