@@ -20,7 +20,10 @@ export const Klassekatalog = () => {
                 <Option>Femte</Option>
                 <Option>Ferdig</Option>
             </DropDown>
-            <TextField placeholder="Søk"/>
+            <TextField placeholder="Stalk en spesifik person"/>
+            <Catalogue>
+
+            </Catalogue>
             </ContentBox>
             </PageContainer>
             </OuterWrapper>
@@ -37,4 +40,11 @@ const ContentBox = styled.div`
   width: 90%;
   border-radius: 10px;
   padding: 0 20px;
+`;
+
+const Catalogue = styled.div`
+  display: flex;
+  align-self: center;
+  margin: 20px 0px;
+  width: 30%;
 `;
