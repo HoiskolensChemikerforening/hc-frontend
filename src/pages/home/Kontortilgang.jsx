@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { H1, H2, P, Link } from "../../components/Text";
+import { H1, H2, P, Link, WideTitle } from "../../components/Text";
 import { PageContainer } from "../../components/Layout";
 import { TextField } from "../../components/Form";
 import { Button } from "../../components/Button";
@@ -42,8 +42,7 @@ export const Kontortilgang = () => {
   return (
     <OuterWrapper>
       <PageContainer>
-        <PageContainer>
-        <HeaderKontortilgang>Kontortilgang</HeaderKontortilgang>
+        <WideTitle>Kontortilgang</WideTitle>
         <ContentBox>
           <H1>Her kan du søke om tilgang på kontoret med studentkortet ditt.</H1>
           <P>
@@ -91,7 +90,6 @@ export const Kontortilgang = () => {
           </ButtonWrapper>          
           
         </ContentBox>
-        </PageContainer>
       </PageContainer>
 
       <ModalWrapper show={showModal}>
@@ -139,21 +137,6 @@ const OuterWrapper = styled.div`
   min-height: 100vh;
 `;
 
-const HeaderKontortilgang = styled.div`
-  background-color: var(--primary);
-  width: auto;
-  height: auto;
-  font-size: 42px;
-  text-align: center;
-  border-radius: 10px;
-  padding: 10px 10%;
-  margin: 20px;
-
-  @media (max-width: 530px){
-    width 100%
-  }
-`;
-
 const ContentBox = styled.div`
   background-color: white;
   width: 90%;
@@ -199,9 +182,8 @@ const ErrorMessage = styled.p`
   position: absolute;
 `;
 
-const SuccessMessage = styled.p`
+const SuccessMessage = styled(ErrorMessage)`
   color: green;
-  position: absolute;
 `;
 
 const ButtonWrapper = styled.div`
