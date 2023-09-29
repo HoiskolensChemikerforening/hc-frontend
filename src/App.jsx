@@ -13,6 +13,7 @@ import { Kontortilgang } from "./pages/home/Kontortilgang";
 import { AboutHC } from "./pages/home/AboutHC";
 import { AuthProvider } from './context/AuthContext'
 import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
+import { EventPage } from "./pages/events/events";
 import { SoknadMidler } from "./pages/home/soknadommidler";
 import { Internside } from "./pages/internt/internt";
 import { Klassekatalog } from "./pages/internt/Klassekatalog";
@@ -27,8 +28,8 @@ class App extends React.Component {
           <NavBar/>
           <Switch>
             <Route path="/" exact>                  <HomePage/>                 </Route>
+            <Route path="/arrangement">             <EventPage/>                </Route>
             <Route path='/login'>                   <Login/>                    </Route>
-            <Route path="/arrangement">             <H1>BLOT OG SÅNN!!!</H1>    </Route>
             <Route path="/bedrift">                 <H1>Bedrift</H1>            </Route>
             <Route path="/internt">                 <Internside/>               </Route>
             <Route path="/info">                    <H1>Info</H1>               </Route>
