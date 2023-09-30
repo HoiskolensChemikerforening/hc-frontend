@@ -39,10 +39,7 @@ function RichTextEditor() {
 }
 */
 
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+
 
 const TextField = styled.input`
   border: solid 1px var(--gray-50);
@@ -114,4 +111,45 @@ const Password = styled.input.attrs({ type: "password" })`
   width: ${ props => props.width || "200px" };
 `;
 
-export {TextArea, TextField, ImageField, ExampleForm, ImageUpload };
+
+const NewArticleContainer = styled.div`
+  margin: 10px 200px;
+`; 
+
+const FormContainer = styled.div`
+  display: flex;
+  padding: 10px 15px;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 500px;
+  max-height: 1000px;
+`;  
+
+const ButtonContainer = styled.div`
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+`;
+
+const ImageContainer = styled.div `
+    display: flex;
+    align-self: center;
+    margin: 20px 0px;
+    width: 30%;
+`; 
+
+const ImagePreview = styled.img `
+    width: 100%;
+`; 
+
+const Error = styled.p `
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: black;
+  font-style: bold;
+  background-color: var(--yellow-30);
+  `;
+
+
+export {TextArea, TextField, ImageField, ExampleForm, ImageUpload, FormContainer, NewArticleContainer, ImagePreview, Error, ButtonContainer, Option, Password, DropDown };

@@ -169,6 +169,14 @@ const Title = styled.div`
   margin:20px;
 `;
 
+const WideTitle = styled(Title)`
+  padding: 10px 10%;
+
+  @media (max-width: 530px){
+    width 100%
+  }
+`
+
 export {
   H1,
   H2,
@@ -176,5 +184,6 @@ export {
   P,
   Link,
   TitleContainer,
-  Title
+  Title,
+  WideTitle
 };
