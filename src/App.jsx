@@ -13,6 +13,7 @@ import { AboutHC } from "./pages/home/AboutHC";
 import { AuthProvider } from './context/AuthContext'
 import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
 import { EventPage } from "./pages/events/events";
+import { CreateSocialEvent } from "./pages/events/createSocialEvent";
 
 
 class App extends React.Component {
@@ -34,6 +35,7 @@ class App extends React.Component {
             <Route path="/nyheter">                 <NewsRouter/>               </Route>
             <Route path="/undergrupper/:committee"> <CommitteeDetailsPage/>     </Route>            
             <Route path="/undergrupper">            <CommitteePage/>            </Route>
+            <Route path="/sosialt/opprett">             <CreateSocialEvent/>                </Route>
           </Switch>
           <NavBarPhone/>
           </AuthProvider>
