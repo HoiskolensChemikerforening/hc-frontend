@@ -27,7 +27,8 @@ export const EventPage = () => {
     const currentEventFilterRef = useRef(coming);
 
     useEffect(() => {
-      fetchList("arrangementer/api/social/kommende/", setDispEvents);
+      fetchData(currentEventTypeRef.current, currentEventFilterRef.current);
+      // fetchList("arrangementer/api/social/kommende/", setDispEvents);
       console.log(dispEvents);
       checkPermission("events.add_social", user, setCanAddSocial);
       checkPermission("events.add_corporate", user, setCanAddCorporate);
@@ -43,11 +44,43 @@ export const EventPage = () => {
           }
         };*/
 
+    const fetchData = (eventType, filterType) => {
+      let endpoint = "";
+    
+      if (eventType === social) {
+        if (filterType === coming) {
+          endpoint = "arrangementer/api/social/kommende/";
+        } else if (filterType === mine) {
+          endpoint = "arrangementer/api/social/mine/";
+        } else if (filterType === previous) {
+          endpoint = "arrangementer/api/social/tidligere/";
+        }
+      } else if (eventType === corporate) {
+        if (filterType === coming) {
+          endpoint = "arrangementer/api/bedpres/kommende/";
+        } else if (filterType === mine) {
+          endpoint = "arrangementer/api/bedpres/mine/";
+        } else if (filterType === previous) {
+          endpoint = "arrangementer/api/bedpres/tidligere/";
+        }
+      }
+
+      fetch(endpoint)
+        .then((response) => response.json())
+        .then((data) => {
+          setDispEvents(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    };
+    
   const switchFilter = (eventType, filterType) => {
     //setcurrentEventType(eventType);
     //setcurrentEventFilter(filterType);
     currentEventTypeRef.current = eventType;
     currentEventFilterRef.current = filterType;
+    fetchData(eventType, filterType);
     if (currentEventTypeRef.current === social){
       if (currentEventFilterRef.current === coming){
         fetchList("arrangementer/api/social/kommende/", setDispEvents)
