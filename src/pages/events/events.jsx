@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import styled, {css} from "styled-components";
 import { Button } from "../../components/Button"; 
 import { Col } from "../../components/Layout";
@@ -17,12 +17,14 @@ export const EventPage = () => {
     const [dispEvents, setDispEvents] = useState();
     const [socialEvents, setSocialEvents] = useState();
     const [corporateEvents, setCorporateEvents] = useState();
-    const [currentEventType, setcurrentEventType] = useState(social);
-    const [currentEventFilter, setcurrentEventFilter] = useState(coming);
+    //const [currentEventType, setcurrentEventType] = useState(social);
+    //const [currentEventFilter, setcurrentEventFilter] = useState(coming);
     const [canAddSocial, setCanAddSocial] = useState(false);
     const [canAddCorporate, setCanAddCorporate] = useState(false);
     const history = useHistory();
     let {user} = useContext(AuthContext);
+    const currentEventTypeRef = useRef(social);
+    const currentEventFilterRef = useRef(coming);
 
     useEffect(() => {
       fetchList("arrangementer/api/social/kommende/", setDispEvents);
@@ -31,52 +33,54 @@ export const EventPage = () => {
       checkPermission("events.add_corporate", user, setCanAddCorporate);
         }, [user]);
 
-  const switchEvent = eventType => {
-    setcurrentEventType(eventType);
-    if (eventType === social ){
-      setDispEvents(socialEvents);
-    }
-    else if (eventType === corporate ){
-      setDispEvents(corporateEvents);
-    }
-  };
+        /* const switchEvent = eventType => {
+          setcurrentEventType(eventType);
+          if (eventType === social ){
+            setDispEvents(socialEvents);
+          }
+          else if (eventType === corporate ){
+            setDispEvents(corporateEvents);
+          }
+        };*/
 
   const switchFilter = (eventType, filterType) => {
-    setcurrentEventFilter(filterType)
-    setcurrentEventType(eventType)
-    if (currentEventType === social){
-      if (currentEventFilter === coming){
+    //setcurrentEventType(eventType);
+    //setcurrentEventFilter(filterType);
+    currentEventTypeRef.current = eventType;
+    currentEventFilterRef.current = filterType;
+    if (currentEventTypeRef.current === social){
+      if (currentEventFilterRef.current === coming){
         fetchList("arrangementer/api/social/kommende/", setDispEvents)
         console.log("Kommende sosiale eventer")
       }
-      else if (currentEventFilter === mine){
+      else if (currentEventFilterRef.current === mine){
         fetchList("arrangementer/api/social/mine/", setDispEvents)
         console.log("Mine sosiale eventer")
       }
-      else if (currentEventFilter === previous){
+      else if (currentEventFilterRef.current === previous){
         fetchList("arrangementer/api/social/", setDispEvents)
         console.log("Alle sosiale eventer")
       }
     }
-    else if (currentEventType === corporate){
-      if (currentEventFilter === coming){
+    else if (currentEventTypeRef.current === corporate){
+      if (currentEventFilterRef.current === coming){
         fetchList("arrangementer/api/bedpres/kommende/", setDispEvents)
         console.log("Kommende bedrift eventer")
       }
-      else if (currentEventFilter === mine){
+      else if (currentEventFilterRef.current === mine){
         fetchList("arrangementer/api/bedpres/mine/", setDispEvents)
         console.log("Mine bedrift eventer")
       }
-      else if (currentEventFilter === previous){
+      else if (currentEventFilterRef.current === previous){
         fetchList("arrangementer/api/bedpres/", setDispEvents)
         console.log("Alle bedrift eventer")
       }
     }
   };
 
-  const addEvent= () =>{
+  /*const addEvent= () =>{
     alert("La til event");
-  };
+  };*/
   
     return (
         <>
@@ -84,20 +88,20 @@ export const EventPage = () => {
           <EventType>
             <EventTypeDevider>
               <Devider>
-              <Title  onClick={() => switchFilter(social, currentEventFilter)  }
-                style={ currentEventType === social ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30' } : { fontWeight: 'normal' } }
+              <Title  onClick={() => switchFilter(social, currentEventFilterRef.current)  }
+                style={ currentEventTypeRef.current === social ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30' } : { fontWeight: 'normal' } }
               >Sosialt</Title> </Devider>
               <Devider>
-              <Title  onClick={() => switchFilter(corporate, currentEventFilter)}
-              style={ currentEventType === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+              <Title  onClick={() => switchFilter(corporate, currentEventFilterRef.current)}
+              style={ currentEventTypeRef.current === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
               >Bedrift</Title></Devider>
               <Devider>
-              {currentEventType === social && canAddSocial ? (
+              {currentEventTypeRef.current === social && canAddSocial ? (
                 <AddButtonContainer to="/sosialt/opprett">
                   <Title value="Event" style={{ fontWeight: 'bold' }}>+</Title>
                 </AddButtonContainer>
               ) : null}
-                {currentEventType === corporate && canAddCorporate ? (
+                {currentEventTypeRef.current === corporate && canAddCorporate ? (
                   <AddButtonContainer to="/bedpres/opprett">
                     <Title value="Event" style={{ fontWeight: 'bold' }}>+</Title>
                   </AddButtonContainer>
@@ -106,16 +110,16 @@ export const EventPage = () => {
               </EventTypeDevider>
               <EventFilterDevider>
               <Devider>
-              <Title  onClick={() => switchFilter(currentEventType,coming)}
-              style={ currentEventFilter === coming ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+              <Title  onClick={() => switchFilter(currentEventTypeRef.current, coming)}
+              style={ currentEventFilterRef.current === coming ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
               >Kommende</Title></Devider>
               <Devider>
-              <Title  onClick={() => switchFilter(currentEventType,mine)}
-              style={ currentEventFilter === mine ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+              <Title  onClick={() => switchFilter(currentEventTypeRef.current, mine)}
+              style={ currentEventFilterRef.current === mine ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
               >Mine</Title></Devider>
               <Devider>
-              <Title  onClick={() => switchFilter(currentEventType,previous)}
-              style={ currentEventFilter === previous ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+              <Title  onClick={() => switchFilter(currentEventTypeRef.current, previous)}
+              style={ currentEventFilterRef.current === previous ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
               >Tidligere</Title> </Devider>
             </EventFilterDevider>
           </EventType>
