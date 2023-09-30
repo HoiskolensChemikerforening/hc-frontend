@@ -58,7 +58,7 @@ export const EventPage = () => {
         console.log("Mine sosiale eventer")
       }
       else if (currentEventFilterRef.current === previous){
-        fetchList("arrangementer/api/social/", setDispEvents)
+        fetchList("arrangementer/api/social/tidligere/", setDispEvents)
         console.log("Alle sosiale eventer")
       }
     }
@@ -72,7 +72,7 @@ export const EventPage = () => {
         console.log("Mine bedrift eventer")
       }
       else if (currentEventFilterRef.current === previous){
-        fetchList("arrangementer/api/bedpres/", setDispEvents)
+        fetchList("arrangementer/api/bedpres/tidligere/", setDispEvents)
         console.log("Alle bedrift eventer")
       }
     }
