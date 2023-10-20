@@ -17,8 +17,6 @@ export const EventPage = () => {
     const [dispEvents, setDispEvents] = useState();
     const [socialEvents, setSocialEvents] = useState();
     const [corporateEvents, setCorporateEvents] = useState();
-    //const [currentEventType, setcurrentEventType] = useState(social);
-    //const [currentEventFilter, setcurrentEventFilter] = useState(coming);
     const [canAddSocial, setCanAddSocial] = useState(false);
     const [canAddCorporate, setCanAddCorporate] = useState(false);
     const history = useHistory();
@@ -28,21 +26,11 @@ export const EventPage = () => {
 
     useEffect(() => {
       fetchData(currentEventTypeRef.current, currentEventFilterRef.current);
-      // fetchList("arrangementer/api/social/kommende/", setDispEvents);
+      switchFilter(currentEventTypeRef.current, currentEventFilterRef.current) // have set current to social and coming, could add so updates on current page and not back to social and coming
       console.log(dispEvents);
       checkPermission("events.add_social", user, setCanAddSocial);
       checkPermission("events.add_corporate", user, setCanAddCorporate);
         }, [user]);
-
-        /* const switchEvent = eventType => {
-          setcurrentEventType(eventType);
-          if (eventType === social ){
-            setDispEvents(socialEvents);
-          }
-          else if (eventType === corporate ){
-            setDispEvents(corporateEvents);
-          }
-        };*/
 
     const fetchData = (eventType, filterType) => {
       let endpoint = "";
@@ -76,8 +64,6 @@ export const EventPage = () => {
     };
     
   const switchFilter = (eventType, filterType) => {
-    //setcurrentEventType(eventType);
-    //setcurrentEventFilter(filterType);
     currentEventTypeRef.current = eventType;
     currentEventFilterRef.current = filterType;
     fetchData(eventType, filterType);
@@ -110,10 +96,6 @@ export const EventPage = () => {
       }
     }
   };
-
-  /*const addEvent= () =>{
-    alert("La til event");
-  };*/
   
     return (
         <>
