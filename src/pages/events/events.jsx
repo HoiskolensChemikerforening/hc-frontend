@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import styled, {css} from "styled-components";
-import { Button } from "../../components/Button"; 
-import { Col } from "../../components/Layout";
-import { H1, P} from "../../components/Text";
+import { P} from "../../components/Text";
 import { Link, useHistory } from "react-router-dom";
 import { fetchList, checkPermission } from "../../utils/requests";
 import AuthContext from "../../context/AuthContext";
@@ -15,8 +13,6 @@ const corporate = 2
 
 export const EventPage = () => {
     const [dispEvents, setDispEvents] = useState();
-    const [socialEvents, setSocialEvents] = useState();
-    const [corporateEvents, setCorporateEvents] = useState();
     const [canAddSocial, setCanAddSocial] = useState(false);
     const [canAddCorporate, setCanAddCorporate] = useState(false);
     const history = useHistory();
