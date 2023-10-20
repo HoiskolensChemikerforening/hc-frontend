@@ -4,6 +4,7 @@ import { P} from "../../components/Text";
 import { Link, useHistory } from "react-router-dom";
 import { fetchList, checkPermission } from "../../utils/requests";
 import AuthContext from "../../context/AuthContext";
+//import ReactPaginate from 'react-paginate';
 
 const coming = 1
 const mine = 2
@@ -33,19 +34,19 @@ export const EventPage = () => {
     
       if (eventType === social) {
         if (filterType === coming) {
-          endpoint = "arrangementer/api/social/kommende/";
+          endpoint = "arrangementer/api/sosial/kommende/";
         } else if (filterType === mine) {
-          endpoint = "arrangementer/api/social/mine/";
+          endpoint = "arrangementer/api/sosial/mine/";
         } else if (filterType === previous) {
-          endpoint = "arrangementer/api/social/tidligere/";
+          endpoint = "arrangementer/api/sosial/tidligere/";
         }
       } else if (eventType === corporate) {
         if (filterType === coming) {
-          endpoint = "arrangementer/api/bedpres/kommende/";
+          endpoint = "arrangementer/api/karriere/kommende/";
         } else if (filterType === mine) {
-          endpoint = "arrangementer/api/bedpres/mine/";
+          endpoint = "arrangementer/api/karriere/mine/";
         } else if (filterType === previous) {
-          endpoint = "arrangementer/api/bedpres/tidligere/";
+          endpoint = "arrangementer/api/karriere/tidligere/";
         }
       }
 
@@ -65,29 +66,29 @@ export const EventPage = () => {
     fetchData(eventType, filterType);
     if (currentEventTypeRef.current === social){
       if (currentEventFilterRef.current === coming){
-        fetchList("arrangementer/api/social/kommende/", setDispEvents)
+        fetchList("arrangementer/api/sosial/kommende/", setDispEvents)
         console.log("Kommende sosiale eventer")
       }
       else if (currentEventFilterRef.current === mine){
-        fetchList("arrangementer/api/social/mine/", setDispEvents)
+        fetchList("arrangementer/api/sosial/mine/", setDispEvents)
         console.log("Mine sosiale eventer")
       }
       else if (currentEventFilterRef.current === previous){
-        fetchList("arrangementer/api/social/tidligere/", setDispEvents)
+        fetchList("arrangementer/api/sosial/tidligere/", setDispEvents)
         console.log("Alle sosiale eventer")
       }
     }
     else if (currentEventTypeRef.current === corporate){
       if (currentEventFilterRef.current === coming){
-        fetchList("arrangementer/api/bedpres/kommende/", setDispEvents)
+        fetchList("arrangementer/api/karriere/kommende/", setDispEvents)
         console.log("Kommende bedrift eventer")
       }
       else if (currentEventFilterRef.current === mine){
-        fetchList("arrangementer/api/bedpres/mine/", setDispEvents)
+        fetchList("arrangementer/api/karriere/mine/", setDispEvents)
         console.log("Mine bedrift eventer")
       }
       else if (currentEventFilterRef.current === previous){
-        fetchList("arrangementer/api/bedpres/tidligere/", setDispEvents)
+        fetchList("arrangementer/api/karriere/tidligere/", setDispEvents)
         console.log("Alle bedrift eventer")
       }
     }
@@ -113,7 +114,7 @@ export const EventPage = () => {
                 </AddButtonContainer>
               ) : null}
                 {currentEventTypeRef.current === corporate && canAddCorporate ? (
-                  <AddButtonContainer to="/bedpres/opprett">
+                  <AddButtonContainer to="/karriere/opprett">
                     <Title value="Event" style={{ fontWeight: 'bold' }}>+</Title>
                   </AddButtonContainer>
                 ) : null}
