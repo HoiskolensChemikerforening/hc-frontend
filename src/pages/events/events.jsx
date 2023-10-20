@@ -130,7 +130,7 @@ export const EventPage = () => {
               >Bedrift</Title></Devider>
               <Devider>
               {currentEventTypeRef.current === social && canAddSocial ? (
-                <AddButtonContainer to="sosialt/opprett">
+                <AddButtonContainer to="arrangement/sosialt/opprett">
                   <Title value="Event" style={{ fontWeight: 'bold' }}>+</Title>
                 </AddButtonContainer>
               ) : null}
