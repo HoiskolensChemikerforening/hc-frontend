@@ -18,6 +18,7 @@ const Pagination = ({ currentPage, itemsPerPage, totalItems, onPageChange }) => 
   const handlePageClick = (newPage) => {
     if (newPage >= 1 && newPage <= totalPages) {
       onPageChange(newPage);
+      window.scrollTo(0, 0); // Scroll up to top when button is clicked
     }
   };
 
