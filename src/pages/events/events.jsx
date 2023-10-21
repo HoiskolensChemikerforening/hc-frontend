@@ -187,12 +187,14 @@ export const EventPage = () => {
          </EventBox>
           )) }
           </EventList>
+          {dispEvents.length > itemsPerPage && (
           <Pagination
             currentPage={currentPage}
             itemsPerPage={itemsPerPage}
             totalItems={dispEvents.length}
             onPageChange={handlePageChange}
           />
+          )}
         </EventContainer>
       </>
   )
