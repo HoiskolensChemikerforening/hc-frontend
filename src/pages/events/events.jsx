@@ -284,7 +284,7 @@ const EventBox = styled.div`
     padding: 5px 0px 7px 5px;
     border-radius: 5px;
     width: 300px;
-
+    
 `;
 
 const EventList = styled.div`
@@ -293,7 +293,7 @@ const EventList = styled.div`
   justify-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
-
+  justify-content: center;
 `;
 
 const DateBox = styled.div`
