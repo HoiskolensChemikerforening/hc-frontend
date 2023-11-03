@@ -6,7 +6,7 @@ import { H1, H2, H3, P, Title, TitleContainer} from "../../components/Text";
 import { Link, useHistory } from "react-router-dom";
 import { fetchList, checkPermission } from "../../utils/requests";
 import AuthContext from "../../context/AuthContext";
-import { TextField, ImageUpload } from "../../components/Form";
+import { TextField, ImageUpload, DropDown, TextArea } from "../../components/Form";
 
 export const CreateSocialEvent = () => {
   const [canAddSocial, setCanAddSocial] = useState(false);
@@ -18,7 +18,7 @@ export const CreateSocialEvent = () => {
     checkPermission("events.add_social", user, setCanAddSocial);
       }, [user]);
 
-      const [formData, setFormData] = useState({ title: '', date: '', description: '' });
+      const [formData, setFormData] = useState({ title: '', komite: '', date: '', sted: '', beskrivelse: '', betalingsinfo: '' });
 
       const handleChange = (e) => {
         const { name, value } = e.target;
@@ -82,13 +82,20 @@ export const CreateSocialEvent = () => {
 
           <div>
             <P>Komité</P>
-            <select id="dropdown" value={selectedOption} onChange={handleOptionChange}>
-            <option value="invalid">Velg din komité</option>
+            <DropDown
+            label="Komite"
+            type="komite"
+            id="komite"
+            name="komite"
+            value={formData.komite}
+            onChange={handleChange}
+            required>
+              <option value="" disabled selected>Velg din komité</option> {/* Burde legge inn at kun komiteer man har permission til vises */}
               <option value="pHaestkomiteen">pHaestkomiteen</option>
               <option value="Webkomiteen">Webkomiteen</option>
-              <option value="Kjellerstyret">Kjellerstyret</option>
-            </select>
-            <P>Du valgte: {selectedOption}</P>
+              <option value="Kjellerstyret">Kjellerstyret</option> 
+            </DropDown>
+            <P>Du valgte: {formData.komite}</P>
           </div>
 
           <P>Legg inn følgende datoer og klokkeslett:</P>
@@ -129,17 +136,41 @@ export const CreateSocialEvent = () => {
 
           <div>
             <P>Sted</P>
-            <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required />
+            <TextField
+              label="Sted"
+              type="sted"
+              id="sted"
+              name="sted"
+              value={formData.sted}
+              onChange={handleChange}
+              required
+            />
           </div>
 
           <div>
             <P>Beskrivelse av arrangementet</P>
-            <textarea id="description" name="description" value={formData.description} onChange={handleChange} required />
+            <TextArea
+              label="Beskrivelse"
+              type="beskrivelse"
+              id="beskrivelse"
+              name="beskrivelse"
+              value={formData.beskrivelse}
+              onChange={handleChange}
+              required
+            />
           </div>
 
           <div>
             <P>Betalingsinformasjon</P>
-            <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required />
+            <TextArea
+              label="Betalingsinfo"
+              type="betalingsinfo"
+              id="betalingsinfo"
+              name="betalingsinfo"
+              value={formData.betalingsinfo}
+              onChange={handleChange}
+              required
+            />
           </div>
 
           <br/>
