@@ -3,8 +3,10 @@ import axios from 'axios';
 
 export const baseUrl = "http://localhost:8000/";
 
-export const fetchList = async (url, setFunction) => {
-    await axios.get(baseUrl + url)
+export const fetchList = async (url, setFunction, currentPage = 1, itemsPerPage = 20) => {
+    await axios.get(baseUrl + url, {
+        params: { page: currentPage, itemsPerPage }
+      })
     .then(response => {
     setFunction(response.data);
     })

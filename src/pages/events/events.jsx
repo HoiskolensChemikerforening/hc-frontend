@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import styled, {css} from "styled-components";
-import { Button } from "../../components/Button"; 
-import { Col } from "../../components/Layout";
-import { H1, P} from "../../components/Text";
+import { P } from "../../components/Text";
+import { Button } from "../../components/Button";
 import { Link, useHistory } from "react-router-dom";
 import { fetchList, checkPermission } from "../../utils/requests";
 import AuthContext from "../../context/AuthContext";
@@ -13,55 +12,77 @@ const previous = 3
 const social = 1
 const corporate = 2
 
+const Pagination = ({ currentPage, itemsPerPage, totalItems, onPageChange }) => {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const handlePageClick = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      onPageChange(newPage);
+      window.scrollTo(0, 0); // Scroll up to top when button is clicked
+    }
+  };
+
+  return (
+    <PageBut>
+      <DevideButAndText>
+        <Button primary type="button" onClick={() => handlePageClick(currentPage - 1)}>Forrige</Button>
+        <Button primary type="button" onClick={() => handlePageClick(currentPage + 1)}>Neste</Button>
+      </DevideButAndText>
+      <DevideButAndText>
+        <P>Side {currentPage} av {totalPages}</P>
+      </DevideButAndText>
+    </PageBut>
+  );
+};
+
 export const EventPage = () => {
-    const [dispEvents, setDispEvents] = useState();
-    const [socialEvents, setSocialEvents] = useState();
-    const [corporateEvents, setCorporateEvents] = useState();
-    //const [currentEventType, setcurrentEventType] = useState(social);
-    //const [currentEventFilter, setcurrentEventFilter] = useState(coming);
+    const [dispEvents, setDispEvents] = useState([]);
     const [canAddSocial, setCanAddSocial] = useState(false);
     const [canAddCorporate, setCanAddCorporate] = useState(false);
     const history = useHistory();
     let {user} = useContext(AuthContext);
     const currentEventTypeRef = useRef(social);
     const currentEventFilterRef = useRef(coming);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 20; // Change this number to your desired items per page
+
+    const handlePageChange = (page) => {
+      setCurrentPage(page);
+    };
+
+    const displayedEvents = dispEvents.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage
+    );
 
     useEffect(() => {
       fetchData(currentEventTypeRef.current, currentEventFilterRef.current);
-      // fetchList("arrangementer/api/social/kommende/", setDispEvents);
+      switchFilter(currentEventTypeRef.current, currentEventFilterRef.current); // have set current to social and coming, could add so updates on current page and not back to social and coming
       console.log(dispEvents);
       checkPermission("events.add_social", user, setCanAddSocial);
       checkPermission("events.add_corporate", user, setCanAddCorporate);
         }, [user]);
 
-        /* const switchEvent = eventType => {
-          setcurrentEventType(eventType);
-          if (eventType === social ){
-            setDispEvents(socialEvents);
-          }
-          else if (eventType === corporate ){
-            setDispEvents(corporateEvents);
-          }
-        };*/
-
-    const fetchData = (eventType, filterType) => {
-      let endpoint = "";
+    const fetchData = (eventType, filterType, currentPage, itemsPerPage) => {
+      //let endpoint = "";
+      //endpoint += `?page=${currentPage}&itemsPerPage=${itemsPerPage}`;
+      let endpoint = `?page=${currentPage}&itemsPerPage=${itemsPerPage}`;
     
       if (eventType === social) {
         if (filterType === coming) {
-          endpoint = "arrangementer/api/social/kommende/";
+          endpoint = "arrangementer/api/sosial/kommende/";
         } else if (filterType === mine) {
-          endpoint = "arrangementer/api/social/mine/";
+          endpoint = "arrangementer/api/sosial/mine/";
         } else if (filterType === previous) {
-          endpoint = "arrangementer/api/social/tidligere/";
+          endpoint = "arrangementer/api/sosial/tidligere/";
         }
       } else if (eventType === corporate) {
         if (filterType === coming) {
-          endpoint = "arrangementer/api/bedpres/kommende/";
+          endpoint = "arrangementer/api/karriere/kommende/";
         } else if (filterType === mine) {
-          endpoint = "arrangementer/api/bedpres/mine/";
+          endpoint = "arrangementer/api/karriere/mine/";
         } else if (filterType === previous) {
-          endpoint = "arrangementer/api/bedpres/tidligere/";
+          endpoint = "arrangementer/api/karriere/tidligere/";
         }
       }
 
@@ -76,44 +97,38 @@ export const EventPage = () => {
     };
     
   const switchFilter = (eventType, filterType) => {
-    //setcurrentEventType(eventType);
-    //setcurrentEventFilter(filterType);
     currentEventTypeRef.current = eventType;
     currentEventFilterRef.current = filterType;
-    fetchData(eventType, filterType);
+    fetchData(eventType, filterType, currentPage, itemsPerPage);
     if (currentEventTypeRef.current === social){
       if (currentEventFilterRef.current === coming){
-        fetchList("arrangementer/api/social/kommende/", setDispEvents)
+        fetchList("arrangementer/api/sosial/kommende/", setDispEvents)
         console.log("Kommende sosiale eventer")
       }
       else if (currentEventFilterRef.current === mine){
-        fetchList("arrangementer/api/social/mine/", setDispEvents)
+        fetchList("arrangementer/api/sosial/mine/", setDispEvents)
         console.log("Mine sosiale eventer")
       }
       else if (currentEventFilterRef.current === previous){
-        fetchList("arrangementer/api/social/tidligere/", setDispEvents)
+        fetchList("arrangementer/api/sosial/tidligere/", setDispEvents, currentPage, itemsPerPage)
         console.log("Alle sosiale eventer")
       }
     }
     else if (currentEventTypeRef.current === corporate){
       if (currentEventFilterRef.current === coming){
-        fetchList("arrangementer/api/bedpres/kommende/", setDispEvents)
+        fetchList("arrangementer/api/karriere/kommende/", setDispEvents)
         console.log("Kommende bedrift eventer")
       }
       else if (currentEventFilterRef.current === mine){
-        fetchList("arrangementer/api/bedpres/mine/", setDispEvents)
+        fetchList("arrangementer/api/karriere/mine/", setDispEvents)
         console.log("Mine bedrift eventer")
       }
       else if (currentEventFilterRef.current === previous){
-        fetchList("arrangementer/api/bedpres/tidligere/", setDispEvents)
+        fetchList("arrangementer/api/karriere/tidligere/", setDispEvents, currentPage, itemsPerPage)
         console.log("Alle bedrift eventer")
       }
     }
   };
-
-  /*const addEvent= () =>{
-    alert("La til event");
-  };*/
   
     return (
         <>
@@ -135,7 +150,7 @@ export const EventPage = () => {
                 </AddButtonContainer>
               ) : null}
                 {currentEventTypeRef.current === corporate && canAddCorporate ? (
-                  <AddButtonContainer to="bedpres/opprett">
+                  <AddButtonContainer to="/karriere/opprett">
                     <Title value="Event" style={{ fontWeight: 'bold' }}>+</Title>
                   </AddButtonContainer>
                 ) : null}
@@ -157,7 +172,7 @@ export const EventPage = () => {
             </EventFilterDevider>
           </EventType>
           <EventList>
-          {dispEvents && dispEvents.map((event) => (
+          {displayedEvents.map((event) => (
              <EventBox key={event.id} onClick={() => {history.push(`/arrangementer/${event.id}`)}}>
               <ImageCont>
                <Image src={event.image}/>
@@ -172,6 +187,14 @@ export const EventPage = () => {
          </EventBox>
           )) }
           </EventList>
+          {dispEvents.length > itemsPerPage && (
+          <Pagination
+            currentPage={currentPage}
+            itemsPerPage={itemsPerPage}
+            totalItems={dispEvents.length}
+            onPageChange={handlePageChange}
+          />
+          )}
         </EventContainer>
       </>
   )
@@ -264,7 +287,7 @@ const EventBox = styled.div`
     padding: 5px 0px 7px 5px;
     border-radius: 5px;
     width: 300px;
-
+    
 `;
 
 const EventList = styled.div`
@@ -273,7 +296,7 @@ const EventList = styled.div`
   justify-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
-
+  justify-content: center;
 `;
 
 const DateBox = styled.div`
@@ -357,4 +380,18 @@ const PTitle = styled.div`
 const AddButtonContainer = styled(Link)`
   text-decoration: none; 
   color: black; 
+`;
+
+const PageBut = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const DevideButAndText = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 10px;
 `;
