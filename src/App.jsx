@@ -18,6 +18,7 @@ import { Internside } from "./pages/internt/internt";
 import { Klassekatalog } from "./pages/internt/Klassekatalog";
 import { easterEggsRouter } from "./pages/easterEggs/easterEggsRouter";
 import { EasterEggs } from "./pages/easterEggs/easterEggs";
+import { HundreSPM } from "./pages/easterEggs/hundreSPM";
 import { EventRouter } from "./pages/events/EventRouter";
 
 
@@ -40,6 +41,7 @@ class App extends React.Component {
             <Route path="/nyheter">                 <NewsRouter/>               </Route>
             <Route path="/easterEggs">              <easterEggsRouter/>         </Route>
             <Route path="/testEgg">                 <EasterEggs/>               </Route>
+            <Route path="/100spm">                  <HundreSPM/>                </Route>
             <Route path="/undergrupper/:committee"> <CommitteeDetailsPage/>     </Route>            
             <Route path="/undergrupper">            <CommitteePage/>            </Route>
             <Route path="/kontortilgang">           <Kontortilgang/>            </Route>
