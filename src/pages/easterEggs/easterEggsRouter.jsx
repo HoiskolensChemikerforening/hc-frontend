@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
-import { easterEggs } from "./easterEggs";
+import { EasterEggs } from "./easterEggs";
 
 const easterEggsRouter = () => {
   return (
@@ -8,7 +8,7 @@ const easterEggsRouter = () => {
       <Switch>
 
       <Route exact path="/easterEggs">
-        <easterEggs />
+        <EasterEggs />
       </Route>
 
       </Switch>
