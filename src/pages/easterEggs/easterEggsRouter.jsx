@@ -8,8 +8,9 @@ const easterEggsRouter = () => {
       <Switch>
 
       <Route exact path="/easterEggs">
-          <easterEggs />
+        <easterEggs />
       </Route>
+
       </Switch>
       
     </Fragment>
