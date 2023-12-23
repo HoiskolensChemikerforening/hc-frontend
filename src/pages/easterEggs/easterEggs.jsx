@@ -39,13 +39,14 @@ export const EasterEggs = () => {
             </TitleContainer>
 
             <PageContainer>
-                <H1>Klar for et spennende eventyr?</H1>
+                <H1>Hvilke sider gjemmer seg på nettsiden vår?</H1>
                 <P>
-                    Velkommen til vår påskeegg-side! Her gjemmer det seg overraskelser i form av hemmelige lenker til morsomme sider på nettstedet vårt. Kan du finne alle de skjulte URL-ene som fører til spennende eventyr?
+                    Velkommen til vår påskeegg-side! Her gjemmer det seg overraskelser i form av hemmelige lenker til morsomme sider på nettstedet vårt. 
+                    Kan du finne alle de skjulte URL-ene som fører til morsomme og ikke fullt så morsomme sider?
                 </P>
                 <EggImage src={easterEgg} alt="Easter Egg" />
                 <P>
-                    Disse "eggene" er ikke bare for påsken - de venter på at du oppdager dem når som helst du utforsker nettsiden vår! Det kan være alt fra skjulte historier til morsomme interaktive aktiviteter.
+                    Disse "eggene" er ikke bare for påsken - de venter på at du oppdager dem når som helst du utforsker nettsiden vår! 
                 </P>
             </PageContainer>
         </MainContainer>
