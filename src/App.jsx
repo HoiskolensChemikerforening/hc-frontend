@@ -17,6 +17,7 @@ import { EventPage } from "./pages/events/events";
 import { SoknadMidler } from "./pages/home/soknadommidler";
 import { Internside } from "./pages/internt/internt";
 import { Klassekatalog } from "./pages/internt/Klassekatalog";
+import { easterEggsRouter } from "./pages/easterEggs/easterEggsRouter";
 
 
 class App extends React.Component {
@@ -36,6 +37,7 @@ class App extends React.Component {
             <Route path="/profil">                  <H1>Profil</H1>             </Route>
             <Route path="/om-hc">                   <AboutHC/>                  </Route>
             <Route path="/nyheter">                 <NewsRouter/>               </Route>
+            <Route path="/easterEggs">              <easterEggsRouter/>         </Route>
             <Route path="/undergrupper/:committee"> <CommitteeDetailsPage/>     </Route>            
             <Route path="/undergrupper">            <CommitteePage/>            </Route>
             <Route path="/kontortilgang">           <Kontortilgang/>            </Route>
