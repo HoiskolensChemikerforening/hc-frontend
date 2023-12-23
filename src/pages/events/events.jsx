@@ -1,8 +1,7 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import styled, {css} from "styled-components";
-import { Button } from "../../components/Button"; 
-import { Col } from "../../components/Layout";
-import { H1, P} from "../../components/Text";
+import { P } from "../../components/Text";
+import { Button } from "../../components/Button";
 import { Link, useHistory } from "react-router-dom";
 import { fetchList, checkPermission } from "../../utils/requests";
 import AuthContext from "../../context/AuthContext";
@@ -13,68 +12,122 @@ const previous = 3
 const social = 1
 const corporate = 2
 
+const Pagination = ({ currentPage, itemsPerPage, totalItems, onPageChange }) => {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  const handlePageClick = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      onPageChange(newPage);
+      window.scrollTo(0, 0); // Scroll up to top when button is clicked
+    }
+  };
+
+  return (
+    <PageBut>
+      <DevideButAndText>
+        <Button primary type="button" onClick={() => handlePageClick(currentPage - 1)}>Forrige</Button>
+        <Button primary type="button" onClick={() => handlePageClick(currentPage + 1)}>Neste</Button>
+      </DevideButAndText>
+      <DevideButAndText>
+        <P>Side {currentPage} av {totalPages}</P>
+      </DevideButAndText>
+    </PageBut>
+  );
+};
+
 export const EventPage = () => {
-    const [dispEvents, setDispEvents] = useState();
-    const [socialEvents, setSocialEvents] = useState();
-    const [corporateEvents, setCorporateEvents] = useState();
-    const [eventTypeBold, seteventTypeBold] = useState(social);
-    const [eventFilterBold, seteventFilterBold] = useState(coming);
+    const [dispEvents, setDispEvents] = useState([]);
     const [canAddSocial, setCanAddSocial] = useState(false);
     const [canAddCorporate, setCanAddCorporate] = useState(false);
     const history = useHistory();
     let {user} = useContext(AuthContext);
+    const currentEventTypeRef = useRef(social);
+    const currentEventFilterRef = useRef(coming);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 20; // Change this number to your desired items per page
+
+    const handlePageChange = (page) => {
+      setCurrentPage(page);
+    };
+
+    const displayedEvents = dispEvents.slice(
+      (currentPage - 1) * itemsPerPage,
+      currentPage * itemsPerPage
+    );
 
     useEffect(() => {
-      fetchList("arrangementer/api/social/kommende/", setDispEvents);
+      fetchData(currentEventTypeRef.current, currentEventFilterRef.current);
+      switchFilter(currentEventTypeRef.current, currentEventFilterRef.current); // have set current to social and coming, could add so updates on current page and not back to social and coming
       console.log(dispEvents);
       checkPermission("events.add_social", user, setCanAddSocial);
       checkPermission("events.add_corporate", user, setCanAddCorporate);
         }, [user]);
 
-  const switchEvent = eventType => {
-    seteventTypeBold(eventType);
-    if (eventType === social ){
-      setDispEvents(socialEvents);
-    }
-    else if (eventType === corporate ){
-      setDispEvents(corporateEvents);
-    }
-  };
+    const fetchData = (eventType, filterType, currentPage, itemsPerPage) => {
+      //let endpoint = "";
+      //endpoint += `?page=${currentPage}&itemsPerPage=${itemsPerPage}`;
+      let endpoint = `?page=${currentPage}&itemsPerPage=${itemsPerPage}`;
+    
+      if (eventType === social) {
+        if (filterType === coming) {
+          endpoint = "arrangementer/api/sosial/kommende/";
+        } else if (filterType === mine) {
+          endpoint = "arrangementer/api/sosial/mine/";
+        } else if (filterType === previous) {
+          endpoint = "arrangementer/api/sosial/tidligere/";
+        }
+      } else if (eventType === corporate) {
+        if (filterType === coming) {
+          endpoint = "arrangementer/api/karriere/kommende/";
+        } else if (filterType === mine) {
+          endpoint = "arrangementer/api/karriere/mine/";
+        } else if (filterType === previous) {
+          endpoint = "arrangementer/api/karriere/tidligere/";
+        }
+      }
 
-  const switchFilter = filter_id => {
-    seteventFilterBold(filter_id)
-    if (eventTypeBold === social){
-      if (filter_id === coming){
-        fetchList("arrangementer/api/social/kommende/", setDispEvents)
+      fetch(endpoint)
+        .then((response) => response.json())
+        .then((data) => {
+          setDispEvents(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
+    };
+    
+  const switchFilter = (eventType, filterType) => {
+    currentEventTypeRef.current = eventType;
+    currentEventFilterRef.current = filterType;
+    fetchData(eventType, filterType, currentPage, itemsPerPage);
+    if (currentEventTypeRef.current === social){
+      if (currentEventFilterRef.current === coming){
+        fetchList("arrangementer/api/sosial/kommende/", setDispEvents)
         console.log("Kommende sosiale eventer")
       }
-      else if (filter_id === mine){
-        fetchList("arrangementer/api/social/mine/", setDispEvents)
+      else if (currentEventFilterRef.current === mine){
+        fetchList("arrangementer/api/sosial/mine/", setDispEvents)
         console.log("Mine sosiale eventer")
       }
-      else if (filter_id === previous){
-        fetchList("arrangementer/api/social/", setDispEvents)
+      else if (currentEventFilterRef.current === previous){
+        fetchList("arrangementer/api/sosial/tidligere/", setDispEvents, currentPage, itemsPerPage)
         console.log("Alle sosiale eventer")
       }
     }
-    else if (eventTypeBold === corporate){
-      if (filter_id === coming){
-        fetchList("arrangementer/api/bedpres/kommende/", setDispEvents)
+    else if (currentEventTypeRef.current === corporate){
+      if (currentEventFilterRef.current === coming){
+        fetchList("arrangementer/api/karriere/kommende/", setDispEvents)
         console.log("Kommende bedrift eventer")
       }
-      else if (filter_id === mine){
-        fetchList("arrangementer/api/bedpres/mine/", setDispEvents)
+      else if (currentEventFilterRef.current === mine){
+        fetchList("arrangementer/api/karriere/mine/", setDispEvents)
         console.log("Mine bedrift eventer")
       }
-      else if (filter_id === previous){
-        fetchList("arrangementer/api/bedpres/", setDispEvents)
+      else if (currentEventFilterRef.current === previous){
+        fetchList("arrangementer/api/karriere/tidligere/", setDispEvents, currentPage, itemsPerPage)
         console.log("Alle bedrift eventer")
       }
     }
-  };
-
-  const addEvent= () =>{
-    alert("La til event");
   };
   
     return (
@@ -83,43 +136,43 @@ export const EventPage = () => {
           <EventType>
             <EventTypeDevider>
               <Devider>
-              <Title  onClick={() => switchEvent(social)}
-                style={ eventTypeBold === social ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30' } : { fontWeight: 'normal' } }
+              <Title  onClick={() => switchFilter(social, currentEventFilterRef.current)  }
+                style={ currentEventTypeRef.current === social ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30' } : { fontWeight: 'normal' } }
               >Sosialt</Title> </Devider>
               <Devider>
-              <Title  onClick={() => switchEvent(corporate)}
-              style={ eventTypeBold === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+              <Title  onClick={() => switchFilter(corporate, currentEventFilterRef.current)}
+              style={ currentEventTypeRef.current === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
               >Bedrift</Title></Devider>
               <Devider>
-              {eventTypeBold === social && canAddSocial ? (
-                <AddButtonContainer to="/sosialt/opprett">
-                  <Title value="Event" onClick={() => addEvent()} style={{ fontWeight: 'bold' }}>+</Title>
+              {currentEventTypeRef.current === social && canAddSocial ? (
+                <AddButtonContainer to="arrangement/sosialt/opprett">
+                  <Title value="Event" style={{ fontWeight: 'bold' }}>+</Title>
                 </AddButtonContainer>
               ) : null}
-                {eventTypeBold === corporate && canAddCorporate ? (
-                  <AddButtonContainer to="/bedpres/opprett">
-                    <Title value="Event" onClick={() => addEvent()} style={{ fontWeight: 'bold' }}>+</Title>
+                {currentEventTypeRef.current === corporate && canAddCorporate ? (
+                  <AddButtonContainer to="/karriere/opprett">
+                    <Title value="Event" style={{ fontWeight: 'bold' }}>+</Title>
                   </AddButtonContainer>
                 ) : null}
               </Devider>
               </EventTypeDevider>
               <EventFilterDevider>
               <Devider>
-              <Title  onClick={() => switchFilter(coming)}
-              style={ eventFilterBold === coming ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+              <Title  onClick={() => switchFilter(currentEventTypeRef.current, coming)}
+              style={ currentEventFilterRef.current === coming ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
               >Kommende</Title></Devider>
               <Devider>
-              <Title  onClick={() => switchFilter(mine)}
-              style={ eventFilterBold === mine ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+              <Title  onClick={() => switchFilter(currentEventTypeRef.current, mine)}
+              style={ currentEventFilterRef.current === mine ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
               >Mine</Title></Devider>
               <Devider>
-              <Title  onClick={() => switchFilter(previous)}
-              style={ eventFilterBold === previous ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+              <Title  onClick={() => switchFilter(currentEventTypeRef.current, previous)}
+              style={ currentEventFilterRef.current === previous ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
               >Tidligere</Title> </Devider>
             </EventFilterDevider>
           </EventType>
           <EventList>
-          {dispEvents && dispEvents.map((event) => (
+          {displayedEvents.map((event) => (
              <EventBox key={event.id} onClick={() => {history.push(`/arrangementer/${event.id}`)}}>
               <ImageCont>
                <Image src={event.image}/>
@@ -134,6 +187,14 @@ export const EventPage = () => {
          </EventBox>
           )) }
           </EventList>
+          {dispEvents.length > itemsPerPage && (
+          <Pagination
+            currentPage={currentPage}
+            itemsPerPage={itemsPerPage}
+            totalItems={dispEvents.length}
+            onPageChange={handlePageChange}
+          />
+          )}
         </EventContainer>
       </>
   )
@@ -226,7 +287,7 @@ const EventBox = styled.div`
     padding: 5px 0px 7px 5px;
     border-radius: 5px;
     width: 300px;
-
+    
 `;
 
 const EventList = styled.div`
@@ -235,7 +296,7 @@ const EventList = styled.div`
   justify-content: flex-start;
   flex-wrap: wrap;
   width: 100%;
-
+  justify-content: center;
 `;
 
 const DateBox = styled.div`
@@ -319,4 +380,18 @@ const PTitle = styled.div`
 const AddButtonContainer = styled(Link)`
   text-decoration: none; 
   color: black; 
+`;
+
+const PageBut = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const DevideButAndText = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 10px;
 `;

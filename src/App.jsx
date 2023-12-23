@@ -13,11 +13,11 @@ import { Kontortilgang } from "./pages/home/Kontortilgang";
 import { AboutHC } from "./pages/home/AboutHC";
 import { AuthProvider } from './context/AuthContext'
 import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
-import { EventPage } from "./pages/events/events";
 import { SoknadMidler } from "./pages/home/soknadommidler";
 import { Internside } from "./pages/internt/internt";
 import { Klassekatalog } from "./pages/internt/Klassekatalog";
 import { easterEggsRouter } from "./pages/easterEggs/easterEggsRouter";
+import { EventRouter } from "./pages/events/EventRouter";
 
 
 class App extends React.Component {
@@ -29,7 +29,7 @@ class App extends React.Component {
           <NavBar/>
           <Switch>
             <Route path="/" exact>                  <HomePage/>                 </Route>
-            <Route path="/arrangement">             <EventPage/>                </Route>
+            <Route path="/arrangement">             <EventRouter/>              </Route>
             <Route path='/login'>                   <Login/>                    </Route>
             <Route path="/bedrift">                 <H1>Bedrift</H1>            </Route>
             <Route path="/internt">                 <Internside/>               </Route>
