@@ -1,23 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  overflow: hidden;
-`;
-
 const RainContainer = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-`;
-
-const EmojiElement = styled.span`
-  position: absolute;
-  font-size: 26px;
+  height: 100%;
 `;
 
 const EmojiRain = () => {
@@ -28,14 +17,21 @@ const EmojiRain = () => {
     const circles = [];
 
     const addCircle = (delay, range, color) => {
-      setTimeout(() => {
-        const c = new Circle(range[0] + Math.random() * range[1], 80 + Math.random() * 4, color, {
-          x: -0.15 + Math.random() * 0.3,
-          y: 1 + Math.random() * 1
-        }, range);
-        circles.push(c);
-      }, delay);
-    };
+        setTimeout(() => {
+          const c = new Circle(
+            Math.random() * window.innerWidth, // Random x-coordinate across the entire width
+            80 + Math.random() * 4,
+            color,
+            {
+              x: -0.15 + Math.random() * 0.3,
+              y: 1 + Math.random() * 1,
+            },
+            range
+          );
+          circles.push(c);
+        }, delay);
+      };
+      
 
     class Circle {
       constructor(x, y, c, v, range) {
@@ -53,17 +49,17 @@ const EmojiRain = () => {
         rainRef.current.appendChild(this.element);
 
         this.update = () => {
-          if (this.y > 800) {
-            this.y = 80 + Math.random() * 4;
-            this.x = this.range[0] + Math.random() * this.range[1];
-          }
-          this.y += this.v.y;
-          this.x += this.v.x;
-          this.element.style.opacity = 1;
-          this.element.style.transform = `translate3d(${this.x}px, ${this.y}px, 0px)`;
-          this.element.style.webkitTransform = `translate3d(${this.x}px, ${this.y}px, 0px)`;
-          this.element.style.mozTransform = `translate3d(${this.x}px, ${this.y}px, 0px)`;
-        };
+            if (this.y > window.innerHeight) {
+              this.y = 80 + Math.random() * 4;
+              this.x = Math.random() * window.innerWidth;
+            }
+            this.y += this.v.y;
+            this.x += this.v.x;
+            this.element.style.opacity = 1;
+            this.element.style.transform = `translate3d(${this.x}px, ${this.y}px, 0px)`;
+            this.element.style.webkitTransform = `translate3d(${this.x}px, ${this.y}px, 0px)`;
+            this.element.style.mozTransform = `translate3d(${this.x}px, ${this.y}px, 0px)`;
+          };          
       }
     }
 
@@ -73,7 +69,6 @@ const EmojiRain = () => {
         [10 + 0, 300],
         emoji[Math.floor(Math.random() * emoji.length)]
       );
-      // Add more positions if needed as per your original code
     }
 
     const animate = () => {
@@ -93,9 +88,7 @@ const EmojiRain = () => {
   }, []);
 
   return (
-    <Container>
       <RainContainer ref={rainRef} />
-    </Container>
   );
 };
 

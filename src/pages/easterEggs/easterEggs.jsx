@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { PageContainer } from "../../components/Layout";
 import { P, H1, TitleContainer, Title } from '../../components/Text';
 import easterEgg from './easterEgg.png'; // must use a symlink to module from project´s node modules to use img from static. Dont know how
-import EmojiRain from './easterEggRain';
+import EmojiRain from './emojiRain';
 
 // Styled components for added visual appeal
 const MainContainer = styled.div`
@@ -21,15 +21,23 @@ const EggImage = styled.img`
     margin-bottom: 20px;
 `;
 
+const FullPageContainer = styled.div`
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+`;
+
 export const EasterEggs = () => {
 
     return (
+        <FullPageContainer>
+            <EmojiRain /> 
         <MainContainer>
             <TitleContainer>
                 <Title>🥚 Velkommen til HC's Easter Eggs! 🐰</Title>
             </TitleContainer>
 
-            <EmojiRain /> 
             <PageContainer>
                 <H1>Klar for et spennende eventyr?</H1>
                 <P>
@@ -41,5 +49,6 @@ export const EasterEggs = () => {
                 </P>
             </PageContainer>
         </MainContainer>
-    )
+        </FullPageContainer>
+    );
 };
