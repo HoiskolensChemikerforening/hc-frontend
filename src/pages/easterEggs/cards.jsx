@@ -25,13 +25,13 @@ const Flashcard = ({ cards }) => {
         </CardContent>
         <Navigation>
           <StyledButton secondary type="button" onClick={handlePrevCard} disabled={currentCardIndex === 0}>
-            Previous
+            Forrige
           </StyledButton>
           <CardCounter>
             {currentCardIndex + 1} of {cards.length}
           </CardCounter>
           <StyledButton secondary type="button" onClick={handleNextCard} disabled={currentCardIndex === cards.length - 1}>
-            Next
+            Neste
           </StyledButton>
         </Navigation>
       </FlashcardBox>
@@ -45,7 +45,7 @@ const FlashcardContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60vh;
+  margin-top: 10px;
 `;
 
 const FlashcardBox = styled.div`
