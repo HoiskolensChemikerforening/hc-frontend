@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StickyNotes = ({ texts }) => {
+const StickyNotes = ({ texts }) => { // The sticky notes overlap:( 
 
     const getRandomPosition = () => {
         const x = Math.random() * window.innerWidth;

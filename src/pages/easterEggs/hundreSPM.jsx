@@ -2,12 +2,12 @@ import React, { useEffect } from "react";
 import styled from 'styled-components';
 import { PageContainer } from "../../components/Layout";
 import { P, H1, TitleContainer, Title } from '../../components/Text';
-import StickyNotes from "./stickyNotes";
+import Flashcard from "./cards";
 
 export const HundreSPM = () => {
 
     const texts = [
-        'Text 1',
+        '1. Hvem ser ut som de har vært i milla? \n 2. Hvem har kokt flest øvinger? \n 3. Hvem har stalket klasselisten på HC-siden mest? \n 4. Hvem har finest lepper? Sett de til bruk og drikk opp glasset \n 5. Hvem kunne blitt kasta ut av et HC arrangement? \n 6. Hvem har vært på en strippeklubb? Gratulerer, du liker ikke å være alene så velg en drikkevenn og skål! \n 7. Hvem er mest sannynlig til å drepe noen ved et uhell? \n 8. Hvem har stjålet noe fra kontoret? \n 9. Hvem har best musikksmak? \n 10. Hvem lukter best?',
         'Text 2',
         'Text 3',
         'Text 4',
@@ -27,7 +27,7 @@ export const HundreSPM = () => {
 
             <PageContainer>
                 <H1>Prøv 100 spørsmål - HC edition</H1>
-                <StickyNotes texts={texts} />
+                <Flashcard cards={texts} />
             </PageContainer>
         </MainContainer>
     );

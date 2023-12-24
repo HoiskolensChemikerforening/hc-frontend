@@ -1,0 +1,86 @@
+import React, { useState } from 'react';
+import styled from 'styled-components';
+
+const Flashcard = ({ cards }) => {
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+
+  const handleNextCard = () => {
+    setCurrentCardIndex((prevIndex) => Math.min(prevIndex + 1, cards.length - 1));
+  };
+
+  const handlePrevCard = () => {
+    setCurrentCardIndex((prevIndex) => Math.max(prevIndex - 1, 0));
+  };
+
+  return (
+    <FlashcardContainer>
+      <FlashcardBox>
+      <CardContent>
+          {/* Split text by '\n' and map each part to a separate div */}
+          {cards[currentCardIndex].split('\n').map((line, index) => (
+            <div key={index}>{line}</div>
+          ))}
+        </CardContent>
+        <Navigation>
+          <Button onClick={handlePrevCard} disabled={currentCardIndex === 0}>
+            Previous
+          </Button>
+          <CardCounter>
+            {currentCardIndex + 1} of {cards.length}
+          </CardCounter>
+          <Button onClick={handleNextCard} disabled={currentCardIndex === cards.length - 1}>
+            Next
+          </Button>
+        </Navigation>
+      </FlashcardBox>
+    </FlashcardContainer>
+  );
+};
+
+export default Flashcard;
+
+const FlashcardContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+`;
+
+const FlashcardBox = styled.div`
+  width: 500px;
+  padding: 20px;
+  border: 2px solid #333;
+  border-radius: 10px;
+  background-color: #FDF7C3;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+`;
+
+const CardContent = styled.div`
+  text-align: center;
+  font-size: 18px;
+`;
+
+const Navigation = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+`;
+
+const Button = styled.button`
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #009688;
+  color: white;
+  cursor: pointer;
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+`;
+
+const CardCounter = styled.div`
+  font-size: 14px;
+  color: #777;
+`;
