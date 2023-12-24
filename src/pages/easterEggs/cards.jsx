@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Button as BaseButton } from "../../components/Button";
+import { P } from "../../components/Text";
 
 const Flashcard = ({ cards }) => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
@@ -22,15 +24,15 @@ const Flashcard = ({ cards }) => {
           ))}
         </CardContent>
         <Navigation>
-          <Button onClick={handlePrevCard} disabled={currentCardIndex === 0}>
+          <StyledButton secondary type="button" onClick={handlePrevCard} disabled={currentCardIndex === 0}>
             Previous
-          </Button>
+          </StyledButton>
           <CardCounter>
             {currentCardIndex + 1} of {cards.length}
           </CardCounter>
-          <Button onClick={handleNextCard} disabled={currentCardIndex === cards.length - 1}>
+          <StyledButton secondary type="button" onClick={handleNextCard} disabled={currentCardIndex === cards.length - 1}>
             Next
-          </Button>
+          </StyledButton>
         </Navigation>
       </FlashcardBox>
     </FlashcardContainer>
@@ -55,9 +57,9 @@ const FlashcardBox = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 `;
 
-const CardContent = styled.div`
+const CardContent = styled(P)`
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 const Navigation = styled.div`
@@ -67,13 +69,7 @@ const Navigation = styled.div`
   margin-top: 20px;
 `;
 
-const Button = styled.button`
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
-  background-color: #009688;
-  color: white;
-  cursor: pointer;
+const StyledButton = styled(BaseButton)`
   &:disabled {
     background-color: #ccc;
     cursor: not-allowed;
@@ -81,6 +77,6 @@ const Button = styled.button`
 `;
 
 const CardCounter = styled.div`
-  font-size: 14px;
-  color: #777;
+font-size: 14px;
+color: #777;
 `;
