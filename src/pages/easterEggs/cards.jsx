@@ -103,6 +103,9 @@ const FlashcardBox = styled.div`
   transform-style: preserve-3d; /* Enable 3D transforms */
   transition: transform 1s; /* Add a transition for smooth flip effect */
   transform: ${({ isFlipped }) => (isFlipped ? 'rotateY(360deg)' : 'rotateY(0deg)')}; /* Apply the flip effect */
+  @media screen and (max-width: 768px) {
+    width: 80%;
+  }
 `;
 
 const CardContent = styled(P)`
