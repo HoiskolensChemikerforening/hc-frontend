@@ -6,7 +6,7 @@ import Flashcard from "./cards";
 
 export const HundreSPM = () => {
 
-    const texts = [
+    const frontTexts = [
         '1. Hvem ser ut som de har vært i milla? \n 2. Hvem har kokt flest øvinger? \n 3. Hvem har stalket klasselisten på HC-siden mest? \n 4. Hvem har finest lepper? Sett de til bruk og drikk opp glasset \n 5. Hvem kunne blitt kasta ut av et HC arrangement? \n 6. Hvem har vært på en strippeklubb? Gratulerer, du liker ikke å være alene så velg en drikkevenn og skål! \n 7. Hvem er mest sannynlig til å drepe noen ved et uhell? \n 8. Hvem har stjålet noe fra kontoret? \n 9. Hvem har best musikksmak? \n 10. Hvem lukter best?',
         '11. Hvem har shava og er forbredt på alt? \n 12. Hvem er mest fornøyd med eget utseende? \n 13. Hvem er mest sannsynlig til å bli arrestert? \n 14. Hvem er mest sannsynlig til å bli en politibetjent? Ta en skål med din første arrest! \n 15. Hvem har størst sjans på noen i styret? \n 16. Hvem her kunne brukt noe annet enn en kondom som en kondom? \n 17. Velg en i rommet, you have been lamboed! Velg en partner å ta lambo med! \n 18. Hvem er mest sannsynlig til å bli rommets neste Svein Sunde? \n 19. Hvem er den dyreste vennen i rommet? \n 20. Hvem kunne mest sannsynlig solgt bilder av føttene sine for penger? Her tjener man godt, ta en slurk med den dyreste vennen din som velger antallet slurker!',
         '21. Hvem i rommet er mest sannsynlig til å bli en mobber?  \n 22. Hvem er mest sannsynlig til å etablere en ny kjemisk vitenskapelig lov? \n 23. Hvem er mest melodramatisk i rommet? \n 24. Hvem i rommet er høyest? Skål med den faktisk høyeste, dersom dette er deg selv blir det bonski! \n 25. Hvem burde ta seg en tørkeperiode? \n Hvem kjenner du best? La vedkommende gjette din favorittfarge, dersom det er riktig tar du 3 slurker, hvis ikke tar hen 3 slurker. \n 27. Hvem er lettest å bli kjent med?  \n 28. Hvem er mest sannsynlig til å spise når de kjeder seg? 29. Hvem er mest generøs? Del ut fritt antall slurker rundt rommet, og ta like mange selv. \n 30. Hvem hadde kunne tatt 4 pils og 1 pizza? Bevis det ved å ta 4 slurker.',
@@ -19,6 +19,19 @@ export const HundreSPM = () => {
         '91. Hvem her vil mest sannsynlig kunne komme seg unna med drap? \n 92. Hvem i rommet kunne ha prøvd seg på en trekant? Den utvalgte velger sine to, og dere tre tar en skål! \n 93. Hvem er best til å kysse? Skål med trekanten, er du en del av trekanten drikker du for alle 3, altså 3 slurker! \n 94. Hvem er blotets neste ØL beerpong vinneren på HC? Ta seks slurker, like mange kopper som i beerpong ;) \n 95. Hvem er mest uskyldig? \n 96. Hvem fikk vaksinen først? Alle fullvaksinerte tar 2 slurker og alle med en dose tar 1 slurk! \n 97. Hvem i rommet har mest sannsynlig hatt kongle? \n 98. Hvem er mest sannsynlig til å ta en shot antibac i løpet av kvelden? \n 99. Hvem i rommet har best humor, få sidemannen din til å smile på 30 sek og du kan dele ut 10 slurker, mislykker du så tar du 5 \n 100. Hvem har vært festen høydepunkt! Velg din nærmeste til å ta bonski med!',
       ];
 
+    const backTexts = [
+        'Skål for 10!',
+        'Skål for 20!',
+        'Skål for 30!',
+        'Skål for 40!',
+        'Skål for 50!',
+        'Skål for 60!',
+        'Skål for 70!',
+        'Skål for 80!',
+        'Skål for 90!',
+        'Skål for 100!',
+    ];
+
     return (
         <MainContainer>
             <TitleContainer>
@@ -27,7 +40,7 @@ export const HundreSPM = () => {
 
             <PageContainer>
                 <H1>Prøv 100 spørsmål - HC edition</H1>
-                <Flashcard cards={texts} />
+                <Flashcard frontCards={frontTexts} backCards={backTexts} />
             </PageContainer>
         </MainContainer>
     );
