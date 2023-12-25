@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from 'styled-components';
 import { PageContainer } from "../../components/Layout";
-import { P, H1, TitleContainer, Title } from '../../components/Text';
+import { H1, Title as baseTitle, TitleContainer } from '../../components/Text';
 import Flashcard from "./cards";
 
 export const HundreSPM = () => {
@@ -34,6 +34,7 @@ export const HundreSPM = () => {
 
     return (
         <MainContainer>
+            <BackgroundDecoration/>
             <TitleContainer>
                 <Title>🥂 Lyst til å drikke? 🍻</Title>
             </TitleContainer>
@@ -53,4 +54,19 @@ const MainContainer = styled.div`
     justify-content: center;
     text-align: center;
     padding: 20px;
+`;
+
+const BackgroundDecoration = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #FFD966, #FFA500);
+    opacity: 0.8;
+    z-index: -1;
+`;
+
+const Title = styled(baseTitle)`
+    background-color: #FFA500;
 `;
