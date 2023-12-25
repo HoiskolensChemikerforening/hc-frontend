@@ -4,6 +4,7 @@ import { EasterEggs } from "./easterEggs";
 import { HundreSPM } from "./hundreSPM";
 import { SpinningTree } from "./spinningTree";
 import { ComplimentMe } from "./complimentMe";
+import { Magic8Ball } from "./magicEightBall";
 
 const EasterEggsRouter = () => {
   return (
@@ -21,6 +22,9 @@ const EasterEggsRouter = () => {
       </Route>
       <Route exact path="/easterEggs/kompliment">
         <ComplimentMe />
+      </Route>
+      <Route exact path="/easterEggs/magic8ball">
+        <Magic8Ball />
       </Route>
 
       </Switch>
