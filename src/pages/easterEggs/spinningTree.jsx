@@ -3,6 +3,8 @@ import styled, { keyframes } from 'styled-components';
 
 const emojis = ['🎄', '🌟', '❄️', '🎁', '🔔', '🦌', '🎅'];
 
+// This does not work and I could not get it to spin like a tree in a spiral:(
+
 const spin = keyframes`
   0% {
     transform: rotateY(0deg);
