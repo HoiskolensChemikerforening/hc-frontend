@@ -98,7 +98,7 @@ const FlashcardBox = styled.div`
   padding: 20px;
   border: 2px solid #333;
   border-radius: 10px;
-  background-color: #FDF7C3;
+  background: ${({ isFlipped }) => (isFlipped ? 'linear-gradient(to bottom, #FFDCA9, #FFA500)' : 'linear-gradient(to bottom, #FDF7C3, #FFD966)')};
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transform-style: preserve-3d; /* Enable 3D transforms */
   transition: transform 1s; /* Add a transition for smooth flip effect */
