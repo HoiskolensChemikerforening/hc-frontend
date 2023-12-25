@@ -44,7 +44,7 @@ const Flashcard = ({ frontCards, backCards }) => {
   return (
     <FlashcardContainer>
       <FlashcardBox isFlipped={isFlipped} disabled={disabledButton}>
-        <CardContent>
+        <CardContent isFlipped={isFlipped}>
             {isFlipped ? (
                 // Content to show on the back of the card when flipped, text will be splitted by '\n'
                 backCards[currentCardIndex].split('\n').map((line, index) => (
@@ -57,7 +57,7 @@ const Flashcard = ({ frontCards, backCards }) => {
                 ))
                 )}
         </CardContent>
-        <Navigation>
+        <Navigation isFlipped={isFlipped}>
         {!isFlipped && (
             <StyledButton secondary type="button" onClick={handlePrevCard} disabled={currentCardIndex === 0}>
               Forrige
@@ -70,7 +70,7 @@ const Flashcard = ({ frontCards, backCards }) => {
           )}
           {(currentCardIndex === frontCards.length - 1 && isFlipped) && (
             <StyledButton secondary type="button" onClick={handleBeginFromStart}>
-              Begin from Start
+              Start fra begynnelsen
             </StyledButton>
           )}
           {!isFlipped && (
@@ -107,12 +107,13 @@ const FlashcardBox = styled.div`
 
 const CardContent = styled(P)`
   text-align: center;
-  font-size: 16px;
+  font-size: ${({ isFlipped }) => (isFlipped ? '20px' : '16px')};
+  font-weight: ${({ isFlipped }) => (isFlipped ? 'bold' : 'normal')};
 `;
 
 const Navigation = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ isFlipped }) => (isFlipped ? 'center' : 'space-between')};
   align-items: center;
   margin-top: 20px;
 `;
