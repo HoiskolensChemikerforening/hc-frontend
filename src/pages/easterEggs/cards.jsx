@@ -35,6 +35,12 @@ const Flashcard = ({ frontCards, backCards }) => {
     setCurrentCardIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   };
 
+  const handleBeginFromStart = () => {
+    setCurrentCardIndex(0);
+    setIsFlipped(false);
+    setDisabledButton(false);
+  };
+
   return (
     <FlashcardContainer>
       <FlashcardBox isFlipped={isFlipped} disabled={disabledButton}>
@@ -52,20 +58,25 @@ const Flashcard = ({ frontCards, backCards }) => {
                 )}
         </CardContent>
         <Navigation>
-          <StyledButton secondary type="button" onClick={(e) => handlePrevCard(e)} disabled={currentCardIndex === 0}>
-            Forrige
-          </StyledButton>
-          <CardCounter>
+        {!isFlipped && (
+            <StyledButton secondary type="button" onClick={handlePrevCard} disabled={currentCardIndex === 0}>
+              Forrige
+            </StyledButton>
+          )}
+          {!isFlipped && (
+            <CardCounter>
             {currentCardIndex + 1} of {frontCards.length}
           </CardCounter>
-          {disabledButton ? (
-          <StyledButton secondary type="button" disabled={currentCardIndex === frontCards.length - 1}>
-            Neste
-          </StyledButton>
-          ) : (
-            <StyledButton secondary type="button" onClick={(e) => handleNextCard(e)}>
-            Neste
-          </StyledButton>
+          )}
+          {(currentCardIndex === frontCards.length - 1 && isFlipped) && (
+            <StyledButton secondary type="button" onClick={handleBeginFromStart}>
+              Begin from Start
+            </StyledButton>
+          )}
+          {!isFlipped && (
+            <StyledButton secondary type="button" onClick={handleNextCard}>
+              Neste
+            </StyledButton>
           )}
         </Navigation>
       </FlashcardBox>
