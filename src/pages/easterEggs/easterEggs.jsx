@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from 'styled-components';
 import { PageContainer } from "../../components/Layout";
 import { P, H1, TitleContainer, Title } from '../../components/Text';
