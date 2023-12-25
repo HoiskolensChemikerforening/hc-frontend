@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { EasterEggs } from "./easterEggs";
 import { HundreSPM } from "./hundreSPM";
 import { SpinningTree } from "./spinningTree";
+import { ComplimentMe } from "./complimentMe";
 
 const EasterEggsRouter = () => {
   return (
@@ -17,6 +18,9 @@ const EasterEggsRouter = () => {
       </Route>
       <Route exact path="/easterEggs/spinningTree">
         <SpinningTree />
+      </Route>
+      <Route exact path="/easterEggs/kompliment">
+        <ComplimentMe />
       </Route>
 
       </Switch>
