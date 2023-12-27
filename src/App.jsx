@@ -17,6 +17,7 @@ import { EventPage } from "./pages/events/events";
 import { SoknadMidler } from "./pages/home/soknadommidler";
 import { Internside } from "./pages/internt/internt";
 import { Klassekatalog } from "./pages/internt/Klassekatalog";
+import { General } from "./pages/training/general";
 
 
 class App extends React.Component {
@@ -41,6 +42,7 @@ class App extends React.Component {
             <Route path="/kontortilgang">           <Kontortilgang/>            </Route>
             <Route path="/midler">                  <SoknadMidler/>             </Route>
             <Route path="/klassekatalog">           <Klassekatalog/>            </Route>
+            <Route path="/hjelp">                   <General/>                  </Route> {/* A page with general components to start learning */}
           </Switch>
           <NavBarPhone/>
           </AuthProvider>
