@@ -18,6 +18,7 @@ import { SoknadMidler } from "./pages/home/soknadommidler";
 import { Internside } from "./pages/internt/internt";
 import { Klassekatalog } from "./pages/internt/Klassekatalog";
 import { General } from "./pages/training/general";
+import { ApiDemo } from "./pages/training/API";
 
 
 class App extends React.Component {
@@ -43,6 +44,7 @@ class App extends React.Component {
             <Route path="/midler">                  <SoknadMidler/>             </Route>
             <Route path="/klassekatalog">           <Klassekatalog/>            </Route>
             <Route path="/hjelp">                   <General/>                  </Route> {/* A page with general components to start learning */}
+            <Route path="/APIdemo">                 <ApiDemo/>                  </Route> {/* A page with API, axios, post and fetch */}
           </Switch>
           <NavBarPhone/>
           </AuthProvider>
