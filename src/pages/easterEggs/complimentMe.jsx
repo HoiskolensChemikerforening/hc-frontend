@@ -10,7 +10,7 @@ export const ComplimentMe = () => {
     const compliments = [
         "Du er fantastisk!",
         "Du er den beste!",
-        "Du er en smart kjeks!",
+        "Du er smart!",
         "Jeg liker stilen din.",
         "Du har den beste latteren.",
         "Jeg setter pris på deg.",
@@ -27,7 +27,17 @@ export const ComplimentMe = () => {
         "Din innsats er imponerende.",
         "Du er en naturlig leder.",
         "Du har et godt hjerte.",
-        "Din entusiasme er smittende."
+        "Din entusiasme er smittende.",
+        "Du er veldig forståelsesfull.",
+        "Din pålitelighet er uvurderlig.",
+        "Du har en imponerende arbeidsmoral.",
+        "Din sans for humor er topp.",
+        "Du er alltid hjelpsom.",
+        "Din evne til å lytte gjør deg til en god venn.",
+        "Du er veldig jordnær.",
+        "Din praktiske tilnærming er beundringsverdig.",
+        "Du tar gode beslutninger.",
+        "Din tålmodighet er imponerende."
     ];
 
     const generateCompliment = () => {

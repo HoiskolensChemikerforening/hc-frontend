@@ -18,7 +18,7 @@ const EasterEggsRouter = () => {
       <Route exact path="/easterEggs/100spm">
         <HundreSPM />
       </Route>
-      <Route exact path="/easterEggs/spinningTree">
+      <Route exact path="/easterEggs/spinningTree"> {/* Does not work properly:( */}
         <SpinningTree />
       </Route>
       <Route exact path="/easterEggs/kompliment">
@@ -27,7 +27,7 @@ const EasterEggsRouter = () => {
       <Route exact path="/easterEggs/magic8ball">
         <Magic8Ball />
       </Route>
-      <Route exact path="/easterEggs/snowGlobe">
+      <Route exact path="/easterEggs/snowGlobe"> {/* Does not work properly:( */}
         <VirtualSnowGlobe />
       </Route>
 

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import Shake from 'shake.js';
 
-export const VirtualSnowGlobe = () => {
+// does not work properly:(( i can´t get the snow-animation correct
+
+export const VirtualSnowGlobe = () => { 
   const [snowflakes, setSnowflakes] = useState([]);
   const [shaking, setShaking] = useState(false);
 
