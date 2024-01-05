@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { PageContainer } from "../../components/Layout";
 import { P as baseP, TitleContainer, Title, Link as baseLink, H2 } from '../../components/Text'; 
 import { Button } from "../../components/Button";
-import { FaEnvelope, FaPhone } from 'react-icons/fa'; // Importing the envelope icon
+import { FaEnvelope, FaPhone } from 'react-icons/fa'; // Importing the envelope and phone icons
 
 export const FillIn = () => {
 
@@ -12,7 +12,7 @@ export const FillIn = () => {
         <PageContainer> 
             <TitleContainer> 
                 <Title>
-                    Kontaktinfo
+                    Kontaktinfoen til Styret
                 </Title>
             </TitleContainer>
 
@@ -40,6 +40,51 @@ export const FillIn = () => {
                     <P>, <FaPhone/> 97083134</P>
                 </InlineContainer>
             </ContactInfo>
+            <ContactInfo>
+                <P><em>VicepHormand:</em> Sebastian Johan Varegg,</P>
+                <InlineContainer>
+                    <Link href="mailto:nestleder@hc.ntnu.no"><FaEnvelope />nestleder@hc.ntnu.no</Link>
+                    <P>, <FaPhone/> 48350399</P>
+                </InlineContainer>
+            </ContactInfo>
+            <ContactInfo>
+                <P><em>Secreteuse:</em> Celine Hansen,</P>
+                <InlineContainer>
+                    <Link href="mailto:sekretar@hc.ntnu.no"><FaEnvelope />sekretar@hc.ntnu.no</Link>
+                    <P>, <FaPhone/> 95494077</P>
+                </InlineContainer>
+            </ContactInfo>
+            <ContactInfo>
+                <P><em>Kasserer:</em> Hedda Vrangsund Mikalsen,</P>
+                <InlineContainer>
+                    <Link href="mailto:kasserer@hc.ntnu.no"><FaEnvelope />kasserer@hc.ntnu.no</Link>
+                </InlineContainer>
+            </ContactInfo>
+            <ContactInfo>
+                <P><em>WebsjaepH:</em> Ola Aarflot Skar,</P>
+                <InlineContainer>
+                    <Link href="mailto:websjef@hc.ntnu.no"><FaEnvelope />websjef@hc.ntnu.no</Link>
+                </InlineContainer>
+            </ContactInfo>
+            <ContactInfo>
+                <P><em>pHaestsjaepH:</em> Ingrid Sutterud,</P>
+                <InlineContainer>
+                    <Link href="mailto:festsjef@hc.ntnu.no"><FaEnvelope />festsjef@hc.ntnu.no</Link>
+                </InlineContainer>
+            </ContactInfo>
+            <ContactInfo>
+                <P><em>KjellersjaepH:</em> Cecilie Ødegaarden Gjertsen,</P>
+                <InlineContainer>
+                    <Link href="mailto:kjellersjef@hc.ntnu.no"><FaEnvelope />kjellersjef@hc.ntnu.no</Link>
+                </InlineContainer>
+            </ContactInfo>
+            <ContactInfo>
+                <P><em>IndustrisjaepH:</em> Hilde-Marie Hulleberg Gransjøen,</P>
+                <InlineContainer>
+                    <Link href="mailto:industrisjef@hc.ntnu.no"><FaEnvelope />industrisjef@hc.ntnu.no</Link>
+                </InlineContainer>
+            </ContactInfo>
+
             </ContactInfoContainer>
         </PageContainer>
     )
