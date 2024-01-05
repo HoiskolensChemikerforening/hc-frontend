@@ -19,6 +19,8 @@ import { Internside } from "./pages/internt/internt";
 import { Klassekatalog } from "./pages/internt/Klassekatalog";
 import { General } from "./pages/training/general";
 import { ApiDemo } from "./pages/training/API";
+import { FillIn } from "./pages/training/fill_in_code";
+import { AddComments } from "./pages/training/add_comments_code";
 
 
 class App extends React.Component {
@@ -45,6 +47,8 @@ class App extends React.Component {
             <Route path="/klassekatalog">           <Klassekatalog/>            </Route>
             <Route path="/hjelp">                   <General/>                  </Route> {/* A page with general components to start learning */}
             <Route path="/APIdemo">                 <ApiDemo/>                  </Route> {/* A page with API, axios, post and fetch */}
+            <Route path="/fillIn">                  <FillIn/>                   </Route> {/* A page with un-finished code to fill in */}
+            <Route path="/addComments">             <AddComments/>              </Route> {/* A page with finished code to fill out comments */}
           </Switch>
           <NavBarPhone/>
           </AuthProvider>
