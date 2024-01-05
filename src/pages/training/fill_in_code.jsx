@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { PageContainer } from "../../components/Layout";
 import { P as baseP, TitleContainer, Title, Link as baseLink, H2 } from '../../components/Text'; 
 import { Button } from "../../components/Button";
-import { FaEnvelope, FaPhone } from 'react-icons/fa'; // Importing the envelope and phone icons
+import { FaEnvelope, FaPhone, FaCamera, FaFacebook } from 'react-icons/fa'; // Importing the envelope and phone icons
 
 export const FillIn = () => {
 
@@ -84,8 +84,20 @@ export const FillIn = () => {
                     <Link href="mailto:industrisjef@hc.ntnu.no"><FaEnvelope />industrisjef@hc.ntnu.no</Link>
                 </InlineContainer>
             </ContactInfo>
-
             </ContactInfoContainer>
+
+            <SocialMediaContainer>
+                <H2>Sosiale medier</H2>
+                    <SocialMedia>
+                        <Link href="https://www.instagram.com/hcntnu/"><FaCamera/>Instagram</Link>
+                    </SocialMedia>
+                    <SocialMedia>
+                        <Link href="https://www.facebook.com/HoiskolensChemikerforening"><FaFacebook/>Facebook side</Link>
+                    </SocialMedia>
+                    <SocialMedia>
+                        <Link href="https://www.facebook.com/groups/1505975139619109"><FaFacebook/>Facebook medlemsgruppe</Link>
+                    </SocialMedia>
+            </SocialMediaContainer>
         </PageContainer>
     )
 };
@@ -122,4 +134,15 @@ const ContactInfoContainer = styled.div`
 const ContactInfo = styled.div`
     margin: 15px;
     text-align: center; // Center-align the contact info
+`;
+
+const SocialMediaContainer = styled.div`
+    margin: 15px;
+    text-align: center; // Center-align the social media container
+`;
+
+const SocialMedia = styled.div`
+    display: flex; 
+    text-align: center; // Center-align the social media 
+    justify-content: center;
 `;
