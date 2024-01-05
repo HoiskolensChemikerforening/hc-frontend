@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { PageContainer } from "../../components/Layout";
 import { P as baseP, TitleContainer, Title, Link as baseLink, H2 } from '../../components/Text'; 
 import { Button } from "../../components/Button";
+import { FaEnvelope, FaPhone } from 'react-icons/fa'; // Importing the envelope icon
 
 export const FillIn = () => {
 
@@ -35,8 +36,8 @@ export const FillIn = () => {
             <ContactInfo>
                 <P><em>pHormand:</em> Kurt-Inge Midtbø,</P>
                 <InlineContainer>
-                    <Link href="mailto:leder@hc.ntnu.no">leder@hc.ntnu.no</Link>
-                    <P>, tlf: 97083134</P>
+                    <Link href="mailto:leder@hc.ntnu.no"><FaEnvelope />leder@hc.ntnu.no</Link>
+                    <P>, <FaPhone/> 97083134</P>
                 </InlineContainer>
             </ContactInfo>
             </ContactInfoContainer>
@@ -56,6 +57,9 @@ const Link = styled(baseLink)`
     line-height: 1.5; // Adjust line height as needed
     vertical-align: middle; // Aligns the link vertically in the middle
     color: #FFBF00 !important; // Using !important to override other styles
+    display: flex; // To align icon with text
+    align-items: center; // Center align icon with text
+    gap: 5px; // Add space between icon and text
 `;
 
 const P = styled(baseP)`
