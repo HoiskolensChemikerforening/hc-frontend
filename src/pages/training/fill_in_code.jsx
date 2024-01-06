@@ -1,16 +1,16 @@
 import React from "react";
 import styled from 'styled-components';
 import { PageContainer } from "../../components/Layout";
-import { P as baseP, TitleContainer, Title, Link as baseLink, H2 } from '../../components/Text'; 
+import { P as ?, TitleContainer, ?, Link as baseLink, H2 } from '../../components/Text'; // Here something is missing
 import { FaEnvelope, FaPhone, FaCamera, FaFacebook } from 'react-icons/fa'; // Importing the envelope and phone icons
 
 export const FillIn = () => {
     return (
         <PageContainer> 
-            <TitleContainer> 
+            {/*what is supposed to be here?*/}
                 <Title>
                     Kontaktinfoen til Styret
-                </Title>
+                </title> {/* there is a typo here */}
             </TitleContainer>
 
             <InlineContainer>
@@ -27,42 +27,42 @@ export const FillIn = () => {
             <SectionContainer>
             <H2>
                 Kontakt Styret
-            </H2>
+            {/*what is supposed to be here?*/}
             <InlineContainer>
             <P>E-post:</P>
-            <Link href="mailto:styret@hc.ntnu.no">styret@hc.ntnu.no</Link>
+            <Link href="mailto:styret@hc.ntnu.no">styret@hc.ntnu.no</Lik> {/* whats wrong here? */}
             </InlineContainer>
             <ContactInfo>
                 <P><em>pHormand:</em> Kurt-Inge Midtbø,</P>
                 <InlineContainer>
-                    <Link href="mailto:leder@hc.ntnu.no"><FaEnvelope />leder@hc.ntnu.no</Link>
+                    <Link><FaEnvelope />leder@hc.ntnu.no</Link> {/* something is missing */}
                     <P>, <FaPhone/> 97083134</P>
-                </InlineContainer>
+                </InlineContiner> {/* whats wrong here? */}
             </ContactInfo>
-            <ContactInfo>
-                <P><em>VicepHormand:</em> Sebastian Johan Varegg,</P>
+            {/* whats wrong here? */}
+                <P><em>VicepHormand:</> Sebastian Johan Varegg,</P> {/* whats wrong here? */}
                 <InlineContainer>
-                    <Link href="mailto:nestleder@hc.ntnu.no"><FaEnvelope />nestleder@hc.ntnu.no</Link>
+                    <Link href="mailto:nestleder@hc.ntnu.no"><FaEnvelpe />nestleder@hc.ntnu.no</Link> {/* whats wrong here? */}
                     <P>, <FaPhone/> 48350399</P>
                 </InlineContainer>
             </ContactInfo>
             <ContactInfo>
-                <P><em>Secreteuse:</em> Celine Hansen,</P>
+                <P>Secreteuse:</em> Celine Hansen,</P> {/* whats wrong here? */}
                 <InlineContainer>
                     <Link href="mailto:sekretar@hc.ntnu.no"><FaEnvelope />sekretar@hc.ntnu.no</Link>
-                    <P>, <FaPhone/> 95494077</P>
+                    <P>, <FaPone/> 95494077</> {/* whats wrong here? */}
                 </InlineContainer>
             </ContactInfo>
             <ContactInfo>
-                <P><em>Kasserer:</em> Hedda Vrangsund Mikalsen,</P>
+                <P><em>Kasserer:</strong> Hedda Vrangsund Mikalsen,</P> {/* whats wrong here? */}
                 <InlineContainer>
                     <Link href="mailto:kasserer@hc.ntnu.no"><FaEnvelope />kasserer@hc.ntnu.no</Link>
                 </InlineContainer>
             </ContactInfo>
             <ContactInfo>
-                <P><em>WebsjaepH:</em> Ola Aarflot Skar,</P>
+                <P><strong>WebsjaepH:</strong> Bært Aarflot Skar,</P> {/* whats wrong here? */}
                 <InlineContainer>
-                    <Link href="mailto:websjef@hc.ntnu.no"><FaEnvelope />websjef@hc.ntnu.no</Link>
+                    <Link hrf="malto:websjef@hc.ntnu.no"><FaEnvelope />websjef@hc.ntnu.no</Link> {/* whats wrong here? */}
                 </InlineContainer>
             </ContactInfo>
             <ContactInfo>
@@ -73,9 +73,9 @@ export const FillIn = () => {
             </ContactInfo>
             <ContactInfo>
                 <P><em>KjellersjaepH:</em> Cecilie Ødegaarden Gjertsen,</P>
-                <InlineContainer>
+                {/* whats wrong here? */}
                     <Link href="mailto:kjellersjef@hc.ntnu.no"><FaEnvelope />kjellersjef@hc.ntnu.no</Link>
-                </InlineContainer>
+                {/* whats wrong here? */}
             </ContactInfo>
             <ContactInfo>
                 <P><em>IndustrisjaepH:</em> Hilde-Marie Hulleberg Gransjøen,</P>
@@ -88,11 +88,11 @@ export const FillIn = () => {
 
             <Column>
             <SectionContainer>
-                <H2>Informasjon</H2>
+                <H2>Informasjon</H1> {/* whats wrong here? */}
                 <InfoContainer>
                     <InfoBox>
                         <P><strong>Post/faktureringsadresse</strong></P>
-                        <P>Høiskolens Chemikerforening</P>
+                        Høiskolens Chemikerforening {/* whats wrong here? */}
                         <P>Fakultet for naturvitenskap</P>
                         <P>Høgskoleringen 5</P>
                         <P>N-7034 Trondheim</P>
@@ -102,7 +102,7 @@ export const FillIn = () => {
                         <P>Kjemi sydfløy, rom 109</P>
                         <P>Sem Sælandsvei 10</P>
                         <P>NTNU Gløshaugen</P>
-                    </InfoBox>
+                    {/* whats wrong here? */}
                     <InfoBox>
                         <P>Organisasjonsnummer: 990833761 MVA</P>
                         <P>Telefon: 735 94 186</P>
@@ -115,9 +115,8 @@ export const FillIn = () => {
                 <H2>Sosiale medier</H2>
                     <SocialMedia>
                         <Link href="https://www.instagram.com/hcntnu/"><FaCamera/>Instagram</Link>
-                    </SocialMedia>
-                    <SocialMedia>
-                        <Link href="https://www.facebook.com/HoiskolensChemikerforening"><FaFacebook/>Facebook side</Link>
+                    {/* whats wrong here? */}
+                        <Link href="https://www.facebook.com/HoiskolensChemikerforening"><FaFacebook/>Facebook side</Lnk> {/* whats wrong here? */}
                     </SocialMedia>
                     <SocialMedia>
                         <Link href="https://www.facebook.com/groups/1505975139619109"><FaFacebook/>Facebook medlemsgruppe</Link>
@@ -129,7 +128,7 @@ export const FillIn = () => {
                 <H2>Komiteer og undergrupper</H2>
                     <InlineContainer>
                         <P className="last-paragraph">Du finner kontaktinformasjonen til alle våre komiteer og undergrupper på siden</P>
-                        <Link href="http://localhost:3000/undergrupper" className="last-paragraph">undergrupper</Link>
+                        <Link href="http://localhost:3000/undergrupper" >undergrupper</Link> {/* something is missing. Hint: its a style thing */}
                     </InlineContainer>
             </SectionContainer>
         </PageContainer>
@@ -147,9 +146,9 @@ const Link = styled(baseLink)`
     font-size: 16px;
     line-height: 1.5; // Adjust line height as needed
     vertical-align: middle; // Aligns the link vertically in the middle
-    color: #FFBF00 !important; // Using !important to override other styles
-    display: flex; // To align icon with text
-    align-items: center; // Center align icon with text
+    color: #FFBF00; ///// Using !important to override other styles, add it /////
+    display: ; ///// What should be here? /////
+    align-items: ; ///// Center align icon with text /////
     gap: 5px; // Add space between icon and text
 `;
 
@@ -157,27 +156,27 @@ const P = styled(baseP)`
   margin: 0; // Removes default margin
   line-height: 1.5; // Match line height with Link
   vertical-align: middle; // Aligns text vertically in the middle
-  text-align: center; // Center-align the text
+  text-align: ; ///// Center-align the text /////
 `;
 
 const SectionContainer = styled.div`
     margin: 10px;
-    text-align: center; // Center-align the contact info container
+    text-align: center; // Center-align the container
 
     .last-paragraph {
-        margin-bottom: 20px; // Adjust this value as needed
+        margin-bottom: 20px; // Adding margin to the bottom of the page
     }
 `;
 
 const ContactInfo = styled.div`
-    margin: 15px;
+    margin: 15px; ///// try different values to see difference /////
     text-align: center; // Center-align the contact info
 `;
 
 const SocialMedia = styled.div`
     display: flex; 
-    text-align: center; // Center-align the social media 
-    justify-content: center;
+    text-align: ; ///// Center-align the social media /////
+    justify-content: ;  ///// what should be here? /////
 `;
 
 const InfoContainer = styled.div`
@@ -189,7 +188,7 @@ const InfoBox = styled.div`
     margin: 15px;
     border: 1px solid black; // Adding a border line
     padding: 10px; // Adding some padding inside the box
-    text-align: center; // Center-align the social media container
+     ///// Center-align the social media container /////
     border-radius: 20px;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); // Adding shadow
 `;
