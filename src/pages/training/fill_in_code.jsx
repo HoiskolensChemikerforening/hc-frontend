@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from 'styled-components';
 import { PageContainer } from "../../components/Layout";
-import { P as baseP, TitleContainer, Title, Link as baseLink, H2, H1 } from '../../components/Text'; 
-import { Button } from "../../components/Button";
+import { P as baseP, TitleContainer, Title, Link as baseLink, H2 } from '../../components/Text'; 
 import { FaEnvelope, FaPhone, FaCamera, FaFacebook } from 'react-icons/fa'; // Importing the envelope and phone icons
 
 export const FillIn = () => {
-
-
     return (
         <PageContainer> 
             <TitleContainer> 
