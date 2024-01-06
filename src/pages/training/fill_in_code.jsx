@@ -28,30 +28,6 @@ export const FillIn = () => {
             <TwoColumnLayout>
             <Column>
             <SectionContainer>
-                <H2>Sosiale medier</H2>
-                    <SocialMedia>
-                        <Link href="https://www.instagram.com/hcntnu/"><FaCamera/>Instagram</Link>
-                    </SocialMedia>
-                    <SocialMedia>
-                        <Link href="https://www.facebook.com/HoiskolensChemikerforening"><FaFacebook/>Facebook side</Link>
-                    </SocialMedia>
-                    <SocialMedia>
-                        <Link href="https://www.facebook.com/groups/1505975139619109"><FaFacebook/>Facebook medlemsgruppe</Link>
-                    </SocialMedia>
-            </SectionContainer>
-
-            <SectionContainer>
-                <H2>Komiteer og undergrupper</H2>
-                <P>Du finner kontaktinformasjonen til alle våre</P>
-                    <InlineContainer>
-                        <P>komiteer og undergrupper på siden</P>
-                        <Link href="http://localhost:3000/undergrupper">undergrupper</Link>
-                    </InlineContainer>
-            </SectionContainer>
-            </Column>
-
-            <Column>
-            <SectionContainer>
             <H2>
                 Kontakt Styret
             </H2>
@@ -138,8 +114,27 @@ export const FillIn = () => {
                     </InfoBox>
                 </InfoContainer>
             </SectionContainer>
+            <SectionContainer>
+                <H2>Sosiale medier</H2>
+                    <SocialMedia>
+                        <Link href="https://www.instagram.com/hcntnu/"><FaCamera/>Instagram</Link>
+                    </SocialMedia>
+                    <SocialMedia>
+                        <Link href="https://www.facebook.com/HoiskolensChemikerforening"><FaFacebook/>Facebook side</Link>
+                    </SocialMedia>
+                    <SocialMedia>
+                        <Link href="https://www.facebook.com/groups/1505975139619109"><FaFacebook/>Facebook medlemsgruppe</Link>
+                    </SocialMedia>
+            </SectionContainer>
             </Column>
             </TwoColumnLayout>
+            <SectionContainer>
+                <H2>Komiteer og undergrupper</H2>
+                    <InlineContainer>
+                        <P className="last-paragraph">Du finner kontaktinformasjonen til alle våre komiteer og undergrupper på siden</P>
+                        <Link href="http://localhost:3000/undergrupper" className="last-paragraph">undergrupper</Link>
+                    </InlineContainer>
+            </SectionContainer>
         </PageContainer>
     )
 };
@@ -171,6 +166,10 @@ const P = styled(baseP)`
 const SectionContainer = styled.div`
     margin: 10px;
     text-align: center; // Center-align the contact info container
+
+    .last-paragraph {
+        margin-bottom: 20px; // Adjust this value as needed
+    }
 `;
 
 const ContactInfo = styled.div`
