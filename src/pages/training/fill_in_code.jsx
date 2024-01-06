@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import { PageContainer } from "../../components/Layout";
-import { P as baseP, TitleContainer, Title, Link as baseLink, H2 } from '../../components/Text'; 
+import { P as baseP, TitleContainer, Title, Link as baseLink, H2, H1 } from '../../components/Text'; 
 import { Button } from "../../components/Button";
 import { FaEnvelope, FaPhone, FaCamera, FaFacebook } from 'react-icons/fa'; // Importing the envelope and phone icons
 
@@ -25,7 +25,33 @@ export const FillIn = () => {
             </P>
             </InlineContainer>
 
-            <ContactInfoContainer>
+            <TwoColumnLayout>
+            <Column>
+            <SectionContainer>
+                <H2>Sosiale medier</H2>
+                    <SocialMedia>
+                        <Link href="https://www.instagram.com/hcntnu/"><FaCamera/>Instagram</Link>
+                    </SocialMedia>
+                    <SocialMedia>
+                        <Link href="https://www.facebook.com/HoiskolensChemikerforening"><FaFacebook/>Facebook side</Link>
+                    </SocialMedia>
+                    <SocialMedia>
+                        <Link href="https://www.facebook.com/groups/1505975139619109"><FaFacebook/>Facebook medlemsgruppe</Link>
+                    </SocialMedia>
+            </SectionContainer>
+
+            <SectionContainer>
+                <H2>Komiteer og undergrupper</H2>
+                <P>Du finner kontaktinformasjonen til alle våre</P>
+                    <InlineContainer>
+                        <P>komiteer og undergrupper på siden</P>
+                        <Link href="http://localhost:3000/undergrupper">undergrupper</Link>
+                    </InlineContainer>
+            </SectionContainer>
+            </Column>
+
+            <Column>
+            <SectionContainer>
             <H2>
                 Kontakt Styret
             </H2>
@@ -84,20 +110,36 @@ export const FillIn = () => {
                     <Link href="mailto:industrisjef@hc.ntnu.no"><FaEnvelope />industrisjef@hc.ntnu.no</Link>
                 </InlineContainer>
             </ContactInfo>
-            </ContactInfoContainer>
+            </SectionContainer>
+            </Column>
 
-            <SocialMediaContainer>
-                <H2>Sosiale medier</H2>
-                    <SocialMedia>
-                        <Link href="https://www.instagram.com/hcntnu/"><FaCamera/>Instagram</Link>
-                    </SocialMedia>
-                    <SocialMedia>
-                        <Link href="https://www.facebook.com/HoiskolensChemikerforening"><FaFacebook/>Facebook side</Link>
-                    </SocialMedia>
-                    <SocialMedia>
-                        <Link href="https://www.facebook.com/groups/1505975139619109"><FaFacebook/>Facebook medlemsgruppe</Link>
-                    </SocialMedia>
-            </SocialMediaContainer>
+            <Column>
+            <SectionContainer>
+                <H2>Informasjon</H2>
+                <InfoContainer>
+                    <InfoBox>
+                        <P><strong>Post/faktureringsadresse</strong></P>
+                        <P>Høiskolens Chemikerforening</P>
+                        <P>Fakultet for naturvitenskap</P>
+                        <P>Høgskoleringen 5</P>
+                        <P>N-7034 Trondheim</P>
+                    </InfoBox>
+                    <InfoBox>
+                        <P><strong>Besøksadresse</strong></P>
+                        <P>Kjemi sydfløy, rom 109</P>
+                        <P>Sem Sælandsvei 10</P>
+                        <P>NTNU Gløshaugen</P>
+                    </InfoBox>
+                    <InfoBox>
+                        <P>Organisasjonsnummer: 990833761 MVA</P>
+                        <P>Telefon: 735 94 186</P>
+                        <P>Telefax: 735 91 410</P>
+                        <P>Kontonummer: 8601.64.87181</P>
+                    </InfoBox>
+                </InfoContainer>
+            </SectionContainer>
+            </Column>
+            </TwoColumnLayout>
         </PageContainer>
     )
 };
@@ -126,7 +168,7 @@ const P = styled(baseP)`
   text-align: center; // Center-align the text
 `;
 
-const ContactInfoContainer = styled.div`
+const SectionContainer = styled.div`
     margin: 10px;
     text-align: center; // Center-align the contact info container
 `;
@@ -136,13 +178,32 @@ const ContactInfo = styled.div`
     text-align: center; // Center-align the contact info
 `;
 
-const SocialMediaContainer = styled.div`
-    margin: 15px;
-    text-align: center; // Center-align the social media container
-`;
-
 const SocialMedia = styled.div`
     display: flex; 
     text-align: center; // Center-align the social media 
     justify-content: center;
+`;
+
+const InfoContainer = styled.div`
+    margin: 15px;
+    text-align: center; // Center-align the social media container
+`;
+
+const InfoBox = styled.div`
+    margin: 15px;
+    border: 1px solid black; // Adding a border line
+    padding: 10px; // Adding some padding inside the box
+    text-align: center; // Center-align the social media container
+    border-radius: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); // Adding shadow
+`;
+
+const TwoColumnLayout = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 20px; // Adjust the gap between the two columns
+`;
+
+const Column = styled.div`
+  flex: 1; // Each column takes up equal space
 `;
