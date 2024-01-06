@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
 import { PageContainer } from "../../components/Layout";
-import { P as ?, TitleContainer, ?, Link as baseLink, H2 } from '../../components/Text'; // Here something is missing
+// import { P as ?, TitleContainer, ?, Link as baseLink, H2 } from '../../components/Text'; // Here something is missing, and un-comment the line
 import { FaEnvelope, FaPhone, FaCamera, FaFacebook } from 'react-icons/fa'; // Importing the envelope and phone icons
 
 export const FillIn = () => {
