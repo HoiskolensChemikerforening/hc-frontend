@@ -245,11 +245,9 @@ export const CreateSocialEvent = () => {
           <div>
             <P>Sted</P>
             <TextField
-              label="Sted"
-              type="sted"
-              id="sted"
-              name="sted"
-              value={formData.sted}
+              id="location"
+              name="location"
+              value={formData.location}
               onChange={handleChange}
               required
             />
@@ -258,11 +256,9 @@ export const CreateSocialEvent = () => {
           <div>
             <P>Beskrivelse av arrangementet</P>
             <TextArea
-              label="Beskrivelse"
-              type="beskrivelse"
-              id="beskrivelse"
-              name="beskrivelse"
-              value={formData.beskrivelse}
+              id="description"
+              name="description"
+              value={formData.description}
               onChange={handleChange}
               required
             />
@@ -271,11 +267,9 @@ export const CreateSocialEvent = () => {
           <div>
             <P>Betalingsinformasjon</P>
             <TextArea
-              label="Betalingsinfo"
-              type="betalingsinfo"
-              id="betalingsinfo"
-              name="betalingsinfo"
-              value={formData.betalingsinfo}
+              id="payment_information"
+              name="payment_information"
+              value={formData.payment_information}
               onChange={handleChange}
               required
             />
@@ -300,19 +294,19 @@ export const CreateSocialEvent = () => {
             <div>
               <P>Pris for medlemmer</P>
               <PriceBox>
-              <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required />
+              <input type="text" id="price_member" name="price_member" value={formData.price_member} onChange={handleChange} required />
             </PriceBox>
             </div>
             <div>
               <P>Pris for ikke-medlemmer</P>
               <PriceBox>
-              <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required />
+              <input type="text" id="price_not_member" name="price_not_member" value={formData.price_not_member} onChange={handleChange} required />
             </PriceBox>
             </div>
             <div>
               <P>Pris for følge</P>
               <PriceBox>
-              <input type="text" id="title" name="title" value={formData.title} onChange={handleChange} required />
+              <input type="text" id="price_companion" name="price_companion" value={formData.price_companion} onChange={handleChange} required />
             </PriceBox>
             </div>
           </PriceContainer>
