@@ -102,17 +102,19 @@ export const CreateSocialEvent = () => {
       <ContentBox>
         <form onSubmit={handleSubmit}>
 
-        <H3>Tittel</H3>
-        <TextField
-              label="Tittel"
-              type="text"
-              id="title"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              required
-            />
-      
+        <FloatingLabelInputContainer>
+          <StyledInput
+            type="text"
+            id="title"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            placeholder=" " 
+            required
+          />
+          <FloatingLabel htmlFor="title">Tittel</FloatingLabel>
+        </FloatingLabelInputContainer>
+
       <CheckboxContainer>
         <CheckBox>
           <ColoredCheckbox
@@ -376,6 +378,45 @@ const ContentBox = styled.div`
   border-radius: 10px;
   padding: 20px;
   margin: 0 auto;
+`;
+
+const FloatingLabelInputContainer = styled.div`
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`;
+
+const FloatingLabel = styled.label`
+  position: absolute;
+  top: 0;
+  bottom: 0; 
+  left: 0;
+  font-size: 16px;
+  color: #999;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  transform-origin: left bottom;
+`;
+
+const StyledInput = styled.input`
+  width: 40%;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  outline: 0;
+  font-size: 16px;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &:focus {
+    border-bottom-color: #000;
+  }
+
+  &:focus ~ ${FloatingLabel}, &:not(:placeholder-shown) ~ ${FloatingLabel} {
+    top: -20px;
+    font-size: 12px;
+    color: #333;
+  }
 `;
 
 const TimeContainer = styled.div`
