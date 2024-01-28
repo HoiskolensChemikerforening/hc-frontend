@@ -4,7 +4,7 @@ import { Button } from "../../components/Button";
 import { Col, PageContainer } from "../../components/Layout";
 import { H1, H2, H3, P, Title, TitleContainer} from "../../components/Text";
 import { Link, useHistory } from "react-router-dom";
-import { fetchList, checkPermission } from "../../utils/requests";
+import { fetchList, checkPermission, postRequest } from "../../utils/requests";
 import AuthContext from "../../context/AuthContext";
 import { TextField, ImageUpload, DropDown, TextArea } from "../../components/Form";
 import Checkbox from '@material-ui/core/Checkbox';
@@ -42,18 +42,9 @@ export const CreateSocialEvent = () => {
           return;
         }
         try {
-          const response = await fetch('arrangement/opprettarrangement/send', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-          });
-          if (response.ok) {
-            // Handle successful event creation (e.g., show a success message).
-          } else {
-            // Handle error (e.g., show an error message).
-          }
+          // Use the postRequest function here
+          await postRequest('arrangementer/api/sosial/', formData);
+          // Handle successful event creation (e.g., show a success message).
         } catch (error) {
           // Handle network or other errors.
         }
