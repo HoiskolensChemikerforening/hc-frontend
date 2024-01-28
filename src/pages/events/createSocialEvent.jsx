@@ -28,7 +28,7 @@ export const CreateSocialEvent = () => {
     checkPermission("events.add_social", user, setCanAddSocial);
       }, [user]);
 
-      const [formData, setFormData] = useState({ title: '', komite: '', date: '', sted: '', beskrivelse: '', betalingsinfo: '' });
+      const [formData, setFormData] = useState({ title: '', commitee: '', date: '', sted: '', beskrivelse: '', betalingsinfo: '' });
 
       const handleChange = (e) => {
         const { name, value } = e.target;
@@ -130,9 +130,9 @@ export const CreateSocialEvent = () => {
           <div>
             <P>Hvilken komité arrangerer?</P>
             <StyledDropDown
-              id="komite"
-              name="komite"
-              value={formData.komite}
+              id="commitee"
+              name="commitee"
+              value={formData.commitee}
               onChange={handleChange}
               required
             >
@@ -141,7 +141,7 @@ export const CreateSocialEvent = () => {
               <option value="Webkomiteen">Webkomiteen</option>
               <option value="Kjellerstyret">Kjellerstyret</option> 
             </StyledDropDown>
-            <P>Du valgte: {formData.komite}</P>
+            <P>Du valgte: {formData.commitee}</P>
           </div>
 
           <P>Legg inn følgende datoer og klokkeslett:</P>
