@@ -11,8 +11,17 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 export const CreateSocialEvent = () => {
   const [canAddSocial, setCanAddSocial] = useState(false);
+  const [eventType, setEventType] = useState(""); // holds either "published" or "tentative"
+  const [showModal, setShowModal] = useState(false);
   const history = useHistory();
   let {user} = useContext(AuthContext);
+
+  const Modal = ({ onClose, children }) => (
+    <StyledModal>
+      {children}
+      <Button primary type="button" onClick={onClose} style={{ marginTop: '20px' }}>Lukk</Button>
+    </StyledModal>
+  );
 
   useEffect(() => {
     
@@ -28,6 +37,10 @@ export const CreateSocialEvent = () => {
     
       const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!eventType) {
+          setShowModal(true);
+          return;
+        }
         try {
           const response = await fetch('arrangement/opprettarrangement/send', {
             method: 'POST',
@@ -63,6 +76,7 @@ export const CreateSocialEvent = () => {
       const handleCheckboxChange = (e) => {
         const { name, checked } = e.target;
         setCheckboxes({ ...checkboxes, [name]: checked });
+        setEventType(e.target.name);
       };
 
       const [selectedOption, setSelectedOption] = useState(''); 
@@ -73,6 +87,11 @@ export const CreateSocialEvent = () => {
 
   return (
     <>
+    {showModal && (
+      <Modal onClose={() => setShowModal(false)}>
+        <p>Du må velge om arrangementet ditt skal være publisert eller tentativt!</p>
+      </Modal>
+    )}
     <OuterWrapper>
       <TitleContainer>
         <Title>Opprett sosialt arrangement</Title>
@@ -97,7 +116,7 @@ export const CreateSocialEvent = () => {
       <CheckboxContainer>
         <CheckBox>
           <ColoredCheckbox
-            checked={checkboxes.published}
+            checked={eventType === "published"}
             onChange={handleCheckboxChange}
             name="published"
             
@@ -106,7 +125,7 @@ export const CreateSocialEvent = () => {
         </CheckBox>
         <CheckBox>
           <ColoredCheckbox
-            checked={checkboxes.tentative}
+            checked={eventType === "tentative"}
             onChange={handleCheckboxChange}
             name="tentative"
             color="primary"
@@ -416,4 +435,18 @@ const ColoredCheckbox = styled(Checkbox)`
   &:hover {
     background-color: rgba(255, 203, 38, 0.1) !important;
   }
+`;
+
+const StyledModal = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fffacd;
+  padding: 20px;
+  z-index: 1000;
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  text-align: center;
 `;
