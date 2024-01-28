@@ -28,7 +28,7 @@ export const CreateSocialEvent = () => {
     checkPermission("events.add_social", user, setCanAddSocial);
       }, [user]);
 
-      const [formData, setFormData] = useState({ title: '', commitee: '', date: '', sted: '', beskrivelse: '', betalingsinfo: '' });
+      const [formData, setFormData] = useState({ title: '', committee: '', date: '', sted: '', beskrivelse: '', betalingsinfo: '' });
 
       const handleChange = (e) => {
         const { name, value } = e.target;
@@ -130,9 +130,9 @@ export const CreateSocialEvent = () => {
           <div>
             <P>Hvilken komité arrangerer?</P>
             <StyledDropDown
-              id="commitee"
-              name="commitee"
-              value={formData.commitee}
+              id="committee"
+              name="committee"
+              value={formData.committee}
               onChange={handleChange}
               required
             >
@@ -141,7 +141,7 @@ export const CreateSocialEvent = () => {
               <option value="Webkomiteen">Webkomiteen</option>
               <option value="Kjellerstyret">Kjellerstyret</option> 
             </StyledDropDown>
-            <P>Du valgte: {formData.commitee}</P>
+            <P>Du valgte: {formData.committee}</P>
           </div>
 
           <P>Legg inn følgende datoer og klokkeslett:</P>
@@ -431,15 +431,20 @@ const StyledDropDown = styled.select`
 
 const TimeContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 5%;
-  margin-right: 5%;
+  flex-direction: row; 
+  justify-content: space-evenly;
+  align-items: center; 
+  margin: 20px 0; 
 `;
 
 const TimeBox = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column; 
+  margin-bottom: 10px; 
+
+  & > input {
+    margin-bottom: 5px; // Spacing between each input
+  }
 `;
 
 const PriceContainer = styled.div`
