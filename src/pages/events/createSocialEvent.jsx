@@ -31,12 +31,20 @@ export const CreateSocialEvent = () => {
       const [formData, setFormData] = useState({
         attendees: [], // skal jeg sende dette eller legges den til etterpå?
         title: '',
-        date: '',
         created: '',
         edited: '',
+        date: '',
         register_startdate: '',
         register_deadline: '',
         deregister_deadline: '',
+        eventDate: '',
+        eventTime: '',
+        registerStartDate: '',
+        registerStartTime: '',
+        registerDeadlineDate: '',
+        registerDeadlineTime: '',
+        deregisterDeadlineDate: '',
+        deregisterDeadlineTime: '',
         location: '',
         description: '',
         image: '',
@@ -69,12 +77,20 @@ export const CreateSocialEvent = () => {
         // For arrays like allowed_grades, you'll need logic to add/remove items
       };
 
+      const combineDateTime = (date, time) => {
+        if (date && time) {
+          return new Date(date + 'T' + time).toISOString();
+        }
+        return '';
+      };
+
       const prepareDataForSubmission = () => {
         const dataToSubmit = {
           ...formData,
-          date: new Date(formData.date).toISOString(),
-          register_startdate: new Date(formData.register_startdate).toISOString(),
-          // ... convert other date fields
+          date: combineDateTime(formData.eventDate, formData.eventTime),
+          register_startdate: combineDateTime(formData.registerStartDate, formData.registerStartTime),
+          register_deadline: combineDateTime(formData.registerDeadlineDate, formData.registerDeadlineTime),
+          deregister_deadline: combineDateTime(formData.deregisterDeadlineDate, formData.deregisterDeadlineTime),
           // Make sure nested objects and arrays are correctly formatted
         };
       
@@ -195,30 +211,30 @@ export const CreateSocialEvent = () => {
             <div>
               <P>Tidspunkt for arrangementet</P>
               <TimeBox>
-              <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} required />
-              <input type="time" id="time1" name="time1" value={formData.time1} onChange={handleChange} required />
-            </TimeBox>
+                <input type="date" id="eventDate" name="eventDate" value={formData.eventDate} onChange={handleChange} required />
+                <input type="time" id="eventTime" name="eventTime" value={formData.eventTime} onChange={handleChange} required />
+              </TimeBox>
             </div>
             <div>
               <P>Påmeldingen åpner</P>
               <TimeBox>
-              <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} required />
-              <input type="time" id="time1" name="time1" value={formData.time1} onChange={handleChange} required />
-            </TimeBox>
+                <input type="date" id="registerStartDate" name="registerStartDate" value={formData.registerStartDate} onChange={handleChange} required />
+                <input type="time" id="registerStartTime" name="registerStartTime" value={formData.registerStartTime} onChange={handleChange} required />
+              </TimeBox>
             </div>
             <div>
               <P>Påmeldingen stenger</P>
               <TimeBox>
-              <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} required />
-              <input type="time" id="time1" name="time1" value={formData.time1} onChange={handleChange} required />
-            </TimeBox>
+                <input type="date" id="registerDeadlineDate" name="registerDeadlineDate" value={formData.registerDeadlineDate} onChange={handleChange} required />
+                <input type="time" id="registerDeadlineTime" name="registerDeadlineTime" value={formData.registerDeadlineTime} onChange={handleChange} required />
+              </TimeBox>
             </div>
             <div>
               <P>Avmeldingen stenger</P>
               <TimeBox>
-              <input type="date" id="date" name="date" value={formData.date} onChange={handleChange} required />
-              <input type="time" id="time1" name="time1" value={formData.time1} onChange={handleChange} required />
-            </TimeBox>
+                <input type="date" id="deregisterDeadlineDate" name="deregisterDeadlineDate" value={formData.deregisterDeadlineDate} onChange={handleChange} required />
+                <input type="time" id="deregisterDeadlineTime" name="deregisterDeadlineTime" value={formData.deregisterDeadlineTime} onChange={handleChange} required />
+              </TimeBox>
             </div>
           </TimeContainer>
 
