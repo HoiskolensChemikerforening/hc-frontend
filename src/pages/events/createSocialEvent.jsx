@@ -137,20 +137,19 @@ export const CreateSocialEvent = () => {
       </CheckboxContainer>
 
           <div>
-            <P>Komité</P>
-            <DropDown
-            label="Komite"
-            type="komite"
-            id="komite"
-            name="komite"
-            value={formData.komite}
-            onChange={handleChange}
-            required>
+            <P>Hvilken komité arrangerer?</P>
+            <StyledDropDown
+              id="komite"
+              name="komite"
+              value={formData.komite}
+              onChange={handleChange}
+              required
+            >
               <option value="" disabled selected>Velg din komité</option> {/* Burde legge inn at kun komiteer man har permission til vises */}
               <option value="pHaestkomiteen">pHaestkomiteen</option>
               <option value="Webkomiteen">Webkomiteen</option>
               <option value="Kjellerstyret">Kjellerstyret</option> 
-            </DropDown>
+            </StyledDropDown>
             <P>Du valgte: {formData.komite}</P>
           </div>
 
@@ -416,6 +415,26 @@ const StyledInput = styled.input`
     top: -20px;
     font-size: 12px;
     color: #333;
+  }
+`;
+
+const StyledDropDown = styled.select`
+  width: 40%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 16px;
+  color: #333 !important;
+  margin-bottom: 20px;
+
+  option {
+    color: #333;
+    background-color: white !important;
+
+    &:hover {
+      background-color: #FFcb26 !important; 
+    }
   }
 `;
 
