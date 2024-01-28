@@ -7,6 +7,7 @@ import { Link, useHistory } from "react-router-dom";
 import { fetchList, checkPermission } from "../../utils/requests";
 import AuthContext from "../../context/AuthContext";
 import { TextField, ImageUpload, DropDown, TextArea } from "../../components/Form";
+import Checkbox from '@material-ui/core/Checkbox';
 
 export const CreateSocialEvent = () => {
   const [canAddSocial, setCanAddSocial] = useState(false);
@@ -45,10 +46,23 @@ export const CreateSocialEvent = () => {
         }
       };
 
-      const [isChecked, setIsChecked] = useState(false);
+      const [checkboxes, setCheckboxes] = useState({
+        published: false,
+        tentative: false,
+        plusOne: false,
+        sleepover: false,
+        nightSnack: false,
+        checkIn: false,
+        first: false,
+        second: false,
+        third: false,
+        forth: false,
+        fifth: false
+      });
 
-      const handleCheckboxChange = () => {
-        setIsChecked(!isChecked);
+      const handleCheckboxChange = (e) => {
+        const { name, checked } = e.target;
+        setCheckboxes({ ...checkboxes, [name]: checked });
       };
 
       const [selectedOption, setSelectedOption] = useState(''); 
@@ -79,6 +93,27 @@ export const CreateSocialEvent = () => {
               onChange={handleChange}
               required
             />
+      
+      <CheckboxContainer>
+        <CheckBox>
+          <ColoredCheckbox
+            checked={checkboxes.published}
+            onChange={handleCheckboxChange}
+            name="published"
+            
+          />
+          <P>Publisert</P>
+        </CheckBox>
+        <CheckBox>
+          <ColoredCheckbox
+            checked={checkboxes.tentative}
+            onChange={handleCheckboxChange}
+            name="tentative"
+            color="primary"
+          />
+          <P>Tentativt</P>
+        </CheckBox>
+      </CheckboxContainer>
 
           <div>
             <P>Komité</P>
@@ -212,50 +247,96 @@ export const CreateSocialEvent = () => {
           <div>
             <P>Inkluderer arrangementet noen av alternativene nedenfor?</P>
           </div>
-          <ExtraContainer>
-            <ExtraBox>
+          <CheckboxContainer>
+            <CheckBox>
+              <ColoredCheckbox
+                checked={checkboxes.plusOne}
+                onChange={handleCheckboxChange}
+                name="plusOne"
+                color="primary"
+              />
               <P>Følge</P>
-              <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange}/>
-            </ExtraBox>
-            <ExtraBox>
+            </CheckBox>
+            <CheckBox>
+              <ColoredCheckbox
+                checked={checkboxes.sleepover}
+                onChange={handleCheckboxChange}
+                name="sleepover"
+                color="primary"
+              />
               <P>Overnatting</P>
-              <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange}/>
-            </ExtraBox>
-            <ExtraBox>
+            </CheckBox>
+            <CheckBox>
+              <ColoredCheckbox
+                checked={checkboxes.nightSnack}
+                onChange={handleCheckboxChange}
+                name="nightSnack"
+                color="primary"
+              />
               <P>Nattmat</P>
-              <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange}/>
-            </ExtraBox>
-            <ExtraBox>
+            </CheckBox>
+            <CheckBox>
+              <ColoredCheckbox
+                checked={checkboxes.checkIn}
+                onChange={handleCheckboxChange}
+                name="checkIn"
+                color="primary"
+              />
               <P>Innsjekking</P>
-              <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange}/>
-            </ExtraBox>
-          </ExtraContainer>
+            </CheckBox>
+          </CheckboxContainer>
+
 
           <div>
           <P>Hvilke klassetrinn er dette arrangementet for?</P>
           </div>
-          <ExtraContainer>
-            <ExtraBox>
+          <CheckboxContainer>
+            <CheckBox>
+              <ColoredCheckbox
+                checked={checkboxes.first}
+                onChange={handleCheckboxChange}
+                name="first"
+                color="primary"
+              />
               <P>Førsteklasse</P>
-              <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange}/>
-            </ExtraBox>
-            <ExtraBox>
+            </CheckBox>
+            <CheckBox>
+              <ColoredCheckbox
+                checked={checkboxes.second}
+                onChange={handleCheckboxChange}
+                name="second"
+                color="primary"
+              />
               <P>Andreklasse</P>
-              <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange}/>
-            </ExtraBox>
-            <ExtraBox>
+            </CheckBox>
+            <CheckBox>
+              <ColoredCheckbox
+                checked={checkboxes.third}
+                onChange={handleCheckboxChange}
+                name="third"
+                color="primary"
+              />
               <P>Tredjeklasse</P>
-              <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange}/>
-            </ExtraBox>
-            <ExtraBox>
+            </CheckBox>
+            <CheckBox>
+              <ColoredCheckbox
+                checked={checkboxes.forth}
+                onChange={handleCheckboxChange}
+                name="forth"
+                color="primary"
+              />
               <P>Fjerdeklasse</P>
-              <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange}/>
-            </ExtraBox>
-            <ExtraBox>
+            </CheckBox>
+            <CheckBox>
+              <ColoredCheckbox
+                checked={checkboxes.fifth}
+                onChange={handleCheckboxChange}
+                name="fifth"
+                color="primary"
+              />
               <P>Femteklasse</P>
-              <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange}/>
-            </ExtraBox>
-          </ExtraContainer>
+            </CheckBox>
+          </CheckboxContainer>
 
           <Button primary type="submit">Opprett arrangement!</Button>
         </form>
@@ -304,15 +385,35 @@ const PriceBox = styled.div`
   justify-content: column;
 `;
 
-const ExtraContainer = styled.div`
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-left: 20%;
-margin-right: 20%;
+const CheckboxContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 20%;
+  margin-right: 20%;
 `;
 
-const ExtraBox = styled.div`
+const CheckBox = styled.div`
   display: flex;
-  justify-content: row;
+  align-items: center; 
+  margin-right: 15px; 
+
+  P {
+    margin: 0; 
+    line-height: normal; 
+  }
+
+  .MuiCheckbox-root {
+    padding: 9px; 
+  }
+`;
+
+const ColoredCheckbox = styled(Checkbox)`
+  &.Mui-checked {
+    color: #FFcb26 !important; // Color when checked
+  }
+
+  &:hover {
+    background-color: rgba(255, 203, 38, 0.1) !important;
+  }
 `;
