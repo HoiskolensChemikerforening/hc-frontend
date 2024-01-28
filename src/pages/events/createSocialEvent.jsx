@@ -28,11 +28,57 @@ export const CreateSocialEvent = () => {
     checkPermission("events.add_social", user, setCanAddSocial);
       }, [user]);
 
-      const [formData, setFormData] = useState({ title: '', committee: '', date: '', sted: '', beskrivelse: '', betalingsinfo: '' });
+      const [formData, setFormData] = useState({
+        attendees: [], // skal jeg sende dette eller legges den til etterpå?
+        title: '',
+        date: '',
+        created: '',
+        edited: '',
+        register_startdate: '',
+        register_deadline: '',
+        deregister_deadline: '',
+        location: '',
+        description: '',
+        image: '',
+        sluts: '',
+        payment_information: '',
+        price_member: 0,
+        price_not_member: 0,
+        price_companion: 0,
+        published: false,
+        tentative: false,
+        companion: false,
+        sleepover: false,
+        night_snack: false,
+        check_in: false,
+        allowed_grades: [],
+        committee: null, // kan dette hentes direkte fra en API? Skal egentlig være en { med info }
+        author: { // hvordan hente dette fra brukeren som er logget inn?
+          username: "ingridsutterud",
+          email: "dsf@fd.com",
+          first_name: "Ingrid",
+          last_name: "Sutterud",
+          full_name: "Ingrid Sutterud"
+        }
+      });
 
       const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+        // For nested fields like committee, you'll need a separate handler or logic
+        // For arrays like allowed_grades, you'll need logic to add/remove items
+      };
+
+      const prepareDataForSubmission = () => {
+        const dataToSubmit = {
+          ...formData,
+          date: new Date(formData.date).toISOString(),
+          register_startdate: new Date(formData.register_startdate).toISOString(),
+          // ... convert other date fields
+          // Make sure nested objects and arrays are correctly formatted
+        };
+      
+        return dataToSubmit;
       };
     
       const handleSubmit = async (e) => {
@@ -42,9 +88,9 @@ export const CreateSocialEvent = () => {
           return;
         }
         try {
-          // Use the postRequest function here
-          await postRequest('arrangementer/api/sosial/', formData);
-          // Handle successful event creation (e.g., show a success message).
+          const dataToSubmit = prepareDataForSubmission();
+          await postRequest('arrangementer/api/sosial/', dataToSubmit);
+          // show a success message
         } catch (error) {
           // Handle network or other errors.
         }
@@ -53,10 +99,10 @@ export const CreateSocialEvent = () => {
       const [checkboxes, setCheckboxes] = useState({
         published: false,
         tentative: false,
-        plusOne: false,
+        companion: false,
         sleepover: false,
-        nightSnack: false,
-        checkIn: false,
+        night_snack: false,
+        check_in: false,
         first: false,
         second: false,
         third: false,
@@ -261,9 +307,9 @@ export const CreateSocialEvent = () => {
           <CheckboxContainer>
             <CheckBox>
               <ColoredCheckbox
-                checked={checkboxes.plusOne}
+                checked={checkboxes.companion}
                 onChange={handleCheckboxChange}
-                name="plusOne"
+                name="companion"
                 color="primary"
               />
               <P>Følge</P>
@@ -279,18 +325,18 @@ export const CreateSocialEvent = () => {
             </CheckBox>
             <CheckBox>
               <ColoredCheckbox
-                checked={checkboxes.nightSnack}
+                checked={checkboxes.night_snack}
                 onChange={handleCheckboxChange}
-                name="nightSnack"
+                name="night_snack"
                 color="primary"
               />
               <P>Nattmat</P>
             </CheckBox>
             <CheckBox>
               <ColoredCheckbox
-                checked={checkboxes.checkIn}
+                checked={checkboxes.check_in}
                 onChange={handleCheckboxChange}
-                name="checkIn"
+                name="check_in"
                 color="primary"
               />
               <P>Innsjekking</P>
