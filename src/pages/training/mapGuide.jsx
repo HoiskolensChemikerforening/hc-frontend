@@ -15,7 +15,8 @@ export const MapDemo = () => {
 
 
     useEffect(() => {
-      fetchList("undergrupper/api/", setCommittees);
+      // fetchList("api-link", funksjon som skal gjennomføres):
+      fetchList("/undergrupper/api/", setCommittees);
       console.log(committees);
     }, []);
     
@@ -24,11 +25,7 @@ export const MapDemo = () => {
       history.push("/clicked")
     };
 
-    function handleClick2 () {
-      console.log("clicked")
-    }
 
-      //const history = useHistory();
     return (
       <PageContainer>
         <TitleContainer>
@@ -43,6 +40,8 @@ export const MapDemo = () => {
         </StyledP>
           
           <Row>
+          {/* her vil map-funksjonen lage et "SimpleSubGroup"-element for
+           hver "committee" i committees */}
           {committees.map((committee) => 
             (<SimpleSubGroup key={committee.id} committee={committee}></SimpleSubGroup>
             ))}
@@ -51,13 +50,14 @@ export const MapDemo = () => {
         <Spacer></Spacer>
 
         <H1>Oppgave 2: Pyntet layout av komiteer:</H1>
-        <StyledP>Her har vi en simpel layout, men den kan bli finere. 
+        <StyledP>Start med å fikse map-statement slik at den lager "RoundedSubGroup". 
+          Her har vi en simpel layout, men den kan bli finere. 
           Lag avrundede hjørner på boksene og fyll inn kode slik at 
           bakgrunnen blir bildet til undergruppen.
         </StyledP>
           <Row>
           {committees.map((committee) => 
-            (<RoundedSubGroup key={committee.id} committee={committee}></RoundedSubGroup>
+            (<div key={committee.id} committee={committee}></div>
             ))}
           </Row>
 
