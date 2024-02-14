@@ -44,14 +44,13 @@ const ContentWrapper = styled.p`
 
 /* Oppgave 1: */
 const SimpleWrapper = styled.div`
-  display: flex;
+  
   width: 100%;
   min-height: 100px;
-  /* background-color: #fd43e8; */
-  background-color: var(--primary);
-  /* Din kode her: */
-  justify-content: center;
-  flex-wrap: wrap;
+  /* Her må noe fikses: */
+  background-color: #a0ab27;
+  /* Bruk flexbox for å sentrere elementene: */
+  display: flex;
 `
 
 /* Oppgave 2: */
@@ -63,10 +62,7 @@ const RoundedImageWrapper = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   /* Din kode her: */
-  border-radius: 25px;
-  background-image: url(${props => props.committee.image});
-  background-size: cover;
-  background-repeat: no-repeat;
+  
 `
 
 
@@ -78,12 +74,12 @@ const ShadowWrapper = styled.div`
   background-color: var(--primary);
   justify-content: center;
   flex-wrap: wrap;
-  /* Din kode her: */
   border-radius: 25px;
   background-image: url(${props => props.committee.image});
   background-size: cover;
   background-repeat: no-repeat;
-  box-shadow: 1px 1px 5px black;
+  /* Din kode her: */
+  
 `
 
 
@@ -92,8 +88,7 @@ const ReadableTitleWrapper = styled.h2`
   width: 100%;
   justify-content: center;  
   align-items: center;
-  color: white;
-  text-shadow: 0 0 2px black;
+  /* Din kode her */
   
   `
   
@@ -102,8 +97,7 @@ const ReadableTitleWrapper = styled.h2`
   width: 100%;
   align-items: center;
   justify-content: center;
-  color: white;
-  text-shadow: 0 0 2px black;
+  /* Din kode her */
   
 `
 

@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import React, { useEffect, useState, useContext } from "react";
-import { PageContainer, Container, Row } from "../../components/Layout";
+import { PageContainer, Container, Row, Col } from "../../components/Layout";
 import { P, TitleContainer, Title, H1} from '../../components/Text'; 
 import { fetchDetail, fetchList} from "../../utils/requests";
 import AuthContext from "../../context/AuthContext";
@@ -15,8 +15,8 @@ export const MapDemo = () => {
 
 
     useEffect(() => {
-      // fetchList("api-link", funksjon som skal gjennomføres):
-      fetchList("/undergrupper/api/", setCommittees);
+      // Her må noe endres for å få tak i undergruppene:
+      fetchList("url", setCommittees);
       console.log(committees);
     }, []);
     
@@ -31,12 +31,34 @@ export const MapDemo = () => {
         <TitleContainer>
         <Title>Introduksjon til map</Title>
         </TitleContainer>
+        <StyledP>Velkommen til en liten tutorial på å fetching og mapping av elementer.
+          I webdesign brukes map når man har gjenstander i en liste, og man vil lage et element (html-objekt) for hvert objekt i listen.
+          Eksempler kan være personer i klassekatalogen eller gjenstander i HC-shoppen. I denne oppgaven
+          skal vi bruke undergrupper, så pass på at du har opprettet minst 4 undergrupper i den lokale databasen din. 
+          Det er også viktig å være logget inn for at fetching skal fungere. 
 
-     
-        <H1>Oppgave 1: Simpel layout av komiteer:</H1>
+        </StyledP>
+        <StyledP >
+          <Col>
+          <p>Filene du trenger å endre:</p>
+          <ul>
+            <li>mapGuide</li>
+            <li>MapTraining (src/components)</li>
+          </ul>
+          </Col> 
+        </StyledP>
+
+        <H1>Oppgave 1: Fiks fetch statement:</H1>
+        <StyledP>Fiks fetch-statement i useEffect slik at komiteene importeres og lagres i "committees".
+          Når det fungerer som det skal vil undergruppene vises i oppgave 2.
+        </StyledP>
+        
+        <Spacer></Spacer>
+
+        <H1>Oppgave 2: Simpel layout av komiteer:</H1>
         <StyledP>Den er ikke så fin, men den fungerer. Gjør den litt finere
           med å få tittel og tekst i midten av figuren, og bytt til en 
-          finere farge (gult er kult ;^) ).
+          finere farge (gult er kult ;^) ). 
         </StyledP>
           
           <Row>
@@ -49,7 +71,7 @@ export const MapDemo = () => {
 
         <Spacer></Spacer>
 
-        <H1>Oppgave 2: Pyntet layout av komiteer:</H1>
+        <H1>Oppgave 3: Pyntet layout av komiteer:</H1>
         <StyledP>Start med å fikse map-statement slik at den lager "RoundedSubGroup". 
           Her har vi en simpel layout, men den kan bli finere. 
           Lag avrundede hjørner på boksene og fyll inn kode slik at 
@@ -57,25 +79,25 @@ export const MapDemo = () => {
         </StyledP>
           <Row>
           {committees.map((committee) => 
+            /* Her må noe endres: */
             (<div key={committee.id} committee={committee}></div>
             ))}
           </Row>
 
         <Spacer></Spacer>
         
-        <H1>Oppgave 3: Lesbar layout av komiteer:</H1>
+        <H1>Oppgave 4: Lesbar layout av komiteer:</H1>
         <StyledP>
+          Map komiteene med "ReadableSubGroup" som element.
           Nå begynner det å se ut som noe, men det er veldig vanskelig å lese teksten.
-          Bruk skygge for å gjøre teksten mer leselig uavhengig av bakgrunn. Når det er gjort kan du legge til skygge rundt boksene, 
+          Bruk tekst-skygge for å gjøre teksten mer leselig uavhengig av bakgrunn. Når det er gjort kan du legge til skygge rundt boksene, 
           med ekstra tyngde nede til høyre. 
         </StyledP>
           <Row>
-          {committees.map((committee) => 
-            (<ReadableSubGroup key={committee.id} committee={committee} onClick={() => handleClick()}></ReadableSubGroup>
-            ))}
+            {/* Map komiteene med "ReadableSubGroup" som element her */}
           </Row>
 
-          <H1>Oppgave 4: link til annen side</H1>
+          <H1>Oppgave 5: link til annen side</H1>
           <StyledP>
           Nå som siden ser bra ut kan du få elementene til å 
           sende brukeren til siden med url "/clicked"
