@@ -24,11 +24,6 @@ export const MapDemo = () => {
       history.push("/clicked")
     };
 
-    function handleClick2 () {
-      console.log("clicked")
-    }
-
-      //const history = useHistory();
     return (
       <PageContainer>
         <TitleContainer>
