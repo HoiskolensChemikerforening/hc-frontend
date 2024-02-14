@@ -22,6 +22,8 @@ import { ApiDemo } from "./pages/training/API";
 // import { FillIn } from "./pages/training/fill_in_code";
 import { AddComments } from "./pages/training/add_comments_code";
 import { MapDemo } from "./pages/training/mapGuide";
+import { Clicked } from "./pages/training/clicked";
+
 
 
 class App extends React.Component {
@@ -51,6 +53,7 @@ class App extends React.Component {
             {/* <Route path="/fillIn">                  <FillIn/>                   </Route>  A page with un-finished code to fill in */}
             <Route path="/addComments">             <AddComments/>              </Route> {/* A page with finished code to fill out comments */}
             <Route path="/mapDemo">                 <MapDemo/>                  </Route>
+            <Route path="/clicked">                 <Clicked/>                  </Route>
           </Switch>
           <NavBarPhone/>
           </AuthProvider>
