@@ -16,6 +16,7 @@ export const MapDemo = () => {
 
     useEffect(() => {
       // Her må noe endres for å få tak i undergruppene:
+      // (Hint: typisk form for api på hc-siden er "sluttenAvURLPåGammelSide/api")
       fetchList("url", setCommittees);
       console.log(committees);
     }, []);
