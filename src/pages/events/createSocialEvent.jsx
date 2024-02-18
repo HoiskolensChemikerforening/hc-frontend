@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
+import axios from 'axios';
 import styled, {css} from "styled-components";
 import { Button } from "../../components/Button"; 
 import { Col, PageContainer } from "../../components/Layout";
@@ -23,52 +24,71 @@ export const CreateSocialEvent = () => {
     </StyledModal>
   );
 
-  useEffect(() => {
-    
-    checkPermission("events.add_social", user, setCanAddSocial);
-      }, [user]);
+  const [formData, setFormData] = useState({
+    attendees: [], // skal jeg sende dette eller legges den til etterpå?
+    title: '',
+    created: '',
+    edited: '',
+    date: '',
+    register_startdate: '',
+    register_deadline: '',
+    deregister_deadline: '',
+    eventDate: '',
+    eventTime: '',
+    registerStartDate: '',
+    registerStartTime: '',
+    registerDeadlineDate: '',
+    registerDeadlineTime: '',
+    deregisterDeadlineDate: '',
+    deregisterDeadlineTime: '',
+    location: '',
+    description: '',
+    image: '',
+    sluts: '',
+    payment_information: '',
+    price_member: 0,
+    price_not_member: 0,
+    price_companion: 0,
+    published: false,
+    tentative: false,
+    companion: false,
+    sleepover: false,
+    night_snack: false,
+    check_in: false,
+    allowed_grades: [],
+    committee: null, // kan dette hentes direkte fra en API? Skal egentlig være en { med info }
+    author: {}
+  });
 
-      const [formData, setFormData] = useState({
-        attendees: [], // skal jeg sende dette eller legges den til etterpå?
-        title: '',
-        created: '',
-        edited: '',
-        date: '',
-        register_startdate: '',
-        register_deadline: '',
-        deregister_deadline: '',
-        eventDate: '',
-        eventTime: '',
-        registerStartDate: '',
-        registerStartTime: '',
-        registerDeadlineDate: '',
-        registerDeadlineTime: '',
-        deregisterDeadlineDate: '',
-        deregisterDeadlineTime: '',
-        location: '',
-        description: '',
-        image: '',
-        sluts: '',
-        payment_information: '',
-        price_member: 0,
-        price_not_member: 0,
-        price_companion: 0,
-        published: false,
-        tentative: false,
-        companion: false,
-        sleepover: false,
-        night_snack: false,
-        check_in: false,
-        allowed_grades: [],
-        committee: null, // kan dette hentes direkte fra en API? Skal egentlig være en { med info }
-        author: { // hvordan hente dette fra brukeren som er logget inn?
-          username: "ingridsutterud",
-          email: "dsf@fd.com",
-          first_name: "Ingrid",
-          last_name: "Sutterud",
-          full_name: "Ingrid Sutterud"
+  useEffect(() => {
+    checkPermission("events.add_social", user, setCanAddSocial);
+
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/bruker/');
+        const userData = response.data;
+        setFormData((currentFormData) => ({
+          ...currentFormData,
+          author: {
+            username: userData.username,
+            email: userData.email,
+            first_name: userData.first_name,
+            last_name: userData.last_name,
+            full_name: userData.full_name
+          }
+        }));
+        } catch (error) {
+          console.error('Failed to fetch user data:', error);
         }
-      });
+    };
+    if (user && user.user_id) { // Make sure there's a logged-in user
+      fetchUserData();
+    }
+
+    console.log(user, user.user_id);
+    console.log(formData.author);
+    }, [user]);
+
 
       const handleChange = (e) => {
         const { name, value } = e.target;
