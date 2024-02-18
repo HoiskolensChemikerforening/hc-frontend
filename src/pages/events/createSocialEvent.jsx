@@ -67,6 +67,8 @@ export const CreateSocialEvent = () => {
       try {
         const response = await axios.get('http://localhost:8000/api/bruker/');
         const userData = response.data;
+        const userId = userData.id;
+        console.log(userId);
         setFormData((currentFormData) => ({
           ...currentFormData,
           author: {
@@ -86,7 +88,6 @@ export const CreateSocialEvent = () => {
     }
 
     console.log(user, user.user_id);
-    console.log(formData.author);
     }, [user]);
 
 
