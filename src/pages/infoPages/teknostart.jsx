@@ -20,7 +20,8 @@ export const Teknostart = () => {
                 <P>Teknostart er delt inn i flere deler hvor hovedarbeidet består av et prosjektarbeid i grupper. </P>
             
                 <P>Mer informasjon om Teknostart finner du på: <Link> https://www.ntnu.no/studier/teknostart </Link> </P>
-            
+
+                <img type="image/jpg" src="hc-frontend/static/hc.jpg" alt="teknostart image"/>
               </InfoText>
             </ContentBox>
           
