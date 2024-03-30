@@ -16,6 +16,7 @@ export const CreateSocialEvent = () => {
   const [showModal, setShowModal] = useState(false);
   const history = useHistory();
   let {user} = useContext(AuthContext);
+  const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(false);
 
   const Modal = ({ onClose, children }) => (
     <StyledModal>
@@ -127,9 +128,9 @@ export const CreateSocialEvent = () => {
         try {
           const dataToSubmit = prepareDataForSubmission();
           await postRequest('arrangementer/api/sosial/', dataToSubmit);
-          // show a success message
+          setIsSubmittedSuccessfully(true);
         } catch (error) {
-          // Handle network or other errors.
+          console.error('Error submitting form:', error);
         }
       };
 
@@ -166,6 +167,12 @@ export const CreateSocialEvent = () => {
         <p>Du må velge om arrangementet ditt skal være publisert eller tentativt!</p>
       </Modal>
     )}
+    {isSubmittedSuccessfully && (
+      <SuccessModal onClose={() => setIsSubmittedSuccessfully(false)}>
+        Arrangementet ditt er opprettet med suksess!
+      </SuccessModal>
+    )}
+
     <OuterWrapper>
       <TitleContainer>
         <Title>Opprett sosialt arrangement</Title>
