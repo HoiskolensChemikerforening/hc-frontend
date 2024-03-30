@@ -17,6 +17,7 @@ export const CreateSocialEvent = () => {
   const history = useHistory();
   let {user} = useContext(AuthContext);
   const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const Modal = ({ onClose, children }) => (
     <StyledModal>
@@ -121,16 +122,19 @@ export const CreateSocialEvent = () => {
     
       const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!eventType) {
+        if (!eventType || isSubmitting) {
           setShowModal(true);
           return;
         }
+        setIsSubmitting(true);
         try {
           const dataToSubmit = prepareDataForSubmission();
           await postRequest('arrangementer/api/sosial/', dataToSubmit);
           setIsSubmittedSuccessfully(true);
         } catch (error) {
           console.error('Error submitting form:', error);
+        } finally {
+          setIsSubmitting(false); // Innsending ferdig, vellykket eller ei
         }
       };
 
@@ -433,7 +437,9 @@ export const CreateSocialEvent = () => {
             </CheckBox>
           </CheckboxContainer>
 
-          <Button primary type="submit">Opprett arrangement!</Button>
+          <Button primary type="submit" disabled={isSubmitting}>
+            {isSubmitting ? 'Sender inn...' : 'Opprett arrangement!'}
+          </Button>
         </form>
     </ContentBox>
     </OuterWrapper> 
