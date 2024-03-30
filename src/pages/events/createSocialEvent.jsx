@@ -19,10 +19,12 @@ export const CreateSocialEvent = () => {
   const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const Modal = ({ onClose, children }) => (
+  const Modal = ({ onClose, children, showCloseButton = true }) => (
     <StyledModal>
       {children}
-      <Button primary type="button" onClick={onClose} style={{ marginTop: '20px' }}>Lukk</Button>
+      {showCloseButton && (
+        <Button primary type="button" onClick={onClose} style={{ marginTop: '20px' }}>Lukk</Button>
+      )}
     </StyledModal>
   );
 
@@ -172,9 +174,9 @@ export const CreateSocialEvent = () => {
       </Modal>
     )}
     {isSubmittedSuccessfully && (
-      <SuccessModal onClose={() => setIsSubmittedSuccessfully(false)}>
+      <Modal onClose={() => setIsSubmittedSuccessfully(false)}>
         Arrangementet ditt er opprettet med suksess!
-      </SuccessModal>
+      </Modal>
     )}
 
     <OuterWrapper>
