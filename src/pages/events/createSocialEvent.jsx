@@ -28,6 +28,12 @@ export const CreateSocialEvent = () => {
     </StyledModal>
   );
 
+  const handleResize = (e) => {
+    const textarea = e.target;
+    textarea.style.height = 'inherit'; // Resetter høyden slik at scrollHeight kan beregnes på nytt
+    textarea.style.height = `${textarea.scrollHeight}px`; // Setter ny høyde
+  };  
+
   const [formData, setFormData] = useState({
     attendees: [], // skal jeg sende dette eller legges den til etterpå?
     title: '',
@@ -87,6 +93,7 @@ export const CreateSocialEvent = () => {
           console.error('Failed to fetch user data:', error);
         }
     };
+
     if (user && user.user_id) { // Make sure there's a logged-in user
       fetchUserData();
     }
@@ -115,8 +122,7 @@ export const CreateSocialEvent = () => {
           date: combineDateTime(formData.eventDate, formData.eventTime),
           register_startdate: combineDateTime(formData.registerStartDate, formData.registerStartTime),
           register_deadline: combineDateTime(formData.registerDeadlineDate, formData.registerDeadlineTime),
-          deregister_deadline: combineDateTime(formData.deregisterDeadlineDate, formData.deregisterDeadlineTime),
-          // Make sure nested objects and arrays are correctly formatted
+          deregister_deadline: combineDateTime(formData.deregisterDeadlineDate, formData.deregisterDeadlineTime)
         };
       
         return dataToSubmit;
@@ -276,38 +282,45 @@ export const CreateSocialEvent = () => {
           <br/>
           <br/>
 
-          <div>
-            <P>Sted</P>
-            <TextField
+          <FloatingLabelInputContainer>
+            <StyledInput
+              type="text"
               id="location"
               name="location"
               value={formData.location}
               onChange={handleChange}
+              placeholder=" " 
               required
             />
-          </div>
+            <FloatingLabel htmlFor="location">Sted</FloatingLabel>
+        </FloatingLabelInputContainer>
 
           <div>
-            <P>Beskrivelse av arrangementet</P>
-            <TextArea
+            <P_color>Beskrivelse av arrangementet</P_color>
+            <DynamicTextArea
               id="description"
               name="description"
               value={formData.description}
-              onChange={handleChange}
+              onChange={(e) => {
+                handleChange(e); 
+                handleResize(e); 
+              }}
               required
             />
           </div>
 
-          <div>
-            <P>Betalingsinformasjon</P>
-            <TextArea
+          <FloatingLabelInputContainer>
+            <StyledInput
+              type="text"
               id="payment_information"
               name="payment_information"
               value={formData.payment_information}
               onChange={handleChange}
+              placeholder=" " 
               required
             />
-          </div>
+            <FloatingLabel htmlFor="payment_information">Betalingsinformasjon</FloatingLabel>
+          </FloatingLabelInputContainer>
 
           <br/>
           <br/>
@@ -481,7 +494,7 @@ const FloatingLabel = styled.label`
 `;
 
 const StyledInput = styled.input`
-  width: 40%;
+  width: 90%;
   border: 0;
   border-bottom: 1px solid #ccc;
   outline: 0;
@@ -499,6 +512,26 @@ const StyledInput = styled.input`
     font-size: 12px;
     color: #333;
   }
+`;
+
+const DynamicTextArea = styled.textarea`
+  width: 90%; 
+  margin-bottom: 15px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 16px;
+  background: transparent;
+  outline: none;
+  resize: none; 
+  box-sizing: border-box; 
+
+  &:focus {
+    border-bottom-color: #000;
+  }
+`;
+
+const P_color = styled(P)`
+  color: ${props => props.color || 'inherit' };
 `;
 
 const StyledDropDown = styled.select`
