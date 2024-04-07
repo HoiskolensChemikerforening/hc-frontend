@@ -19,12 +19,10 @@ export const Teknostart = () => {
             
                 <P>Teknostart er delt inn i flere deler hvor hovedarbeidet består av et prosjektarbeid i grupper. </P>
             
-                <P>Mer informasjon om Teknostart finner du på: <Link> https://www.ntnu.no/studier/teknostart </Link> </P>
+                <P>Mer informasjon om Teknostart finner du på: <Link href="https://www.ntnu.no/studier/teknostart">Teknostart/ntnu</Link></P>
 
-                <img type="image/jpg" src="hc-frontend/static/hc.jpg" alt="teknostart image"/>
               </InfoText>
             </ContentBox>
-          
 
         </OuterWrapper>
         
@@ -45,6 +43,6 @@ const OuterWrapper = styled.div`
 const ContentBox = styled.div`
   background-color: white;
   border-radius: 10px;
-  margin: 0 2% 0 2%;
+  margin: 0 4% 0 4%;
   padding: 2% 5% ;
 `;
