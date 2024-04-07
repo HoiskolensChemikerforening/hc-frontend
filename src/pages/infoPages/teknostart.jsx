@@ -37,11 +37,6 @@ export const Teknostart = () => {
     )
   };
 
-const InfoText = styled.div`
-  text-align: left;
-  margin: 0 5% 0 5%;
-  width: 50%;
-`;
 
 const OuterWrapper = styled.div`
   background-color: var(--gray-10);
@@ -51,9 +46,15 @@ const OuterWrapper = styled.div`
 const ContentBox = styled.div`
   background-color: white;
   border-radius: 10px;
-  margin: 0 4% 0 4%;
+  margin: 0 8% 0 8%;
   padding: 2% 5% ;
   display: flex;
+  justify-content: space-around;
+`;
+
+const InfoText = styled.div`
+  text-align: left;
+  width: 50%; 
 `;
 
 const Linkbox = styled.div`
