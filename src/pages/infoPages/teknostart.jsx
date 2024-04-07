@@ -22,6 +22,12 @@ export const Teknostart = () => {
                 <P>Mer informasjon om Teknostart finner du på: <Link href="https://www.ntnu.no/studier/teknostart">Teknostart/ntnu</Link></P>
 
               </InfoText>
+                <Linkbox>
+                  <H2>Nyttige lenker</H2>
+                  <Link href="https://wiki.math.ntnu.no/oppfrisk/2023/start">Oppfriskningskurs i matte</Link>
+                  <Link href="https://wiki.math.ntnu.no/oppfrisk/2023/start">Oppfriskningskurs i matte</Link>
+                  <Link href="https://wiki.math.ntnu.no/oppfrisk/2023/start">Oppfriskningskurs i matte</Link>
+                </Linkbox>
             </ContentBox>
 
         </OuterWrapper>
@@ -31,8 +37,9 @@ export const Teknostart = () => {
   };
 
 const InfoText = styled.div`
-  text-align: center;
-  margin: 0 20% 0 20%;
+  text-align: left;
+  margin: 0 20% 0 5%;
+  width: 50%;
 `;
 
 const OuterWrapper = styled.div`
@@ -45,4 +52,12 @@ const ContentBox = styled.div`
   border-radius: 10px;
   margin: 0 4% 0 4%;
   padding: 2% 5% ;
+  display: flex;
+`;
+
+const Linkbox = styled.div`
+  display: flex; 
+  flex-direction: column;
+  border: 10px red;
+
 `;
