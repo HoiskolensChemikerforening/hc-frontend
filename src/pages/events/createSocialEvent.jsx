@@ -74,7 +74,7 @@ export const CreateSocialEvent = () => {
     location: '',
     description: '',
     image: '',
-    sluts: '',
+    sluts: 0,
     payment_information: '',
     price_member: 0,
     price_not_member: 0,
@@ -177,7 +177,8 @@ export const CreateSocialEvent = () => {
         second: false,
         third: false,
         forth: false,
-        fifth: false
+        fifth: false,
+        finished: false
       });
 
       const handleCheckboxChange = (e) => {
@@ -518,6 +519,15 @@ export const CreateSocialEvent = () => {
                 color="primary"
               />
               <P>Femteklasse</P>
+            </CheckBox>
+            <CheckBox>
+              <ColoredCheckbox
+                checked={checkboxes.finished}
+                onChange={handleCheckboxChange}
+                name="finished"
+                color="primary"
+              />
+              <P>Ferdig</P>
             </CheckBox>
           </CheckboxContainer>
 
