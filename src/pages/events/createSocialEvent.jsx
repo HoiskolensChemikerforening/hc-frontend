@@ -43,6 +43,10 @@ export const CreateSocialEvent = () => {
 
     reader.onloadend = () => {
         setImagePreviewUrl(reader.result);
+        setFormData(prevFormData => ({
+          ...prevFormData,
+          image: reader.result 
+        }));
     };
 
     if (file) {
@@ -353,14 +357,13 @@ export const CreateSocialEvent = () => {
                 type="file" 
                 id="image"
                 name="image"
-                value={formData.image}
                 onChange={handleImageChange} 
                 required
               />
             </div>
             <div style={{ marginTop: '10px' }}>
               {imagePreviewUrl && (
-                  <img src={imagePreviewUrl} alt="Preview" style={{ width: '50%', height: 'auto' }} />
+                  <img src={imagePreviewUrl} alt="Preview" style={{ width: '80%', height: 'auto' }} />
               )}
             </div>
             </ImgContainer>
@@ -372,7 +375,7 @@ export const CreateSocialEvent = () => {
                 name="sluts"
                 value={formData.sluts}
                 onChange={handleChange}
-                placeholder=" " 
+                placeholder="0" 
                 required
               />
             </SlutsContainer>
@@ -637,6 +640,7 @@ const ImgAndSlutsContainer = styled.div`
 const ImgContainer = styled.div`
   width: 50%; // Take up half of the parent container's width
   padding-right: 10px; // Optional: add padding for spacing between the two containers
+  margin-top: -30px;
 `;
 
 const SlutsContainer = styled.div`
