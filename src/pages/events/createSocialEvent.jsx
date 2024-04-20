@@ -704,10 +704,10 @@ const PriceBox = styled.div`
 
 const CheckboxContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  margin-left: 20%;
-  margin-right: 20%;
+  width: 100%;
+  margin-bottom: 30px;
 `;
 
 const CheckBox = styled.div`
