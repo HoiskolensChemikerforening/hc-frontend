@@ -387,21 +387,42 @@ export const CreateSocialEvent = () => {
           
           <PriceContainer>
             <div>
-              <P>Pris for medlemmer</P>
+              <LabelNumber htmlFor="price_member">Pris for medlemmer</LabelNumber>
               <PriceBox>
-              <input type="text" id="price_member" name="price_member" value={formData.price_member} onChange={handleChange} required />
+              <InputNumber 
+                type="number" 
+                id="price_member" 
+                name="price_member" 
+                value={formData.price_member} 
+                onChange={handleChange} 
+                required 
+                />
             </PriceBox>
             </div>
             <div>
-              <P>Pris for ikke-medlemmer</P>
+              <LabelNumber htmlFor="price_not_member">Pris for ikke-medlemmer</LabelNumber>
               <PriceBox>
-              <input type="text" id="price_not_member" name="price_not_member" value={formData.price_not_member} onChange={handleChange} required />
+              <InputNumber 
+                type="number" 
+                id="price_not_member" 
+                name="price_not_member" 
+                value={formData.price_not_member} 
+                onChange={handleChange} 
+                required 
+                />
             </PriceBox>
             </div>
             <div>
-              <P>Pris for følge</P>
+              <LabelNumber htmlFor="price_companion">Pris for følge</LabelNumber>
               <PriceBox>
-              <input type="text" id="price_companion" name="price_companion" value={formData.price_companion} onChange={handleChange} required />
+              <InputNumber 
+                type="number" 
+                id="price_companion" 
+                name="price_companion" 
+                value={formData.price_companion} 
+                onChange={handleChange} 
+                required 
+                />
             </PriceBox>
             </div>
           </PriceContainer>
@@ -670,15 +691,15 @@ const InputNumber = styled.input`
 
 const PriceContainer = styled.div`
 display: flex;
-justify-content: space-between;
-align-items: center;
-margin-left: 20%;
-margin-right: 20%;
+justify-content: space-evenly;
+width: 100%;
+margin-bottom: 40px;
 `;
 
 const PriceBox = styled.div`
   display: flex;
-  justify-content: column;
+  flex-direction: column;
+  flex: 1;
 `;
 
 const CheckboxContainer = styled.div`
