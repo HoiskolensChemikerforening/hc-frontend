@@ -296,17 +296,20 @@ export const CreateSocialEvent = () => {
         </FloatingLabelInputContainer>
 
           <div>
-            <P_color>Beskrivelse av arrangementet</P_color>
-            <DynamicTextArea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={(e) => {
-                handleChange(e); 
-                handleResize(e); 
-              }}
-              required
-            />
+            <FloatingLabelTextAreaContainer>
+              <FloatingDynamicTextArea
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={(e) => {
+                  handleChange(e); 
+                  handleResize(e); 
+                }}
+                placeholder=" "
+                required
+              />
+              <FloatingLabel htmlFor="description">Beskrivelse av arrangementet</FloatingLabel>
+            </FloatingLabelTextAreaContainer>
           </div>
 
           <FloatingLabelInputContainer>
@@ -478,7 +481,7 @@ const ContentBox = styled.div`
 const FloatingLabelInputContainer = styled.div`
   position: relative;
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 `;
 
 const FloatingLabel = styled.label`
@@ -491,6 +494,35 @@ const FloatingLabel = styled.label`
   transition: all 0.3s ease;
   pointer-events: none;
   transform-origin: left bottom;
+`;
+
+const FloatingLabelTextAreaContainer = styled.div`
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 25px;
+`;
+
+const FloatingDynamicTextArea = styled.textarea`
+  width: 90%;
+  height: 35px;
+  padding: 7px 0;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  font-size: 16px;
+  background: transparent;
+  outline: none;
+  resize: none;
+  box-sizing: border-box;
+
+  &:focus {
+    border-bottom-color: #000;
+  }
+
+  &:focus ~ label, &:not(:placeholder-shown) ~ label {
+    top: -20px;
+    font-size: 12px;
+    color: #333;
+  }
 `;
 
 const StyledInput = styled.input`
@@ -512,26 +544,6 @@ const StyledInput = styled.input`
     font-size: 12px;
     color: #333;
   }
-`;
-
-const DynamicTextArea = styled.textarea`
-  width: 90%; 
-  margin-bottom: 15px;
-  border: none;
-  border-bottom: 1px solid #ccc;
-  font-size: 16px;
-  background: transparent;
-  outline: none;
-  resize: none; 
-  box-sizing: border-box; 
-
-  &:focus {
-    border-bottom-color: #000;
-  }
-`;
-
-const P_color = styled(P)`
-  color: ${props => props.color || 'inherit' };
 `;
 
 const StyledDropDown = styled.select`
