@@ -347,7 +347,14 @@ export const CreateSocialEvent = () => {
           <div>
             <H3>Last opp et bilde</H3>
             <div>
-              <input type="file" onChange={handleImageChange} />
+              <input 
+                type="file" 
+                id="image"
+                name="image"
+                value={formData.image}
+                onChange={handleImageChange} 
+                required
+              />
             </div>
             <div style={{ marginTop: '10px' }}>
               {imagePreviewUrl && (
