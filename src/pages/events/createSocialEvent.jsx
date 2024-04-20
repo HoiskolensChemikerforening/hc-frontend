@@ -18,6 +18,7 @@ export const CreateSocialEvent = () => {
   let {user} = useContext(AuthContext);
   const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState("");
 
   const Modal = ({ onClose, children, showCloseButton = true }) => (
     <StyledModal>
@@ -33,6 +34,21 @@ export const CreateSocialEvent = () => {
     textarea.style.height = 'inherit'; // Resetter høyden slik at scrollHeight kan beregnes på nytt
     textarea.style.height = `${textarea.scrollHeight}px`; // Setter ny høyde
   };  
+
+  const handleImageChange = e => {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+        setImagePreviewUrl(reader.result);
+    };
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+};
 
   const [formData, setFormData] = useState({
     attendees: [], // skal jeg sende dette eller legges den til etterpå?
@@ -330,7 +346,14 @@ export const CreateSocialEvent = () => {
           <br/>
           <div>
             <H3>Last opp et bilde</H3>
-            <ImageUpload/>
+            <div>
+              <input type="file" onChange={handleImageChange} />
+            </div>
+            <div style={{ marginTop: '10px' }}>
+              {imagePreviewUrl && (
+                  <img src={imagePreviewUrl} alt="Preview" style={{ width: '50%', height: 'auto' }} />
+              )}
+            </div>
           </div>
           <br/>
           <br/>
