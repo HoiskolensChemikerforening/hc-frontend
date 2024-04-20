@@ -344,7 +344,9 @@ export const CreateSocialEvent = () => {
           <br/>
           <br/>
           <br/>
-          <div>
+
+          <ImgAndSlutsContainer>
+            <ImgContainer>
             <H3>Last opp et bilde</H3>
             <div>
               <input 
@@ -361,15 +363,25 @@ export const CreateSocialEvent = () => {
                   <img src={imagePreviewUrl} alt="Preview" style={{ width: '50%', height: 'auto' }} />
               )}
             </div>
-          </div>
-          <br/>
-          <br/>
-          <br/>
+            </ImgContainer>
+            <SlutsContainer>
+              <LabelNumber htmlFor="sluts">Antall plasser, sett til 0 hvis åpent arrangement</LabelNumber>
+              <InputNumber
+                type="number"
+                id="sluts"
+                name="sluts"
+                value={formData.sluts}
+                onChange={handleChange}
+                placeholder=" " 
+                required
+              />
+            </SlutsContainer>
+          </ImgAndSlutsContainer>
 
-          <div>
-            <P>Antall plasser, sett til 0 hvis åpent arrangement</P>
-          </div>
-
+          <br/>
+          <br/>
+          <br/>
+          
           <PriceContainer>
             <div>
               <P>Pris for medlemmer</P>
@@ -612,6 +624,44 @@ const TimeBox = styled.div`
   & > input {
     margin-bottom: 5px; // Spacing between each input
   }
+`;
+
+const ImgAndSlutsContainer = styled.div`
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between; 
+  align-items: start; // Align items to the top of the container
+  width: 100%; 
+`;
+
+const ImgContainer = styled.div`
+  width: 50%; // Take up half of the parent container's width
+  padding-right: 10px; // Optional: add padding for spacing between the two containers
+`;
+
+const SlutsContainer = styled.div`
+  width: 50%; // Take up half of the parent container's width
+  padding-left: 10px; // Optional: add padding for spacing between the two containers
+`;
+
+const LabelNumber = styled.label`
+  top: 0;
+  bottom: 0; 
+  left: 0;
+  font-size: 16px;
+  color: #999;
+  pointer-events: none;
+  margin-bottom: 8px;
+`;
+
+const InputNumber = styled.input`
+  width: 80%;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+  outline: 0;
+  font-size: 16px;
+  padding: 7px 0;
+  background: transparent;
 `;
 
 const PriceContainer = styled.div`
