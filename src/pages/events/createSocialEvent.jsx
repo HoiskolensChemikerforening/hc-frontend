@@ -4,7 +4,7 @@ import styled, {css} from "styled-components";
 import { Button } from "../../components/Button"; 
 import { Col, PageContainer } from "../../components/Layout";
 import { H1, H2, H3, P, Title, TitleContainer} from "../../components/Text";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { fetchList, checkPermission, postRequest } from "../../utils/requests";
 import AuthContext from "../../context/AuthContext";
 import { TextField, ImageUpload, DropDown, TextArea } from "../../components/Form";
@@ -14,8 +14,7 @@ export const CreateSocialEvent = () => {
   const [canAddSocial, setCanAddSocial] = useState(false);
   const [eventType, setEventType] = useState(""); // holds either "published" or "tentative"
   const [showModal, setShowModal] = useState(false);
-  const history = useHistory();
-  let {user} = useContext(AuthContext);
+  let {user} = useContext(AuthContext); // må passe på at bruker blir sjekket ordentlig slik at kun de med tilgang kan legge til events
   const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
@@ -29,13 +28,13 @@ export const CreateSocialEvent = () => {
     </StyledModal>
   );
 
-  const handleResize = (e) => {
+  const handleResize = (e) => { // lets the description area expand when more text
     const textarea = e.target;
-    textarea.style.height = 'inherit'; // Resetter høyden slik at scrollHeight kan beregnes på nytt
-    textarea.style.height = `${textarea.scrollHeight}px`; // Setter ny høyde
+    textarea.style.height = 'inherit'; // resets height so scrollHeight can be re-calculated 
+    textarea.style.height = `${textarea.scrollHeight}px`; // sets new height
   };  
 
-  const handleImageChange = e => {
+  const handleImageChange = e => { // må få bilde til å legges ved på riktig måte ved innsending
     e.preventDefault();
 
     let reader = new FileReader();
@@ -57,15 +56,15 @@ export const CreateSocialEvent = () => {
   const [formData, setFormData] = useState({
     attendees: [], // skal jeg sende dette eller legges den til etterpå?
     title: '',
-    created: '',
+    created: '', // hva er hva av denne
     edited: '',
-    date: '',
-    register_startdate: '',
+    date: '', // denne
+    register_startdate: '', // hva er forskjellen på denne
     register_deadline: '',
     deregister_deadline: '',
     eventDate: '',
     eventTime: '',
-    registerStartDate: '',
+    registerStartDate: '', // og denne? Er den andre denne og den under satt sammen bare? Why have both?
     registerStartTime: '',
     registerDeadlineDate: '',
     registerDeadlineTime: '',
@@ -85,15 +84,15 @@ export const CreateSocialEvent = () => {
     sleepover: false,
     night_snack: false,
     check_in: false,
-    allowed_grades: [],
-    committee: null, // kan dette hentes direkte fra en API? Skal egentlig være en { med info }
-    author: {}
+    allowed_grades: [], 
+    committee: null, // denne må gjøres dynamisk. Hente rullegardin direkte fra backend
+    author: {} // hvordan hente denne direkte fra backend?
   });
 
   useEffect(() => {
     checkPermission("events.add_social", user, setCanAddSocial);
 
-    const fetchUserData = async () => {
+    const fetchUserData = async () => { // kan denne flyttes ut av useEffect?
       try {
         const response = await axios.get('http://localhost:8000/api/bruker/');
         const userData = response.data;
@@ -114,7 +113,7 @@ export const CreateSocialEvent = () => {
         }
     };
 
-    if (user && user.user_id) { // Make sure there's a logged-in user
+    if (user && user.user_id) { // Make sure there's a logged-in user. Funker denne som den skal?
       fetchUserData();
     }
 
@@ -122,21 +121,21 @@ export const CreateSocialEvent = () => {
     }, [user]);
 
 
-      const handleChange = (e) => {
+      const handleChange = (e) => { // mangler logikk for komiteer og hvilke klasser som skal med
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
         // For nested fields like committee, you'll need a separate handler or logic
         // For arrays like allowed_grades, you'll need logic to add/remove items
       };
 
-      const combineDateTime = (date, time) => {
+      const combineDateTime = (date, time) => { // funker denne som den skal?
         if (date && time) {
           return new Date(date + 'T' + time).toISOString();
         }
         return '';
       };
 
-      const prepareDataForSubmission = () => {
+      const prepareDataForSubmission = () => { // funker denne som den skal?
         const dataToSubmit = {
           ...formData,
           date: combineDateTime(formData.eventDate, formData.eventTime),
@@ -148,7 +147,7 @@ export const CreateSocialEvent = () => {
         return dataToSubmit;
       };
     
-      const handleSubmit = async (e) => {
+      const handleSubmit = async (e) => { // funker denne som den skal?
         e.preventDefault();
         if (!eventType || isSubmitting) {
           setShowModal(true);
@@ -166,7 +165,7 @@ export const CreateSocialEvent = () => {
         }
       };
 
-      const [checkboxes, setCheckboxes] = useState({
+      const [checkboxes, setCheckboxes] = useState({ // er denne nødvendig? De er definert som false lenger oppe
         published: false,
         tentative: false,
         companion: false,
@@ -181,15 +180,15 @@ export const CreateSocialEvent = () => {
         finished: false
       });
 
-      const handleCheckboxChange = (e) => {
+      const handleCheckboxChange = (e) => { // funker denne som den skal?
         const { name, checked } = e.target;
         setCheckboxes({ ...checkboxes, [name]: checked });
         setEventType(e.target.name);
       };
 
-      const [selectedOption, setSelectedOption] = useState(''); 
+      const [selectedOption, setSelectedOption] = useState(''); // brukes ikke? Slette?
 
-      const handleOptionChange = (e) => {
+      const handleOptionChange = (e) => { // brukes ikke? Slette?
         setSelectedOption(e.target.value);
       };
 
