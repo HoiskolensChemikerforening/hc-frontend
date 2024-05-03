@@ -11,7 +11,7 @@ import { TextField, ImageUpload, DropDown, TextArea } from "../../components/For
 import Checkbox from '@material-ui/core/Checkbox';
 
 export const CreateSocialEvent = () => {
-  const [canAddSocial, setCanAddSocial] = useState(false);
+  const [canAddSocial, setCanAddSocial] = useState(false); // brukere blir ikke sjekket dersom de kun skriver inn URL. Må fikses
   const [eventType, setEventType] = useState(""); // holds either "published" or "tentative"
   const [showModal, setShowModal] = useState(false);
   let {user} = useContext(AuthContext); // må passe på at bruker blir sjekket ordentlig slik at kun de med tilgang kan legge til events
@@ -20,7 +20,18 @@ export const CreateSocialEvent = () => {
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const [committees, setCommittees] = useState([]);
 
-  const Modal = ({ onClose, children, showCloseButton = true }) => (
+
+// de under her er et forsøk på å legge in tidsdata riktig. Fungerer ikke enda :)
+  const [eventDate, setEventDate] = useState('');
+  const [eventTime, setEventTime] = useState('');
+  const [registerStartDate, setRegisterStartDate] = useState('');
+  const [registerStartTime, setRegisterStartTime] = useState('');
+  const [registerDeadlineDate, setRegisterDeadlineDate] = useState('');
+  const [registerDeadlineTime, setRegisterDeadlineTime] = useState('');
+  const [deregisterDeadlineDate, setDeregisterDeadlineDate] = useState('');
+  const [deregisterDeadlineTime, setDeregisterDeadlineTime] = useState('');
+
+  const Modal = ({ onClose, children, showCloseButton = true }) => ( // fungerer denne som den skal? 
     <StyledModal>
       {children}
       {showCloseButton && (
@@ -54,7 +65,8 @@ export const CreateSocialEvent = () => {
     }
   };
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({ // her er det nå færre felter enn på original nettside. Det er fordi jeg
+    // har fjernet noen felter som jeg tenker er unødvendige da de ikke brukes til arrangementer.
     author: user.user_id, 
     committee: '', 
     title: '',
@@ -74,26 +86,37 @@ export const CreateSocialEvent = () => {
     price_not_member: 0,
   });
 
-  const [timeData, setTimeData] = useState({
-    eventDate: '',
-    eventTime: '',
-    registerStartDate: '', 
-    registerStartTime: '',
-    registerDeadlineDate: '',
-    registerDeadlineTime: '',
-    deregisterDeadlineDate: '',
-    deregisterDeadlineTime: '',
-  });
-
-  useEffect(() => {
-    checkPermission("events.add_social", user, setCanAddSocial);
-    fetchList("undergrupper/api/", setCommittees);
-  }, [user]);
+  // const [timeData, setTimeData] = useState({ // også forsøk på å få tidsdata riktig
+  //   eventDate: '',
+  //   eventTime: '',
+  //   registerStartDate: '', 
+  //   registerStartTime: '',
+  //   registerDeadlineDate: '',
+  //   registerDeadlineTime: '',
+  //   deregisterDeadlineDate: '',
+  //   deregisterDeadlineTime: '',
+  // });
 
 
-  const handleChange = (e) => { // mangler logikk for komiteer og hvilke klasser som skal med
+  // Virker som den oppdaterer alle variabler et hakk for sent
+  const handleChange = (e) => { // mangler logikk for hvilke klasser som skal med
     const { name, value } = e.target;
+
+    // Dette under her er et forsøk på å oppdatere tidsdataen, funker ikke som de skal:(
+    // Prøver å få til å oppdatere tidspunktene riktig. De må hentes fra feltene, settes til riktige variabler, kombineres riktig
+    // deretter registrert til riktige variabler i formData
+    const date = combineDateTime(eventDate, eventTime);
+    const register_startdate = combineDateTime(registerStartDate, registerStartTime);
+    const register_deadline = combineDateTime(registerDeadlineDate, registerDeadlineTime);
+    const deregister_deadline = combineDateTime(deregisterDeadlineDate, deregisterDeadlineTime);
+    setFormData({ ...formData, [date]: date });
+    setFormData({ ...formData, [register_startdate]: register_startdate });
+    setFormData({ ...formData, [register_deadline]: register_deadline });
+    setFormData({ ...formData, [deregister_deadline]: deregister_deadline });
+
+    // 
     setFormData({ ...formData, [name]: value });
+    console.log(formData);
   };
 
   const combineDateTime = (date, time) => { // funker denne som den skal?
@@ -101,18 +124,6 @@ export const CreateSocialEvent = () => {
       return new Date(date + 'T' + time).toISOString();
     }
     return '';
-  };
-
-  const prepareDataForSubmission = () => { // funker denne som den skal?
-    const dataToSubmit = {
-      ...formData,
-      date: combineDateTime(timeData.eventDate, timeData.eventTime),
-      register_startdate: combineDateTime(timeData.registerStartDate, timeData.registerStartTime),
-      register_deadline: combineDateTime(timeData.registerDeadlineDate, timeData.registerDeadlineTime),
-      deregister_deadline: combineDateTime(timeData.deregisterDeadlineDate, timeData.deregisterDeadlineTime)
-      };
-
-    return dataToSubmit;
   };
     
   const handleSubmit = async (e) => { // funker denne som den skal?
@@ -123,8 +134,8 @@ export const CreateSocialEvent = () => {
     }
     setIsSubmitting(true);
     try {
-      const dataToSubmit = prepareDataForSubmission();
-      await postRequest('arrangementer/api/sosial/', dataToSubmit);
+      // const dataToSubmit = prepareTimeDataForSubmission();
+      // await postRequest('arrangementer/api/sosial/', dataToSubmit);
       setIsSubmittedSuccessfully(true);
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -134,21 +145,26 @@ export const CreateSocialEvent = () => {
   };
 
   const [checkboxes, setCheckboxes] = useState({ // er denne nødvendig? De er definert som false lenger oppe
-    published: false,
-    tentative: false,
+    published: false, // slette da definert lenger oppe?
+    tentative: false, // slette da definert lenger oppe?
     first: false,
     second: false,
     third: false,
     forth: false,
     fifth: false,
     finished: false
-  });
+  }); // må få lagt allowed grades til riktig sted i formData
 
-  const handleCheckboxChange = (e) => { // funker denne som den skal?
+  const handleCheckboxChange = (e) => { // funker denne som den skal? Ganske sikke rpå at den aldri oppdaterer noe til true som den skal
     const { name, checked } = e.target;
     setCheckboxes({ ...checkboxes, [name]: checked });
     setEventType(e.target.name);
   };
+
+  useEffect(() => {
+    checkPermission("events.add_social", user, setCanAddSocial);
+    fetchList("undergrupper/api/", setCommittees);
+  }, [user]);
 
   return (
     <>
@@ -228,29 +244,29 @@ export const CreateSocialEvent = () => {
             <div>
               <P>Tidspunkt for arrangementet</P>
               <TimeBox>
-                <input type="date" id="eventDate" name="eventDate" value={timeData.eventDate} onChange={handleChange} required />
-                <input type="time" id="eventTime" name="eventTime" value={timeData.eventTime} onChange={handleChange} required />
+                <input type="date" id="eventDate" name="eventDate" value={eventDate} onChange={setEventDate} required />
+                <input type="time" id="eventTime" name="eventTime" value={eventTime} onChange={setEventTime} required />
               </TimeBox>
             </div>
             <div>
               <P>Påmeldingen åpner</P>
               <TimeBox>
-                <input type="date" id="registerStartDate" name="registerStartDate" value={timeData.registerStartDate} onChange={handleChange} required />
-                <input type="time" id="registerStartTime" name="registerStartTime" value={timeData.registerStartTime} onChange={handleChange} required />
+                <input type="date" id="registerStartDate" name="registerStartDate" value={registerStartDate} onChange={setRegisterStartDate} required />
+                <input type="time" id="registerStartTime" name="registerStartTime" value={registerStartTime} onChange={setRegisterStartTime} required />
               </TimeBox>
             </div>
             <div>
               <P>Påmeldingen stenger</P>
               <TimeBox>
-                <input type="date" id="registerDeadlineDate" name="registerDeadlineDate" value={timeData.registerDeadlineDate} onChange={handleChange} required />
-                <input type="time" id="registerDeadlineTime" name="registerDeadlineTime" value={timeData.registerDeadlineTime} onChange={handleChange} required />
+                <input type="date" id="registerDeadlineDate" name="registerDeadlineDate" value={registerDeadlineDate} onChange={setRegisterDeadlineDate} required />
+                <input type="time" id="registerDeadlineTime" name="registerDeadlineTime" value={registerDeadlineTime} onChange={setRegisterDeadlineTime} required />
               </TimeBox>
             </div>
             <div>
               <P>Avmeldingen stenger</P>
               <TimeBox>
-                <input type="date" id="deregisterDeadlineDate" name="deregisterDeadlineDate" value={timeData.deregisterDeadlineDate} onChange={handleChange} required />
-                <input type="time" id="deregisterDeadlineTime" name="deregisterDeadlineTime" value={timeData.deregisterDeadlineTime} onChange={handleChange} required />
+                <input type="date" id="deregisterDeadlineDate" name="deregisterDeadlineDate" value={deregisterDeadlineDate} onChange={setDeregisterDeadlineDate} required />
+                <input type="time" id="deregisterDeadlineTime" name="deregisterDeadlineTime" value={deregisterDeadlineTime} onChange={setDeregisterDeadlineTime} required />
               </TimeBox>
             </div>
           </TimeContainer>
@@ -343,7 +359,7 @@ export const CreateSocialEvent = () => {
           
           <PriceContainer>
             <div>
-              <LabelNumber htmlFor="price_member">Pris for medlemmer</LabelNumber>
+              <LabelNumber htmlFor="price_member">Pris for medlemmer, sett til 0 hvis gratis</LabelNumber>
               <PriceBox>
               <InputNumber 
                 type="number" 
@@ -355,7 +371,7 @@ export const CreateSocialEvent = () => {
             </PriceBox>
             </div>
             <div>
-              <LabelNumber htmlFor="price_not_member">Pris for ikke-medlemmer</LabelNumber>
+              <LabelNumber htmlFor="price_not_member">Pris for ikke-medlemmer, sett til 0 hvis gratis</LabelNumber>
               <PriceBox>
               <InputNumber 
                 type="number" 
