@@ -29,15 +29,13 @@ export const EventHomepage = () => {
         let socialData;
         let bedpresData;
 
-        await axios.get("http://localhost:8000/arrangementer/api/sosial")
+        await axios.get("http://localhost:8000/arrangementer/api/sosial/kommende/")
         .then(response => {
-          socialData = response.data;
-          //const socialData = itemsSocial.slice(0,4);
+          socialData = response.data.slice(0,4);
         })
-        .then(axios.get("http://localhost:8000/arrangementer/api/karriere")
+        .then(axios.get("http://localhost:8000/arrangementer/api/karriere/kommende/")
         .then(response => {
-          bedpresData = response.data;
-          //const bedpresData = itemsSocial.slice(0,4);
+          bedpresData = response.data.slice(0,4);
         }))
         return {social: socialData, corporate: bedpresData}
       };
