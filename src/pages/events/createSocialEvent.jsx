@@ -54,39 +54,42 @@ export const CreateSocialEvent = () => {
 };
 
   const [formData, setFormData] = useState({
-    attendees: [], // skal jeg sende dette eller legges den til etterpå?
+    author: {}, // hvordan hente denne direkte fra backend?
+    committee: null, // denne må gjøres dynamisk. Hente rullegardin direkte fra backend
+    attendees: [], // legges det til folk her etter hvert som man melder seg på sånn at den sendes inn tom? Må den da sendes inn?
     title: '',
-    created: '', // hva er hva av denne
+    date: '', 
+    created: '', 
     edited: '',
-    date: '', // denne
-    register_startdate: '', // hva er forskjellen på denne
+    register_startdate: '', 
     register_deadline: '',
     deregister_deadline: '',
+    location: '',
+    description: '',
+    image: '',
+    sluts: 0,
+    allowed_grades: [],
+    published: false,
+    tentative: false,
+    payment_information: '',
+    price_member: 0,
+    price_not_member: 0,
+    price_companion: 0,
+    companion: false,
+    sleepover: false,
+    night_snack: false,
+    check_in: false
+  });
+
+  const [timeData, setTimeData] = useState({
     eventDate: '',
     eventTime: '',
-    registerStartDate: '', // og denne? Er den andre denne og den under satt sammen bare? Why have both?
+    registerStartDate: '', 
     registerStartTime: '',
     registerDeadlineDate: '',
     registerDeadlineTime: '',
     deregisterDeadlineDate: '',
     deregisterDeadlineTime: '',
-    location: '',
-    description: '',
-    image: '',
-    sluts: 0,
-    payment_information: '',
-    price_member: 0,
-    price_not_member: 0,
-    price_companion: 0,
-    published: false,
-    tentative: false,
-    companion: false,
-    sleepover: false,
-    night_snack: false,
-    check_in: false,
-    allowed_grades: [], 
-    committee: null, // denne må gjøres dynamisk. Hente rullegardin direkte fra backend
-    author: {} // hvordan hente denne direkte fra backend?
   });
 
   useEffect(() => {
@@ -138,10 +141,10 @@ export const CreateSocialEvent = () => {
       const prepareDataForSubmission = () => { // funker denne som den skal?
         const dataToSubmit = {
           ...formData,
-          date: combineDateTime(formData.eventDate, formData.eventTime),
-          register_startdate: combineDateTime(formData.registerStartDate, formData.registerStartTime),
-          register_deadline: combineDateTime(formData.registerDeadlineDate, formData.registerDeadlineTime),
-          deregister_deadline: combineDateTime(formData.deregisterDeadlineDate, formData.deregisterDeadlineTime)
+          date: combineDateTime(timeData.eventDate, timeData.eventTime),
+          register_startdate: combineDateTime(timeData.registerStartDate, timeData.registerStartTime),
+          register_deadline: combineDateTime(timeData.registerDeadlineDate, timeData.registerDeadlineTime),
+          deregister_deadline: combineDateTime(timeData.deregisterDeadlineDate, timeData.deregisterDeadlineTime)
         };
       
         return dataToSubmit;
@@ -271,29 +274,29 @@ export const CreateSocialEvent = () => {
             <div>
               <P>Tidspunkt for arrangementet</P>
               <TimeBox>
-                <input type="date" id="eventDate" name="eventDate" value={formData.eventDate} onChange={handleChange} required />
-                <input type="time" id="eventTime" name="eventTime" value={formData.eventTime} onChange={handleChange} required />
+                <input type="date" id="eventDate" name="eventDate" value={timeData.eventDate} onChange={handleChange} required />
+                <input type="time" id="eventTime" name="eventTime" value={timeData.eventTime} onChange={handleChange} required />
               </TimeBox>
             </div>
             <div>
               <P>Påmeldingen åpner</P>
               <TimeBox>
-                <input type="date" id="registerStartDate" name="registerStartDate" value={formData.registerStartDate} onChange={handleChange} required />
-                <input type="time" id="registerStartTime" name="registerStartTime" value={formData.registerStartTime} onChange={handleChange} required />
+                <input type="date" id="registerStartDate" name="registerStartDate" value={timeData.registerStartDate} onChange={handleChange} required />
+                <input type="time" id="registerStartTime" name="registerStartTime" value={timeData.registerStartTime} onChange={handleChange} required />
               </TimeBox>
             </div>
             <div>
               <P>Påmeldingen stenger</P>
               <TimeBox>
-                <input type="date" id="registerDeadlineDate" name="registerDeadlineDate" value={formData.registerDeadlineDate} onChange={handleChange} required />
-                <input type="time" id="registerDeadlineTime" name="registerDeadlineTime" value={formData.registerDeadlineTime} onChange={handleChange} required />
+                <input type="date" id="registerDeadlineDate" name="registerDeadlineDate" value={timeData.registerDeadlineDate} onChange={handleChange} required />
+                <input type="time" id="registerDeadlineTime" name="registerDeadlineTime" value={timeData.registerDeadlineTime} onChange={handleChange} required />
               </TimeBox>
             </div>
             <div>
               <P>Avmeldingen stenger</P>
               <TimeBox>
-                <input type="date" id="deregisterDeadlineDate" name="deregisterDeadlineDate" value={formData.deregisterDeadlineDate} onChange={handleChange} required />
-                <input type="time" id="deregisterDeadlineTime" name="deregisterDeadlineTime" value={formData.deregisterDeadlineTime} onChange={handleChange} required />
+                <input type="date" id="deregisterDeadlineDate" name="deregisterDeadlineDate" value={timeData.deregisterDeadlineDate} onChange={handleChange} required />
+                <input type="time" id="deregisterDeadlineTime" name="deregisterDeadlineTime" value={timeData.deregisterDeadlineTime} onChange={handleChange} required />
               </TimeBox>
             </div>
           </TimeContainer>
