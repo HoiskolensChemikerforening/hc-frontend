@@ -18,6 +18,7 @@ export const CreateSocialEvent = () => {
   const [isSubmittedSuccessfully, setIsSubmittedSuccessfully] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
+  const [committees, setCommittees] = useState([]);
 
   const Modal = ({ onClose, children, showCloseButton = true }) => (
     <StyledModal>
@@ -55,8 +56,7 @@ export const CreateSocialEvent = () => {
 
   const [formData, setFormData] = useState({
     author: {}, // hvordan hente denne direkte fra backend?
-    committee: null, // denne må gjøres dynamisk. Hente rullegardin direkte fra backend. Denne er feil per nå
-    attendees: [], // legges det til folk her etter hvert som man melder seg på sånn at den sendes inn tom? Må den da sendes inn?
+    committee: null, 
     title: '',
     date: '', 
     created: '', 
@@ -94,6 +94,7 @@ export const CreateSocialEvent = () => {
 
   useEffect(() => {
     checkPermission("events.add_social", user, setCanAddSocial);
+    fetchList("undergrupper/api/", setCommittees);
 
     const fetchUserData = async () => { // kan denne flyttes ut av useEffect?
       try {
@@ -127,8 +128,6 @@ export const CreateSocialEvent = () => {
       const handleChange = (e) => { // mangler logikk for komiteer og hvilke klasser som skal med
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-        // For nested fields like committee, you'll need a separate handler or logic
-        // For arrays like allowed_grades, you'll need logic to add/remove items
       };
 
       const combineDateTime = (date, time) => { // funker denne som den skal?
@@ -257,16 +256,16 @@ export const CreateSocialEvent = () => {
             <StyledDropDown
               id="committee"
               name="committee"
-              value={formData.committee} // denne er satt til null i formData. Må fikses
+              value={formData.committee} 
               onChange={handleChange}
               required
             >
-              <option value="" disabled selected>Velg din komité</option> {/* Burde legge inn at kun komiteer man har permission til vises */}
-              <option value="pHaestkomiteen">pHaestkomiteen</option>
-              <option value="Webkomiteen">Webkomiteen</option>
-              <option value="Kjellerstyret">Kjellerstyret</option> 
+              <option value={null}>Velg din komité!</option>
+              {committees.map((committee) => {
+                return <option key={committee.id} value={committee.id}>{committee.title}</option>
+              })}
             </StyledDropDown>
-            <P>Du valgte: {formData.committee}</P>
+            <P>Du valgte: {committees.title}</P>
           </div>
 
           <P>Legg inn følgende datoer og klokkeslett:</P>
