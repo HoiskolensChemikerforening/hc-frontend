@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from 'axios';
 import styled, {css} from "styled-components";
 import { Button } from "../../components/Button"; 
@@ -52,15 +52,13 @@ export const CreateSocialEvent = () => {
     if (file) {
         reader.readAsDataURL(file);
     }
-};
+  };
 
   const [formData, setFormData] = useState({
-    author: {}, // hvordan hente denne direkte fra backend?
-    committee: null, 
+    author: user.user_id, 
+    committee: '', 
     title: '',
     date: '', 
-    created: '', 
-    edited: '',
     register_startdate: '', 
     register_deadline: '',
     deregister_deadline: '',
@@ -74,11 +72,6 @@ export const CreateSocialEvent = () => {
     payment_information: '',
     price_member: 0,
     price_not_member: 0,
-    price_companion: 0,
-    companion: false,
-    sleepover: false,
-    night_snack: false,
-    check_in: false
   });
 
   const [timeData, setTimeData] = useState({
@@ -95,59 +88,32 @@ export const CreateSocialEvent = () => {
   useEffect(() => {
     checkPermission("events.add_social", user, setCanAddSocial);
     fetchList("undergrupper/api/", setCommittees);
+  }, [user]);
 
-    const fetchUserData = async () => { // kan denne flyttes ut av useEffect?
-      try {
-        const response = await axios.get('http://localhost:8000/api/bruker/');
-        const userData = response.data;
-        const userId = userData.id;
-        console.log(userId);
-        setFormData((currentFormData) => ({
-          ...currentFormData,
-          author: {
-            username: userData.username,
-            email: userData.email,
-            first_name: userData.first_name,
-            last_name: userData.last_name,
-            full_name: userData.full_name
-          }
-        }));
-        } catch (error) {
-          console.error('Failed to fetch user data:', error);
-        }
-    };
 
-    if (user && user.user_id) { // Make sure there's a logged-in user. Funker denne som den skal?
-      fetchUserData();
+  const handleChange = (e) => { // mangler logikk for komiteer og hvilke klasser som skal med
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const combineDateTime = (date, time) => { // funker denne som den skal?
+    if (date && time) {
+      return new Date(date + 'T' + time).toISOString();
     }
+    return '';
+  };
 
-    console.log(user, user.user_id);
-    }, [user]);
-
-
-      const handleChange = (e) => { // mangler logikk for komiteer og hvilke klasser som skal med
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+  const prepareDataForSubmission = () => { // funker denne som den skal?
+    const dataToSubmit = {
+      ...formData,
+      date: combineDateTime(timeData.eventDate, timeData.eventTime),
+      register_startdate: combineDateTime(timeData.registerStartDate, timeData.registerStartTime),
+      register_deadline: combineDateTime(timeData.registerDeadlineDate, timeData.registerDeadlineTime),
+      deregister_deadline: combineDateTime(timeData.deregisterDeadlineDate, timeData.deregisterDeadlineTime)
       };
 
-      const combineDateTime = (date, time) => { // funker denne som den skal?
-        if (date && time) {
-          return new Date(date + 'T' + time).toISOString();
-        }
-        return '';
-      };
-
-      const prepareDataForSubmission = () => { // funker denne som den skal?
-        const dataToSubmit = {
-          ...formData,
-          date: combineDateTime(timeData.eventDate, timeData.eventTime),
-          register_startdate: combineDateTime(timeData.registerStartDate, timeData.registerStartTime),
-          register_deadline: combineDateTime(timeData.registerDeadlineDate, timeData.registerDeadlineTime),
-          deregister_deadline: combineDateTime(timeData.deregisterDeadlineDate, timeData.deregisterDeadlineTime)
-        };
-      
-        return dataToSubmit;
-      };
+      return dataToSubmit;
+    };
     
       const handleSubmit = async (e) => { // funker denne som den skal?
         e.preventDefault();
@@ -170,10 +136,6 @@ export const CreateSocialEvent = () => {
       const [checkboxes, setCheckboxes] = useState({ // er denne nødvendig? De er definert som false lenger oppe
         published: false,
         tentative: false,
-        companion: false,
-        sleepover: false,
-        night_snack: false,
-        check_in: false,
         first: false,
         second: false,
         third: false,
@@ -186,12 +148,6 @@ export const CreateSocialEvent = () => {
         const { name, checked } = e.target;
         setCheckboxes({ ...checkboxes, [name]: checked });
         setEventType(e.target.name);
-      };
-
-      const [selectedOption, setSelectedOption] = useState(''); // brukes ikke? Slette?
-
-      const handleOptionChange = (e) => { // brukes ikke? Slette?
-        setSelectedOption(e.target.value);
       };
 
   return (
@@ -265,7 +221,6 @@ export const CreateSocialEvent = () => {
                 return <option key={committee.id} value={committee.id}>{committee.title}</option>
               })}
             </StyledDropDown>
-            <P>Du valgte: {committees.title}</P>
           </div>
 
           <P>Legg inn følgende datoer og klokkeslett:</P>
@@ -378,7 +333,6 @@ export const CreateSocialEvent = () => {
                 value={formData.sluts}
                 onChange={handleChange}
                 placeholder="0" 
-                required
               />
             </SlutsContainer>
           </ImgAndSlutsContainer>
@@ -396,8 +350,7 @@ export const CreateSocialEvent = () => {
                 id="price_member" 
                 name="price_member" 
                 value={formData.price_member} 
-                onChange={handleChange} 
-                required 
+                onChange={handleChange}  
                 />
             </PriceBox>
             </div>
@@ -409,68 +362,12 @@ export const CreateSocialEvent = () => {
                 id="price_not_member" 
                 name="price_not_member" 
                 value={formData.price_not_member} 
-                onChange={handleChange} 
-                required 
-                />
-            </PriceBox>
-            </div>
-            <div>
-              <LabelNumber htmlFor="price_companion">Pris for følge</LabelNumber>
-              <PriceBox>
-              <InputNumber 
-                type="number" 
-                id="price_companion" 
-                name="price_companion" 
-                value={formData.price_companion} 
-                onChange={handleChange} 
-                required 
+                onChange={handleChange}  
                 />
             </PriceBox>
             </div>
           </PriceContainer>
-
-          <div>
-            <P>Inkluderer arrangementet noen av alternativene nedenfor?</P>
-          </div>
-          <CheckboxContainer>
-            <CheckBox>
-              <ColoredCheckbox
-                checked={checkboxes.companion}
-                onChange={handleCheckboxChange}
-                name="companion"
-                color="primary"
-              />
-              <P>Følge</P>
-            </CheckBox>
-            <CheckBox>
-              <ColoredCheckbox
-                checked={checkboxes.sleepover}
-                onChange={handleCheckboxChange}
-                name="sleepover"
-                color="primary"
-              />
-              <P>Overnatting</P>
-            </CheckBox>
-            <CheckBox>
-              <ColoredCheckbox
-                checked={checkboxes.night_snack}
-                onChange={handleCheckboxChange}
-                name="night_snack"
-                color="primary"
-              />
-              <P>Nattmat</P>
-            </CheckBox>
-            <CheckBox>
-              <ColoredCheckbox
-                checked={checkboxes.check_in}
-                onChange={handleCheckboxChange}
-                name="check_in"
-                color="primary"
-              />
-              <P>Innsjekking</P>
-            </CheckBox>
-          </CheckboxContainer>
-
+            
 
           <div>
           <P>Hvilke klassetrinn er dette arrangementet for?</P>
