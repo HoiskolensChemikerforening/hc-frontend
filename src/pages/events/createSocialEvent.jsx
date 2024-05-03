@@ -112,43 +112,43 @@ export const CreateSocialEvent = () => {
       deregister_deadline: combineDateTime(timeData.deregisterDeadlineDate, timeData.deregisterDeadlineTime)
       };
 
-      return dataToSubmit;
-    };
+    return dataToSubmit;
+  };
     
-      const handleSubmit = async (e) => { // funker denne som den skal?
-        e.preventDefault();
-        if (!eventType || isSubmitting) {
-          setShowModal(true);
-          return;
-        }
-        setIsSubmitting(true);
-        try {
-          const dataToSubmit = prepareDataForSubmission();
-          await postRequest('arrangementer/api/sosial/', dataToSubmit);
-          setIsSubmittedSuccessfully(true);
-        } catch (error) {
-          console.error('Error submitting form:', error);
-        } finally {
-          setIsSubmitting(false); // Innsending ferdig, vellykket eller ei
-        }
-      };
+  const handleSubmit = async (e) => { // funker denne som den skal?
+    e.preventDefault();
+    if (!eventType || isSubmitting) {
+      setShowModal(true);
+      return;
+    }
+    setIsSubmitting(true);
+    try {
+      const dataToSubmit = prepareDataForSubmission();
+      await postRequest('arrangementer/api/sosial/', dataToSubmit);
+      setIsSubmittedSuccessfully(true);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    } finally {
+      setIsSubmitting(false); // Innsending ferdig, vellykket eller ei
+    }
+  };
 
-      const [checkboxes, setCheckboxes] = useState({ // er denne nødvendig? De er definert som false lenger oppe
-        published: false,
-        tentative: false,
-        first: false,
-        second: false,
-        third: false,
-        forth: false,
-        fifth: false,
-        finished: false
-      });
+  const [checkboxes, setCheckboxes] = useState({ // er denne nødvendig? De er definert som false lenger oppe
+    published: false,
+    tentative: false,
+    first: false,
+    second: false,
+    third: false,
+    forth: false,
+    fifth: false,
+    finished: false
+  });
 
-      const handleCheckboxChange = (e) => { // funker denne som den skal?
-        const { name, checked } = e.target;
-        setCheckboxes({ ...checkboxes, [name]: checked });
-        setEventType(e.target.name);
-      };
+  const handleCheckboxChange = (e) => { // funker denne som den skal?
+    const { name, checked } = e.target;
+    setCheckboxes({ ...checkboxes, [name]: checked });
+    setEventType(e.target.name);
+  };
 
   return (
     <>
