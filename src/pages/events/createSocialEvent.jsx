@@ -55,7 +55,7 @@ export const CreateSocialEvent = () => {
 
   const [formData, setFormData] = useState({
     author: {}, // hvordan hente denne direkte fra backend?
-    committee: null, // denne må gjøres dynamisk. Hente rullegardin direkte fra backend
+    committee: null, // denne må gjøres dynamisk. Hente rullegardin direkte fra backend. Denne er feil per nå
     attendees: [], // legges det til folk her etter hvert som man melder seg på sånn at den sendes inn tom? Må den da sendes inn?
     title: '',
     date: '', 
@@ -257,7 +257,7 @@ export const CreateSocialEvent = () => {
             <StyledDropDown
               id="committee"
               name="committee"
-              value={formData.committee}
+              value={formData.committee} // denne er satt til null i formData. Må fikses
               onChange={handleChange}
               required
             >
