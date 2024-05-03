@@ -86,14 +86,7 @@ export const EventPage = () => {
         }
       }
 
-      fetch(endpoint)
-        .then((response) => response.json())
-        .then((data) => {
-          setDispEvents(data);
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-        });
+      fetchList(endpoint, setDispEvents)
     };
     
   const switchFilter = (eventType, filterType) => {
@@ -145,7 +138,7 @@ export const EventPage = () => {
               >Bedrift</Title></Devider>
               <Devider>
               {currentEventTypeRef.current === social && canAddSocial ? (
-                <AddButtonContainer to="/sosialt/opprett">
+                <AddButtonContainer to="arrangement/sosialt/opprett">
                   <Title value="Event" style={{ fontWeight: 'bold' }}>+</Title>
                 </AddButtonContainer>
               ) : null}
