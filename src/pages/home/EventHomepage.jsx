@@ -29,12 +29,12 @@ export const EventHomepage = () => {
         let socialData;
         let bedpresData;
 
-        await axios.get("http://localhost:8000/arrangementer/api/social")
+        await axios.get("http://localhost:8000/arrangementer/api/sosial/kommende/")
         .then(response => {
           socialData = response.data;
           //const socialData = itemsSocial.slice(0,4);
         })
-        .then(axios.get("http://localhost:8000/arrangementer/api/bedpres")
+        .then(axios.get("http://localhost:8000/arrangementer/api/karriere/kommende/")
         .then(response => {
           bedpresData = response.data;
           //const bedpresData = itemsSocial.slice(0,4);
