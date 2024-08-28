@@ -17,10 +17,8 @@ import { EventPage } from "./pages/events/events";
 import { SoknadMidler } from "./pages/home/soknadommidler";
 import { Internside } from "./pages/internt/internt";
 import { Klassekatalog } from "./pages/internt/Klassekatalog";
-import { General } from "./pages/training/general";
-import { ApiDemo } from "./pages/training/API";
 // import { FillIn } from "./pages/training/fill_in_code";
-import { AddComments } from "./pages/training/add_comments_code";
+import { Kontoret } from "./pages/training/kontoret";
 import { MapDemo } from "./pages/training/mapGuide";
 import { Clicked } from "./pages/training/clicked";
 
@@ -48,10 +46,8 @@ class App extends React.Component {
             <Route path="/kontortilgang">           <Kontortilgang/>            </Route>
             <Route path="/midler">                  <SoknadMidler/>             </Route>
             <Route path="/klassekatalog">           <Klassekatalog/>            </Route>
-            <Route path="/hjelp">                   <General/>                  </Route> {/* A page with general components to start learning */}
-            <Route path="/APIdemo">                 <ApiDemo/>                  </Route> {/* A page with API, axios, post and fetch */}
             {/* <Route path="/fillIn">                  <FillIn/>                   </Route>  A page with un-finished code to fill in */}
-            <Route path="/addComments">             <AddComments/>              </Route> {/* A page with finished code to fill out comments */}
+            <Route path="/kontoret">                <Kontoret/>              </Route> {/* A page with finished code to fill out comments */}
             <Route path="/mapDemo">                 <MapDemo/>                  </Route>
             <Route path="/clicked">                 <Clicked/>                  </Route>
           </Switch>
