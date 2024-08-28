@@ -35,7 +35,6 @@ class App extends React.Component {
             <Route path='/login'>                   <Login/>                    </Route>
             <Route path="/bedrift">                 <H1>Bedrift</H1>            </Route>
             <Route path="/internt">                 <Internside/>               </Route>
-            <Route path="/info">                    <H1>Info</H1>               </Route>
             <Route path="/profil">                  <H1>Profil</H1>             </Route>
             <Route path="/om-hc">                   <AboutHC/>                  </Route>
             <Route path="/nyheter">                 <NewsRouter/>               </Route>
