@@ -148,7 +148,6 @@ const InlineContainer = styled.div`
  justify-content: center; // Center-align items horizontally in the flex container
 `;
 
-
 const Link = styled(baseLink)`
    font-size: 16px;
    line-height: 1.5; // Adjust line height as needed
@@ -159,14 +158,12 @@ const Link = styled(baseLink)`
    gap: 5px; // Add space between icon and text
 `;
 
-
 const P = styled(baseP)`
  margin: 0; // Removes default margin
  line-height: 1.5; // Match line height with Link
  vertical-align: middle; // Aligns text vertically in the middle
  text-align: center; // Center-align the text
 `;
-
 
 const SectionContainer = styled.div`
    margin: 10px;
@@ -178,12 +175,10 @@ const SectionContainer = styled.div`
    }
 `;
 
-
 const ContactInfo = styled.div`
    margin: 15px;
    text-align: center; // Center-align the contact info
 `;
-
 
 const SocialMedia = styled.div`
    display: flex;
@@ -191,12 +186,10 @@ const SocialMedia = styled.div`
    justify-content: center;
 `;
 
-
 const InfoContainer = styled.div`
    margin: 15px;
    text-align: center; // Center-align the social media container
 `;
-
 
 const InfoBox = styled.div`
    margin: 15px;
@@ -207,13 +200,11 @@ const InfoBox = styled.div`
    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); // Adding shadow
 `;
 
-
 const TwoColumnLayout = styled.div`
  display: flex;
  justify-content: center;
  gap: 20px; // Adjust the gap between the two columns
 `;
-
 
 const Column = styled.div`
  flex: 1; // Each column takes up equal space

@@ -14,7 +14,7 @@ export const Internside = () => (
             <Link to="/nyheter/ny">
               <Button>Bilder</Button>
             </Link>
-            <Link to="/undergrupper">
+            <Link to="/kontoret">
               <Button>Kontoret</Button>
             </Link>
             <Link to="/klassekatalog">
@@ -25,15 +25,15 @@ export const Internside = () => (
             <Link to="/nyheter/ny">
                 <Button>Sladreboks</Button>
             </Link>
-            <Link to="/nyheter/ny">
+            <Link to="/midler">
                 <Button>Søknad om midler</Button>
             </Link>
-            <Link to="/nyheter/ny">
+            <Link to="/kontortilgang">
                 <Button>Kontortilgang</Button>
             </Link>
         </ButtonContainer>
         <ButtonContainer>
-            <Link to="/nyheter/ny">
+            <Link to="/undergrupper">
                 <Button>Undergrupper</Button>
             </Link>
             <Link to="/nyheter/ny">

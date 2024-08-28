@@ -17,8 +17,8 @@ import { EventPage } from "./pages/events/events";
 import { SoknadMidler } from "./pages/home/soknadommidler";
 import { Internside } from "./pages/internt/internt";
 import { Klassekatalog } from "./pages/internt/Klassekatalog";
-import { Kontaktinfo } from "./pages/training/kontaktinfo";
-import { Kontoret } from "./pages/training/kontoret";
+import { Kontaktinfo } from "./pages/home/kontaktinfo";
+import { Kontoret } from "./pages/internt/kontoret";
 
 
 
