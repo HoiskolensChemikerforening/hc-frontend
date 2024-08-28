@@ -9,15 +9,15 @@ import { NavBarPhone } from "./components/navigation/NavBarPhone";
 import { NewsRouter } from "./pages/news/NewsRouter";
 import { Login } from "./pages/login/Login";
 import { setAuthToken } from "./pages/login/setAuthToken";
-import { Kontortilgang } from "./pages/home/Kontortilgang";
-import { AboutHC } from "./pages/home/AboutHC";
+import { Kontortilgang } from "./pages/internt/Kontortilgang";
+import { AboutHC } from "./pages/internt/AboutHC";
 import { AuthProvider } from './context/AuthContext'
 import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
 import { EventPage } from "./pages/events/events";
-import { SoknadMidler } from "./pages/home/soknadommidler";
+import { SoknadMidler } from "./pages/internt/soknadommidler";
 import { Internside } from "./pages/internt/internt";
 import { Klassekatalog } from "./pages/internt/Klassekatalog";
-import { Kontaktinfo } from "./pages/home/kontaktinfo";
+import { Kontaktinfo } from "./pages/internt/kontaktinfo";
 import { Kontoret } from "./pages/internt/kontoret";
 
 
