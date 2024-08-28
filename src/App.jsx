@@ -17,10 +17,8 @@ import { EventPage } from "./pages/events/events";
 import { SoknadMidler } from "./pages/home/soknadommidler";
 import { Internside } from "./pages/internt/internt";
 import { Klassekatalog } from "./pages/internt/Klassekatalog";
-// import { FillIn } from "./pages/training/fill_in_code";
+import { Kontaktinfo } from "./pages/training/kontaktinfo";
 import { Kontoret } from "./pages/training/kontoret";
-import { MapDemo } from "./pages/training/mapGuide";
-import { Clicked } from "./pages/training/clicked";
 
 
 
@@ -46,10 +44,8 @@ class App extends React.Component {
             <Route path="/kontortilgang">           <Kontortilgang/>            </Route>
             <Route path="/midler">                  <SoknadMidler/>             </Route>
             <Route path="/klassekatalog">           <Klassekatalog/>            </Route>
-            {/* <Route path="/fillIn">                  <FillIn/>                   </Route>  A page with un-finished code to fill in */}
-            <Route path="/kontoret">                <Kontoret/>              </Route> {/* A page with finished code to fill out comments */}
-            <Route path="/mapDemo">                 <MapDemo/>                  </Route>
-            <Route path="/clicked">                 <Clicked/>                  </Route>
+            <Route path="/kontaktinfo">             <Kontaktinfo/>              </Route>
+            <Route path="/kontoret">                <Kontoret/>                 </Route> 
           </Switch>
           <NavBarPhone/>
           </AuthProvider>
