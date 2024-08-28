@@ -43,6 +43,17 @@ export const Internside = () => (
                 <Button>Wiki</Button>
             </Link>
         </ButtonContainer>
+        <ButtonContainer>
+            <Link to="/kontaktinfo">
+                <Button>Kontaktinfo</Button>
+            </Link>
+            <Link to="/om-hc">
+                <Button>Info om HC</Button>
+            </Link>
+            <Link to="/nyheter/ny">
+                <Button>Utvekslingsside</Button>
+            </Link>
+        </ButtonContainer>
     </>
 );
 
