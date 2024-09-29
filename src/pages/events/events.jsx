@@ -62,7 +62,7 @@ export const EventPage = () => {
       checkPermission("events.add_corporate", user, setCanAddCorporate);
         }, [user]);
 
-    const fetchData = (eventType, filterType, currentPage, itemsPerPage) => {
+    const fetchData = (eventType, filterType, currentPage) => {
       //let endpoint = "";
       //endpoint += `?page=${currentPage}&itemsPerPage=${itemsPerPage}`;
       let endpoint = "";
@@ -85,7 +85,8 @@ export const EventPage = () => {
           endpoint = "arrangementer/api/karriere/tidligere/";
         }
       }
-
+      endpoint += `?page=${currentPage}`;
+      console.log(endpoint)
       fetchPaginationObject(endpoint, setDispEvents, setPaginatonProperties);
       
     };
@@ -181,13 +182,13 @@ export const EventPage = () => {
          </EventBox>
           )) }
           </EventList>
-          {dispEvents.length > itemsPerPage && (
-          <Pagination
-            paginatonProperties={paginatonProperties}
-            currentPage={currentPage}
-            onPageChange={handlePageChange}
-          />
-          )}
+            {paginatonProperties.total > paginatonProperties.page_size && (
+              <Pagination
+                paginatonProperties={paginatonProperties}
+                currentPage={currentPage}
+                onPageChange={handlePageChange}
+              />
+            )}
         </EventContainer>
       </>
   )
