@@ -3,7 +3,7 @@ import styled, {css} from "styled-components";
 import { P } from "../../components/Text";
 import { Button } from "../../components/Button";
 import { Link, useHistory } from "react-router-dom";
-import { fetchList, checkPermission } from "../../utils/requests";
+import { fetchList, checkPermission, fetchPaginationObject } from "../../utils/requests";
 import AuthContext from "../../context/AuthContext";
 
 const coming = 1
@@ -12,11 +12,11 @@ const previous = 3
 const social = 1
 const corporate = 2
 
-const Pagination = ({ currentPage, itemsPerPage, totalItems, onPageChange }) => {
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+const Pagination = ({ paginatonProperties, currentPage, onPageChange }) => {
+  const total_pages = Math.ceil(paginatonProperties.total/paginatonProperties.page_size)
 
   const handlePageClick = (newPage) => {
-    if (newPage >= 1 && newPage <= totalPages) {
+    if (newPage >= 1 && newPage <= total_pages) {
       onPageChange(newPage);
       window.scrollTo(0, 0); // Scroll up to top when button is clicked
     }
@@ -29,7 +29,7 @@ const Pagination = ({ currentPage, itemsPerPage, totalItems, onPageChange }) => 
         <Button primary type="button" onClick={() => handlePageClick(currentPage + 1)}>Neste</Button>
       </DevideButAndText>
       <DevideButAndText>
-        <P>Side {currentPage} av {totalPages}</P>
+        <P>Side {currentPage} av {total_pages}</P>
       </DevideButAndText>
     </PageBut>
   );
@@ -37,6 +37,7 @@ const Pagination = ({ currentPage, itemsPerPage, totalItems, onPageChange }) => 
 
 export const EventPage = () => {
     const [dispEvents, setDispEvents] = useState([]);
+    const [paginatonProperties,setPaginatonProperties] = useState({});
     const [canAddSocial, setCanAddSocial] = useState(false);
     const [canAddCorporate, setCanAddCorporate] = useState(false);
     const history = useHistory();
@@ -44,16 +45,14 @@ export const EventPage = () => {
     const currentEventTypeRef = useRef(social);
     const currentEventFilterRef = useRef(coming);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 20; // Change this number to your desired items per page
+    const itemsPerPage = 1; // Change this number to your desired items per page
 
     const handlePageChange = (page) => {
       setCurrentPage(page);
+      fetchData(currentEventTypeRef.current, currentEventFilterRef.current, page);
     };
 
-    const displayedEvents = dispEvents.slice(
-      (currentPage - 1) * itemsPerPage,
-      currentPage * itemsPerPage
-    );
+
 
     useEffect(() => {
       fetchData(currentEventTypeRef.current, currentEventFilterRef.current);
@@ -66,7 +65,8 @@ export const EventPage = () => {
     const fetchData = (eventType, filterType, currentPage, itemsPerPage) => {
       //let endpoint = "";
       //endpoint += `?page=${currentPage}&itemsPerPage=${itemsPerPage}`;
-      let endpoint = `?page=${currentPage}&itemsPerPage=${itemsPerPage}`;
+      let endpoint = "";
+
     
       if (eventType === social) {
         if (filterType === coming) {
@@ -86,7 +86,8 @@ export const EventPage = () => {
         }
       }
 
-      fetchList(endpoint, setDispEvents)
+      fetchPaginationObject(endpoint, setDispEvents, setPaginatonProperties);
+      
     };
     
   const switchFilter = (eventType, filterType) => {
@@ -95,29 +96,29 @@ export const EventPage = () => {
     fetchData(eventType, filterType, currentPage, itemsPerPage);
     if (currentEventTypeRef.current === social){
       if (currentEventFilterRef.current === coming){
-        fetchList("arrangementer/api/sosial/kommende/", setDispEvents)
+        fetchPaginationObject("arrangementer/api/sosial/kommende/", setDispEvents,setPaginatonProperties)
         console.log("Kommende sosiale eventer")
       }
       else if (currentEventFilterRef.current === mine){
-        fetchList("arrangementer/api/sosial/mine/", setDispEvents)
+        fetchPaginationObject("arrangementer/api/sosial/mine/", setDispEvents,setPaginatonProperties)
         console.log("Mine sosiale eventer")
       }
       else if (currentEventFilterRef.current === previous){
-        fetchList("arrangementer/api/sosial/tidligere/", setDispEvents, currentPage, itemsPerPage)
+        fetchPaginationObject("arrangementer/api/sosial/tidligere/", setDispEvents, setPaginatonProperties)
         console.log("Alle sosiale eventer")
       }
     }
     else if (currentEventTypeRef.current === corporate){
       if (currentEventFilterRef.current === coming){
-        fetchList("arrangementer/api/karriere/kommende/", setDispEvents)
+        fetchPaginationObject("arrangementer/api/karriere/kommende/", setDispEvents, setPaginatonProperties)
         console.log("Kommende bedrift eventer")
       }
       else if (currentEventFilterRef.current === mine){
-        fetchList("arrangementer/api/karriere/mine/", setDispEvents)
+        fetchPaginationObject("arrangementer/api/karriere/mine/", setDispEvents, setPaginatonProperties)
         console.log("Mine bedrift eventer")
       }
       else if (currentEventFilterRef.current === previous){
-        fetchList("arrangementer/api/karriere/tidligere/", setDispEvents, currentPage, itemsPerPage)
+        fetchPaginationObject("arrangementer/api/karriere/tidligere/", setDispEvents, setPaginatonProperties)
         console.log("Alle bedrift eventer")
       }
     }
@@ -165,7 +166,7 @@ export const EventPage = () => {
             </EventFilterDevider>
           </EventType>
           <EventList>
-          {displayedEvents.map((event) => (
+          {dispEvents.map((event) => (
              <EventBox key={event.id} onClick={() => {history.push(`/arrangementer/${event.id}`)}}>
               <ImageCont>
                <Image src={event.image}/>
@@ -182,9 +183,8 @@ export const EventPage = () => {
           </EventList>
           {dispEvents.length > itemsPerPage && (
           <Pagination
+            paginatonProperties={paginatonProperties}
             currentPage={currentPage}
-            itemsPerPage={itemsPerPage}
-            totalItems={dispEvents.length}
             onPageChange={handlePageChange}
           />
           )}
@@ -192,6 +192,7 @@ export const EventPage = () => {
       </>
   )
 };
+
 
 const widthProgress = 180;
 
