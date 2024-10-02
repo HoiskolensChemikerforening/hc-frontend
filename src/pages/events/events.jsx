@@ -64,7 +64,6 @@ export const EventPage = () => {
     const fetchData = (eventType, filterType, currentPage) => {
       let endpoint = "";
 
-    
       if (eventType === social) {
         if (filterType === coming) {
           endpoint = "arrangementer/api/sosial/kommende/";
@@ -142,7 +141,7 @@ export const EventPage = () => {
                 </AddButtonContainer>
               ) : null}
                 {currentEventTypeRef.current === corporate && canAddCorporate ? (
-                  <AddButtonContainer to="/karriere/opprett">
+                  <AddButtonContainer to="arrangement/karriere/opprett">
                     <Title value="Event" style={{ fontWeight: 'bold' }}>+</Title>
                   </AddButtonContainer>
                 ) : null}
