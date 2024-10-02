@@ -45,7 +45,6 @@ export const EventPage = () => {
     const currentEventTypeRef = useRef(social);
     const currentEventFilterRef = useRef(coming);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 1; // Change this number to your desired items per page
 
     const handlePageChange = (page) => {
       setCurrentPage(page);
@@ -63,8 +62,6 @@ export const EventPage = () => {
         }, [user]);
 
     const fetchData = (eventType, filterType, currentPage) => {
-      //let endpoint = "";
-      //endpoint += `?page=${currentPage}&itemsPerPage=${itemsPerPage}`;
       let endpoint = "";
 
     
@@ -94,7 +91,7 @@ export const EventPage = () => {
   const switchFilter = (eventType, filterType) => {
     currentEventTypeRef.current = eventType;
     currentEventFilterRef.current = filterType;
-    fetchData(eventType, filterType, currentPage, itemsPerPage);
+    fetchData(eventType, filterType, currentPage);
     if (currentEventTypeRef.current === social){
       if (currentEventFilterRef.current === coming){
         fetchPaginationObject("arrangementer/api/sosial/kommende/", setDispEvents,setPaginatonProperties)
