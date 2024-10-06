@@ -11,6 +11,7 @@ const mine = 2
 const previous = 3
 const social = 1
 const corporate = 2
+const PageSize = 6 //Sets number of objects
 
 const Pagination = ({ paginatonProperties, currentPage, onPageChange }) => {
   const total_pages = Math.ceil(paginatonProperties.total/paginatonProperties.page_size)
@@ -45,7 +46,6 @@ export const EventPage = () => {
     const currentEventTypeRef = useRef(social);
     const currentEventFilterRef = useRef(coming);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 1; // Change this number to your desired items per page
 
     const handlePageChange = (page) => {
       setCurrentPage(page);
@@ -62,10 +62,8 @@ export const EventPage = () => {
       checkPermission("events.add_corporate", user, setCanAddCorporate);
         }, [user]);
 
-    const fetchData = (eventType, filterType, currentPage) => {
-      //let endpoint = "";
-      //endpoint += `?page=${currentPage}&itemsPerPage=${itemsPerPage}`;
-      let endpoint = "";
+    const fetchData = (eventType, filterType, currentPage =1) => {
+       let endpoint = "";
 
     
       if (eventType === social) {
@@ -85,7 +83,8 @@ export const EventPage = () => {
           endpoint = "arrangementer/api/karriere/tidligere/";
         }
       }
-      endpoint += `?page=${currentPage}`;
+      endpoint += `?page=${currentPage}&page_size=${PageSize}`;
+
       console.log(endpoint)
       fetchPaginationObject(endpoint, setDispEvents, setPaginatonProperties);
       
@@ -94,7 +93,7 @@ export const EventPage = () => {
   const switchFilter = (eventType, filterType) => {
     currentEventTypeRef.current = eventType;
     currentEventFilterRef.current = filterType;
-    fetchData(eventType, filterType, currentPage, itemsPerPage);
+    fetchData(eventType, filterType, currentPage);
     if (currentEventTypeRef.current === social){
       if (currentEventFilterRef.current === coming){
         fetchPaginationObject("arrangementer/api/sosial/kommende/", setDispEvents,setPaginatonProperties)
