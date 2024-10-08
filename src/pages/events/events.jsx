@@ -174,7 +174,7 @@ export const EventPage = () => {
                  </P>
              </DateBox>
              <PTitle>{event.title}</PTitle>
-             <ProgressBar value={event.attendees.length} max={event.sluts} color="var(--yellow-30)"></ProgressBar>
+             <ProgressBar value={event.confirmed_attendees.length} max={event.sluts} color="var(--yellow-30)"></ProgressBar>
          </EventBox>
           )) }
           </EventList>
