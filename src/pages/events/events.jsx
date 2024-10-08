@@ -11,6 +11,7 @@ const mine = 2
 const previous = 3
 const social = 1
 const corporate = 2
+const PageSize = 8 //Sets number of objects
 
 const Pagination = ({ paginatonProperties, currentPage, onPageChange }) => {
   const total_pages = Math.ceil(paginatonProperties.total/paginatonProperties.page_size)
@@ -61,8 +62,8 @@ export const EventPage = () => {
       checkPermission("events.add_corporate", user, setCanAddCorporate);
         }, [user]);
 
-    const fetchData = (eventType, filterType, currentPage) => {
-      let endpoint = "";
+    const fetchData = (eventType, filterType, currentPage =1) => {
+       let endpoint = "";
 
       if (eventType === social) {
         if (filterType === coming) {
@@ -81,7 +82,8 @@ export const EventPage = () => {
           endpoint = "arrangementer/api/karriere/tidligere/";
         }
       }
-      endpoint += `?page=${currentPage}`;
+      endpoint += `?page=${currentPage}&page_size=${PageSize}`;
+
       console.log(endpoint)
       fetchPaginationObject(endpoint, setDispEvents, setPaginatonProperties);
       
