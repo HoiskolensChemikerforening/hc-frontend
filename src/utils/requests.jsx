@@ -16,7 +16,6 @@ export const fetchPaginationObject = async (url, setFunction, setPaginatonProper
     await axios.get(baseUrl + url)
     .then(response => {
     setFunction(response.data.results);
-    //console.log("hei", response.data)
     //console.log("results", response.data.results.map(e => 1),response.data.results)
     setPaginatonProperties({
         "links" : response.data.links,
@@ -24,6 +23,7 @@ export const fetchPaginationObject = async (url, setFunction, setPaginatonProper
         "total": response.data.total,
         "page": response.data.page
     });
+    console.log("page_size gir meg", response.data.page_size)
     //console.log("hu", {
     //     "links" : response.data.links,
     //     "page_size": response.data.page_size,

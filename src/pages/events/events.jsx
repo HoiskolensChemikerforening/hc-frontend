@@ -11,7 +11,7 @@ const mine = 2
 const previous = 3
 const social = 1
 const corporate = 2
-const PageSize = 8 //Sets number of objects
+const PageSize = 8 //Sets number of objects for pagination
 
 const Pagination = ({ paginatonProperties, currentPage, onPageChange }) => {
   const total_pages = Math.ceil(paginatonProperties.total/paginatonProperties.page_size)
@@ -55,7 +55,7 @@ export const EventPage = () => {
 
 
     useEffect(() => {
-      fetchData(currentEventTypeRef.current, currentEventFilterRef.current);
+      //fetchData(currentEventTypeRef.current, currentEventFilterRef.current); // må vi ha denne her egentlig? den hentes jo i  switchfilter som er neste linje
       switchFilter(currentEventTypeRef.current, currentEventFilterRef.current); // have set current to social and coming, could add so updates on current page and not back to social and coming
       console.log(dispEvents);
       checkPermission("events.add_social", user, setCanAddSocial);
