@@ -84,7 +84,7 @@ export const EventPage = () => {
       }
       endpoint += `?page=${currentPage}&page_size=${PageSize}`;
 
-      console.log(endpoint)
+      //console.log(endpoint)
       fetchPaginationObject(endpoint, setDispEvents, setPaginatonProperties);
       
     };
