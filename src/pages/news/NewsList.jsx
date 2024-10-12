@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { H3, P } from "../../components/Text";
-import { Button } from "../../components/Button.js";
+import { Button, ButtonContainer } from "../../components/Button.js";
 import parse from "react-html-parser";
 import { fetchList, checkPermission } from "../../utils/requests";
 
@@ -21,7 +21,7 @@ export const NewsList = () => {
 
   return (
       <NewsListContainer>
-        <ButtonContainer>
+        <ButtonContainer center>
           {//This should be edited to in a absolute position on homepage
           // or only visible when hovered
           //Previously link component wrapped around button
@@ -71,12 +71,6 @@ const NewsItem = styled.div`
         background-color: #EEE;
         cursor: pointer;
     }
-`;
-
-const ButtonContainer = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
 `;
 
 const ImageContainer = styled.div`

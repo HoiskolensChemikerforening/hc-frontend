@@ -4,6 +4,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';*/
 import "../index.css";
 import React from "react";
 import { H1 } from "./Text";
+import { Button, ButtonContainer } from "./Button";
 
 const ExampleForm = ({ children }) => (
     <form>
@@ -125,12 +126,6 @@ const FormContainer = styled.div`
   max-height: 1000px;
 `;  
 
-const ButtonContainer = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-`;
-
 const ImageContainer = styled.div `
     display: flex;
     align-self: center;
@@ -152,4 +147,4 @@ const Error = styled.p `
   `;
 
 
-export {TextArea, TextField, ImageField, ExampleForm, ImageUpload, FormContainer, NewArticleContainer, ImagePreview, Error, ButtonContainer, Option, Password, DropDown };
+export {TextArea, TextField, ImageField, ExampleForm, ImageUpload, FormContainer, NewArticleContainer, ImagePreview, Error, Option, Password, DropDown };

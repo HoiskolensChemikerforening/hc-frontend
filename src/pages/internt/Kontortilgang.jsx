@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { H1, H2, P, Link, WideTitle } from "../../components/Text";
 import { PageContainer } from "../../components/Layout";
 import { TextField } from "../../components/Form";
-import { Button } from "../../components/Button";
+import { Button, ButtonContainer } from "../../components/Button";
 
 export const Kontortilgang = () => {
   const [username, setUsername] = useState("");
@@ -83,11 +83,11 @@ export const Kontortilgang = () => {
             </Link>
           </TermsLinkContainer>
           <br/>
-          <ButtonWrapper>
+          <ButtonContainer left>
           <Button primary type="button" onClick={handleSubmit}>
             SEND SØKNAD
           </Button>
-          </ButtonWrapper>          
+          </ButtonContainer>          
           
         </ContentBox>
       </PageContainer>
@@ -184,9 +184,4 @@ const ErrorMessage = styled.p`
 
 const SuccessMessage = styled(ErrorMessage)`
   color: green;
-`;
-
-const ButtonWrapper = styled.div`
-  width: 100%;
-  text-align: left;
 `;

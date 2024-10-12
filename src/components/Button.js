@@ -62,14 +62,6 @@ const Button = styled.button`
         `}
 `;
 
-
-//hc-frontend/src/pages/home/Kontortilgang.jsx
-const ButtonWrapper = styled.div`
-  width: 100%;
-  text-align: left;
-`;
-
-//hc-frontend/src/pages/internt/internt.jsx
 const ButtonContainer = styled.div`
     display: flex;
     flex-flow: row nowrap;
@@ -79,6 +71,9 @@ const ButtonContainer = styled.div`
       `}
     ${props => props.space && css`
         justify-content: space-evenly;
+      `}
+    ${props => props.left && css`
+        text-align: left;
       `}
 `;
 

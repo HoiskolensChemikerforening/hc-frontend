@@ -4,7 +4,7 @@ import "./news.css";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { TextField, ImageField } from "../../components/Form"
-import { Button } from "../../components/Button.js";
+import { Button, ButtonContainer } from "../../components/Button.js";
 
 export const NewsForm = () => {
    // For validation
@@ -80,7 +80,7 @@ export const NewsForm = () => {
         <ImageField onChange={(event) => {setImage({file: URL.createObjectURL(event.target.files[0]), djFile: event.target.files[0]});console.log(URL.createObjectURL(event.target.files[0]))}} onFocus={() => setError(false)}/>
       </FormContainer>
       { error && <Error>Husk både tittel, tekst OG bilde!</Error>}
-      <ButtonContainer>
+      <ButtonContainer center>
         <Button primary type="submit" >Send inn</Button>
       </ButtonContainer>
     </form>
@@ -100,12 +100,6 @@ const FormContainer = styled.div`
   min-height: 500px;
   max-height: 1000px;
 `;  
-
-const ButtonContainer = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-`;
 
 const ImageContainer = styled.div `
     display: flex;
