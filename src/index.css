@@ -4,6 +4,8 @@
 :root {
   /* Primary colors */
   --primary: var(--yellow-30);
+  --secondary: var(--blue-50);
+  --cancel:var(--red-00);
 
   /* Yellow */
   --yellow-00: #fff7c0;
@@ -16,6 +18,29 @@
   --yellow-70: #fba635;
   --yellow-80: #fd871a;
   --yellow-90: #ff6800;
+
+  /* Blue */
+  --blue-00: #aac3fb;
+  --blue-10: #729cf8;
+  --blue-20: #3a75f5;
+  --blue-30: #07318b; 
+  --blue-40: #46b2e0; 
+  --blue-50: #2b3cc0; 
+  --blue-60: #392bc0;
+
+  /* Red */
+  --red-00: #c0392b; 
+  --red-10: #ff4d4f; 
+  --red-20: #d9534f; 
+  --red-30: #d90429;
+  --red-40: #e74c3c;  
+
+  /* Purple */
+  --purple-00: #d3b3f0;
+  --purple-10: #b782e7;
+  --purple-20: #9a50de;
+  --purple-30: #551a8b; 
+  --purple-40: #5f4b8b; 
 
   /* Gray */
   --gray-00: #fafafa;

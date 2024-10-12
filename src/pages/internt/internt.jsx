@@ -3,88 +3,57 @@ import styled from "styled-components";
 import { Container, Row, Col } from "../../components/Layout";
 import { H1 } from "../../components/Text";
 import { Link, useHistory } from "react-router-dom";
+import {Button, ButtonContainer} from "../../components/Button"
 
 
 export const Internside = () => (
     <>
-          <ButtonContainer>
-            {//This should be edited to in a absolute position on homepage
+        <ButtonContainer space>
+        {//This should be edited to in a absolute position on homepage
             // or only visible when hovered
             }
             <Link to="/nyheter/ny">
-              <Button>Bilder</Button>
+              <Button primary big>Bilder</Button>
             </Link>
             <Link to="/kontoret">
-              <Button>Kontoret</Button>
+              <Button primary big>Kontoret</Button>
             </Link>
             <Link to="/klassekatalog">
-              <Button>Klassekatalog</Button>
+              <Button primary big>Klassekatalog</Button>
             </Link>
-            </ButtonContainer>
-        <ButtonContainer>
+        </ButtonContainer>
+        <ButtonContainer space>
             <Link to="/nyheter/ny">
-                <Button>Sladreboks</Button>
+                <Button primary big>Sladreboks</Button>
             </Link>
             <Link to="/midler">
-                <Button>Søknad om midler</Button>
+                <Button primary big>Søknad om midler</Button>
             </Link>
             <Link to="/kontortilgang">
-                <Button>Kontortilgang</Button>
+                <Button primary big>Kontortilgang</Button>
             </Link>
         </ButtonContainer>
-        <ButtonContainer>
+        <ButtonContainer space>
             <Link to="/undergrupper">
-                <Button>Undergrupper</Button>
+                <Button primary big>Undergrupper</Button>
             </Link>
             <Link to="/nyheter/ny">
-                <Button>Valg</Button>
+                <Button primary big>Valg</Button>
             </Link>
             <Link to="/nyheter/ny">
-                <Button>Wiki</Button>
+                <Button primary big>Wiki</Button>
             </Link>
         </ButtonContainer>
-        <ButtonContainer>
+        <ButtonContainer space>
             <Link to="/kontaktinfo">
-                <Button>Kontaktinfo</Button>
+                <Button primary big>Kontaktinfo</Button>
             </Link>
             <Link to="/om-hc">
-                <Button>Info om HC</Button>
+                <Button primary big>Info om HC</Button>
             </Link>
             <Link to="/nyheter/ny">
-                <Button>Utvekslingsside</Button>
+                <Button primary big>Utvekslingsside</Button>
             </Link>
         </ButtonContainer>
     </>
 );
-
-const ButtonContainer = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
-`;
-
-const Button = styled.button`
-  margin: 15px 30px 30px;
-  padding: 2em 2em;
-  width: 250px;
-  
-
-  font-weight: bold;
-  font-size: 16px;
-  color: rgb(0, 0, 0, 0.5);
-
-  background: transparent;
-  border: 2px cursor: pointer;
-  border-radius: 1px;
-
-  cursor: pointer;
-    &:hover {
-      background-color: #e3d262;
-      border-color: #e3d262;
-    }
-
-color: #000;
-background: var(--primary);
-border: 3px var(--primary) solid;
-hover: #FFF;
-`;
