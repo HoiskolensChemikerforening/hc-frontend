@@ -9,14 +9,17 @@ import { NavBarPhone } from "./components/navigation/NavBarPhone";
 import { NewsRouter } from "./pages/news/NewsRouter";
 import { Login } from "./pages/login/Login";
 import { setAuthToken } from "./pages/login/setAuthToken";
-import { Kontortilgang } from "./pages/home/Kontortilgang";
-import { AboutHC } from "./pages/home/AboutHC";
+import { Kontortilgang } from "./pages/internt/Kontortilgang";
+import { AboutHC } from "./pages/internt/AboutHC";
 import { AuthProvider } from './context/AuthContext'
 import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
 import { EventPage } from "./pages/events/events";
-import { SoknadMidler } from "./pages/home/soknadommidler";
+import { SoknadMidler } from "./pages/internt/soknadommidler";
 import { Internside } from "./pages/internt/internt";
 import { Klassekatalog } from "./pages/internt/Klassekatalog";
+import { Kontaktinfo } from "./pages/internt/kontaktinfo";
+import { Kontoret } from "./pages/internt/kontoret";
+
 
 
 class App extends React.Component {
@@ -32,7 +35,6 @@ class App extends React.Component {
             <Route path='/login'>                   <Login/>                    </Route>
             <Route path="/bedrift">                 <H1>Bedrift</H1>            </Route>
             <Route path="/internt">                 <Internside/>               </Route>
-            <Route path="/info">                    <H1>Info</H1>               </Route>
             <Route path="/profil">                  <H1>Profil</H1>             </Route>
             <Route path="/om-hc">                   <AboutHC/>                  </Route>
             <Route path="/nyheter">                 <NewsRouter/>               </Route>
@@ -41,6 +43,8 @@ class App extends React.Component {
             <Route path="/kontortilgang">           <Kontortilgang/>            </Route>
             <Route path="/midler">                  <SoknadMidler/>             </Route>
             <Route path="/klassekatalog">           <Klassekatalog/>            </Route>
+            <Route path="/kontaktinfo">             <Kontaktinfo/>              </Route>
+            <Route path="/kontoret">                <Kontoret/>                 </Route> 
           </Switch>
           <NavBarPhone/>
           </AuthProvider>
