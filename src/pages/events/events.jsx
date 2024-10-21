@@ -55,7 +55,6 @@ export const EventPage = () => {
 
 
     useEffect(() => {
-      //fetchData(currentEventTypeRef.current, currentEventFilterRef.current); // må vi ha denne her egentlig? den hentes jo i  switchfilter som er neste linje
       switchFilter(currentEventTypeRef.current, currentEventFilterRef.current); // have set current to social and coming, could add so updates on current page and not back to social and coming
       console.log(dispEvents);
       checkPermission("events.add_social", user, setCanAddSocial);
@@ -68,59 +67,36 @@ export const EventPage = () => {
       if (eventType === social) {
         if (filterType === coming) {
           endpoint = "arrangementer/api/sosial/kommende/";
+          console.log("Kommende sosiale eventer")
         } else if (filterType === mine) {
           endpoint = "arrangementer/api/sosial/mine/";
+          console.log("Mine sosiale eventer")
         } else if (filterType === previous) {
           endpoint = "arrangementer/api/sosial/tidligere/";
+          console.log("Tidligere sosiale eventer")
         }
       } else if (eventType === corporate) {
         if (filterType === coming) {
           endpoint = "arrangementer/api/karriere/kommende/";
+          console.log("Kommende bedrift eventer")
         } else if (filterType === mine) {
           endpoint = "arrangementer/api/karriere/mine/";
+          console.log("Mine bedrift eventer")
         } else if (filterType === previous) {
           endpoint = "arrangementer/api/karriere/tidligere/";
+          console.log("Tidligere bedrift eventer")
         }
       }
       endpoint += `?page=${currentPage}&page_size=${PageSize}`;
 
-      //console.log(endpoint)
       fetchPaginationObject(endpoint, setDispEvents, setPaginatonProperties);
       
     };
-    
+
   const switchFilter = (eventType, filterType) => {
     currentEventTypeRef.current = eventType;
     currentEventFilterRef.current = filterType;
     fetchData(eventType, filterType, currentPage);
-    if (currentEventTypeRef.current === social){
-      if (currentEventFilterRef.current === coming){
-        fetchPaginationObject("arrangementer/api/sosial/kommende/", setDispEvents,setPaginatonProperties)
-        console.log("Kommende sosiale eventer")
-      }
-      else if (currentEventFilterRef.current === mine){
-        fetchPaginationObject("arrangementer/api/sosial/mine/", setDispEvents,setPaginatonProperties)
-        console.log("Mine sosiale eventer")
-      }
-      else if (currentEventFilterRef.current === previous){
-        fetchPaginationObject("arrangementer/api/sosial/tidligere/", setDispEvents, setPaginatonProperties)
-        console.log("Alle sosiale eventer")
-      }
-    }
-    else if (currentEventTypeRef.current === corporate){
-      if (currentEventFilterRef.current === coming){
-        fetchPaginationObject("arrangementer/api/karriere/kommende/", setDispEvents, setPaginatonProperties)
-        console.log("Kommende bedrift eventer")
-      }
-      else if (currentEventFilterRef.current === mine){
-        fetchPaginationObject("arrangementer/api/karriere/mine/", setDispEvents, setPaginatonProperties)
-        console.log("Mine bedrift eventer")
-      }
-      else if (currentEventFilterRef.current === previous){
-        fetchPaginationObject("arrangementer/api/karriere/tidligere/", setDispEvents, setPaginatonProperties)
-        console.log("Alle bedrift eventer")
-      }
-    }
   };
   
     return (
