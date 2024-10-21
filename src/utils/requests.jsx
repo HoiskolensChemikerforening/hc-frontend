@@ -13,24 +13,19 @@ export const fetchList = async (url, setFunction, currentPage = 1, itemsPerPage 
 }
 
 export const fetchPaginationObject = async (url, setFunction, setPaginatonProperties) => {
-    await axios.get(baseUrl + url)
-    .then(response => {
-    setFunction(response.data.results);
-    //console.log("results", response.data.results.map(e => 1),response.data.results)
-    setPaginatonProperties({
-        "links" : response.data.links,
-        "page_size": response.data.page_size,
-        "total": response.data.total,
-        "page": response.data.page
-    });
-    console.log("page_size gir meg", response.data.page_size)
-    //console.log("hu", {
-    //     "links" : response.data.links,
-    //     "page_size": response.data.page_size,
-    //     "total": response.data.total,
-    //     "page": response.data.page
-    // })
-    })
+    try {
+        const response = await axios.get(baseUrl + url);
+        setFunction(response.data.results);
+        setPaginatonProperties({
+            "links" : response.data.links,
+            "page_size": response.data.page_size,
+            "total": response.data.total,
+            "page": response.data.page
+        });
+        console.log("page_size gir meg", response.data.page_size)
+    } catch (error) {
+        console.error("Error fetching pagination object", error);
+    }
 }
 
 export const fetchDetail = async (url, id, setFunction, setLoading=null) => {
