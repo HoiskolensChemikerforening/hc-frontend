@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import '../index.css';
 
 /* Fundamentals */
@@ -17,6 +17,15 @@ const PageContainer = styled.div`
   margin-top: -5px;
   width: 100%;
   height: 100%;
+
+  @media only screen and (min-width: 768px) {
+    margin: 0 2%;
+  }
+
+  ${props => props.gray && css`
+    background-color: var(--gray-10);
+    min-height: 100vh;
+  `}
 `;
 
 const Row = styled.div`

@@ -6,9 +6,10 @@ import { Title } from "./Title";
 
 export const Komponenter = () => {
     return (
-        <PageContainer>
+        <PageContainer gray>
         <Title>Testoverskrift</Title>
         <Title wide>Testoverskrift</Title>
+        <ContentBox>
         <ButtonContainer>
         <Button>Button</Button>
         <Button primary>Button</Button>
@@ -17,6 +18,14 @@ export const Komponenter = () => {
         <Button navigation>Button</Button>
         <Button internt>Button</Button>
         </ButtonContainer>
+        </ContentBox>
         </PageContainer>
     )
 }
+
+const ContentBox = styled.div`
+  background-color: white;
+  width: 90%;
+  border-radius: 10px;
+  padding: 0 20px;
+`;

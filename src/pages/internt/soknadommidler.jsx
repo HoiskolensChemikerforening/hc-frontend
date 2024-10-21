@@ -4,14 +4,16 @@ import styled from "styled-components";
 import { TextArea, TextField } from "../../components/Form";
 import { H1, H3, P} from "../../components/Text";
 import { Title } from "../../components/Title";
+import { PageContainer } from "../../components/Layout";
 
 
 
 export const SoknadMidler = () => {
 
     return (
-        <Page>
+        <PageContainer gray>
             <Title wide> Søknad om midler</Title>
+            <ContentBox>
             <NewApplicationFundsText>
                 <P>
                 <H3>Alle medlemmer av Høiskolens Chemikerforening kan søke om økonomisk støtte til 
@@ -42,19 +44,18 @@ export const SoknadMidler = () => {
                 <Button primary type='submit'>Send inn</Button>
                 
             </form>
-        
-        </Page>
+            </ContentBox>
+        </PageContainer>
     )
 };
 
-const Page = styled.div`
-    display: flex;
-    flex-direction: column;
-    background-color: var(--gray-20);
-    margin: 50px;
-    padding: 20px;
-    border-radius: 10px;
+const ContentBox = styled.div`
+  background-color: white;
+  width: 90%;
+  border-radius: 10px;
+  padding: 0 20px;
 `;
+
 const FormContainer = styled.div`
     display: flex;
     justify-content: center;

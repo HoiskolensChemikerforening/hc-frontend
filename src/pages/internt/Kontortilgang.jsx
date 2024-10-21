@@ -41,8 +41,7 @@ export const Kontortilgang = () => {
   };
 
   return (
-    <OuterWrapper>
-      <PageContainer>
+      <PageContainer gray>
         <Title wide>Kontortilgang</Title>
         <ContentBox>
           <H1>Her kan du søke om tilgang på kontoret med studentkortet ditt.</H1>
@@ -91,7 +90,6 @@ export const Kontortilgang = () => {
           </ButtonContainer>          
           
         </ContentBox>
-      </PageContainer>
 
       <ModalWrapper show={showModal}>
           <H2>Kontrakt for tilgang til HC-kontoret</H2>
@@ -130,7 +128,7 @@ export const Kontortilgang = () => {
       </Button>
   </ModalWrapper>
   <ModalOverlay show={showModal} onClick={() => setShowModal(false)} />
-</OuterWrapper>
+  </PageContainer>
 )};
 
 const OuterWrapper = styled.div`
