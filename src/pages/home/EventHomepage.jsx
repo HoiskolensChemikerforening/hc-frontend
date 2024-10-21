@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import styled, {css} from 'styled-components';
-import { P } from "../../components/Text";
+import { P, SubTitle } from "../../components/Text";
 import { useHistory } from "react-router-dom";
 import { fetchPaginationObject } from "../../utils/requests";
 
@@ -38,12 +38,12 @@ export const EventHomepage = () => {
         <EventContainer>
           <div style={{postition: "fixed"}}>
           <EventType>
-            <Title  onClick={() => switchFilter(social)  }
-                style={ currentEventTypeRef.current === social ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30' } : { fontWeight: 'normal' } }
-              >Sosialt</Title>
-            <Title  onClick={() => switchFilter(corporate)}
-              style={ currentEventTypeRef.current === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
-              >Bedrift</Title>
+            <SubTitle  onClick={() => switchFilter(social)  }
+                boldUnderlined={currentEventTypeRef.current === social}
+              >Sosialt</SubTitle>
+            <SubTitle  onClick={() => switchFilter(corporate)}
+              boldUnderlined={currentEventTypeRef.current === corporate}
+              >Bedrift</SubTitle>
           </EventType>
           {dispEvents && dispEvents.map((event) => (
              <EventBox key={event.id} onClick={() => {history.push(`/arrangementer/${event.id}`)}}>
@@ -90,11 +90,6 @@ const EventType = styled.div`
   margin:0;
 `;
 
-const Title = styled.p`
-  cursor: pointer;
-  margin: 0;
-  size: medium;
-`;
 const EventBox = styled.div`
     cursor: pointer;
     border-style: solid;

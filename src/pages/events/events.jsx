@@ -109,35 +109,35 @@ export const EventPage = () => {
                 boldUnderlined={currentEventTypeRef.current === social}
               >Sosialt</SubTitle> </Devider>
               <Devider>
-              <Title  onClick={() => switchFilter(corporate, currentEventFilterRef.current)}
-              style={ currentEventTypeRef.current === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
-              >Bedrift</Title> </Devider>
+              <SubTitle  onClick={() => switchFilter(corporate, currentEventFilterRef.current)}
+                boldUnderlined={currentEventTypeRef.current === corporate}
+              >Bedrift</SubTitle> </Devider>
               <Devider>
               {currentEventTypeRef.current === social && canAddSocial ? (
                 <AddButtonContainer to="arrangement/sosialt/opprett">
-                  <Title value="Event" style={{ fontWeight: 'bold' }}>+</Title>
+                  <SubTitle value="Event" style={{ fontWeight: 'bold' }}>+</SubTitle>
                 </AddButtonContainer>
               ) : null}
                 {currentEventTypeRef.current === corporate && canAddCorporate ? (
                   <AddButtonContainer to="arrangement/karriere/opprett">
-                    <Title value="Event" style={{ fontWeight: 'bold' }}>+</Title>
+                    <SubTitle value="Event" style={{ fontWeight: 'bold' }}>+</SubTitle>
                   </AddButtonContainer>
                 ) : null}
               </Devider>
               </EventTypeDevider>
               <EventFilterDevider>
               <Devider>
-              <Title  onClick={() => switchFilter(currentEventTypeRef.current, coming)}
-              style={ currentEventFilterRef.current === coming ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
-              >Kommende</Title></Devider>
+              <SubTitle  onClick={() => switchFilter(currentEventTypeRef.current, coming)}
+                boldUnderlined={currentEventFilterRef.current === coming}
+              >Kommende</SubTitle></Devider>
               <Devider>
-              <Title  onClick={() => switchFilter(currentEventTypeRef.current, mine)}
-              style={ currentEventFilterRef.current === mine ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
-              >Mine</Title></Devider>
+              <SubTitle  onClick={() => switchFilter(currentEventTypeRef.current, mine)}
+                boldUnderlined={currentEventFilterRef.current === mine}
+              >Mine</SubTitle></Devider>
               <Devider>
-              <Title  onClick={() => switchFilter(currentEventTypeRef.current, previous)}
-              style={ currentEventFilterRef.current === previous ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
-              >Tidligere</Title> </Devider>
+              <SubTitle  onClick={() => switchFilter(currentEventTypeRef.current, previous)}
+                boldUnderlined={currentEventFilterRef.current === previous}
+              >Tidligere</SubTitle> </Devider>
             </EventFilterDevider>
           </EventType>
           <EventList>
@@ -205,13 +205,6 @@ const EventType = styled.div`
     padding: 30px;
     align-items: center;
   }
-`;
-
-const Title = styled.p`
-  cursor: pointer;
-  margin: 0;
-  size: large;
-  font-size: 20px;
 `;
 
 const EventTypeDevider = styled.div`
