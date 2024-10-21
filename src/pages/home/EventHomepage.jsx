@@ -1,67 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled, {css} from 'styled-components';
 import { P } from "../../components/Text";
 import { useHistory } from "react-router-dom";
-import axios from 'axios';
+import { fetchPaginationObject } from "../../utils/requests";
 
+const PageSize = 4;
+const social = 1
+const corporate = 2
 
 export const EventHomepage = () => {
       
-      const [dispEvents, setDispEvents] = useState();
-      const [socialEvents, setSocialEvents] = useState();
-      const [corporateEvents, setCorporateEvents] = useState();
-      const [socialBold, setSocialBold] = useState(true);
+      const [dispEvents, setDispEvents] = useState([]);
+      const [paginatonProperties,setPaginatonProperties] = useState({});
       const history = useHistory();
+      const currentEventTypeRef = useRef(social);
+      const [currentPage, setCurrentPage] = useState(1);
 
       useEffect(() => {
-        let isMounted = true;
-          fetchEvents().then((events) => {
-            if (isMounted) {
-            setDispEvents(events.social);
-            setSocialEvents(events.social);
-            setCorporateEvents(events.corporate);
-            }});
-          return () => {isMounted = false};
+        switchFilter(currentEventTypeRef.current);
         }, []);
-    
-      const fetchEvents = async () => {
 
-        let socialData;
-        let bedpresData;
-
-        await axios.get("http://localhost:8000/arrangementer/api/sosial/kommende/")
-        .then(response => {
-          socialData = response.data.slice(0,4);
-        })
-        .then(axios.get("http://localhost:8000/arrangementer/api/karriere/kommende/")
-        .then(response => {
-          bedpresData = response.data.slice(0,4);
-        }))
-        return {social: socialData, corporate: bedpresData}
+      const fetchData = (eventType) => {
+        let endpoint = "";
+        if (eventType === social) {
+          endpoint = "arrangementer/api/sosial/kommende/";
+        } else if (eventType === corporate) {
+          endpoint = "arrangementer/api/karriere/kommende/";
+        }
+        endpoint += `?page=${currentPage}&page_size=${PageSize}`;
+        fetchPaginationObject(endpoint, setDispEvents, setPaginatonProperties);
       };
-
-  const switchEvent = value => {
-    if (value === "Social" && dispEvents===corporateEvents){
-      setDispEvents(socialEvents);
-      setSocialBold(true);
-    }
-    if (value === "Corporate" && dispEvents===socialEvents){
-      setDispEvents(corporateEvents);
-      setSocialBold(false);
-    }
+ 
+  const switchFilter = (eventType) => {
+    currentEventTypeRef.current = eventType;
+    fetchData(eventType);
   };
   
     return (
         <EventContainer>
           <div style={{postition: "fixed"}}>
           <EventType>
-            <Title value="Corporate" onClick={() => switchEvent("Social")}
-              style={  socialBold ? { fontWeight: 'bold' } : { fontWeight: 'normal' } }
-            >Sosialt</Title>
-            <Title style={{cursor: "default"}}> </Title>
-            <Title value="Corporate" onClick={() => switchEvent("Corporate")}
-            style={  !socialBold ? { fontWeight: 'bold' } : { fontWeight: 'normal' } }
-            >Bedrift</Title>
+            <Title  onClick={() => switchFilter(social)  }
+                style={ currentEventTypeRef.current === social ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30' } : { fontWeight: 'normal' } }
+              >Sosialt</Title>
+            <Title  onClick={() => switchFilter(corporate)}
+              style={ currentEventTypeRef.current === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
+              >Bedrift</Title>
           </EventType>
           {dispEvents && dispEvents.map((event) => (
              <EventBox key={event.id} onClick={() => {history.push(`/arrangementer/${event.id}`)}}>
@@ -71,7 +55,7 @@ export const EventHomepage = () => {
                     </P>
                 </DateBox>
                 <PTitle>{event.title}</PTitle>
-                <ProgressBar value={event.attendees.length} max={event.sluts} color="var(--yellow-30)"></ProgressBar>
+                <ProgressBar value={event.confirmed_attendees.length} max={event.sluts} color="var(--yellow-30)"></ProgressBar>
             </EventBox>
         )) }
         </div>

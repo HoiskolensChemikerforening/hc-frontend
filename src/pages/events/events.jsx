@@ -11,7 +11,7 @@ const mine = 2
 const previous = 3
 const social = 1
 const corporate = 2
-const PageSize = 8 //Sets number of objects for pagination
+const PageSize = 12 //Sets number of objects for pagination
 
 const Pagination = ({ paginatonProperties, currentPage, onPageChange }) => {
   const total_pages = Math.ceil(paginatonProperties.total/paginatonProperties.page_size)
@@ -111,7 +111,7 @@ export const EventPage = () => {
               <Devider>
               <Title  onClick={() => switchFilter(corporate, currentEventFilterRef.current)}
               style={ currentEventTypeRef.current === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }
-              >Bedrift</Title></Devider>
+              >Bedrift</Title> </Devider>
               <Devider>
               {currentEventTypeRef.current === social && canAddSocial ? (
                 <AddButtonContainer to="arrangement/sosialt/opprett">
