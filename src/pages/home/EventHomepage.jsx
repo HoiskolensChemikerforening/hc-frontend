@@ -4,7 +4,6 @@ import { P } from "../../components/Text";
 import { useHistory } from "react-router-dom";
 import { fetchPaginationObject } from "../../utils/requests";
 
-const PageSize = 4;
 const social = 1
 const corporate = 2
 
@@ -14,7 +13,6 @@ export const EventHomepage = () => {
       const [paginatonProperties,setPaginatonProperties] = useState({});
       const history = useHistory();
       const currentEventTypeRef = useRef(social);
-      const [currentPage, setCurrentPage] = useState(1);
 
       useEffect(() => {
         switchFilter(currentEventTypeRef.current);
@@ -27,7 +25,7 @@ export const EventHomepage = () => {
         } else if (eventType === corporate) {
           endpoint = "arrangementer/api/karriere/kommende/";
         }
-        endpoint += `?page=${currentPage}&page_size=${PageSize}`;
+        endpoint += `?page=1&page_size=4`;
         fetchPaginationObject(endpoint, setDispEvents, setPaginatonProperties);
       };
  
