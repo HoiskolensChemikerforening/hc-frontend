@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { PageContainer, Row, Col } from "./Layout";
 import { Button, ButtonContainer } from "./Button";
 import { Title } from "./Title";
+import { P, TextContainer, P2 } from "./Textnew";
 
 export const Komponenter = () => {
     return (
@@ -18,6 +19,9 @@ export const Komponenter = () => {
         <Button navigation>Button</Button>
         <Button internt>Button</Button>
         </ButtonContainer>
+        <P>Tekst</P>
+        <TextContainer> Tekst </TextContainer>
+        <P2> Tekst </P2>
         </ContentBox>
         </PageContainer>
     )
