@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { H1, H2, P, Link, WideTitle } from "../../components/Text";
+import { H1, H2, P, Link } from "../../components/Text";
+import { Title } from "../../components/Title";
 import { PageContainer } from "../../components/Layout";
 import { TextField, DropDown, Option} from "../../components/Form";
 import { Button } from "../../components/Button";
@@ -9,7 +10,7 @@ export const Klassekatalog = () => {
     return(
         <OuterWrapper>
             <PageContainer>
-            <WideTitle>Klassekatalog</WideTitle>
+            <Title wide>Klassekatalog</Title>
             <ContentBox>
             <DropDown>
                 <Option>Alle</Option>

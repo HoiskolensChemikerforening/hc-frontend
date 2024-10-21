@@ -1,6 +1,25 @@
 import styled, { css } from 'styled-components';
 import '../index.css';
 
+const Title = styled.div`
+  background-color: var(--primary);
+  width: auto;
+  height: auto;
+  font-size: 42px;
+  text-align: center;
+  border-radius: 10px;
+  padding: 10px;
+  margin:20px;
+  
+  ${props => props.wide && css`
+    padding: 10px 10%;
+    
+    @media (max-width: 530px){
+      width: 100%;
+    }
+  `}
+`;
+
 //hc-frontend/src/components/MapTraining.jsx
 const TitleWrapper = styled.h2`
   display: flex;
@@ -14,31 +33,7 @@ const ReadableTitleWrapper = styled.h2`
   align-items: center;
   /* Din kode her */;
   `
-
-//hc-frontend/src/components/Text.js
-const TitleContainer = styled.div`
-  display: flex;
-  justify-content: center; 
-`;
-
-const Title1 = styled.div`
-  background-color: var(--primary);
-  width: auto;
-  height: auto;
-  font-size: 42px;
-  text-align: center;
-  border-radius: 10px;
-  padding: 10px;
-  margin:20px;
-`;
-
-const WideTitle = styled(Title1)`
-  padding: 10px 10%;
-
-  @media (max-width: 530px){
-    width 100%
-  }
-`;
+//disse tre tilhører Ingrid
 //hc-frontend/src/pages/events/events.jsx
 const Title2 = styled.p`
   cursor: pointer;
@@ -115,16 +110,14 @@ const Title6 = styled.h1`
 `
 
 export {
-    TitleContainer,
-    Title1, 
     Title2,
     Title3, 
     Title4, 
     Title5, 
     Title6, 
     TitleWrapper, 
-    WideTitle, 
-    PTitle
+    PTitle,
+    Title
 
   };
 

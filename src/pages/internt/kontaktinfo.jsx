@@ -1,18 +1,17 @@
 import React from "react";
 import styled from 'styled-components';
 import { PageContainer } from "../../components/Layout";
-import { P as baseP, TitleContainer, Title, Link as baseLink, H2 } from '../../components/Text';
+import { P as baseP, Link as baseLink, H2 } from '../../components/Text';
+import { Title } from '../../components/Title';
 import { FaEnvelope, FaPhone, FaCamera, FaFacebook } from 'react-icons/fa'; // Importing the envelope and phone icons
 
 
 export const Kontaktinfo = () => {
    return (
        <PageContainer>
-           <TitleContainer>
-               <Title>
-                   Kontaktinfoen til Styret
-               </Title>
-           </TitleContainer>
+            <Title wide>
+               Kontaktinfoen til Styret
+            </Title>
 
 
            <InlineContainer>

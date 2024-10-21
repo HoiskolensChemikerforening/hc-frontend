@@ -3,6 +3,7 @@ import { Button } from "../../components/Button";
 import styled from "styled-components";
 import { TextArea, TextField } from "../../components/Form";
 import { H1, H3, P} from "../../components/Text";
+import { Title } from "../../components/Title";
 
 
 
@@ -10,10 +11,7 @@ export const SoknadMidler = () => {
 
     return (
         <Page>
-           
-            <BackgroundContainer>
-            <H1> Søknad om midler</H1>
-            </BackgroundContainer>
+            <Title wide> Søknad om midler</Title>
             <NewApplicationFundsText>
                 <P>
                 <H3>Alle medlemmer av Høiskolens Chemikerforening kan søke om økonomisk støtte til 
@@ -82,16 +80,6 @@ const NewApplicationFundsText = styled.div`
     width: 70%;
     flex-direction: column;
 `; 
-const BackgroundContainer = styled.div`
-    display: flex;
-    background-color: var(--primary);
-    font-size: 40px;
-    width: 50%;
-    justify-content: center;
-    border-radius: 10px;
-    padding: 10px;
-    margin: 30px;
-`;
 const PriceClassBox = styled.div` 
 `;
 

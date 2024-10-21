@@ -153,37 +153,11 @@ const Link = styled.a`
   `}
 `;
 
-const TitleContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const Title = styled.div`
-  background-color: var(--primary);
-  width: auto;
-  height: auto;
-  font-size: 42px;
-  text-align: center;
-  border-radius: 10px;
-  padding: 10px;
-  margin:20px;
-`;
-
-const WideTitle = styled(Title)`
-  padding: 10px 10%;
-
-  @media (max-width: 530px){
-    width 100%
-  }
-`
 
 export {
   H1,
   H2,
   H3,
   P,
-  Link,
-  TitleContainer,
-  Title,
-  WideTitle
+  Link
 };

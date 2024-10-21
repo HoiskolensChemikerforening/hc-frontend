@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 import { Container, Row, Col } from "../../components/Layout";
+import { Title } from "../../components/Title";
 import { H1 } from "../../components/Text";
 import { Subgroup } from "../../components/CardSubGroups"
 
@@ -23,9 +24,7 @@ export const CommitteePage = () => {
   return (
     <Container>
       <Row>
-        <TitleContainer>
-            <Title>Komiteer og Undergrupper</Title>
-          </TitleContainer>
+          <Title wide>Komiteer og Undergrupper</Title>
       </Row>
       <Row>
         {committees.map((committee) => (
@@ -36,13 +35,3 @@ export const CommitteePage = () => {
   )
 };
 
-const TitleContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
-const Title = styled.h1`
-  background-color: #f8e469ff;
-  text-align: center;
-  padding: 5px 15px 5px 15px;
-`
