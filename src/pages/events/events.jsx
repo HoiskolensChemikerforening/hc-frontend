@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from "react";
 import styled, {css} from "styled-components";
-import { P } from "../../components/Text";
+import { P, SubTitle } from "../../components/Text";
 import { Button } from "../../components/Button";
 import { Link, useHistory } from "react-router-dom";
 import { fetchList, checkPermission, fetchPaginationObject } from "../../utils/requests";
@@ -105,9 +105,9 @@ export const EventPage = () => {
           <EventType>
             <EventTypeDevider>
               <Devider>
-              <Title  onClick={() => switchFilter(social, currentEventFilterRef.current)  }
-                style={ currentEventTypeRef.current === social ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30' } : { fontWeight: 'normal' } }
-              >Sosialt</Title> </Devider>
+              <SubTitle  onClick={() => switchFilter(social, currentEventFilterRef.current)}
+                boldUnderlined={currentEventTypeRef.current === social}
+              >Sosialt</SubTitle> </Devider>
               <Devider>
               <Title  onClick={() => switchFilter(corporate, currentEventFilterRef.current)}
               style={ currentEventTypeRef.current === corporate ? { fontWeight: 'bold', textDecoration: 'underline', textDecorationThickness: '3px', textDecorationColor: 'var(--yellow-30'  } : { fontWeight: 'normal' } }

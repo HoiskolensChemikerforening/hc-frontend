@@ -169,6 +169,19 @@ const Title = styled.div`
   margin:20px;
 `;
 
+const SubTitle = styled.p`
+  cursor: pointer;
+  margin: 0;
+  font-size: 20px;
+
+  ${(props) => props.boldUnderlined && css`
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-decoration-color: var(--yellow-30);
+  `}
+`;
+
 const WideTitle = styled(Title)`
   padding: 10px 10%;
 
@@ -185,5 +198,6 @@ export {
   Link,
   TitleContainer,
   Title,
+  SubTitle,
   WideTitle
 };
