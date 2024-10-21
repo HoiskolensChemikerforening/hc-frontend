@@ -59,8 +59,23 @@ const P2 = styled(baseP)`
  text-align: center; // Center-align the text
 `;
 
+//hc-frontend/src/pages/events/events.jsx på branch page/eventpage, ikke merget inn her enda
+const SubTitle = styled.p`
+  cursor: pointer;
+  margin: 0;
+  font-size: 20px;
+
+  ${(props) => props.boldUnderlined && css`
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-decoration-color: var(--yellow-30);
+  `}
+`;
+
 export {
     P,
     TextContainer,  
-    P2
+    P2,
+    SubTitle
   };
