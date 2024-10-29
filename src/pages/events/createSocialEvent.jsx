@@ -155,10 +155,21 @@ export const CreateSocialEvent = () => {
     finished: false
   }); // må få lagt allowed grades til riktig sted i formData
 
-  const handleCheckboxChange = (e) => { // funker denne som den skal? Ganske sikke rpå at den aldri oppdaterer noe til true som den skal
+  const handleOneOrOtherCheckboxChange = (e) => { // function to handle when one of the checkboxes are to be true, the rest false
     const { name, checked } = e.target;
-    setCheckboxes({ ...checkboxes, [name]: checked });
+    setEventType(checked ? name : null);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      published: name === "published" ? checked : false,
+      tentative: name === "tentative" ? checked : false,
+    }));
+  };
+
+  const handleMultipleCheckboxesChange = (e) => { // function to handle when multiple checkboxes to be sent together
+    const { name, checked } = e.target;
+    //setCheckboxes({ ...checkboxes, [name]: checked });
     setEventType(e.target.name);
+    setFormData({ ...formData, [name]: checked });
   };
 
   useEffect(() => {
@@ -206,16 +217,16 @@ export const CreateSocialEvent = () => {
         <CheckBox>
           <ColoredCheckbox
             checked={eventType === "published"}
-            onChange={handleCheckboxChange}
+            onChange={handleOneOrOtherCheckboxChange} // obs mangler logikk for å gjøre at kun den ene er true av gangen
             name="published"
-            
+            color="primary"
           />
           <P>Publisert</P>
         </CheckBox>
         <CheckBox>
           <ColoredCheckbox
             checked={eventType === "tentative"}
-            onChange={handleCheckboxChange}
+            onChange={handleOneOrOtherCheckboxChange} // obs mangler logikk for å gjøre at kun den ene er true av gangen
             name="tentative"
             color="primary"
           />
@@ -392,7 +403,7 @@ export const CreateSocialEvent = () => {
             <CheckBox>
               <ColoredCheckbox
                 checked={checkboxes.first}
-                onChange={handleCheckboxChange}
+                onChange={handleMultipleCheckboxesChange}
                 name="first"
                 color="primary"
               />
@@ -401,7 +412,7 @@ export const CreateSocialEvent = () => {
             <CheckBox>
               <ColoredCheckbox
                 checked={checkboxes.second}
-                onChange={handleCheckboxChange}
+                onChange={handleMultipleCheckboxesChange}
                 name="second"
                 color="primary"
               />
@@ -410,7 +421,7 @@ export const CreateSocialEvent = () => {
             <CheckBox>
               <ColoredCheckbox
                 checked={checkboxes.third}
-                onChange={handleCheckboxChange}
+                onChange={handleMultipleCheckboxesChange}
                 name="third"
                 color="primary"
               />
@@ -419,7 +430,7 @@ export const CreateSocialEvent = () => {
             <CheckBox>
               <ColoredCheckbox
                 checked={checkboxes.forth}
-                onChange={handleCheckboxChange}
+                onChange={handleMultipleCheckboxesChange}
                 name="forth"
                 color="primary"
               />
@@ -428,7 +439,7 @@ export const CreateSocialEvent = () => {
             <CheckBox>
               <ColoredCheckbox
                 checked={checkboxes.fifth}
-                onChange={handleCheckboxChange}
+                onChange={handleMultipleCheckboxesChange}
                 name="fifth"
                 color="primary"
               />
@@ -437,7 +448,7 @@ export const CreateSocialEvent = () => {
             <CheckBox>
               <ColoredCheckbox
                 checked={checkboxes.finished}
-                onChange={handleCheckboxChange}
+                onChange={handleMultipleCheckboxesChange}
                 name="finished"
                 color="primary"
               />
