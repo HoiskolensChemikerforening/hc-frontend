@@ -76,7 +76,7 @@ export const CreateSocialEvent = () => {
   const [formData, setFormData] = useState({ // her er det nå færre felter enn på original nettside. Det er fordi jeg
     // har fjernet noen felter som jeg tenker er unødvendige da de ikke brukes til arrangementer.
     author: user.user_id,
-    committee: {}, 
+    committee: 0, 
     title: '',
     date: '2025-10-10T18:00:00+02:00', 
     register_startdate: '2025-10-09T19:40:00+02:00', 
@@ -176,24 +176,30 @@ export const CreateSocialEvent = () => {
 
   const handleCommitteeChange = (e) => {
     const selectedCommitteeId = e.target.value;
-    const selectedCommittee = committees.find((committee) => committee.id === parseInt(selectedCommitteeId));
-    try {
-      // Update formData with the committee information
-      setFormData((prevFormData) => ({...prevFormData,
-        committee: {
-          id: selectedCommittee.id,
-          absolute_url: selectedCommittee.absolute_url,
-          title: selectedCommittee.title,
-          email: selectedCommittee.email,
-          image: selectedCommittee.image,
-          slug: selectedCommittee.slug,
-          one_liner: selectedCommittee.one_liner,
-          description: selectedCommittee.description
-        }
-      }));
-    } catch (error) {
-      console.error('Error with committee information:', error);
-    }
+    //console.log("selectedCommitteeId", selectedCommitteeId);
+    //const selectedCommittee = committees.find((committee) => committee.id === parseInt(selectedCommitteeId));
+    //console.log("selectedCommittee", selectedCommittee);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      committee: parseInt(selectedCommitteeId)
+    }));
+    // try {
+    //   // Update formData with the committee information
+    //   setFormData((prevFormData) => ({...prevFormData,
+    //     committee: {
+    //       id: selectedCommittee.id,
+    //       absolute_url: selectedCommittee.absolute_url,
+    //       title: selectedCommittee.title,
+    //       email: selectedCommittee.email,
+    //       image: selectedCommittee.image,
+    //       slug: selectedCommittee.slug,
+    //       one_liner: selectedCommittee.one_liner,
+    //       description: selectedCommittee.description
+    //     }
+    //   }));
+    // } catch (error) {
+    //   console.error('Error with committee information:', error);
+    // }
   };
 
   // const updateAuthor = () => { må ikke sende all info? Fungerer ikke enda, men kan muligens slettes helt?
