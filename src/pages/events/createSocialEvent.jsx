@@ -55,23 +55,16 @@ export const CreateSocialEvent = () => {
 
         // Set a local preview of the selected image
         const reader = new FileReader();
-        reader.onloadend = () => setImagePreviewUrl(reader.result); // This sets a base64 preview
+        reader.onloadend = () => setImagePreviewUrl(reader.result);
         reader.readAsDataURL(file);
-  
-        // Upload the image to the server
-        const response = await axios.post('http://localhost:8000/api/upload-image/', imageData, { // hvilken API trenger jeg her
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-  
-        // Get the image URL from the server response
-        const imageUrl = response.data.image; // Adjust according to your response format
+
+        let imageUrl = 'http://localhost:8000/media/events/';
+        imageUrl += `${file.name}`;
   
         // Update formData with the image URL
         setFormData((prevFormData) => ({
           ...prevFormData,
-          image: imageUrl, // Stores the server URL for the uploaded image
+          image: imageUrl,
         }));
   
       } catch (error) {
