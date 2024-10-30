@@ -75,7 +75,7 @@ export const CreateSocialEvent = () => {
 
   const [formData, setFormData] = useState({ // her er det nå færre felter enn på original nettside. Det er fordi jeg
     // har fjernet noen felter som jeg tenker er unødvendige da de ikke brukes til arrangementer.
-    author: user.user_id, 
+    author: {}, // user.user_id, 
     committee: {}, 
     title: '',
     date: '2025-10-10T18:00:00+02:00', 
@@ -189,17 +189,37 @@ export const CreateSocialEvent = () => {
           image: selectedCommittee.image,
           slug: selectedCommittee.slug,
           one_liner: selectedCommittee.one_liner,
-          description: selectedCommittee.description,
+          description: selectedCommittee.description
         }
       }));
     } catch (error) {
       console.error('Error with committee information:', error);
     }
   };
+
+  const updateAuthor = () => {
+    if (user) {
+      try {
+        // Update formData with the author information
+        setFormData((prevFormData) => ({...prevFormData,
+          author: {
+            username: user.username,
+            email: user.email,
+            first_name: user.first_name,
+            last_name: user.last_name,
+            full_name: user.full_name
+          }
+        }));
+      } catch (error) {
+        console.error('Error with author information:', error);
+      }
+    }
+  };
   
   useEffect(() => {
     checkPermission("events.add_social", user, setCanAddSocial);
     fetchList("undergrupper/api/", setCommittees);
+    updateAuthor();
   }, [user]);
 
   return (
