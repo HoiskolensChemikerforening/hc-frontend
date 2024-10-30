@@ -144,18 +144,7 @@ export const CreateSocialEvent = () => {
     }
   };
 
-  const [checkboxes, setCheckboxes] = useState({ // er denne nødvendig? De er definert som false lenger oppe
-    published: false, // slette da definert lenger oppe?
-    tentative: false, // slette da definert lenger oppe?
-    first: false,
-    second: false,
-    third: false,
-    forth: false,
-    fifth: false,
-    finished: false
-  }); // må få lagt allowed grades til riktig sted i formData
-
-  const handleOneOrOtherCheckboxChange = (e) => { // function to handle when one of the checkboxes are to be true, the rest false
+  const handleExclusiveCheckboxChange = (e) => { // function to handle when one of the checkboxes are to be true, the rest false
     const { name, checked } = e.target;
     setEventType(checked ? name : null);
     setFormData((prevFormData) => ({
@@ -167,11 +156,17 @@ export const CreateSocialEvent = () => {
 
   const handleMultipleCheckboxesChange = (e) => { // function to handle when multiple checkboxes to be sent together
     const { name, checked } = e.target;
-    //setCheckboxes({ ...checkboxes, [name]: checked });
-    setEventType(e.target.name);
-    setFormData({ ...formData, [name]: checked });
+    const gradeNumber = parseInt(name); // Convert the checkbox name to a number
+    setFormData((prevFormData) => {
+      const newAllowedGrades = checked
+        ? [...prevFormData.allowed_grades, gradeNumber]
+        : prevFormData.allowed_grades.filter((grade) => grade !== gradeNumber);
+      return {
+        ...prevFormData, allowed_grades: newAllowedGrades.sort(),
+      };
+    });
   };
-
+  
   useEffect(() => {
     checkPermission("events.add_social", user, setCanAddSocial);
     fetchList("undergrupper/api/", setCommittees);
@@ -217,7 +212,7 @@ export const CreateSocialEvent = () => {
         <CheckBox>
           <ColoredCheckbox
             checked={eventType === "published"}
-            onChange={handleOneOrOtherCheckboxChange} // obs mangler logikk for å gjøre at kun den ene er true av gangen
+            onChange={handleExclusiveCheckboxChange}
             name="published"
             color="primary"
           />
@@ -226,7 +221,7 @@ export const CreateSocialEvent = () => {
         <CheckBox>
           <ColoredCheckbox
             checked={eventType === "tentative"}
-            onChange={handleOneOrOtherCheckboxChange} // obs mangler logikk for å gjøre at kun den ene er true av gangen
+            onChange={handleExclusiveCheckboxChange}
             name="tentative"
             color="primary"
           />
@@ -402,54 +397,54 @@ export const CreateSocialEvent = () => {
           <CheckboxContainer>
             <CheckBox>
               <ColoredCheckbox
-                checked={checkboxes.first}
+                checked={formData.allowed_grades.includes(1)}
                 onChange={handleMultipleCheckboxesChange}
-                name="first"
+                name="1"
                 color="primary"
               />
               <P>Førsteklasse</P>
             </CheckBox>
             <CheckBox>
               <ColoredCheckbox
-                checked={checkboxes.second}
+                checked={formData.allowed_grades.includes(2)}
                 onChange={handleMultipleCheckboxesChange}
-                name="second"
+                name="2"
                 color="primary"
               />
               <P>Andreklasse</P>
             </CheckBox>
             <CheckBox>
               <ColoredCheckbox
-                checked={checkboxes.third}
+                checked={formData.allowed_grades.includes(3)}
                 onChange={handleMultipleCheckboxesChange}
-                name="third"
+                name="3"
                 color="primary"
               />
               <P>Tredjeklasse</P>
             </CheckBox>
             <CheckBox>
               <ColoredCheckbox
-                checked={checkboxes.forth}
+                checked={formData.allowed_grades.includes(4)}
                 onChange={handleMultipleCheckboxesChange}
-                name="forth"
+                name="4"
                 color="primary"
               />
               <P>Fjerdeklasse</P>
             </CheckBox>
             <CheckBox>
               <ColoredCheckbox
-                checked={checkboxes.fifth}
+                checked={formData.allowed_grades.includes(5)}
                 onChange={handleMultipleCheckboxesChange}
-                name="fifth"
+                name="5"
                 color="primary"
               />
               <P>Femteklasse</P>
             </CheckBox>
             <CheckBox>
               <ColoredCheckbox
-                checked={checkboxes.finished}
+                checked={formData.allowed_grades.includes(6)}
                 onChange={handleMultipleCheckboxesChange}
-                name="finished"
+                name="6"
                 color="primary"
               />
               <P>Ferdig</P>
