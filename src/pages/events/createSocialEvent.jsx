@@ -46,22 +46,37 @@ export const CreateSocialEvent = () => {
     textarea.style.height = `${textarea.scrollHeight}px`; // sets new height
   };  
 
-  const handleImageChange = e => { // må få bilde til å legges ved på riktig måte ved innsending
-    e.preventDefault();
-
-    let reader = new FileReader();
-    let file = e.target.files[0];
-
-    reader.onloadend = () => {
-        setImagePreviewUrl(reader.result);
-        setFormData(prevFormData => ({
-          ...prevFormData,
-          image: reader.result 
-        }));
-    };
-
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
     if (file) {
+      try {
+        const imageData = new FormData();
+        imageData.append('image', file);
+
+        // Set a local preview of the selected image
+        const reader = new FileReader();
+        reader.onloadend = () => setImagePreviewUrl(reader.result); // This sets a base64 preview
         reader.readAsDataURL(file);
+  
+        // Upload the image to the server
+        const response = await axios.post('http://localhost:8000/api/upload-image/', imageData, { // hvilken API trenger jeg her
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+  
+        // Get the image URL from the server response
+        const imageUrl = response.data.image; // Adjust according to your response format
+  
+        // Update formData with the image URL
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          image: imageUrl, // Stores the server URL for the uploaded image
+        }));
+  
+      } catch (error) {
+        console.error('Error uploading image:', error);
+      }
     }
   };
 
@@ -134,8 +149,7 @@ export const CreateSocialEvent = () => {
     }
     setIsSubmitting(true);
     try {
-      // const dataToSubmit = prepareTimeDataForSubmission();
-      // await postRequest('arrangementer/api/sosial/', dataToSubmit);
+      const response = await axios.post('http://localhost:8000/api/sosial/opprett/', formData); // riktig API?
       setIsSubmittedSuccessfully(true);
     } catch (error) {
       console.error('Error submitting form:', error);
