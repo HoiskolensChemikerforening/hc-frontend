@@ -50,21 +50,21 @@ export const CreateSocialEvent = () => {
     const file = e.target.files[0];
     if (file) {
       try {
-        const imageData = new FormData();
-        imageData.append('image', file);
+        // const imageData = new FormData();
+        // imageData.append('image', file);
 
         // Set a local preview of the selected image
         const reader = new FileReader();
         reader.onloadend = () => setImagePreviewUrl(reader.result);
         reader.readAsDataURL(file);
 
-        let imageUrl = 'http://localhost:8000/media/events/';
-        imageUrl += `${file.name}`;
+        // let imageUrl = 'http://localhost:8000/media/events/';
+        // imageUrl += `${file.name}`;
   
         // Update formData with the image URL
         setFormData((prevFormData) => ({
           ...prevFormData,
-          image: imageUrl,
+          image: file,
         }));
   
       } catch (error) {
