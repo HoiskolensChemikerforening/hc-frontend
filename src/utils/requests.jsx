@@ -47,7 +47,15 @@ export const fetchDetail = async (url, id, setFunction, setLoading=null) => {
 }
 
 export const postRequest = async (url, data) => {
-    await axios.post(baseUrl + url, data);
+    try {
+        await axios.post(baseUrl + url, data);
+    } catch (error) {
+        if (error.response) {
+            console.error('Server responded with:', error.response.data);
+        } else {
+            console.error('Error sending request:', error.message);
+        }
+    }
 }
 
 export const checkPermission = async (permission, user, setFunction) => {

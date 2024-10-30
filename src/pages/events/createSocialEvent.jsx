@@ -78,10 +78,10 @@ export const CreateSocialEvent = () => {
     author: user.user_id, 
     committee: '', 
     title: '',
-    date: '', 
-    register_startdate: '', 
-    register_deadline: '',
-    deregister_deadline: '',
+    date: '2025-10-10T18:00:00+02:00', 
+    register_startdate: '2025-10-09T19:40:00+02:00', 
+    register_deadline: '2025-10-10T18:00:00+02:00',
+    deregister_deadline: '2025-10-10T18:00:00+02:00',
     location: '',
     description: '',
     image: '',
@@ -142,7 +142,8 @@ export const CreateSocialEvent = () => {
     }
     setIsSubmitting(true);
     try {
-      const response = await axios.post('http://localhost:8000/api/sosial/opprett/', formData); // riktig API?
+      console.log(formData);
+      postRequest('arrangementer/api/sosial/opprett/', formData);
       setIsSubmittedSuccessfully(true);
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -257,29 +258,29 @@ export const CreateSocialEvent = () => {
             <div>
               <P>Tidspunkt for arrangementet</P>
               <TimeBox>
-                <input type="date" id="eventDate" name="eventDate" value={eventDate} onChange={setEventDate} required />
-                <input type="time" id="eventTime" name="eventTime" value={eventTime} onChange={setEventTime} required />
+                <input type="date" id="eventDate" name="eventDate" value={eventDate} onChange={setEventDate}  />
+                <input type="time" id="eventTime" name="eventTime" value={eventTime} onChange={setEventTime}  />
               </TimeBox>
             </div>
             <div>
               <P>Påmeldingen åpner</P>
               <TimeBox>
-                <input type="date" id="registerStartDate" name="registerStartDate" value={registerStartDate} onChange={setRegisterStartDate} required />
-                <input type="time" id="registerStartTime" name="registerStartTime" value={registerStartTime} onChange={setRegisterStartTime} required />
+                <input type="date" id="registerStartDate" name="registerStartDate" value={registerStartDate} onChange={setRegisterStartDate}  />
+                <input type="time" id="registerStartTime" name="registerStartTime" value={registerStartTime} onChange={setRegisterStartTime}  />
               </TimeBox>
             </div>
             <div>
               <P>Påmeldingen stenger</P>
               <TimeBox>
-                <input type="date" id="registerDeadlineDate" name="registerDeadlineDate" value={registerDeadlineDate} onChange={setRegisterDeadlineDate} required />
-                <input type="time" id="registerDeadlineTime" name="registerDeadlineTime" value={registerDeadlineTime} onChange={setRegisterDeadlineTime} required />
+                <input type="date" id="registerDeadlineDate" name="registerDeadlineDate" value={registerDeadlineDate} onChange={setRegisterDeadlineDate}  />
+                <input type="time" id="registerDeadlineTime" name="registerDeadlineTime" value={registerDeadlineTime} onChange={setRegisterDeadlineTime}  />
               </TimeBox>
             </div>
             <div>
               <P>Avmeldingen stenger</P>
               <TimeBox>
-                <input type="date" id="deregisterDeadlineDate" name="deregisterDeadlineDate" value={deregisterDeadlineDate} onChange={setDeregisterDeadlineDate} required />
-                <input type="time" id="deregisterDeadlineTime" name="deregisterDeadlineTime" value={deregisterDeadlineTime} onChange={setDeregisterDeadlineTime} required />
+                <input type="date" id="deregisterDeadlineDate" name="deregisterDeadlineDate" value={deregisterDeadlineDate} onChange={setDeregisterDeadlineDate}  />
+                <input type="time" id="deregisterDeadlineTime" name="deregisterDeadlineTime" value={deregisterDeadlineTime} onChange={setDeregisterDeadlineTime}  />
               </TimeBox>
             </div>
           </TimeContainer>
