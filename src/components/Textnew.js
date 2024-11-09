@@ -79,3 +79,5 @@ export {
     P2,
     SubTitle
   };
+
+  /* ville ikke ha P2 eller Textcontainer*/
