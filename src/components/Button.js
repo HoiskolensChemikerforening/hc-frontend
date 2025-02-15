@@ -31,6 +31,16 @@ const Button = styled.button`
     border: 2px #212121 solid;
     color: rgb(0, 0, 0, 0.7);
   `}
+  ${props => props.tertiary && css`
+    color: rgb(140, 140, 140);
+    background: none;
+    border: none;
+    box-shadow: none;
+    &:hover {
+      color: rgb(104, 104, 104);
+    }
+    padding: 0 10px 0 0;
+  `}
   ${props => props.navigation && css`
     border: 2px #212121 solid;
     color: rgb(0, 0, 0, 0.7);
