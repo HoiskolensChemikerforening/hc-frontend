@@ -154,8 +154,10 @@ export const EventPage = () => {
              <PTitle>{event.title}</PTitle>
              <ProgressBar value={event.confirmed_attendees.length} max={event.sluts} color="var(--yellow-30)"></ProgressBar>
             <EventBoxButtonContainer>
-              <Button tertiary type="button" onClick={() => {history.push(`/arrangementer/${event.id}`)}}>Til påmelding</Button> {/* Must add correct url */}
               <Button tertiary type="button" onClick={() => {history.push(`/arrangementer/${event.id}`)}}>Les mer</Button>
+              {event.sluts !== 0 ? (
+                <Button tertiary type="button" onClick={() => {history.push(`/arrangementer/${event.id}`)}}>Til påmelding</Button>
+              ) : null} {/* Must add correct url */}
             </EventBoxButtonContainer>
          </EventBox>
           )) }
@@ -227,7 +229,6 @@ const EventTypeDevider = styled.div`
     justify-content: space-between;
     height: auto;
   }
-
 `;
 
 const EventFilterDevider = styled.div`
@@ -241,7 +242,6 @@ const EventFilterDevider = styled.div`
     justify_content: space-between;
     height: auto;
   }
-
 `;
 
 const Devider = styled.div`
@@ -259,7 +259,6 @@ const EventBox = styled.div`
     padding: 5px;
     border-radius: 5px;
     width: 300px;
-    
 `;
 
 const EventList = styled.div`
