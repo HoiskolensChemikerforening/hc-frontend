@@ -297,11 +297,10 @@ export const CreateSocialEvent = () => {
           <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="nb">
           <TimeContainer>
             <div>
-              <P>Tidspunkt for arrangementet</P>
               <TimeBox>
               <DatePicker
                 label="Dato for arrangementet"
-                value={formData.eventDate}
+                value={formData.eventDate} // prøvd annen metode enn de andre, fungerer ikke:(
                 onChange={(newDate) => {
                   const safeDate = newDate ? dayjs(newDate) : null;
                   setFormData(prev => ({ ...prev, eventDate: safeDate }));
@@ -322,7 +321,6 @@ export const CreateSocialEvent = () => {
               </TimeBox>
             </div>
             <div>
-              <P>Påmeldingen åpner</P>
               <TimeBox>
               <DatePicker
                 label="Påmelding åpner"
@@ -347,7 +345,6 @@ export const CreateSocialEvent = () => {
               </TimeBox>
             </div>
             <div>
-              <P>Påmeldingen stenger</P>
               <TimeBox>
               <DatePicker
                 label="Påmelding stenger"
@@ -372,7 +369,6 @@ export const CreateSocialEvent = () => {
               </TimeBox>
             </div>
             <div>
-              <P>Avmeldingen stenger</P>
               <TimeBox>
               <DatePicker
                 label="Avmelding stenger"
@@ -687,6 +683,7 @@ const StyledDropDown = styled.select`
 const TimeContainer = styled.div`
   display: flex;
   flex-direction: row; 
+  flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center; 
   margin: 20px 0; 
@@ -696,7 +693,7 @@ const TimeBox = styled.div`
   display: flex;
   flex-direction: column; 
   margin-bottom: 10px; 
-
+  gap: 12px;
   & > input {
     margin-bottom: 5px; // Spacing between each input
   }
