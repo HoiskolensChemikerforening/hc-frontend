@@ -19,7 +19,7 @@ const NavBar = () =>  {
                     <MenuItem to="/bedrift"><BiBriefcaseAlt/></MenuItem>
                     <MenuItem to="/arrangement"><BiCalendarEvent/></MenuItem>
                     <MenuItem to="/internt"><BiGame/></MenuItem>
-                    <MenuItem to="/info"><BiInfoCircle/></MenuItem>
+                    <MenuItem to="/kontaktinfo"><BiInfoCircle/></MenuItem>
                 </MenuItems>
                <UserBox toggleMenu={setMenuOpen} />
             </Nav>
