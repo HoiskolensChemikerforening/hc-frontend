@@ -286,6 +286,8 @@ const ProgressCont = styled.div`
   align-items: baseline;
   width: 100%;
   max-width: 100%;
+  min-height: 23px; 
+  max-height: 23px;
 
   progress[value] {
       width: 75%;
@@ -317,10 +319,9 @@ const ProgressBar = props => {
             <NumberCount black>{value}</NumberCount>
             <NumberCount gray>/{max}</NumberCount>
         </ProgressCont>);
-    const open = (<P italic style={{marginBottom:"0px"}} > Åpent for alle!</P>)
+    const open = (<P italic style={{marginBottom:"0px", fontSize: "14px"}} > Åpent for alle!</P>)
     return ( 
       (max !== 0) ? progress : open
-          
     );
 };
 
