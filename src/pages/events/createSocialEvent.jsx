@@ -7,8 +7,13 @@ import { H1, H2, H3, P, Title, TitleContainer} from "../../components/Text";
 import { Link } from "react-router-dom";
 import { fetchList, checkPermission, postRequest } from "../../utils/requests";
 import AuthContext from "../../context/AuthContext";
-import { TextField, ImageUpload, DropDown, TextArea } from "../../components/Form";
+// import { TextField, ImageUpload, DropDown, TextArea } from "../../components/Form";
 import Checkbox from '@material-ui/core/Checkbox';
+import { DatePicker, TimePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import TextField from "@mui/material/TextField";
+import dayjs from "dayjs";
+import "dayjs/locale/nb"; // Load Norwegian locale
 
 export const CreateSocialEvent = () => {
   const [canAddSocial, setCanAddSocial] = useState(false); // brukere blir ikke sjekket dersom de kun skriver inn URL. Må fikses
@@ -22,14 +27,14 @@ export const CreateSocialEvent = () => {
 
 
 // de under her er et forsøk på å legge in tidsdata riktig. Fungerer ikke enda :)
-  const [eventDate, setEventDate] = useState('');
-  const [eventTime, setEventTime] = useState('');
-  const [registerStartDate, setRegisterStartDate] = useState('');
-  const [registerStartTime, setRegisterStartTime] = useState('');
-  const [registerDeadlineDate, setRegisterDeadlineDate] = useState('');
-  const [registerDeadlineTime, setRegisterDeadlineTime] = useState('');
-  const [deregisterDeadlineDate, setDeregisterDeadlineDate] = useState('');
-  const [deregisterDeadlineTime, setDeregisterDeadlineTime] = useState('');
+  const [eventDate, setEventDate] = useState(dayjs());
+  const [eventTime, setEventTime] = useState(dayjs());
+  const [registerStartDate, setRegisterStartDate] = useState(dayjs());
+  const [registerStartTime, setRegisterStartTime] = useState(dayjs());
+  const [registerDeadlineDate, setRegisterDeadlineDate] = useState(dayjs());
+  const [registerDeadlineTime, setRegisterDeadlineTime] = useState(dayjs());
+  const [deregisterDeadlineDate, setDeregisterDeadlineDate] = useState(dayjs());
+  const [deregisterDeadlineTime, setDeregisterDeadlineTime] = useState(dayjs());
 
   const Modal = ({ onClose, children, showCloseButton = true }) => ( // fungerer denne som den skal? 
     <StyledModal>
@@ -94,55 +99,40 @@ export const CreateSocialEvent = () => {
     price_not_member: 0,
   });
 
-  // const [timeData, setTimeData] = useState({ // også forsøk på å få tidsdata riktig
-  //   eventDate: '',
-  //   eventTime: '',
-  //   registerStartDate: '', 
-  //   registerStartTime: '',
-  //   registerDeadlineDate: '',
-  //   registerDeadlineTime: '',
-  //   deregisterDeadlineDate: '',
-  //   deregisterDeadlineTime: '',
-  // });
-
-
   // Virker som den oppdaterer alle variabler et hakk for sent
   const handleChange = (e) => { // mangler logikk for hvilke klasser som skal med
     const { name, value } = e.target;
-
-    // Dette under her er et forsøk på å oppdatere tidsdataen, funker ikke som de skal:(
-    // Prøver å få til å oppdatere tidspunktene riktig. De må hentes fra feltene, settes til riktige variabler, kombineres riktig
-    // deretter registrert til riktige variabler i formData
-    const date = combineDateTime(eventDate, eventTime);
-    const register_startdate = combineDateTime(registerStartDate, registerStartTime);
-    const register_deadline = combineDateTime(registerDeadlineDate, registerDeadlineTime);
-    const deregister_deadline = combineDateTime(deregisterDeadlineDate, deregisterDeadlineTime);
-    setFormData({ ...formData, [date]: date });
-    setFormData({ ...formData, [register_startdate]: register_startdate });
-    setFormData({ ...formData, [register_deadline]: register_deadline });
-    setFormData({ ...formData, [deregister_deadline]: deregister_deadline });
-
-    setFormData({ ...formData, [name]: value });
-    console.log(formData);
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const combineDateTime = (date, time) => { // funker denne som den skal?
-    if (date && time) {
-      return new Date(date + 'T' + time).toISOString();
-    }
-    return '';
-  };
+  const combineDateTime = (date, time) => {
+    return date
+        .set("hour", time.hour()) // Set hours from time
+        .set("minute", time.minute()) // Set minutes from time
+        .set("second", 0) // Always reset seconds
+        .toISOString(); // Convert to ISO format
+};
     
   const handleSubmit = async (e) => { // funker denne som den skal?
     e.preventDefault();
+    const finalEventDate = combineDateTime(eventDate, eventTime);
+    const finalRegisterStart = combineDateTime(registerStartDate, registerStartTime);
+    const finalRegisterDeadline = combineDateTime(registerDeadlineDate, registerDeadlineTime);
+    const finalDeregisterDeadline = combineDateTime(deregisterDeadlineDate, deregisterDeadlineTime);
     if (!eventType || isSubmitting) {
       setShowModal(true);
       return;
     }
     setIsSubmitting(true);
     try {
-      console.log(formData);
-      postRequest('arrangementer/api/sosial/opprett/', formData);
+      const formData = {
+        eventDateTime: finalEventDate,
+        registerStartDateTime: finalRegisterStart,
+        registerDeadlineDateTime: finalRegisterDeadline,
+        deregisterDeadlineDateTime: finalDeregisterDeadline,
+      };
+      console.log("Submitting:", formData);
+      await postRequest('arrangementer/api/sosial/opprett/', formData);
       setIsSubmittedSuccessfully(true);
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -304,36 +294,110 @@ export const CreateSocialEvent = () => {
           </div>
 
           <P>Legg inn følgende datoer og klokkeslett:</P>
+          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="nb">
           <TimeContainer>
             <div>
               <P>Tidspunkt for arrangementet</P>
               <TimeBox>
-                <input type="date" id="eventDate" name="eventDate" value={eventDate} onChange={setEventDate}  />
-                <input type="time" id="eventTime" name="eventTime" value={eventTime} onChange={setEventTime}  />
+              <DatePicker
+                label="Dato for arrangementet"
+                value={formData.eventDate}
+                onChange={(newDate) => {
+                  const safeDate = newDate ? dayjs(newDate) : null;
+                  setFormData(prev => ({ ...prev, eventDate: safeDate }));
+                }}
+                slotProps={{ textField: { variant: "outlined" } }}
+              />
+              <TimePicker
+                label="Tidspunkt for arrangementet"
+                value={eventTime}
+                onChange={(newTime) => {
+                  const safeTime = newTime ? dayjs(newTime) : null;
+                  setEventTime(safeTime);
+                }}
+                slotProps={{ textField: { variant: "outlined" } }}
+              />
+                {/* <input type="date" id="eventDate" name="eventDate" value={eventDate} onChange={setEventDate}  />
+                <input type="time" id="eventTime" name="eventTime" value={eventTime} onChange={setEventTime}  /> */}
               </TimeBox>
             </div>
             <div>
               <P>Påmeldingen åpner</P>
               <TimeBox>
-                <input type="date" id="registerStartDate" name="registerStartDate" value={registerStartDate} onChange={setRegisterStartDate}  />
-                <input type="time" id="registerStartTime" name="registerStartTime" value={registerStartTime} onChange={setRegisterStartTime}  />
+              <DatePicker
+                label="Påmelding åpner"
+                value={registerStartDate}
+                onChange={(newDate) => {
+                  const safeDate = newDate ? dayjs(newDate) : null;
+                  setRegisterStartDate(safeDate);
+                }}
+                slotProps={{ textField: { variant: "outlined" } }}
+              />
+              <TimePicker
+                label="Påmelding åpner (tid)"
+                value={registerStartTime}
+                onChange={(newTime) => {
+                  const safeTime = newTime ? dayjs(newTime) : null;
+                  setRegisterStartTime(safeTime);
+                }}
+                slotProps={{ textField: { variant: "outlined" } }}
+              />
+                {/*<input type="date" id="registerStartDate" name="registerStartDate" value={registerStartDate} onChange={setRegisterStartDate}  />
+                <input type="time" id="registerStartTime" name="registerStartTime" value={registerStartTime} onChange={setRegisterStartTime}  /> */}
               </TimeBox>
             </div>
             <div>
               <P>Påmeldingen stenger</P>
               <TimeBox>
-                <input type="date" id="registerDeadlineDate" name="registerDeadlineDate" value={registerDeadlineDate} onChange={setRegisterDeadlineDate}  />
-                <input type="time" id="registerDeadlineTime" name="registerDeadlineTime" value={registerDeadlineTime} onChange={setRegisterDeadlineTime}  />
+              <DatePicker
+                label="Påmelding stenger"
+                value={registerDeadlineDate}
+                onChange={(newDate) => {
+                  const safeDate = newDate ? dayjs(newDate) : null;
+                  setRegisterDeadlineDate(safeDate);
+                }}
+                slotProps={{ textField: { variant: "outlined" } }}
+              />
+              <TimePicker
+                label="Påmelding stenger (tid)"
+                value={registerDeadlineTime}
+                onChange={(newTime) => {
+                  const safeTime = newTime ? dayjs(newTime) : null;
+                  setRegisterDeadlineTime(safeTime);
+                }}
+                slotProps={{ textField: { variant: "outlined" } }}
+              />
+                {/* <input type="date" id="registerDeadlineDate" name="registerDeadlineDate" value={registerDeadlineDate} onChange={setRegisterDeadlineDate}  />
+                <input type="time" id="registerDeadlineTime" name="registerDeadlineTime" value={registerDeadlineTime} onChange={setRegisterDeadlineTime}  /> */}
               </TimeBox>
             </div>
             <div>
               <P>Avmeldingen stenger</P>
               <TimeBox>
-                <input type="date" id="deregisterDeadlineDate" name="deregisterDeadlineDate" value={deregisterDeadlineDate} onChange={setDeregisterDeadlineDate}  />
-                <input type="time" id="deregisterDeadlineTime" name="deregisterDeadlineTime" value={deregisterDeadlineTime} onChange={setDeregisterDeadlineTime}  />
+              <DatePicker
+                label="Avmelding stenger"
+                value={deregisterDeadlineDate}
+                onChange={(newDate) => {
+                  const safeDate = newDate ? dayjs(newDate) : null;
+                  setDeregisterDeadlineDate(safeDate);
+                }}
+                slotProps={{ textField: { variant: "outlined" } }}
+              />
+              <TimePicker
+                label="Avmelding stenger (tid)"
+                value={deregisterDeadlineTime}
+                onChange={(newTime) => {
+                  const safeTime = newTime ? dayjs(newTime) : null;
+                  setDeregisterDeadlineTime(safeTime);
+                }}
+                slotProps={{ textField: { variant: "outlined" } }}
+              />
+                {/* <input type="date" id="deregisterDeadlineDate" name="deregisterDeadlineDate" value={deregisterDeadlineDate} onChange={setDeregisterDeadlineDate}  />
+                <input type="time" id="deregisterDeadlineTime" name="deregisterDeadlineTime" value={deregisterDeadlineTime} onChange={setDeregisterDeadlineTime}  /> */}
               </TimeBox>
             </div>
           </TimeContainer>
+          </LocalizationProvider>
 
           <br/>
           <br/>
