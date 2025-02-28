@@ -19,6 +19,8 @@ import { Internside } from "./pages/internt/internt";
 import { Klassekatalog } from "./pages/internt/Klassekatalog";
 import { Kontaktinfo } from "./pages/internt/kontaktinfo";
 import { Kontoret } from "./pages/internt/kontoret";
+import { NyStudent } from "./pages/infosider/NyStudent";
+
 
 
 
@@ -45,6 +47,7 @@ class App extends React.Component {
             <Route path="/klassekatalog">           <Klassekatalog/>            </Route>
             <Route path="/kontaktinfo">             <Kontaktinfo/>              </Route>
             <Route path="/kontoret">                <Kontoret/>                 </Route> 
+            <Route path="/ny-student">              <NyStudent/>                </Route> 
           </Switch>
           <NavBarPhone/>
           </AuthProvider>
