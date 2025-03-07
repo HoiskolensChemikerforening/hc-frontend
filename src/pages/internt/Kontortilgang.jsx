@@ -131,10 +131,6 @@ export const Kontortilgang = () => {
   </PageContainer>
 )};
 
-const OuterWrapper = styled.div`
-  background-color: var(--gray-10);
-  min-height: 100vh;
-`;
 
 const ContentBox = styled.div`
   background-color: white;

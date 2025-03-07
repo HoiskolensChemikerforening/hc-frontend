@@ -2,16 +2,15 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { H1, H2, P, Link } from "../../components/Text";
 import { Title } from "../../components/Title";
-import { PageContainer } from "../../components/Layout";
+import { PageContainer, ContentContainer } from "../../components/Layout";
 import { TextField, DropDown, Option} from "../../components/Form";
 import { Button } from "../../components/Button";
 
 export const Klassekatalog = () => {
     return(
-        <OuterWrapper>
-            <PageContainer>
+            <PageContainer gray>
             <Title wide>Klassekatalog</Title>
-            <ContentBox>
+            <ContentContainer white>
             <DropDown>
                 <Option>Alle</Option>
                 <Option>Første</Option>
@@ -25,16 +24,11 @@ export const Klassekatalog = () => {
             <Catalogue>
 
             </Catalogue>
-            </ContentBox>
+            </ContentContainer>
             </PageContainer>
-            </OuterWrapper>
     )
 }
 
-const OuterWrapper = styled.div`
-  background-color: var(--gray-10);
-  min-height: 100vh;
-`;
 
 const ContentBox = styled.div`
   background-color: white;
