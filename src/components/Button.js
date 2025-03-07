@@ -62,28 +62,6 @@ const Button = styled.button`
         `}
 `;
 
-const ButtonContainer = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-
-    ${props => props.center && css`
-        justify-content: center;
-      `}
-    ${props => props.space && css`
-        justify-content: space-evenly;
-      `}
-    ${props => props.left && css`
-        text-align: left;
-      `}
-`;
-
-//hc-frontend/src/pages/events/events.jsx
-/*const AddButtonContainer = styled(Link)`
-  text-decoration: none; 
-  color: black; 
-`;*/
-
 export {
-    Button,
-    ButtonContainer
+    Button
   };

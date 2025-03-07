@@ -17,8 +17,7 @@ const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: -5px;
-  width: 100%;
-  height: 100%;
+  box-sizing: border-box;
 
   @media only screen and (min-width: 768px) {
     padding
@@ -72,31 +71,17 @@ const ContentContainer = styled.div`
     width: 90%;
     border-radius: 10px;
     padding: 0 20px;
-  ${props => props.box && css`
+
+  ${props => props.white && css`
     background-color: white;
   `}
-`;
-/* Other */
 
-
-//hc-frontend/src/pages/internt/Kontortilgang.jsx
-//hc-frontend/src/pages/internt/Klassekatalog.jsx
-
-
-
-const ContentBox = styled.div`
-  background-color: white;
-  width: 90%;
-  border-radius: 10px;
-  padding: 0 20px;
+  ${props => props.gray && css`
+    background-color: var(--gray-10);
+  `}
 `;
 
-const TermsLinkContainer = styled.div`
-  font-size: 15px;
-  padding-top: 1.2px;
-`;
-
-const ModalWrapper = styled.div`
+const ModalContainer = styled.div`
   display: ${({ show }) => (show ? "block" : "none")};
   position: fixed;
   top: 50%;
@@ -112,10 +97,23 @@ const ModalWrapper = styled.div`
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
-const ButtonWrapper = styled.div`
-  width: 100%;
-  text-align: left;
+const ButtonContainer = styled.div`
+    display: flex;
+    flex-flow: row nowrap;
+
+    ${props => props.center && css`
+        justify-content: center;
+      `}
+    ${props => props.space && css`
+        justify-content: space-evenly;
+      `}
+    ${props => props.left && css`
+        text-align: left;
+      `}
 `;
+/* Other */
+
+
 
 //hc-frontend/src/components/Form.js
 const NewArticleContainer = styled.div`
@@ -131,11 +129,6 @@ const FormContainer1 = styled.div`
   max-height: 1000px;
 `;  
 
-const ButtonContainer = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-`;
 
 const ImageContainer = styled.div `
     display: flex;
@@ -535,6 +528,8 @@ export {
   Container,
   PageContainer,
   ContentContainer,
+  ModalContainer,
+  ButtonContainer,
   Row,
   Col
 };

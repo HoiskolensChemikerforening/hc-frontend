@@ -30,13 +30,6 @@ export const Klassekatalog = () => {
 }
 
 
-const ContentBox = styled.div`
-  background-color: white;
-  width: 90%;
-  border-radius: 10px;
-  padding: 0 20px;
-`;
-
 const Catalogue = styled.div`
   display: flex;
   align-self: center;

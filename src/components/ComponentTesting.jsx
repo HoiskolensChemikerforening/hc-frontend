@@ -1,6 +1,6 @@
 import React from "react";
-import { Row, Col } from "./Layout";
-import { Button, ButtonContainer } from "./Button";
+import { Row, Col, ButtonContainer } from "./Layout";
+import { Button } from "./Button";
 import { Title } from "./Title";
 import { P, TextContainer, P2 } from "./Textnew";
 import styled, { css } from 'styled-components';

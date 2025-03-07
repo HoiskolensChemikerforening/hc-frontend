@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { Container, Row, Col } from "../../components/Layout";
+import { Container, Row, Col, ButtonContainer } from "../../components/Layout";
 import { H1 } from "../../components/Text";
 import { Link, useHistory } from "react-router-dom";
-import {Button, ButtonContainer} from "../../components/Button"
+import { Button } from "../../components/Button"
 
 
 export const Internside = () => (

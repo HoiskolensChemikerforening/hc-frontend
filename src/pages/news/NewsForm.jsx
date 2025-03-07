@@ -4,7 +4,9 @@ import "./news.css";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { TextField, ImageField } from "../../components/Form"
-import { Button, ButtonContainer } from "../../components/Button.js";
+import { Button } from "../../components/Button.js";
+import { ButtonContainer } from "../../components/Layout.js";
+
 
 export const NewsForm = () => {
    // For validation

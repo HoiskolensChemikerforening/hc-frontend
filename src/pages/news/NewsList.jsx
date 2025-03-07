@@ -2,7 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { H3, P } from "../../components/Text";
-import { Button, ButtonContainer } from "../../components/Button.js";
+import { Button } from "../../components/Button.js";
+import { ButtonContainer } from "../../components/Layout.js";
 import parse from "react-html-parser";
 import { fetchList, checkPermission } from "../../utils/requests";
 
