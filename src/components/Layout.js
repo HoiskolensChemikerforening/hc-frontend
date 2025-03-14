@@ -98,8 +98,8 @@ const ModalContainer = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
+  display: flex;
+  flex-flow: row nowrap;
 
     ${props => props.center && css`
         justify-content: center;
@@ -111,6 +111,36 @@ const ButtonContainer = styled.div`
         text-align: left;
       `}
 `;
+
+const FormContainer = styled.div`
+  display: flex;
+  padding: 10px 15px;
+  flex-direction: column;
+  background-color: white;
+
+  ${props => props.border && css`
+    border-color: var( --gray-60);
+    border-width: 0.5px;
+    border-style: solid;
+    border-radius: 10px; 
+  `}
+  ${props => props.stretch && css`
+    min-height: 500px;
+    max-height: 1000px;
+  `}
+  ${props => props.row && css`
+    flex-direction: row; 
+  `}
+  ${props => props.spacebetween && css`
+    justify-content: space-between;
+  `}
+    ${props => props.spaceevenly && css`
+    justify-content: space-evenly;
+  `}
+  ${props => props.left && css`
+    justify-content: flex-start;
+  `}
+`
 /* Other */
 
 
@@ -119,15 +149,6 @@ const ButtonContainer = styled.div`
 const NewArticleContainer = styled.div`
   margin: 10px 200px;
 `; 
-
-const FormContainer1 = styled.div`
-  display: flex;
-  padding: 10px 15px;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 500px;
-  max-height: 1000px;
-`;  
 
 
 const ImageContainer = styled.div `
@@ -226,24 +247,6 @@ const DateBox3 = styled.div`
 `;
 
 //hc-frontend/src/pages/internt/soknadommidler.jsx
-const FormContainer2 = styled.div`
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-    padding: 20px;
-    background-color: white;
-    border-color: var( --gray-60);
-    border-width: 0.5px;
-    border-style: solid;
-    border-radius: 10px; 
-    flex-direction: column;
-    width: 70%;
-`; 
-const FormContainer3 = styled.div`
-    display: flex;
-    flex-direction: row; 
-    justify-content: space-evenly;
-`;
 
 const BackgroundContainer = styled.div`
     display: flex;
@@ -530,6 +533,7 @@ export {
   ContentContainer,
   ModalContainer,
   ButtonContainer,
+  FormContainer,
   Row,
   Col
 };
