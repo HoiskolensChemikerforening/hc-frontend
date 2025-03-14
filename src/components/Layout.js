@@ -54,6 +54,19 @@ const Col = styled.div`
   }
 `;
 
+
+const BodyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -5px;
+  width: auto;
+  height: auto;
+  margin-left: 5%;
+  margin-right: 5%;
+  text-align: center;
+`;
+
 /* Separators */
 
 
@@ -64,5 +77,6 @@ export {
   Container,
   PageContainer,
   Row,
-  Col
+  Col,
+  BodyContainer
 };
