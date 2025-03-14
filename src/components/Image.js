@@ -13,12 +13,6 @@ const ImageFieldLabel = styled.label`
 
 const ImageField = styled.input.attrs({ type: "file", accept: "image/*" })``;
 
-const ImageContainer = styled.div `
-    display: flex;
-    align-self: center;
-    margin: 20px 0px;
-    width: 30%;
-`; 
 
 const ImagePreview = styled.img `
     width: 100%;
@@ -145,7 +139,6 @@ const ImageContainer5= styled.div`
 `;
 
 export {
-    ImageContainer,
     ImageContainer2,
     ImageContainer3,
     ImageContainer4,

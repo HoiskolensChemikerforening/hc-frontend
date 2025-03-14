@@ -142,25 +142,23 @@ const FormContainer = styled.div`
   `}
 
    ${props => props.width && css`
-    width: ${props.width}; /* Allows dynamic width input width="69 px" */
+    width: ${props.width}; /* Allows dynamic width input width="69px" */
   `}
 `
+const ImageContainer = styled.div ` /* WIP, see image.js */
+    display: flex;
+    align-self: center;
+
+  ${props => props.margin && css`
+    width: ${props.margin}; /* Allows dynamic margin input margin="420px 69px" */
+  `}
+   ${props => props.width && css`
+    width: ${props.width}; /* Allows dynamic width input width="69px" */
+  `}
+`; 
 /* Other */
 
 
-
-//hc-frontend/src/components/Form.js
-const NewArticleContainer = styled.div`
-  margin: 10px 200px;
-`; 
-
-
-const ImageContainer = styled.div `
-    display: flex;
-    align-self: center;
-    margin: 20px 0px;
-    width: 30%;
-`; 
 
 //hc-frontend/src/components/navigation/DropdownMenu.jsx
 const DropdownBox1 = styled.div`
@@ -538,6 +536,7 @@ export {
   ModalContainer,
   ButtonContainer,
   FormContainer,
+  ImageContainer,
   Row,
   Col
 };

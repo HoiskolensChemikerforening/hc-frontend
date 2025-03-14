@@ -7,7 +7,7 @@ import { TextField, ImageField } from "../../components/Form"
 import { Button } from "../../components/Button.js";
 import { Title } from "../../components/Title.js";
 import { P } from "../../components/Text.js";
-import { PageContainer, ContentContainer, FormContainer, ButtonContainer } from "../../components/Layout.js";
+import { PageContainer, ContentContainer, FormContainer, ButtonContainer, ImageContainer } from "../../components/Layout.js";
 
 
 export const NewsForm = () => {
@@ -79,7 +79,7 @@ export const NewsForm = () => {
           onChange={(event, editor) => {setData(editor.getData())}} onFocus={() => setError(false)}/>
 
         {imageFile && 
-          <ImageContainer> <ImagePreview src={imageFile.file}/> </ImageContainer>
+          <ImageContainer width="30%,"margin="20px 0px"> <ImagePreview src={imageFile.file}/> </ImageContainer>
         }
 
         <ImageField onChange={(event) => {setImage({file: URL.createObjectURL(event.target.files[0]), djFile: event.target.files[0]});console.log(URL.createObjectURL(event.target.files[0]))}} onFocus={() => setError(false)}/>
@@ -93,13 +93,6 @@ export const NewsForm = () => {
     </PageContainer>
   )
   };
-
-const ImageContainer = styled.div `
-    display: flex;
-    align-self: center;
-    margin: 20px 0px;
-    width: 30%;
-` 
 
 const ImagePreview = styled.img `
     width: 100%;

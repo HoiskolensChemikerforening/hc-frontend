@@ -113,10 +113,6 @@ const Password = styled.input.attrs({ type: "password" })`
 `;
 
 
-const NewArticleContainer = styled.div`
-  margin: 10px 200px;
-`; 
-
 const FormContainer = styled.div`
   display: flex;
   padding: 10px 15px;
@@ -125,13 +121,6 @@ const FormContainer = styled.div`
   min-height: 500px;
   max-height: 1000px;
 `;  
-
-const ImageContainer = styled.div `
-    display: flex;
-    align-self: center;
-    margin: 20px 0px;
-    width: 30%;
-`; 
 
 const ImagePreview = styled.img `
     width: 100%;
@@ -147,4 +136,4 @@ const Error = styled.p `
   `;
 
 
-export {TextArea, TextField, ImageField, ExampleForm, ImageUpload, FormContainer, NewArticleContainer, ImagePreview, Error, Option, Password, DropDown };
+export {TextArea, TextField, ImageField, ExampleForm, ImageUpload, FormContainer, ImagePreview, Error, Option, Password, DropDown };
