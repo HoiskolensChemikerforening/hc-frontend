@@ -140,6 +140,10 @@ const FormContainer = styled.div`
   ${props => props.left && css`
     justify-content: flex-start;
   `}
+
+   ${props => props.width && css`
+    width: ${props.width}; /* Allows dynamic width input width="69 px" */
+  `}
 `
 /* Other */
 

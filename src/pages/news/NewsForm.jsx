@@ -5,7 +5,9 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { TextField, ImageField } from "../../components/Form"
 import { Button } from "../../components/Button.js";
-import { ButtonContainer } from "../../components/Layout.js";
+import { Title } from "../../components/Title.js";
+import { P } from "../../components/Text.js";
+import { PageContainer, ContentContainer, FormContainer, ButtonContainer } from "../../components/Layout.js";
 
 
 export const NewsForm = () => {
@@ -65,10 +67,11 @@ export const NewsForm = () => {
   };
 
   return (
-    <NewArticleContainer>
-      <h1>New Article</h1>
+    <PageContainer gray>
+      <Title>New Article</Title>
+    <ContentContainer>
     <form onSubmit={postArticle} onFocus={() => setError(false)}>
-      <FormContainer >
+      <FormContainer border stretch spaceevenly>
         <TextField placeholder="Tittel på nyheten" onChange={(event) => {setTitle(event.target.value)}} />
         <CKEditor 
           data={dataEdit} 
@@ -86,22 +89,10 @@ export const NewsForm = () => {
         <Button primary type="submit" >Send inn</Button>
       </ButtonContainer>
     </form>
-    </NewArticleContainer>
+    </ContentContainer>
+    </PageContainer>
   )
   };
-
-const NewArticleContainer = styled.div`
-  margin: 10px 200px;
-`; 
-
-const FormContainer = styled.div`
-  display: flex;
-  padding: 10px 15px;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 500px;
-  max-height: 1000px;
-`;  
 
 const ImageContainer = styled.div `
     display: flex;
