@@ -1,13 +1,14 @@
 /*import React, { useState } from "react"; */
 import React from "react";
 import styled from "styled-components";
-import { P, Title, Link, TitleContainer} from "../../components/Text";
+import { P, Title, TitleContainer} from "../../components/Text";
 /*import { PageContainer } from "../../components/Layout"; */
 import { BodyContainer } from "../../components/Layout";
 /*import { TextField } from "../../components/Form"; */
 import { Button} from "../../components/Button"; 
 import { ButtonContainer } from "../../components/Container";
 import fadderuka from "./fadderuka.jpg";
+import { Link, useHistory } from "react-router-dom";
 
 
 
@@ -31,12 +32,11 @@ export const NyStudent = () => {
 
 
         <TableOfContent >
-            
                 <Link to="/nyheter/ny">
                     <Button primary>Praktisk info</Button>
                 </Link> 
             <ButtonContainer>
-                <Link to="../internt/kontaktinfo">
+                <Link to="../kontaktinfo">
                     <Button primary>Kontaktinfo</Button>
                 </Link>
             </ButtonContainer>
@@ -73,7 +73,7 @@ export const NyStudent = () => {
 
     </BodyContainer>
 
-    )}
+    )};
 
     const TableOfContent = styled.div`
     width: auto;
