@@ -1,4 +1,5 @@
 /*import React, { useState } from "react"; */
+import React from "react";
 import styled from "styled-components";
 import { P, Title, Link, TitleContainer} from "../../components/Text";
 /*import { PageContainer } from "../../components/Layout"; */
@@ -6,6 +7,7 @@ import { BodyContainer } from "../../components/Layout";
 /*import { TextField } from "../../components/Form"; */
 import { Button} from "../../components/Button"; 
 import { ButtonContainer } from "../../components/Container";
+import fadderuka from "./fadderuka.jpg";
 
 
 
@@ -65,6 +67,10 @@ export const NyStudent = () => {
         Her er linken til facebookgrupper for fadderperioden 2025! Bli med i gruppa for å få informasjon om ......
         </P>
 
+        <Images> 
+            <Photo src={fadderuka} alt="fadderuka" /> 
+        </Images> 
+
     </BodyContainer>
 
     )}
@@ -80,3 +86,15 @@ export const NyStudent = () => {
     }
   `;
     
+  const Images = styled.div`
+  display: flex; // ??
+  flex-direction: row; // ??
+  justify-content: center; // ??
+  align-items: center; // ??
+  gap: 50px; // ??
+`;
+
+const Photo = styled.img`
+  max-width: 50%; // ??
+  height: auto; // ??
+`;
