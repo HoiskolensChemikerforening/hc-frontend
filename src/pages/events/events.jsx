@@ -56,7 +56,7 @@ export const EventPage = () => {
         fetchList("arrangementer/api/social/", setDispEvents)
         console.log("Alle sosiale eventer")
       }
-    }
+    } 
     else if (eventTypeBold === corporate){
       if (filter_id === coming){
         fetchList("arrangementer/api/bedpres/kommende/", setDispEvents)
