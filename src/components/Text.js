@@ -156,6 +156,8 @@ const Link = styled.a`
 const TitleContainer = styled.div`
   display: flex;
   justify-content: center;
+
+  margin : ${props => props.withMargin ? "0 auto" : "0"};
 `;
 
 const Title = styled.div`
@@ -167,6 +169,7 @@ const Title = styled.div`
   border-radius: 10px;
   padding: 10px;
   margin:20px;
+
 `;
 
 const WideTitle = styled(Title)`

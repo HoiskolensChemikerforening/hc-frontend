@@ -32,7 +32,7 @@ export const NyStudent = () => {
 
   return (
     <BodyContainer>
-      <TitleContainer>
+      <TitleContainer withMargin>
         <Title>Velkommen til Høiskolens Chemikerforening</Title>
       </TitleContainer>
       <P>Gratulerer med opptak til Industriell kjemi og bioteknologi!</P>
@@ -42,9 +42,11 @@ export const NyStudent = () => {
       </P>
 
       <TableOfContent>
-        <Link to="/">
-          <Button primary>Praktisk info</Button>
-        </Link>
+        <ButtonContainer>
+          <Link to="/">
+            <Button primary>Praktisk info</Button>
+          </Link>
+        </ButtonContainer>
         <ButtonContainer>
           <Link to="../kontaktinfo">
             <Button primary>Kontaktinfo</Button>
@@ -114,9 +116,16 @@ const TableOfContent = styled.div`
 
 const SlideshowContainer = styled.div`
   position: relative;
-  width: 50%;
+  width: 80%;
+  max-width: 800px;
   margin: 20px auto;
+
+  @media (max-width: 480px) {
+    width: 95%;
+  }
 `;
+
+
 
 const Photo = styled.img`
   width: 100%;
@@ -178,5 +187,12 @@ const ArrowButton = styled.button`
   }
 `;
 
+/*
+const MyComponent = () => {
+  return (
+    <NyStudent images={images} />
+  );
+}
 
+*/
 export default NyStudent;
