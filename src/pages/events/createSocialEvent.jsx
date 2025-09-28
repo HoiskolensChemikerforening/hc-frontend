@@ -8,9 +8,11 @@ import { Link } from "react-router-dom";
 import { fetchList, checkPermission, postRequest } from "../../utils/requests";
 import AuthContext from "../../context/AuthContext";
 // import { TextField, ImageUpload, DropDown, TextArea } from "../../components/Form";
-import Checkbox from '@material-ui/core/Checkbox';
+import Checkbox from '@mui/material/Checkbox';
 import { DatePicker, TimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { Dialog, DialogContent, DialogActions } from '@mui/material';
+import MuiButton from '@mui/material/Button';
 import TextField from "@mui/material/TextField";
 import dayjs from "dayjs";
 import "dayjs/locale/nb"; // Load Norwegian locale
@@ -36,47 +38,63 @@ export const CreateSocialEvent = () => {
   const [deregisterDeadlineDate, setDeregisterDeadlineDate] = useState(dayjs());
   const [deregisterDeadlineTime, setDeregisterDeadlineTime] = useState(dayjs());
 
-  const Modal = ({ onClose, children, showCloseButton = true }) => ( // fungerer denne som den skal? 
-    <StyledModal>
-      {children}
+  //const Modal = ({ onClose, children, showCloseButton = true }) => ( // fungerer denne som den skal? 
+    //<StyledModal>
+      //{children}
+      //{showCloseButton && (
+        //<Button primary type="button" onClick={onClose} style={{ marginTop: '20px' }}>Lukk</Button>
+      //)}
+    //</StyledModal>
+  //);
+const Modal = ({ onClose, children, showCloseButton = true }) => {
+  // Render dialogen i #root i stedet for i body
+  const container =
+    typeof window !== "undefined" ? document.getElementById("root") : undefined;
+
+  return (
+    <Dialog
+      open
+      onClose={() => {
+        // Sørg for at ingenting i bakgrunnen har fokus
+        if (typeof document !== "undefined") {
+          document.activeElement?.blur?.();
+        }
+        onClose?.();
+      }}
+      aria-labelledby="modal-title"
+      container={container}
+    >
+      <DialogContent>{children}</DialogContent>
       {showCloseButton && (
-        <Button primary type="button" onClick={onClose} style={{ marginTop: '20px' }}>Lukk</Button>
+        <DialogActions>
+          {/* Bruk MUI Button her for å få korrekt autofocus/fokushåndtering */}
+          <MuiButton onClick={onClose} autoFocus>
+            Lukk
+          </MuiButton>
+        </DialogActions>
       )}
-    </StyledModal>
+    </Dialog>
   );
+};
+
 
   const handleResize = (e) => { // lets the description area expand when more text
-    const textarea = e.target;
+    const textarea = e.currentTarget;
     textarea.style.height = 'inherit'; // resets height so scrollHeight can be re-calculated 
     textarea.style.height = `${textarea.scrollHeight}px`; // sets new height
   };  
 
-  const handleImageChange = async (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      try {
-        // const imageData = new FormData();
-        // imageData.append('image', file);
+const handleImageChange = (e) => {
+  const input = e.currentTarget;
+  const file = input.files?.[0];
+  if (!file) return;
 
-        // Set a local preview of the selected image
-        const reader = new FileReader();
-        reader.onloadend = () => setImagePreviewUrl(reader.result);
-        reader.readAsDataURL(file);
+  const reader = new FileReader();
+  reader.onloadend = () => setImagePreviewUrl(reader.result);
+  reader.readAsDataURL(file);
 
-        // let imageUrl = 'http://localhost:8000/media/events/';
-        // imageUrl += `${file.name}`;
-  
-        // Update formData with the image URL
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          image: file,
-        }));
-  
-      } catch (error) {
-        console.error('Error uploading image:', error);
-      }
-    }
-  };
+  setFormData(prev => ({ ...prev, image: file }));
+};
 
   const [formData, setFormData] = useState({ // her er det nå færre felter enn på original nettside. Det er fordi jeg
     // har fjernet noen felter som jeg tenker er unødvendige da de ikke brukes til arrangementer.
@@ -99,10 +117,8 @@ export const CreateSocialEvent = () => {
     price_not_member: 0,
   });
 
-  // Virker som den oppdaterer alle variabler et hakk for sent
-  const handleChange = (e) => { // mangler logikk for hvilke klasser som skal med
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+  const handleChange = ({ target: { name, value } }) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const combineDateTime = (date, time) => {
@@ -113,84 +129,80 @@ export const CreateSocialEvent = () => {
         .toISOString(); // Convert to ISO format
 };
     
-  const handleSubmit = async (e) => { // funker denne som den skal?
-    e.preventDefault();
-    const finalEventDate = combineDateTime(eventDate, eventTime);
-    const finalRegisterStart = combineDateTime(registerStartDate, registerStartTime);
-    const finalRegisterDeadline = combineDateTime(registerDeadlineDate, registerDeadlineTime);
-    const finalDeregisterDeadline = combineDateTime(deregisterDeadlineDate, deregisterDeadlineTime);
-    if (!eventType || isSubmitting) {
-      setShowModal(true);
-      return;
-    }
-    setIsSubmitting(true);
-    try {
-      const formData = {
-        eventDateTime: finalEventDate,
-        registerStartDateTime: finalRegisterStart,
-        registerDeadlineDateTime: finalRegisterDeadline,
-        deregisterDeadlineDateTime: finalDeregisterDeadline,
-      };
-      console.log("Submitting:", formData);
-      await postRequest('arrangementer/api/sosial/opprett/', formData);
-      setIsSubmittedSuccessfully(true);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    } finally {
-      setIsSubmitting(false); // Innsending ferdig, vellykket eller ei
-    }
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!eventType || isSubmitting) {
+    setShowModal(true);
+    return;
+  }
+  setIsSubmitting(true);
+  try {
+    const finalEventDate       = combineDateTime(eventDate, eventTime);
+    const finalRegisterStart   = combineDateTime(registerStartDate, registerStartTime);
+    const finalRegisterDl      = combineDateTime(registerDeadlineDate, registerDeadlineTime);
+    const finalDeregisterDl    = combineDateTime(deregisterDeadlineDate, deregisterDeadlineTime);
 
-  const handleExclusiveCheckboxChange = (e) => { // function to handle when one of the checkboxes are to be true, the rest false
-    const { name, checked } = e.target;
-    setEventType(checked ? name : null);
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      published: name === "published" ? checked : false,
-      tentative: name === "tentative" ? checked : false,
+    const fd = new FormData();
+    fd.append("author",              String(formData.author));
+    fd.append("committee",           String(formData.committee));
+    fd.append("title",               formData.title);
+    fd.append("date",                finalEventDate);
+    fd.append("register_startdate",  finalRegisterStart);
+    fd.append("register_deadline",   finalRegisterDl);
+    fd.append("deregister_deadline", finalDeregisterDl);
+    fd.append("location",            formData.location);
+    fd.append("description",         formData.description);
+    fd.append("published",           String(formData.published));
+    fd.append("tentative",           String(formData.tentative));
+    fd.append("payment_information", formData.payment_information);
+    fd.append("price_member",        String(formData.price_member ?? 0));
+    fd.append("price_not_member",    String(formData.price_not_member ?? 0));
+    fd.append("sluts",               String(formData.sluts ?? 0)); // evt. endre "slots" til riktig backend-felt
+    formData.allowed_grades.forEach((g) => {
+      // Prøv uten [] først:
+      fd.append("allowed_grades", String(g));
+
+      // Hvis backend krever bracket-syntaks, bytt til:
+      // fd.append("allowed_grades[]", String(g));
+    });
+
+    if (formData.image instanceof File) {
+      fd.append("image", formData.image, formData.image.name);
+    }
+
+    await postRequest("arrangementer/api/sosial/opprett/", fd);
+    setIsSubmittedSuccessfully(true);
+  } catch (err) {
+    // her kan du vise feilmelding i UI basert på err.response?.data
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
+  // Publisert/Tentativ (utelukkende)
+  const handleExclusiveCheckboxChange = (field, checked) => {
+    setEventType(checked ? field : null);
+    setFormData(prev => ({
+      ...prev,
+      published: field === "published" ? checked : false,
+      tentative: field === "tentative" ? checked : false,
     }));
   };
 
-  const handleMultipleCheckboxesChange = (e) => { // function to handle when multiple checkboxes to be sent together
-    const { name, checked } = e.target;
-    const gradeNumber = parseInt(name); // Convert the checkbox name to a number
-    setFormData((prevFormData) => {
-      const newAllowedGrades = checked
-        ? [...prevFormData.allowed_grades, gradeNumber]
-        : prevFormData.allowed_grades.filter((grade) => grade !== gradeNumber);
-      return {
-        ...prevFormData, allowed_grades: newAllowedGrades.sort(),
-      };
+
+  // Klassetrinn (flervalg)
+  const handleAllowedGradeChange = (grade, checked) => {
+    setFormData(prev => {
+      const next = checked
+        ? [...prev.allowed_grades, grade]
+        : prev.allowed_grades.filter(g => g !== grade);
+      return { ...prev, allowed_grades: next.sort((a,b) => a - b) };
     });
   };
 
-  const handleCommitteeChange = (e) => {
-    const selectedCommitteeId = e.target.value;
-    //console.log("selectedCommitteeId", selectedCommitteeId);
-    //const selectedCommittee = committees.find((committee) => committee.id === parseInt(selectedCommitteeId));
-    //console.log("selectedCommittee", selectedCommittee);
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      committee: parseInt(selectedCommitteeId)
-    }));
-    // try {
-    //   // Update formData with the committee information
-    //   setFormData((prevFormData) => ({...prevFormData,
-    //     committee: {
-    //       id: selectedCommittee.id,
-    //       absolute_url: selectedCommittee.absolute_url,
-    //       title: selectedCommittee.title,
-    //       email: selectedCommittee.email,
-    //       image: selectedCommittee.image,
-    //       slug: selectedCommittee.slug,
-    //       one_liner: selectedCommittee.one_liner,
-    //       description: selectedCommittee.description
-    //     }
-    //   }));
-    // } catch (error) {
-    //   console.error('Error with committee information:', error);
-    // }
-  };
+const handleCommitteeChange = ({ target: { value } }) => {
+  setFormData((prev) => ({ ...prev, committee: parseInt(value, 10) }));
+};
 
   // const updateAuthor = () => { må ikke sende all info? Fungerer ikke enda, men kan muligens slettes helt?
   //   if (user) {
@@ -259,20 +271,22 @@ export const CreateSocialEvent = () => {
 
       <CheckboxContainer>
         <CheckBox>
-          <ColoredCheckbox
+          <Checkbox
             checked={eventType === "published"}
-            onChange={handleExclusiveCheckboxChange}
-            name="published"
+            onChange={(_, checked) => handleExclusiveCheckboxChange("published", checked)}
             color="primary"
+            disableRipple
+            sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
           />
           <P>Publisert</P>
         </CheckBox>
         <CheckBox>
-          <ColoredCheckbox
+          <Checkbox
             checked={eventType === "tentative"}
-            onChange={handleExclusiveCheckboxChange}
-            name="tentative"
+            onChange={(_, checked) => handleExclusiveCheckboxChange("tentative", checked)}
             color="primary"
+            disableRipple
+            sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
           />
           <P>Tentativt</P>
         </CheckBox>
@@ -300,11 +314,8 @@ export const CreateSocialEvent = () => {
               <TimeBox>
               <DatePicker
                 label="Dato for arrangementet"
-                value={formData.eventDate} // prøvd annen metode enn de andre, fungerer ikke:(
-                onChange={(newDate) => {
-                  const safeDate = newDate ? dayjs(newDate) : null;
-                  setFormData(prev => ({ ...prev, eventDate: safeDate }));
-                }}
+                value={eventDate}
+                onChange={(newDate) => setEventDate(newDate ? dayjs(newDate) : null)}
                 slotProps={{ textField: { variant: "outlined" } }}
               />
               <TimePicker
@@ -316,8 +327,6 @@ export const CreateSocialEvent = () => {
                 }}
                 slotProps={{ textField: { variant: "outlined" } }}
               />
-                {/* <input type="date" id="eventDate" name="eventDate" value={eventDate} onChange={setEventDate}  />
-                <input type="time" id="eventTime" name="eventTime" value={eventTime} onChange={setEventTime}  /> */}
               </TimeBox>
             </div>
             <div>
@@ -340,8 +349,6 @@ export const CreateSocialEvent = () => {
                 }}
                 slotProps={{ textField: { variant: "outlined" } }}
               />
-                {/*<input type="date" id="registerStartDate" name="registerStartDate" value={registerStartDate} onChange={setRegisterStartDate}  />
-                <input type="time" id="registerStartTime" name="registerStartTime" value={registerStartTime} onChange={setRegisterStartTime}  /> */}
               </TimeBox>
             </div>
             <div>
@@ -364,8 +371,6 @@ export const CreateSocialEvent = () => {
                 }}
                 slotProps={{ textField: { variant: "outlined" } }}
               />
-                {/* <input type="date" id="registerDeadlineDate" name="registerDeadlineDate" value={registerDeadlineDate} onChange={setRegisterDeadlineDate}  />
-                <input type="time" id="registerDeadlineTime" name="registerDeadlineTime" value={registerDeadlineTime} onChange={setRegisterDeadlineTime}  /> */}
               </TimeBox>
             </div>
             <div>
@@ -388,8 +393,6 @@ export const CreateSocialEvent = () => {
                 }}
                 slotProps={{ textField: { variant: "outlined" } }}
               />
-                {/* <input type="date" id="deregisterDeadlineDate" name="deregisterDeadlineDate" value={deregisterDeadlineDate} onChange={setDeregisterDeadlineDate}  />
-                <input type="time" id="deregisterDeadlineTime" name="deregisterDeadlineTime" value={deregisterDeadlineTime} onChange={setDeregisterDeadlineTime}  /> */}
               </TimeBox>
             </div>
           </TimeContainer>
@@ -514,56 +517,56 @@ export const CreateSocialEvent = () => {
           </div>
           <CheckboxContainer>
             <CheckBox>
-              <ColoredCheckbox
+              <Checkbox
                 checked={formData.allowed_grades.includes(1)}
-                onChange={handleMultipleCheckboxesChange}
-                name="1"
+                onChange={(_, checked) => handleAllowedGradeChange(1, checked)}
                 color="primary"
+                sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
               />
               <P>Førsteklasse</P>
             </CheckBox>
             <CheckBox>
-              <ColoredCheckbox
+              <Checkbox
                 checked={formData.allowed_grades.includes(2)}
-                onChange={handleMultipleCheckboxesChange}
-                name="2"
+                onChange={(_, checked) => handleAllowedGradeChange(2, checked)}
                 color="primary"
+                sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
               />
               <P>Andreklasse</P>
             </CheckBox>
             <CheckBox>
-              <ColoredCheckbox
+              <Checkbox
                 checked={formData.allowed_grades.includes(3)}
-                onChange={handleMultipleCheckboxesChange}
-                name="3"
+                onChange={(_, checked) => handleAllowedGradeChange(3, checked)}
                 color="primary"
+                sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
               />
               <P>Tredjeklasse</P>
             </CheckBox>
             <CheckBox>
-              <ColoredCheckbox
+              <Checkbox
                 checked={formData.allowed_grades.includes(4)}
-                onChange={handleMultipleCheckboxesChange}
-                name="4"
+                onChange={(_, checked) => handleAllowedGradeChange(4, checked)}
                 color="primary"
+                sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
               />
               <P>Fjerdeklasse</P>
             </CheckBox>
             <CheckBox>
-              <ColoredCheckbox
+              <Checkbox
                 checked={formData.allowed_grades.includes(5)}
-                onChange={handleMultipleCheckboxesChange}
-                name="5"
+                onChange={(_, checked) => handleAllowedGradeChange(5, checked)}
                 color="primary"
+                sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
               />
               <P>Femteklasse</P>
             </CheckBox>
             <CheckBox>
-              <ColoredCheckbox
+              <Checkbox
                 checked={formData.allowed_grades.includes(6)}
-                onChange={handleMultipleCheckboxesChange}
-                name="6"
+                onChange={(_, checked) => handleAllowedGradeChange(6, checked)}
                 color="primary"
+                sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
               />
               <P>Ferdig</P>
             </CheckBox>
@@ -771,16 +774,6 @@ const CheckBox = styled.div`
 
   .MuiCheckbox-root {
     padding: 9px; 
-  }
-`;
-
-const ColoredCheckbox = styled(Checkbox)`
-  &.Mui-checked {
-    color: #FFcb26 !important; // Color when checked
-  }
-
-  &:hover {
-    background-color: rgba(255, 203, 38, 0.1) !important;
   }
 `;
 

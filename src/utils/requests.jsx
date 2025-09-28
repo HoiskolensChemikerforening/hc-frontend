@@ -1,7 +1,9 @@
-
 import axios from 'axios';
 
 export const baseUrl = "http://localhost:8000/";
+
+const joinUrl = (base, path) =>
+  `${base.replace(/\/+$/, "")}/${String(path).replace(/^\/+/, "")}`;
 
 export const fetchList = async (url, setFunction, currentPage = 1, itemsPerPage = 20) => {
     await axios.get(baseUrl + url, {
@@ -46,17 +48,35 @@ export const fetchDetail = async (url, id, setFunction, setLoading=null) => {
     }
 }
 
-export const postRequest = async (url, data) => {
-    try {
-        await axios.post(baseUrl + url, data);
-    } catch (error) {
-        if (error.response) {
-            console.error('Server responded with:', error.response.data);
-        } else {
-            console.error('Error sending request:', error.message);
-        }
+export const postRequest = async (url, data, config = {}) => {
+  try {
+    // Hvis data er FormData (f.eks. når du sender bilde), sett riktige headers
+    const isFormData = (typeof FormData !== "undefined") && (data instanceof FormData);
+
+    const resp = await axios.post(
+      joinUrl(baseUrl, url),
+      data,
+      {
+        // Ikke overskriv Content-Type hvis kalleren eksplisitt har satt headers
+        headers: isFormData
+          ? { "Content-Type": "multipart/form-data", ...(config.headers || {}) }
+          : { ...(config.headers || {}) },
+        // legg evt. til withCredentials: true hvis du bruker cookies/session
+        ...config,
+      }
+    );
+
+    return resp.data; // ← kallende kode kan bruke resultatet
+  } catch (error) {
+    // Behold din eksisterende logging, men kast videre
+    if (error.response) {
+      console.error("Server responded with:", error.response.data);
+    } else {
+      console.error("Error sending request:", error.message);
     }
-}
+    throw error; // ← viktig: lar UI/handler vise feilmelding
+  }
+};
 
 export const checkPermission = async (permission, user, setFunction) => {
 
