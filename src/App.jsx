@@ -13,7 +13,7 @@ import { Kontortilgang } from "./pages/internt/Kontortilgang";
 import { AboutHC } from "./pages/internt/AboutHC";
 import { AuthProvider } from './context/AuthContext'
 import { CommitteeDetailsPage } from "./pages/subgroups/CommitteeDetailsPage";
-import { EventPage } from "./pages/events/events";
+import { EventRouter } from "./pages/events/EventRouter";
 import { SoknadMidler } from "./pages/internt/soknadommidler";
 import { Internside } from "./pages/internt/internt";
 import { Klassekatalog } from "./pages/internt/Klassekatalog";
