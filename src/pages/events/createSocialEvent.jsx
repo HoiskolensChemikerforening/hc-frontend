@@ -35,45 +35,27 @@ export const CreateSocialEvent = () => {
   const [deregisterDeadlineDate, setDeregisterDeadlineDate] = useState(dayjs());
   const [deregisterDeadlineTime, setDeregisterDeadlineTime] = useState(dayjs());
 
-  //const Modal = ({ onClose, children, showCloseButton = true }) => ( // fungerer denne som den skal? 
-    //<StyledModal>
-      //{children}
-      //{showCloseButton && (
-        //<Button primary type="button" onClick={onClose} style={{ marginTop: '20px' }}>Lukk</Button>
-      //)}
-    //</StyledModal>
-  //);
-const Modal = ({ onClose, children, showCloseButton = true }) => {
-  // Render dialogen i #root i stedet for i body
-  const container =
-    typeof window !== "undefined" ? document.getElementById("root") : undefined;
 
-  return (
-    <Dialog
-      open
-      onClose={() => {
-        // Sørg for at ingenting i bakgrunnen har fokus
-        if (typeof document !== "undefined") {
-          document.activeElement?.blur?.();
-        }
-        onClose?.();
-      }}
-      aria-labelledby="modal-title"
-      container={container}
-    >
-      <DialogContent>{children}</DialogContent>
-      {showCloseButton && (
-        <DialogActions>
-          {/* Bruk MUI Button her for å få korrekt autofocus/fokushåndtering */}
-          <MuiButton onClick={onClose} autoFocus>
-            Lukk
-          </MuiButton>
-        </DialogActions>
-      )}
-    </Dialog>
-  );
-};
-
+const Modal = ({ onClose, children, showCloseButton = true }) => (
+  <Dialog
+    open
+    onClose={onClose}
+    aria-labelledby="modal-title"
+    keepMounted
+    disableEnforceFocus
+    disableAutoFocus
+    disableRestoreFocus
+  >
+    <DialogContent>{children}</DialogContent>
+    {showCloseButton && (
+      <DialogActions>
+        <MuiButton onClick={onClose} autoFocus>
+          Lukk
+        </MuiButton>
+      </DialogActions>
+    )}
+  </Dialog>
+);
 
   const handleResize = (e) => { // lets the description area expand when more text
     const textarea = e.currentTarget;
@@ -273,7 +255,7 @@ const handleCommitteeChange = ({ target: { value } }) => {
             onChange={(_, checked) => handleExclusiveCheckboxChange("published", checked)}
             color="primary"
             disableRipple
-            sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
+            style={{ color: '#FFcb26' }}
           />
           <P>Publisert</P>
         </CheckBox>
@@ -283,7 +265,7 @@ const handleCommitteeChange = ({ target: { value } }) => {
             onChange={(_, checked) => handleExclusiveCheckboxChange("tentative", checked)}
             color="primary"
             disableRipple
-            sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
+            style={{ color: '#FFcb26' }}
           />
           <P>Tentativt</P>
         </CheckBox>
@@ -501,7 +483,7 @@ const handleCommitteeChange = ({ target: { value } }) => {
                 checked={formData.allowed_grades.includes(1)}
                 onChange={(_, checked) => handleAllowedGradeChange(1, checked)}
                 color="primary"
-                sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
+                style={{ color: '#FFcb26' }}
               />
               <P>Førsteklasse</P>
             </CheckBox>
@@ -510,7 +492,7 @@ const handleCommitteeChange = ({ target: { value } }) => {
                 checked={formData.allowed_grades.includes(2)}
                 onChange={(_, checked) => handleAllowedGradeChange(2, checked)}
                 color="primary"
-                sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
+                style={{ color: '#FFcb26' }}
               />
               <P>Andreklasse</P>
             </CheckBox>
@@ -519,7 +501,7 @@ const handleCommitteeChange = ({ target: { value } }) => {
                 checked={formData.allowed_grades.includes(3)}
                 onChange={(_, checked) => handleAllowedGradeChange(3, checked)}
                 color="primary"
-                sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
+                style={{ color: '#FFcb26' }}
               />
               <P>Tredjeklasse</P>
             </CheckBox>
@@ -528,7 +510,7 @@ const handleCommitteeChange = ({ target: { value } }) => {
                 checked={formData.allowed_grades.includes(4)}
                 onChange={(_, checked) => handleAllowedGradeChange(4, checked)}
                 color="primary"
-                sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
+                style={{ color: '#FFcb26' }}
               />
               <P>Fjerdeklasse</P>
             </CheckBox>
@@ -537,7 +519,7 @@ const handleCommitteeChange = ({ target: { value } }) => {
                 checked={formData.allowed_grades.includes(5)}
                 onChange={(_, checked) => handleAllowedGradeChange(5, checked)}
                 color="primary"
-                sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
+                style={{ color: '#FFcb26' }}
               />
               <P>Femteklasse</P>
             </CheckBox>
@@ -546,7 +528,7 @@ const handleCommitteeChange = ({ target: { value } }) => {
                 checked={formData.allowed_grades.includes(6)}
                 onChange={(_, checked) => handleAllowedGradeChange(6, checked)}
                 color="primary"
-                sx={{ '&.Mui-checked': { color: '#FFcb26' }, '&:hover': { backgroundColor: 'rgba(255,203,38,0.1)' } }}
+                style={{ color: '#FFcb26' }}
               />
               <P>Ferdig</P>
             </CheckBox>
