@@ -1,13 +1,9 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from 'axios';
-import styled, {css} from "styled-components";
+import styled from "styled-components";
 import { Button } from "../../components/Button"; 
-import { Col, PageContainer } from "../../components/Layout";
-import { H1, H2, H3, P, Title, TitleContainer} from "../../components/Text";
-import { Link } from "react-router-dom";
+import { H3, P, Title, TitleContainer} from "../../components/Text";
 import { fetchList, checkPermission, postRequest } from "../../utils/requests";
 import AuthContext from "../../context/AuthContext";
-// import { TextField, ImageUpload, DropDown, TextArea } from "../../components/Form";
 import { Checkbox, Dialog, DialogContent, DialogActions, Button as MuiButton } from '@material-ui/core';
 import { MuiPickersUtilsProvider, KeyboardDatePicker, KeyboardTimePicker } from '@material-ui/pickers';
 import DayjsUtils from '@date-io/dayjs';
@@ -23,9 +19,6 @@ export const CreateSocialEvent = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imagePreviewUrl, setImagePreviewUrl] = useState("");
   const [committees, setCommittees] = useState([]);
-
-
-// de under her er et forsøk på å legge in tidsdata riktig. Fungerer ikke enda :)
   const [eventDate, setEventDate] = useState(dayjs());
   const [eventTime, setEventTime] = useState(dayjs());
   const [registerStartDate, setRegisterStartDate] = useState(dayjs());
@@ -36,54 +29,64 @@ export const CreateSocialEvent = () => {
   const [deregisterDeadlineTime, setDeregisterDeadlineTime] = useState(dayjs());
 
 
-const Modal = ({ onClose, children, showCloseButton = true }) => (
-  <Dialog
-    open
-    onClose={onClose}
-    aria-labelledby="modal-title"
-    keepMounted
-    disableEnforceFocus
-    disableAutoFocus
-    disableRestoreFocus
-  >
-    <DialogContent>{children}</DialogContent>
-    {showCloseButton && (
-      <DialogActions>
-        <MuiButton onClick={onClose} autoFocus>
-          Lukk
-        </MuiButton>
-      </DialogActions>
-    )}
-  </Dialog>
-);
+  // UI helper: Modal
+  // Lightweight wrapper around MUI Dialog used for short messages.
+  // We disable focus enforcement to avoid noisy console warnings in dev.
+  // Pass `onClose` to close the dialog and `children` to render content.
+  const Modal = ({ onClose, children, showCloseButton = true }) => (
+    <Dialog
+      open
+      onClose={onClose}
+      aria-labelledby="modal-title"
+      keepMounted
+      disableEnforceFocus
+      disableAutoFocus
+      disableRestoreFocus
+    >
+      <DialogContent>{children}</DialogContent>
+      {showCloseButton && (
+        <DialogActions>
+          <MuiButton onClick={onClose} autoFocus>
+            Lukk
+          </MuiButton>
+        </DialogActions>
+      )}
+    </Dialog>
+  );
 
-  const handleResize = (e) => { // lets the description area expand when more text
+  // Textarea autoresize
+  // Grows the description textarea to fit its content as the user types.
+  // Resets height to recalc scrollHeight, then applies the measured height.
+  const handleResize = (e) => {
     const textarea = e.currentTarget;
-    textarea.style.height = 'inherit'; // resets height so scrollHeight can be re-calculated 
-    textarea.style.height = `${textarea.scrollHeight}px`; // sets new height
+    textarea.style.height = 'inherit';
+    textarea.style.height = `${textarea.scrollHeight}px`;
   };  
 
-const handleImageChange = (e) => {
-  const input = e.currentTarget;
-  const file = input.files?.[0];
-  if (!file) return;
+  // Image input handler
+  // Reads the selected image file, stores the File in form state,
+  // and creates a data URL for on-page preview.
+  const handleImageChange = (e) => {
+    const input = e.currentTarget;
+    const file = input.files?.[0];
+    if (!file) return;
 
-  const reader = new FileReader();
-  reader.onloadend = () => setImagePreviewUrl(reader.result);
-  reader.readAsDataURL(file);
+    const reader = new FileReader();
+    reader.onloadend = () => setImagePreviewUrl(reader.result);
+    reader.readAsDataURL(file);
 
-  setFormData(prev => ({ ...prev, image: file }));
-};
+    setFormData(prev => ({ ...prev, image: file }));
+  };
 
   const [formData, setFormData] = useState({ // her er det nå færre felter enn på original nettside. Det er fordi jeg
     // har fjernet noen felter som jeg tenker er unødvendige da de ikke brukes til arrangementer.
     author: user.user_id,
     committee: 0, 
     title: '',
-    date: '2025-10-10T18:00:00+02:00', 
-    register_startdate: '2025-10-09T19:40:00+02:00', 
-    register_deadline: '2025-10-10T18:00:00+02:00',
-    deregister_deadline: '2025-10-10T18:00:00+02:00',
+    date: '', 
+    register_startdate: '', 
+    register_deadline: '',
+    deregister_deadline: '',
     location: '',
     description: '',
     image: '',
@@ -96,18 +99,27 @@ const handleImageChange = (e) => {
     price_not_member: 0,
   });
 
+  // Generic input change handler
+  // Updates the `formData` object by matching the input's `name` to a field.
   const handleChange = ({ target: { name, value } }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Date+Time combiner
+  // Takes a Dayjs date and a Dayjs time, merges hours/minutes,
+  // zeroes seconds, and returns an ISO 8601 string for the API.
   const combineDateTime = (date, time) => {
     return date
-        .set("hour", time.hour()) // Set hours from time
-        .set("minute", time.minute()) // Set minutes from time
-        .set("second", 0) // Always reset seconds
-        .toISOString(); // Convert to ISO format
+        .set("hour", time.hour())
+        .set("minute", time.minute())
+        .set("second", 0)
+        .toISOString();
 };
     
+// Submit handler
+// Validates required choices, combines date/time fields,
+// builds a FormData payload (including optional image),
+// posts to the API, and toggles success/error UI states.
 const handleSubmit = async (e) => {
   e.preventDefault();
   if (!eventType || isSubmitting) {
@@ -136,13 +148,9 @@ const handleSubmit = async (e) => {
     fd.append("payment_information", formData.payment_information);
     fd.append("price_member",        String(formData.price_member ?? 0));
     fd.append("price_not_member",    String(formData.price_not_member ?? 0));
-    fd.append("sluts",               String(formData.sluts ?? 0)); // evt. endre "slots" til riktig backend-felt
+    fd.append("sluts",               String(formData.sluts ?? 0));
     formData.allowed_grades.forEach((g) => {
-      // Prøv uten [] først:
       fd.append("allowed_grades", String(g));
-
-      // Hvis backend krever bracket-syntaks, bytt til:
-      // fd.append("allowed_grades[]", String(g));
     });
 
     if (formData.image instanceof File) {
@@ -152,13 +160,15 @@ const handleSubmit = async (e) => {
     await postRequest("arrangementer/api/sosial/opprett/", fd);
     setIsSubmittedSuccessfully(true);
   } catch (err) {
-    // her kan du vise feilmelding i UI basert på err.response?.data
+    // her kan vi vise feilmelding i UI basert på err.response?.data --> brukes ikke
   } finally {
     setIsSubmitting(false);
   }
 };
 
-  // Publisert/Tentativ (utelukkende)
+  // Exclusive toggle for "published" vs "tentative"
+  // Ensures only one of the two booleans can be true at a time,
+  // and tracks the chosen type in `eventType`.
   const handleExclusiveCheckboxChange = (field, checked) => {
     setEventType(checked ? field : null);
     setFormData(prev => ({
@@ -169,7 +179,9 @@ const handleSubmit = async (e) => {
   };
 
 
-  // Klassetrinn (flervalg)
+  // Multi-select for allowed grades
+  // Adds or removes a grade from the `allowed_grades` array
+  // and keeps the list numerically sorted.
   const handleAllowedGradeChange = (grade, checked) => {
     setFormData(prev => {
       const next = checked
@@ -179,37 +191,15 @@ const handleSubmit = async (e) => {
     });
   };
 
-const handleCommitteeChange = ({ target: { value } }) => {
-  setFormData((prev) => ({ ...prev, committee: parseInt(value, 10) }));
-};
-
-  // const updateAuthor = () => { må ikke sende all info? Fungerer ikke enda, men kan muligens slettes helt?
-  //   if (user) {
-  //     let userUrl = 'http://localhost:8000/api/profil/';
-  //     userUrl += `${user.user_id}`;
-  //     fetchList(userUrl, setUsertest);
-  //     console.log("User id er ", user.user_id);
-  //     try {
-  //       // Update formData with the author information
-  //       setFormData((prevFormData) => ({...prevFormData,
-  //         author: {
-  //           username: user.username,
-  //           email: user.email,
-  //           first_name: user.first_name,
-  //           last_name: user.last_name,
-  //           full_name: user.full_name
-  //         }
-  //       }));
-  //     } catch (error) {
-  //       console.error('Error with author information:', error);
-  //     }
-  //   }
-  // };
+  // Committee dropdown handler
+  // Parses the selected committee id into a number and stores it in form state.  
+  const handleCommitteeChange = ({ target: { value } }) => {
+    setFormData((prev) => ({ ...prev, committee: parseInt(value, 10) }));
+  };
   
   useEffect(() => {
     checkPermission("events.add_social", user, setCanAddSocial);
     fetchList("undergrupper/api/", setCommittees);
-    //updateAuthor(); // må kun sende user_id? så denne koden kan muligens slettes
   }, [user]);
 
   return (
@@ -230,7 +220,6 @@ const handleCommitteeChange = ({ target: { value } }) => {
         <Title>Opprett sosialt arrangement</Title>
       </TitleContainer>
       <P style={{paddingLeft:'80px'}}>Her lager du de beste arrangementene på Gløs!</P>
-
 
       <ContentBox>
         <form onSubmit={handleSubmit}>
@@ -592,11 +581,9 @@ const FloatingDynamicTextArea = styled.textarea`
   outline: none;
   resize: none;
   box-sizing: border-box;
-
   &:focus {
     border-bottom-color: #000;
   }
-
   &:focus ~ label, &:not(:placeholder-shown) ~ label {
     top: -20px;
     font-size: 12px;
@@ -613,11 +600,9 @@ const StyledInput = styled.input`
   padding: 7px 0;
   background: transparent;
   transition: border-color 0.2s;
-
   &:focus {
     border-bottom-color: #000;
   }
-
   &:focus ~ ${FloatingLabel}, &:not(:placeholder-shown) ~ ${FloatingLabel} {
     top: -20px;
     font-size: 12px;
@@ -634,11 +619,9 @@ const StyledDropDown = styled.select`
   font-size: 16px;
   color: #333 !important;
   margin-bottom: 20px;
-
   option {
     color: #333;
     background-color: white !important;
-
     &:hover {
       background-color: #FFcb26 !important; 
     }
@@ -728,27 +711,11 @@ const CheckBox = styled.div`
   display: flex;
   align-items: center; 
   margin-right: 15px; 
-
   P {
     margin: 0; 
     line-height: normal; 
   }
-
   .MuiCheckbox-root {
     padding: 9px; 
   }
-`;
-
-const StyledModal = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fffacd;
-  padding: 20px;
-  z-index: 1000;
-  border: 1px solid black;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  text-align: center;
 `;
