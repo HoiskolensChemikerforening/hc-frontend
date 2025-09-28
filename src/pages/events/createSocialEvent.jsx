@@ -8,12 +8,9 @@ import { Link } from "react-router-dom";
 import { fetchList, checkPermission, postRequest } from "../../utils/requests";
 import AuthContext from "../../context/AuthContext";
 // import { TextField, ImageUpload, DropDown, TextArea } from "../../components/Form";
-import Checkbox from '@mui/material/Checkbox';
-import { DatePicker, TimePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { Dialog, DialogContent, DialogActions } from '@mui/material';
-import MuiButton from '@mui/material/Button';
-import TextField from "@mui/material/TextField";
+import { Checkbox, Dialog, DialogContent, DialogActions, Button as MuiButton } from '@material-ui/core';
+import { MuiPickersUtilsProvider, KeyboardDatePicker, KeyboardTimePicker } from '@material-ui/pickers';
+import DayjsUtils from '@date-io/dayjs';
 import dayjs from "dayjs";
 import "dayjs/locale/nb"; // Load Norwegian locale
 
@@ -308,95 +305,78 @@ const handleCommitteeChange = ({ target: { value } }) => {
           </div>
 
           <P>Legg inn følgende datoer og klokkeslett:</P>
-          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="nb">
+          <MuiPickersUtilsProvider utils={DayjsUtils} locale="nb">
           <TimeContainer>
             <div>
               <TimeBox>
-              <DatePicker
+              <KeyboardDatePicker
                 label="Dato for arrangementet"
+                format="DD.MM.YYYY"
                 value={eventDate}
-                onChange={(newDate) => setEventDate(newDate ? dayjs(newDate) : null)}
-                slotProps={{ textField: { variant: "outlined" } }}
+                onChange={(d) => setEventDate(d)}
+                inputVariant="outlined"
               />
-              <TimePicker
+              <KeyboardTimePicker
                 label="Tidspunkt for arrangementet"
                 value={eventTime}
-                onChange={(newTime) => {
-                  const safeTime = newTime ? dayjs(newTime) : null;
-                  setEventTime(safeTime);
-                }}
-                slotProps={{ textField: { variant: "outlined" } }}
+                onChange={(t) => setEventTime(t)}
+                inputVariant="outlined"
               />
               </TimeBox>
             </div>
             <div>
               <TimeBox>
-              <DatePicker
+              <KeyboardDatePicker
                 label="Påmelding åpner"
+                format="DD.MM.YYYY"
                 value={registerStartDate}
-                onChange={(newDate) => {
-                  const safeDate = newDate ? dayjs(newDate) : null;
-                  setRegisterStartDate(safeDate);
-                }}
-                slotProps={{ textField: { variant: "outlined" } }}
+                onChange={(d) => setRegisterStartDate(d)}
+                inputVariant="outlined"
               />
-              <TimePicker
+              <KeyboardTimePicker
                 label="Påmelding åpner (tid)"
                 value={registerStartTime}
-                onChange={(newTime) => {
-                  const safeTime = newTime ? dayjs(newTime) : null;
-                  setRegisterStartTime(safeTime);
-                }}
-                slotProps={{ textField: { variant: "outlined" } }}
+                onChange={(t) => setRegisterStartTime(t)}
+                inputVariant="outlined"
               />
               </TimeBox>
             </div>
             <div>
               <TimeBox>
-              <DatePicker
+              <KeyboardDatePicker
                 label="Påmelding stenger"
+                format="DD.MM.YYYY"
                 value={registerDeadlineDate}
-                onChange={(newDate) => {
-                  const safeDate = newDate ? dayjs(newDate) : null;
-                  setRegisterDeadlineDate(safeDate);
-                }}
-                slotProps={{ textField: { variant: "outlined" } }}
+                onChange={(d) => setRegisterDeadlineDate(d)}
+                inputVariant="outlined"
               />
-              <TimePicker
+              <KeyboardTimePicker
                 label="Påmelding stenger (tid)"
                 value={registerDeadlineTime}
-                onChange={(newTime) => {
-                  const safeTime = newTime ? dayjs(newTime) : null;
-                  setRegisterDeadlineTime(safeTime);
-                }}
-                slotProps={{ textField: { variant: "outlined" } }}
+                onChange={(t) => setRegisterDeadlineTime(t)}
+                inputVariant="outlined"
               />
               </TimeBox>
             </div>
             <div>
               <TimeBox>
-              <DatePicker
+              <KeyboardDatePicker
                 label="Avmelding stenger"
+                format="DD.MM.YYYY"
                 value={deregisterDeadlineDate}
-                onChange={(newDate) => {
-                  const safeDate = newDate ? dayjs(newDate) : null;
-                  setDeregisterDeadlineDate(safeDate);
-                }}
-                slotProps={{ textField: { variant: "outlined" } }}
+                onChange={(d) => setDeregisterDeadlineDate(d)}
+                inputVariant="outlined"
               />
-              <TimePicker
+              <KeyboardTimePicker
                 label="Avmelding stenger (tid)"
                 value={deregisterDeadlineTime}
-                onChange={(newTime) => {
-                  const safeTime = newTime ? dayjs(newTime) : null;
-                  setDeregisterDeadlineTime(safeTime);
-                }}
-                slotProps={{ textField: { variant: "outlined" } }}
+                onChange={(t) => setDeregisterDeadlineTime(t)}
+                inputVariant="outlined"
               />
               </TimeBox>
             </div>
           </TimeContainer>
-          </LocalizationProvider>
+          </MuiPickersUtilsProvider>
 
           <br/>
           <br/>
