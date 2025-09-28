@@ -14,6 +14,7 @@ export const NewsDetail = () => {
   useEffect(() => {
     fetchDetail("nyheter/api/", params.id, setArticle);
     console.log(article);
+    console.log(params.id);
   }, [])
 
   return (
