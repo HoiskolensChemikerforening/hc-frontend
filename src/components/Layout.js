@@ -67,6 +67,21 @@ const BodyContainer = styled.div`
   text-align: center;
 `;
 
+
+const BodyContainerLeft = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* <- viktig */
+  margin-top: -5px;
+  width: auto;
+  height: auto;
+  margin-left: 5%;
+  margin-right: 5%;
+  text-align: left; /* <- passer på at tekst inni p også blir venstrejustert */
+`;
+
+
+
 /* Separators */
 
 
@@ -78,5 +93,6 @@ export {
   PageContainer,
   Row,
   Col,
-  BodyContainer
+  BodyContainer,
+  BodyContainerLeft
 };

@@ -20,7 +20,9 @@ import { Klassekatalog } from "./pages/internt/Klassekatalog";
 import { Kontaktinfo } from "./pages/internt/kontaktinfo";
 import { Kontoret } from "./pages/internt/kontoret";
 import { NyStudent } from "./pages/infosider/NyStudent";
+import { Praktiskinfo } from "./pages/infosider/PraktiskInfo";
 import FlatpageDetail from "./pages/infosider/FlatpageDetail";
+
 
 
 
@@ -49,6 +51,7 @@ class App extends React.Component {
             <Route path="/kontaktinfo">             <Kontaktinfo/>              </Route>
             <Route path="/kontoret">                <Kontoret/>                 </Route> 
             <Route path="/ny-student">              <NyStudent/>                </Route> 
+            <Route path="/praktiskinfo">            <Praktiskinfo/>                </Route>
             <Route path="/s">                       <FlatpageDetail pageurl="praktisk"/>            </Route>
           </Switch>
           <NavBarPhone/>

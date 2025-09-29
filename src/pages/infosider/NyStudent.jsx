@@ -43,7 +43,7 @@ export const NyStudent = () => {
 
       <TableOfContent>
         <ButtonContainer>
-          <Link to="/">
+          <Link to="../praktiskinfo">
             <Button primary>Praktisk info</Button>
           </Link>
         </ButtonContainer>
