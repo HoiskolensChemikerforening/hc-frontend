@@ -5,6 +5,10 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import { TextField, ImageField } from "../../components/Form"
 import { Button } from "../../components/Button.js";
+import { Title } from "../../components/Title.js";
+import { P } from "../../components/Text.js";
+import { PageContainer, ContentContainer, FormContainer, ButtonContainer, ImageContainer } from "../../components/Layout.js";
+
 
 export const NewsForm = () => {
    // For validation
@@ -63,10 +67,11 @@ export const NewsForm = () => {
   };
 
   return (
-    <NewArticleContainer>
-      <h1>New Article</h1>
+    <PageContainer gray>
+      <Title>New Article</Title>
+    <ContentContainer>
     <form onSubmit={postArticle} onFocus={() => setError(false)}>
-      <FormContainer >
+      <FormContainer border stretch spaceevenly>
         <TextField placeholder="Tittel på nyheten" onChange={(event) => {setTitle(event.target.value)}} />
         <CKEditor 
           data={dataEdit} 
@@ -74,45 +79,20 @@ export const NewsForm = () => {
           onChange={(event, editor) => {setData(editor.getData())}} onFocus={() => setError(false)}/>
 
         {imageFile && 
-          <ImageContainer> <ImagePreview src={imageFile.file}/> </ImageContainer>
+          <ImageContainer width="30%,"margin="20px 0px"> <ImagePreview src={imageFile.file}/> </ImageContainer>
         }
 
         <ImageField onChange={(event) => {setImage({file: URL.createObjectURL(event.target.files[0]), djFile: event.target.files[0]});console.log(URL.createObjectURL(event.target.files[0]))}} onFocus={() => setError(false)}/>
       </FormContainer>
       { error && <Error>Husk både tittel, tekst OG bilde!</Error>}
-      <ButtonContainer>
+      <ButtonContainer center>
         <Button primary type="submit" >Send inn</Button>
       </ButtonContainer>
     </form>
-    </NewArticleContainer>
+    </ContentContainer>
+    </PageContainer>
   )
   };
-
-const NewArticleContainer = styled.div`
-  margin: 10px 200px;
-`; 
-
-const FormContainer = styled.div`
-  display: flex;
-  padding: 10px 15px;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 500px;
-  max-height: 1000px;
-`;  
-
-const ButtonContainer = styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: center;
-`;
-
-const ImageContainer = styled.div `
-    display: flex;
-    align-self: center;
-    margin: 20px 0px;
-    width: 30%;
-` 
 
 const ImagePreview = styled.img `
     width: 100%;

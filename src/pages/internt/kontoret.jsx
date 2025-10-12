@@ -1,7 +1,8 @@
 import React from "react";
 import styled from 'styled-components';
 import { PageContainer } from "../../components/Layout";
-import { P, TitleContainer, Title } from '../../components/Text'; 
+import { P } from '../../components/Text'; 
+import { Title } from '../../components/Title'; 
 import coffeeMug from './coffee_mug.png';
 import coffeeMachine from './coffee_machine.png';
 import waffleHeart from './waffle_heart.png';
@@ -9,11 +10,9 @@ import waffleHeart from './waffle_heart.png';
 export const Kontoret = () => {
     return (
         <PageContainer> 
-            <TitleContainer> 
-                <Title>  
-                    Kontoret 
-                </Title>
-            </TitleContainer>
+            <Title wide>  
+                Kontoret 
+            </Title>
 
             <ContentContainer>
                 <P>

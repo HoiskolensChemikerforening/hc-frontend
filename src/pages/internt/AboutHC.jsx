@@ -1,6 +1,7 @@
 import React from "react";
 import styled from 'styled-components';
-import { P, H1, H2, TitleContainer, Title } from "../../components/Text";
+import { P, H1, H2 } from "../../components/Text";
+import { Title } from "../../components/Title";
 import { Button } from "../../components/Button";
 
 
@@ -18,9 +19,7 @@ export const AboutHC = () => {
     return (
         <>
         <BodyContainer>
-        <TitleContainer>
-            <Title>Om Høiskolens Chemikerforening</Title>
-        </TitleContainer>
+            <Title wide>Om Høiskolens Chemikerforening</Title>
 
         <H2 id="HvaErHC">Innholdsfortegnelse</H2>
 

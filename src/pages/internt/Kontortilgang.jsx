@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { H1, H2, P, Link, WideTitle } from "../../components/Text";
-import { PageContainer } from "../../components/Layout";
+import { H1, H2, P, Link } from "../../components/Text";
+import { Title } from "../../components/Title";
+import { PageContainer, ContentContainer, ModalContainer, ButtonContainer } from "../../components/Layout";
 import { TextField } from "../../components/Form";
 import { Button } from "../../components/Button";
 
@@ -40,10 +41,9 @@ export const Kontortilgang = () => {
   };
 
   return (
-    <OuterWrapper>
-      <PageContainer>
-        <WideTitle>Kontortilgang</WideTitle>
-        <ContentBox>
+      <PageContainer gray>
+        <Title wide>Kontortilgang</Title>
+        <ContentContainer white>
           <H1>Her kan du søke om tilgang på kontoret med studentkortet ditt.</H1>
           <P>
             For at tilgang skal kunne bli invilget er det viktig at
@@ -83,16 +83,15 @@ export const Kontortilgang = () => {
             </Link>
           </TermsLinkContainer>
           <br/>
-          <ButtonWrapper>
+          <ButtonContainer left>
           <Button primary type="button" onClick={handleSubmit}>
             SEND SØKNAD
           </Button>
-          </ButtonWrapper>          
+          </ButtonContainer>          
           
-        </ContentBox>
-      </PageContainer>
+        </ContentContainer>
 
-      <ModalWrapper show={showModal}>
+      <ModalContainer show={showModal}>
           <H2>Kontrakt for tilgang til HC-kontoret</H2>
           <P>
             <u>Vilkår for tilgang til HC-kontoret</u>
@@ -127,43 +126,18 @@ export const Kontortilgang = () => {
       >
         Lukk
       </Button>
-  </ModalWrapper>
+  </ModalContainer>
   <ModalOverlay show={showModal} onClick={() => setShowModal(false)} />
-</OuterWrapper>
+  </PageContainer>
 )};
 
-const OuterWrapper = styled.div`
-  background-color: var(--gray-10);
-  min-height: 100vh;
-`;
 
-const ContentBox = styled.div`
-  background-color: white;
-  width: 90%;
-  border-radius: 10px;
-  padding: 0 20px;
-`;
 
 const TermsLinkContainer = styled.div`
   font-size: 15px;
   padding-top: 1.2px;
 `;
 
-const ModalWrapper = styled.div`
-  display: ${({ show }) => (show ? "block" : "none")};
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1003;
-  background-color: white;
-  width: 80%;
-  max-height: 80%;
-  overflow-y: auto;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-`;
 
 const ModalOverlay = styled.div`
   display: ${(props) => (props.show ? 'block' : 'none')};
@@ -184,9 +158,4 @@ const ErrorMessage = styled.p`
 
 const SuccessMessage = styled(ErrorMessage)`
   color: green;
-`;
-
-const ButtonWrapper = styled.div`
-  width: 100%;
-  text-align: left;
 `;
