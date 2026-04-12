@@ -39,6 +39,16 @@ const Button = styled.button`
       filter:  brightness(105%);
     }
   `}
+  ${props => props.informationbox && css`
+    color: var(--black);
+    background: var(--grey);
+    border: 2px var(--black) solid;
+    margin: 20px;
+    &:hover {
+      border-color: var(--primary);
+      filter:  brightness(105%);
+    }
+  `}
     ${props => props.cancel && css`
     color: var(--white);
     background: var(--cancel);

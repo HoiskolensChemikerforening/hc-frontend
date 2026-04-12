@@ -23,6 +23,7 @@ import { Komponenter } from "./components/ComponentTesting";
 import { Bedrift } from "./pages/Bedrift/bedrift";
 import { Jobbutlysninger } from "./pages/Bedrift/jobbutlysninger";
 import { Arrangementer } from "./pages/Bedrift/arrangementer";
+import { NyttArrangement } from "./pages/Bedrift/nytt-arrangement";
 import { Intervjuer } from "./pages/Bedrift/Intervjuer";
 import { Diplomundersøkelsen } from "./pages/Bedrift/Diplomundersøkelsen";
 import { Indkom_infoside } from "./pages/Bedrift/indkom_infoside";
@@ -44,6 +45,7 @@ class App extends React.Component {
             <Route path="/bedrift">                 <Bedrift/>                  </Route>
             <Route path="/jobbutlysninger">         <Jobbutlysninger/>          </Route>
             <Route path="/arrangementer">           <Arrangementer/>            </Route>
+            <Route path="/nytt-arrangement">        <NyttArrangement/>          </Route>
             <Route path="/Intervjuer">              <Intervjuer/>               </Route>
             <Route path="/Diplomundersøkelsen">     <Diplomundersøkelsen/>      </Route>
             <Route path="/internt">                 <Internside/>               </Route>
@@ -57,7 +59,7 @@ class App extends React.Component {
             <Route path="/klassekatalog">           <Klassekatalog/>            </Route>
             <Route path="/kontaktinfo">             <Kontaktinfo/>              </Route>
             <Route path="/kontoret">                <Kontoret/>                 </Route> 
-            <Route path="/komponenter">             <Komponenter/>                 </Route> 
+            <Route path="/komponenter">             <Komponenter/>              </Route> 
           </Switch>
           <NavBarPhone/>
           </AuthProvider>

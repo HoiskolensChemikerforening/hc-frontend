@@ -3,7 +3,7 @@
 
 :root {
   /* Primary colors */
-  --primary: var(--yellow-30);
+  --primary: #f9cf00;
   --secondary: var(--blue-50);
   --cancel:var(--red-00);
 

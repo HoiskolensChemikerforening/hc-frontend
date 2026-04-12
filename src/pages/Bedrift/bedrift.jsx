@@ -4,37 +4,35 @@ import { Container, Row, Col } from "../../components/Layout";
 import { H1 } from "../../components/Text";
 import { Link, useHistory } from "react-router-dom";
 import { Button } from "../../components/Button";
-import { ButtonContainer } from "../../components/Form";
 // Importing components from a separate component library
-import { PageContainer } from "../../components/Layout";
-import { P, TitleContainer, Title } from '../../components/Text'; 
- 
+import { PageContainer, ButtonContainer } from "../../components/Layout";
+import { P } from '../../components/Text'; 
+import { Title } from '../../components/Title';  
+
 // Importing images to be used in this component
 import indkomfoto from './indkomfoto.jpg';
 
 export const Bedrift = () => {
     return (
-        <PageContainer> {/* Using a PageContainer for gathering all content in a unified layout */} 
-                <TitleContainer> {/* Container for the title */} 
-                    <Title> {/* Container for the title text */} 
-                        Bedriftssiden yayyyyy 
+        <PageContainer gray> {/* Using a PageContainer for gathering all content in a unified layout */} 
+                    <Title constwide> {/* Container for the title text */} 
+                        Bedriftssiden  
                     </Title>
-        </TitleContainer>
         <ButtonContainer>
             <Link to="/jobbutlysninger">
-              <Button>Jobbutlysninger</Button>
+              <Button informationbox>Jobbutlysninger</Button>
             </Link>
             <Link to="/arrangementer">
-              <Button>Arrangementer</Button>
+              <Button informationbox>Arrangementer</Button>
             </Link>
             <Link to="/Intervjuer">
-              <Button>Intervjuer</Button>
+              <Button informationbox>Intervjuer</Button>
             </Link>
             <Link to="/Diplomundersøkelsen">
-              <Button>Diplomundersøkelsen</Button>
+              <Button informationbox>Diplomundersøkelsen</Button>
             </Link>
         </ButtonContainer>
-        <ContentContainer> {/* Container for the content of the page */}
+        <ContentContainer white> {/* Container for the content of the page */}
             <P> {/* Paragraph text component for the content */}
                 Denne siden administreres av Industrikomiteen – Høiskolens Chemikerforenings kontakt med industrien. Her finner du en full oversikt over Industrikomiteens arrangementer, relevante jobbutlysninger, intervjuer med kjemikere og informasjon fra diplomundersøkelsen.
             </P>
@@ -46,7 +44,7 @@ export const Bedrift = () => {
             </P>
             <ButtonContainer>
             <Link to="/indkom_infoside">
-              <Button>Les mer her!</Button>
+              <Button informationbox>Les mer her!</Button>
             </Link>
             </ButtonContainer>
         </ContentContainer>

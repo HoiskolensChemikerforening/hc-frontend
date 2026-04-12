@@ -17,6 +17,32 @@ const Title = styled.div`
     @media (max-width: 530px){
       width: 100%;
     }
+
+  `}
+  ${props => props.constwide && css`
+    width: 80%;
+    @media (max-width: 530px){
+      width: 100%;
+    }
+  `}
+
+  ${props => props.undertitle && css`
+    background-color: var(--white);
+    width: auto;
+    border: 2px var(--white) solid;
+    padding: 10px 25%;
+    
+    @media (max-width: 530px){
+      width: 100%;
+    }
+  `}
+
+  ${props => props.widewide && css`
+    padding: 10px 25%;
+    
+    @media (max-width: 530px){
+      width: 100%;
+    }
   `}
 `;
 
