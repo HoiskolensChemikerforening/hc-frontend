@@ -20,6 +20,12 @@ import { Klassekatalog } from "./pages/internt/Klassekatalog";
 import { Kontaktinfo } from "./pages/internt/kontaktinfo";
 import { Kontoret } from "./pages/internt/kontoret";
 import { Komponenter } from "./components/ComponentTesting";
+import { Bedrift } from "./pages/Bedrift/bedrift";
+import { Jobbutlysninger } from "./pages/Bedrift/jobbutlysninger";
+import { Arrangementer } from "./pages/Bedrift/arrangementer";
+import { Intervjuer } from "./pages/Bedrift/Intervjuer";
+import { Diplomundersøkelsen } from "./pages/Bedrift/Diplomundersøkelsen";
+import { Indkom_infoside } from "./pages/Bedrift/indkom_infoside";
 
 
 
@@ -34,7 +40,12 @@ class App extends React.Component {
             <Route path="/" exact>                  <HomePage/>                 </Route>
             <Route path="/arrangement">             <EventPage/>                </Route>
             <Route path='/login'>                   <Login/>                    </Route>
-            <Route path="/bedrift">                 <H1>Bedrift</H1>            </Route>
+            <Route path="/indkom_infoside">         <Indkom_infoside/>          </Route>
+            <Route path="/bedrift">                 <Bedrift/>                  </Route>
+            <Route path="/jobbutlysninger">         <Jobbutlysninger/>          </Route>
+            <Route path="/arrangementer">           <Arrangementer/>            </Route>
+            <Route path="/Intervjuer">              <Intervjuer/>               </Route>
+            <Route path="/Diplomundersøkelsen">     <Diplomundersøkelsen/>      </Route>
             <Route path="/internt">                 <Internside/>               </Route>
             <Route path="/profil">                  <H1>Profil</H1>             </Route>
             <Route path="/om-hc">                   <AboutHC/>                  </Route>
